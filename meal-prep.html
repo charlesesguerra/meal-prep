@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Meal Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { font-family: 'Nunito', sans-serif; background: #f8fafc; color: #0f172a; max-width: 480px; margin: 0 auto; padding-bottom: 80px; min-height: 100vh; }
+
+  /* Header */
+  .header { background: #fff; padding: 28px 20px 18px; border-bottom: 1px solid #f1f5f9; }
+  .header-sub { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 2px; }
+  .header h1 { font-size: 26px; font-weight: 800; color: #0f172a; letter-spacing: -0.04em; }
+  .header p { font-size: 13px; color: #64748b; margin-top: 4px; }
+
+  /* Tabs */
+  .tabs { background: #fff; display: flex; border-bottom: 1px solid #f1f5f9; position: sticky; top: 0; z-index: 100; }
+  .tab { flex: 1; padding: 14px 4px; border: none; background: none; cursor: pointer; font-size: 13px; font-weight: 500; color: #94a3b8; border-bottom: 2px solid transparent; font-family: 'Nunito', sans-serif; transition: all 0.15s; }
+  .tab.active { font-weight: 700; color: #16a34a; border-bottom: 2px solid #16a34a; }
+
+  /* Views */
+  .view { display: none; padding: 20px 16px; }
+  .view.active { display: block; }
+
+  /* Section label */
+  .section-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+
+  /* Cards */
+  .card { background: #fff; border-radius: 16px; padding: 16px; border: 1px solid #f1f5f9; box-shadow: 0 1px 4px rgba(0,0,0,0.05); margin-bottom: 10px; }
+  .card.clickable { cursor: pointer; }
+  .card.selected { border: 2px solid #16a34a; box-shadow: 0 0 0 3px #dcfce7; }
+
+  /* Meal row */
+  .meal-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .meal-icon { width: 48px; height: 48px; border-radius: 12px; background: #dcfce7; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+  .meal-icon.plain { background: #f8fafc; }
+  .meal-info { flex: 1; }
+  .meal-name { font-weight: 700; font-size: 14px; color: #0f172a; line-height: 1.3; }
+  .meal-meta { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+  .meal-macros { text-align: right; min-width: 56px; }
+  .macro-protein { font-size: 16px; font-weight: 800; color: #16a34a; }
+  .macro-label { font-size: 10px; color: #94a3b8; }
+  .macro-cal { font-size: 12px; color: #64748b; margin-top: 2px; }
+
+  /* Buttons row */
+  .btn-row { display: flex; gap: 8px; margin-top: 12px; }
+  .btn { flex: 1; padding: 9px; border-radius: 10px; border: none; font-weight: 700; font-size: 13px; cursor: pointer; font-family: 'Nunito', sans-serif; transition: all 0.15s; }
+  .btn-primary { background: #f1f5f9; color: #64748b; }
+  .btn-primary.active-btn { background: #16a34a; color: #fff; }
+  .btn-outline { background: #fff; border: 1px solid #e2e8f0; color: #64748b; }
+  .btn-outline.active-btn { border-color: #86efac; color: #16a34a; }
+
+  /* Totals */
+  .totals-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f8fafc; }
+  .totals-row:last-child { border-bottom: none; }
+  .totals-key { font-size: 13px; color: #64748b; }
+  .totals-val { font-size: 13px; font-weight: 700; color: #0f172a; }
+  .totals-val.green { color: #16a34a; }
+  .freeze-note { font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 10px; }
+
+  /* Recipe view */
+  .recipe-back { background: none; border: none; color: #64748b; font-size: 13px; cursor: pointer; padding: 0 0 16px; font-family: 'Nunito', sans-serif; }
+  .recipe-hero { background: #dcfce7; border-radius: 20px; padding: 20px; margin-bottom: 16px; display: flex; gap: 14px; align-items: center; }
+  .recipe-hero-emoji { font-size: 48px; }
+  .recipe-hero h2 { font-size: 18px; font-weight: 800; color: #0f172a; line-height: 1.2; }
+  .recipe-hero p { font-size: 12px; color: #16a34a; margin-top: 4px; }
+
+  /* Macro pills */
+  .macro-pills { display: flex; gap: 8px; margin-bottom: 16px; }
+  .macro-pill { flex: 1; border-radius: 12px; padding: 10px 4px; text-align: center; }
+  .macro-pill.highlight { background: #16a34a; }
+  .macro-pill.plain { background: #fff; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .macro-pill .val { font-size: 15px; font-weight: 800; }
+  .macro-pill.highlight .val { color: #fff; }
+  .macro-pill.plain .val { color: #0f172a; }
+  .macro-pill .lbl { font-size: 10px; margin-top: 2px; }
+  .macro-pill.highlight .lbl { color: #bbf7d0; }
+  .macro-pill.plain .lbl { color: #94a3b8; }
+
+  /* Alert boxes */
+  .alert-yellow { background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; font-size: 12px; color: #92400e; line-height: 1.5; }
+  .alert-blue { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; font-size: 12px; color: #1e40af; line-height: 1.5; }
+  .alert-blue-lg { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 14px; padding: 16px; margin-top: 8px; }
+  .alert-blue-lg h4 { font-size: 12px; font-weight: 700; color: #1e40af; margin-bottom: 6px; }
+  .alert-blue-lg p { font-size: 12px; color: #3b82f6; line-height: 1.8; }
+
+  /* Ingredient list */
+  .ing-list { background: #fff; border-radius: 14px; overflow: hidden; margin-bottom: 20px; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .ing-row { display: flex; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid #f8fafc; font-size: 13px; }
+  .ing-row:last-child { border-bottom: none; }
+  .ing-name { color: #334155; }
+  .ing-qty { font-weight: 700; color: #16a34a; }
+
+  /* Steps */
+  .steps-list { display: flex; flex-direction: column; gap: 8px; }
+  .step { display: flex; gap: 12px; align-items: flex-start; background: #fff; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px 14px; cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,0.04); transition: all 0.15s; }
+  .step.done { background: #f0fdf4; border-color: #86efac; }
+  .step-num { min-width: 24px; height: 24px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #94a3b8; flex-shrink: 0; transition: all 0.15s; }
+  .step.done .step-num { background: #16a34a; color: #fff; }
+  .step-text { font-size: 13px; color: #334155; line-height: 1.5; transition: all 0.15s; }
+  .step.done .step-text { color: #94a3b8; text-decoration: line-through; }
+
+  /* Shopping */
+  .shop-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+  .shop-title { font-size: 20px; font-weight: 800; color: #0f172a; }
+  .shop-sub { font-size: 12px; color: #64748b; margin-top: 3px; }
+  .reset-btn { background: none; border: none; color: #94a3b8; font-size: 12px; cursor: pointer; font-family: 'Nunito', sans-serif; padding-top: 4px; }
+  .progress-bar { background: #f1f5f9; border-radius: 99px; height: 6px; margin: 14px 0 20px; overflow: hidden; }
+  .progress-fill { background: #16a34a; height: 100%; border-radius: 99px; transition: width 0.3s; }
+  .lunch-switcher { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 20px; border: 1px solid #f1f5f9; }
+  .lunch-switcher-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .lunch-emoji-row { display: flex; gap: 6px; }
+  .lunch-emoji-btn { flex: 1; padding: 8px 4px; border-radius: 8px; border: none; background: #f1f5f9; font-size: 18px; cursor: pointer; font-family: 'Nunito', sans-serif; transition: all 0.15s; }
+  .lunch-emoji-btn.active { background: #16a34a; }
+  .cat-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .shop-list { background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.04); margin-bottom: 20px; }
+  .shop-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 14px; border-bottom: 1px solid #f8fafc; cursor: pointer; transition: background 0.15s; }
+  .shop-row:last-child { border-bottom: none; }
+  .shop-row.checked { background: #f0fdf4; }
+  .shop-row-left { display: flex; align-items: center; gap: 10px; }
+  .checkbox { width: 20px; height: 20px; border-radius: 6px; border: 2px solid #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; font-weight: 800; flex-shrink: 0; transition: all 0.15s; }
+  .checkbox.checked { background: #16a34a; border-color: #16a34a; }
+  .shop-item-name { font-size: 13px; color: #334155; transition: all 0.15s; }
+  .shop-row.checked .shop-item-name { color: #94a3b8; text-decoration: line-through; }
+  .shop-item-qty { font-size: 12px; font-weight: 700; color: #16a34a; transition: all 0.15s; }
+  .shop-row.checked .shop-item-qty { color: #94a3b8; }
+
+  /* Prep guide */
+  .prep-title { font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+  .prep-sub { font-size: 12px; color: #64748b; margin-bottom: 20px; }
+  .prep-step { display: flex; gap: 14px; align-items: flex-start; background: #fff; border-radius: 14px; padding: 14px; margin-bottom: 8px; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .prep-icon { text-align: center; min-width: 44px; }
+  .prep-icon span { font-size: 24px; }
+  .prep-time { font-size: 9px; color: #94a3b8; font-weight: 700; margin-top: 2px; }
+  .prep-step-title { font-weight: 700; font-size: 14px; color: #0f172a; margin-bottom: 3px; }
+  .prep-step-desc { font-size: 12px; color: #64748b; line-height: 1.5; }
+
+  /* Bottom bar */
+  .bottom-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: #fff; border-top: 1px solid #f1f5f9; padding: 11px 20px; text-align: center; }
+  .bottom-bar p { font-size: 11px; color: #cbd5e1; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-sub">Weekly</div>
+  <h1>Meal Prep</h1>
+  <p>60g+ protein · Low calorie · Mon–Fri</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('plan')">Plan</button>
+  <button class="tab" onclick="switchTab('shopping')" id="tab-shopping">Shopping</button>
+  <button class="tab" onclick="switchTab('prep')">Prep Guide</button>
+</div>
+
+<!-- PLAN VIEW -->
+<div class="view active" id="view-plan">
+  <div class="section-label" style="margin-top:0">Breakfast · Every day</div>
+  <div class="card clickable" onclick="openRecipe('breakfast')">
+    <div class="meal-row">
+      <div class="meal-icon">🥣</div>
+      <div class="meal-info">
+        <div class="meal-name">High-Protein Overnight Oats</div>
+        <div class="meal-meta">5 jars · 10 min Sunday</div>
+      </div>
+      <div class="meal-macros">
+        <div class="macro-protein">38g</div>
+        <div class="macro-label">protein</div>
+        <div class="macro-cal">350 kcal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:14px">This week's lunch</div>
+  <p style="font-size:12px;color:#64748b;margin-bottom:12px">Pick one — cook a big batch, divide into 5.</p>
+
+  <div id="lunch-cards"></div>
+  <div class="card" id="totals-card" style="margin-top:4px">
+    <div class="section-label" style="margin-bottom:12px">Daily totals · Breakfast + Lunch</div>
+    <div id="totals-rows"></div>
+    <div class="freeze-note">❄ Containers 1–3 → fridge · Containers 4–5 → freezer<br>Move Thu out Wed night · Move Fri out Thu night</div>
+  </div>
+</div>
+
+<!-- RECIPE VIEW -->
+<div class="view" id="view-recipe">
+  <button class="recipe-back" onclick="closeRecipe()">← Back</button>
+  <div class="recipe-hero">
+    <div class="recipe-hero-emoji" id="r-emoji"></div>
+    <div>
+      <h2 id="r-name"></h2>
+      <p id="r-meta"></p>
+    </div>
+  </div>
+  <div class="macro-pills" id="r-macros"></div>
+  <div class="alert-yellow" id="r-tip"></div>
+  <div class="alert-blue" id="r-storage" style="display:none"></div>
+  <div class="section-label" id="r-ing-label"></div>
+  <div class="ing-list" id="r-ingredients"></div>
+  <div class="section-label">Method</div>
+  <div class="steps-list" id="r-steps"></div>
+</div>
+
+<!-- SHOPPING VIEW -->
+<div class="view" id="view-shopping">
+  <div class="shop-header">
+    <div>
+      <div class="shop-title">Shopping List</div>
+      <div class="shop-sub" id="shop-sub">Breakfast + lunch</div>
+    </div>
+    <button class="reset-btn" onclick="resetShopping()">Reset</button>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  <div class="lunch-switcher">
+    <div class="lunch-switcher-label">Lunch this week</div>
+    <div class="lunch-emoji-row" id="lunch-emoji-row"></div>
+  </div>
+  <div id="shopping-list"></div>
+</div>
+
+<!-- PREP VIEW -->
+<div class="view" id="view-prep">
+  <div class="prep-title">Sunday Prep</div>
+  <div class="prep-sub">~90 min total · Follow in order</div>
+  <div class="prep-step"><div class="prep-icon"><span>📦</span><div class="prep-time">0–5 min</div></div><div><div class="prep-step-title">Set up</div><div class="prep-step-desc">Get out 5 lunch containers + 5 breakfast jars. Preheat oven to 200°C.</div></div></div>
+  <div class="prep-step"><div class="prep-icon"><span>🌾</span><div class="prep-time">5–10 min</div></div><div><div class="prep-step-title">Start the rice</div><div class="prep-step-desc">Put brown rice on — takes 25–30 min and needs no attention.</div></div></div>
+  <div class="prep-step"><div class="prep-icon"><span>🔪</span><div class="prep-time">10–20 min</div></div><div><div class="prep-step-title">Prep everything</div><div class="prep-step-desc">Season your protein, chop all veg. Get it all ready before anything hits the heat.</div></div></div>
+  <div class="prep-step"><div class="prep-icon"><span>🔥</span><div class="prep-time">20–50 min</div></div><div><div class="prep-step-title">Cook proteins & veg</div><div class="prep-step-desc">Everything into the oven or on the hob. Roast veg goes in at the same time. Run it all in parallel.</div></div></div>
+  <div class="prep-step"><div class="prep-icon"><span>📐</span><div class="prep-time">50–80 min</div></div><div><div class="prep-step-title">Portion lunches</div><div class="prep-step-desc">Divide everything equally across 5 containers. Cool fully — 20–30 min — before sealing.</div></div></div>
+  <div class="prep-step"><div class="prep-icon"><span>🫙</span><div class="prep-time">80–90 min</div></div><div><div class="prep-step-title">Breakfast jars</div><div class="prep-step-desc">Fill 5 jars: oats, milk, yogurt, chia seeds, vanilla. Stir, seal, refrigerate. Done.</div></div></div>
+  <div class="alert-blue-lg"><h4>❄ Freezer reminder</h4><p>Sunday: containers 1–3 → fridge, 4–5 → freezer<br>Wednesday night: move Thursday's to fridge<br>Thursday night: move Friday's to fridge</p></div>
+</div>
+
+<div class="bottom-bar"><p id="bottom-hint">Tap a meal to see the full recipe</p></div>
+
+<script>
+const MEALS = {
+  breakfast: {
+    id: 'breakfast', name: 'High-Protein Overnight Oats', emoji: '🥣',
+    macros: { protein: 38, calories: 350, carbs: 42, fat: 6 },
+    prepTime: '10 min', isSingle: true,
+    tip: 'Fairlife milk has 13g protein per 200ml vs 7g in regular skimmed — it\'s the single biggest lever here. Alternatively use skimmed milk + 1 scoop unflavoured whey.',
+    ingredients: [
+      { name: 'Rolled oats', qty: '250g', note: '(50g × 5)' },
+      { name: 'Fairlife protein milk', qty: '1 litre', note: '(200ml × 5)' },
+      { name: '0% Greek yogurt', qty: '500g', note: '(100g × 5)' },
+      { name: 'Chia seeds', qty: '50g', note: '(10g × 5)' },
+      { name: 'Vanilla extract', qty: '1 tsp', note: '' },
+      { name: 'Mixed berries', qty: '400g', note: '(80g × 5)' },
+    ],
+    steps: [
+      'In each mason jar, add 50g rolled oats.',
+      'Pour in 200ml Fairlife protein milk.',
+      'Add 100g 0% Greek yogurt and 10g chia seeds.',
+      'Add a splash of vanilla extract. Stir everything well.',
+      'Seal jars and refrigerate overnight (minimum 6 hours).',
+      'In the morning, top with 80g mixed berries. Eat cold or microwave 60–90 seconds.',
+    ]
+  },
+  lunches: [
+    {
+      id: 'beef', name: 'Lean Beef & Roasted Veg Rice Bowl', emoji: '🥩',
+      macros: { protein: 62, calories: 490, carbs: 38, fat: 11 },
+      prepTime: '35 min',
+      tip: 'Use 5% fat beef mince — 20% mince has nearly 3x the fat calories. Always check the label.',
+      storage: '3 containers → fridge · 2 containers → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      ingredients: [
+        { name: 'Extra-lean beef mince (5% fat)', qty: '1,000g' },
+        { name: 'Brown rice (dry weight)', qty: '350g' },
+        { name: 'Broccoli florets', qty: '750g' },
+        { name: 'Courgette', qty: '500g' },
+        { name: 'Cherry tomatoes', qty: '400g' },
+        { name: 'Low-sodium soy sauce', qty: '75ml' },
+        { name: 'Garlic cloves', qty: '10' },
+        { name: 'Smoked paprika', qty: '5 tsp' },
+        { name: 'Cooking spray (Frylight)', qty: '1 bottle' },
+      ],
+      steps: [
+        'Cook 350g brown rice per packet instructions. Drain and divide equally across 5 containers.',
+        'Spray a large non-stick pan with Frylight. Brown all the beef mince on high heat, breaking it up as it cooks.',
+        'Season with smoked paprika, crushed garlic, salt and pepper. Add soy sauce, stir for 2 min. Remove from heat.',
+        'Spread broccoli, courgette and cherry tomatoes on 2 baking trays. Spray with Frylight. Roast at 200°C for 20–22 min.',
+        'Divide beef and roasted veg equally across the 5 rice containers.',
+        'Let cool completely — at least 30 min — before sealing. Put 3 in fridge, 2 in freezer.',
+        'Reheat at work: microwave 2–2.5 min, stir halfway through.',
+      ]
+    },
+    {
+      id: 'chicken-breast', name: 'Chicken Breast & Broccoli Soy-Ginger Bowl', emoji: '🍗',
+      macros: { protein: 65, calories: 440, carbs: 32, fat: 6 },
+      prepTime: '30 min',
+      tip: 'Don\'t skip the rice vinegar in the sauce — it lifts the whole flavour and stops the soy tasting flat after reheating.',
+      storage: '3 containers → fridge · 2 containers → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      ingredients: [
+        { name: 'Chicken breast', qty: '1,100g' },
+        { name: 'Broccoli florets', qty: '1,000g' },
+        { name: 'Edamame (shelled, frozen)', qty: '400g' },
+        { name: 'Brown rice (dry weight)', qty: '300g' },
+        { name: 'Low-sodium soy sauce', qty: '100ml' },
+        { name: 'Fresh ginger (grated)', qty: '25g' },
+        { name: 'Garlic cloves', qty: '10' },
+        { name: 'Rice vinegar', qty: '50ml' },
+        { name: 'Sesame seeds', qty: '25g' },
+        { name: 'Cooking spray', qty: '1 bottle' },
+      ],
+      steps: [
+        'Cook 300g brown rice. While it cooks, mix soy sauce, grated ginger, crushed garlic and rice vinegar into a sauce.',
+        'Season all chicken breasts with salt and pepper. Cook in batches in a non-stick pan with Frylight — 6–7 min each side until cooked through.',
+        'Slice all chicken and toss in half the soy-ginger sauce.',
+        'Steam broccoli in batches for 3 min until just tender. Defrost edamame in boiling water for 2 min, drain.',
+        'Divide rice across 5 containers. Top with chicken, broccoli and edamame. Drizzle remaining sauce evenly. Sprinkle sesame seeds.',
+        'Cool completely before sealing. 3 in fridge, 2 in freezer.',
+        'Reheat: microwave 2 min. The sauce keeps the chicken moist.',
+      ]
+    },
+    {
+      id: 'chicken-thigh', name: 'Baked Chicken Thigh & Sweet Potato Mash', emoji: '🍠',
+      macros: { protein: 63, calories: 470, carbs: 30, fat: 12 },
+      prepTime: '45 min',
+      tip: 'Skinless thighs give more flavour and juiciness than breast for barely more calories — important when eating the same meal 5 days running.',
+      storage: '3 containers → fridge · 2 containers → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      ingredients: [
+        { name: 'Skinless chicken thighs', qty: '1,400g' },
+        { name: 'Sweet potato', qty: '1,000g' },
+        { name: 'Green beans', qty: '750g' },
+        { name: 'Garlic cloves', qty: '15' },
+        { name: 'Smoked paprika', qty: '7 tsp' },
+        { name: 'Dried thyme', qty: '5 tsp' },
+        { name: 'Lemon (zested)', qty: '2' },
+        { name: 'Low-salt chicken stock', qty: '250ml' },
+        { name: 'Cooking spray', qty: '1 bottle' },
+      ],
+      steps: [
+        'Preheat oven to 200°C. Remove any remaining skin from thighs.',
+        'Mix smoked paprika, thyme, lemon zest, crushed garlic, salt and pepper. Rub all over every thigh.',
+        'Place thighs in a large baking dish. Pour chicken stock into the bottom — stops them drying out. Bake 35–40 min until golden and cooked through.',
+        'While chicken bakes, peel and cube all sweet potato. Boil for 15 min until soft. Drain and mash with a pinch of salt — no butter needed.',
+        'Steam or boil green beans for 4 min until just tender.',
+        'Divide mash across 5 containers. Add 2–3 thighs per portion and green beans alongside.',
+        'Cool completely. 3 in fridge, 2 in freezer. Reheat: microwave 2.5–3 min.',
+      ]
+    }
+  ]
+};
+
+const CAT_ORDER = ['Protein','Fruit & Veg','Grains & Pulses','Dairy & Eggs','Pantry & Condiments'];
+const CAT_ICONS = { 'Protein':'🥩', 'Fruit & Veg':'🥦', 'Grains & Pulses':'🌾', 'Dairy & Eggs':'🥛', 'Pantry & Condiments':'🧴' };
+
+let activeLunch = 'beef';
+let checkedItems = {};
+let checkedSteps = {};
+let currentView = 'plan';
+let currentRecipeMeal = null;
+
+function categorise(name) {
+  const n = name.toLowerCase();
+  if (/chicken|beef|mince/.test(n)) return 'Protein';
+  if (/oat|rice|edamame|lentil/.test(n)) return 'Grains & Pulses';
+  if (/yogurt|milk|egg/.test(n)) return 'Dairy & Eggs';
+  if (/broccoli|courgette|tomato|spinach|onion|bean|potato|pepper|salad|berr|ginger|lemon|garlic|spring/.test(n)) return 'Fruit & Veg';
+  return 'Pantry & Condiments';
+}
+
+function buildShoppingList(lunchId) {
+  const lunch = MEALS.lunches.find(l => l.id === lunchId);
+  const map = {};
+  const bfIngs = [
+    { name: 'Rolled oats', qty: '250g' },
+    { name: 'Fairlife protein milk', qty: '1 litre' },
+    { name: '0% Greek yogurt', qty: '500g' },
+    { name: 'Chia seeds', qty: '50g' },
+    { name: 'Vanilla extract', qty: '5 tsp' },
+    { name: 'Mixed berries', qty: '400g' },
+  ];
+  [...bfIngs, ...lunch.ingredients].forEach(ing => {
+    const key = ing.name.toLowerCase();
+    if (!map[key]) map[key] = { name: ing.name, qty: ing.qty, cat: categorise(ing.name) };
+  });
+  return Object.values(map);
+}
+
+function getLunch() { return MEALS.lunches.find(l => l.id === activeLunch); }
+
+function renderPlan() {
+  const lunch = getLunch();
+  // Render lunch cards
+  const container = document.getElementById('lunch-cards');
+  container.innerHTML = MEALS.lunches.map(meal => `
+    <div class="card ${meal.id === activeLunch ? 'selected' : ''}" id="lcard-${meal.id}">
+      <div class="meal-row">
+        <div class="meal-icon ${meal.id === activeLunch ? '' : 'plain'}">${meal.emoji}</div>
+        <div class="meal-info">
+          <div class="meal-name">${meal.name}</div>
+          <div class="meal-meta">${meal.prepTime} · batch of 5</div>
+        </div>
+        <div class="meal-macros">
+          <div class="macro-protein">${meal.macros.protein}g</div>
+          <div class="macro-label">protein</div>
+          <div class="macro-cal">${meal.macros.calories} kcal</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary ${meal.id === activeLunch ? 'active-btn' : ''}" onclick="selectLunch('${meal.id}')">${meal.id === activeLunch ? '✓ Selected' : 'Select'}</button>
+        <button class="btn btn-outline ${meal.id === activeLunch ? 'active-btn' : ''}" onclick="openRecipe('${meal.id}')">View Recipe</button>
+      </div>
+    </div>
+  `).join('');
+
+  // Render totals
+  const tp = 38 + lunch.macros.protein;
+  const tc = 350 + lunch.macros.calories;
+  const tcarb = 42 + lunch.macros.carbs;
+  const tf = 6 + lunch.macros.fat;
+  document.getElementById('totals-rows').innerHTML = `
+    <div class="totals-row"><span class="totals-key">Protein</span><span class="totals-val green">${tp}g</span></div>
+    <div class="totals-row"><span class="totals-key">Calories</span><span class="totals-val">${tc} kcal</span></div>
+    <div class="totals-row"><span class="totals-key">Carbs</span><span class="totals-val" style="color:#64748b">${tcarb}g</span></div>
+    <div class="totals-row" style="border-bottom:none"><span class="totals-key">Fat</span><span class="totals-val" style="color:#64748b">${tf}g</span></div>
+  `;
+}
+
+function selectLunch(id) {
+  activeLunch = id;
+  renderPlan();
+  renderShopping();
+}
+
+function openRecipe(mealId) {
+  const meal = mealId === 'breakfast' ? MEALS.breakfast : MEALS.lunches.find(l => l.id === mealId);
+  currentRecipeMeal = mealId;
+  document.getElementById('r-emoji').textContent = meal.emoji;
+  document.getElementById('r-name').textContent = meal.name;
+  document.getElementById('r-meta').textContent = (meal.isSingle ? '5 jars · ' : 'Batch of 5 · ') + meal.prepTime;
+  document.getElementById('r-macros').innerHTML = [
+    { label: 'Protein', val: meal.macros.protein + 'g', highlight: true },
+    { label: 'Calories', val: meal.macros.calories },
+    { label: 'Carbs', val: meal.macros.carbs + 'g' },
+    { label: 'Fat', val: meal.macros.fat + 'g' },
+  ].map(m => `<div class="macro-pill ${m.highlight ? 'highlight' : 'plain'}"><div class="val">${m.val}</div><div class="lbl">${m.label}</div></div>`).join('');
+  document.getElementById('r-tip').innerHTML = '<strong>💡 </strong>' + meal.tip;
+  const storageEl = document.getElementById('r-storage');
+  if (meal.storage) { storageEl.style.display = 'block'; storageEl.innerHTML = '<strong>❄ Storage: </strong>' + meal.storage; }
+  else storageEl.style.display = 'none';
+  document.getElementById('r-ing-label').textContent = 'Ingredients · ' + (meal.isSingle ? '5 servings' : 'Full batch (5 portions)');
+  document.getElementById('r-ingredients').innerHTML = meal.ingredients.map(ing => `
+    <div class="ing-row"><span class="ing-name">${ing.name}${ing.note ? ' <span style="color:#94a3b8;font-size:11px">' + ing.note + '</span>' : ''}</span><span class="ing-qty">${ing.qty}</span></div>
+  `).join('');
+  renderSteps(meal);
+  showView('recipe');
+}
+
+function renderSteps(meal) {
+  document.getElementById('r-steps').innerHTML = meal.steps.map((step, i) => {
+    const key = meal.id + '-' + i;
+    const done = checkedSteps[key];
+    return `<div class="step ${done ? 'done' : ''}" onclick="toggleStep('${meal.id}', ${i})">
+      <div class="step-num">${done ? '✓' : i + 1}</div>
+      <div class="step-text">${step}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleStep(mealId, i) {
+  const key = mealId + '-' + i;
+  checkedSteps[key] = !checkedSteps[key];
+  const meal = mealId === 'breakfast' ? MEALS.breakfast : MEALS.lunches.find(l => l.id === mealId);
+  renderSteps(meal);
+}
+
+function closeRecipe() { showView('plan'); currentRecipeMeal = null; }
+
+function renderShopping() {
+  const lunch = getLunch();
+  document.getElementById('shop-sub').textContent = 'Breakfast + ' + lunch.name;
+  const items = buildShoppingList(activeLunch);
+  const total = items.length;
+  const checked = Object.values(checkedItems).filter(Boolean).length;
+  document.getElementById('progress-fill').style.width = total > 0 ? (checked / total * 100) + '%' : '0%';
+  document.getElementById('tab-shopping').textContent = checked > 0 ? `Shop (${checked}/${total})` : 'Shopping';
+
+  // Emoji switcher
+  document.getElementById('lunch-emoji-row').innerHTML = MEALS.lunches.map(m =>
+    `<button class="lunch-emoji-btn ${m.id === activeLunch ? 'active' : ''}" onclick="switchShoppingLunch('${m.id}')">${m.emoji}</button>`
+  ).join('');
+
+  // Group items
+  const grouped = {};
+  items.forEach(item => {
+    if (!grouped[item.cat]) grouped[item.cat] = [];
+    grouped[item.cat].push(item);
+  });
+
+  document.getElementById('shopping-list').innerHTML = CAT_ORDER.filter(c => grouped[c]).map(cat => `
+    <div class="cat-label">${CAT_ICONS[cat]} ${cat}</div>
+    <div class="shop-list">
+      ${grouped[cat].map((item, i) => {
+        const key = item.name.toLowerCase();
+        const done = checkedItems[key];
+        return `<div class="shop-row ${done ? 'checked' : ''}" onclick="toggleCheck('${key}')">
+          <div class="shop-row-left">
+            <div class="checkbox ${done ? 'checked' : ''}">${done ? '✓' : ''}</div>
+            <span class="shop-item-name">${item.name}</span>
+          </div>
+          <span class="shop-item-qty">${item.qty}</span>
+        </div>`;
+      }).join('')}
+    </div>
+  `).join('');
+}
+
+function switchShoppingLunch(id) { activeLunch = id; checkedItems = {}; renderShopping(); renderPlan(); }
+function toggleCheck(key) { checkedItems[key] = !checkedItems[key]; renderShopping(); }
+function resetShopping() { checkedItems = {}; renderShopping(); }
+
+function showView(name) {
+  currentView = name;
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (name !== 'recipe') {
+    const tabMap = { plan: 0, shopping: 1, prep: 2 };
+    document.querySelectorAll('.tab')[tabMap[name] ?? 0].classList.add('active');
+  } else {
+    document.querySelectorAll('.tab')[0].classList.add('active');
+  }
+  const hints = { plan: 'Tap a meal to see the full recipe', recipe: 'Tap each step to mark it done', shopping: 'Tap items to check them off · Switch lunch with emoji buttons', prep: 'Run proteins and veg in parallel to save time' };
+  document.getElementById('bottom-hint').textContent = hints[name] || '';
+}
+
+function switchTab(name) { if (name === 'plan' && currentView === 'recipe') closeRecipe(); else showView(name); }
+
+// Init
+renderPlan();
+renderShopping();
+</script>
+</body>
+</html>
