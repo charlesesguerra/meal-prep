@@ -43,7 +43,6 @@ body { font-family: 'Nunito', sans-serif; background: #f8fafc; color: #0f172a; m
 .totals-val { font-size: 13px; font-weight: 700; color: #0f172a; }
 .totals-val.green { color: #16a34a; }
 .freeze-note { font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 10px; }
-/* Recipe */
 .recipe-back { background: none; border: none; color: #64748b; font-size: 13px; cursor: pointer; padding: 0 0 16px; font-family: 'Nunito', sans-serif; }
 .recipe-hero { border-radius: 20px; padding: 20px; margin-bottom: 16px; display: flex; gap: 14px; align-items: center; }
 .recipe-hero-emoji { font-size: 44px; }
@@ -61,6 +60,12 @@ body { font-family: 'Nunito', sans-serif; background: #f8fafc; color: #0f172a; m
 .macro-pill.pl .plbl { color: #94a3b8; }
 .alert-yellow { background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; font-size: 12px; color: #92400e; line-height: 1.5; }
 .alert-blue { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; font-size: 12px; color: #1e40af; line-height: 1.5; }
+.alert-green { background: #f0fdf4; border: 1px solid #86efac; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.alert-green h4 { font-size: 12px; font-weight: 800; color: #16a34a; margin-bottom: 8px; }
+.portion-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #dcfce7; font-size: 12px; }
+.portion-row:last-child { border-bottom: none; }
+.portion-key { color: #334155; }
+.portion-val { font-weight: 800; color: #16a34a; }
 .alert-blue-lg { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 14px; padding: 16px; margin-top: 8px; }
 .alert-blue-lg h4 { font-size: 12px; font-weight: 700; color: #1e40af; margin-bottom: 6px; }
 .alert-blue-lg p { font-size: 12px; color: #3b82f6; line-height: 1.8; }
@@ -76,7 +81,6 @@ body { font-family: 'Nunito', sans-serif; background: #f8fafc; color: #0f172a; m
 .step.done .step-num { background: #16a34a; color: #fff; }
 .step-text { font-size: 13px; color: #334155; line-height: 1.5; }
 .step.done .step-text { color: #94a3b8; text-decoration: line-through; }
-/* Shopping */
 .shop-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
 .shop-title { font-size: 20px; font-weight: 800; }
 .shop-sub { font-size: 12px; color: #64748b; margin-top: 3px; }
@@ -100,7 +104,6 @@ body { font-family: 'Nunito', sans-serif; background: #f8fafc; color: #0f172a; m
 .shop-row.checked .shop-item-name { color: #94a3b8; text-decoration: line-through; }
 .shop-item-qty { font-size: 12px; font-weight: 700; color: #16a34a; }
 .shop-row.checked .shop-item-qty { color: #94a3b8; }
-/* Prep */
 .prep-step { display: flex; gap: 14px; align-items: flex-start; background: #fff; border-radius: 14px; padding: 14px; margin-bottom: 8px; border: 1px solid #f1f5f9; }
 .prep-icon { text-align: center; min-width: 44px; }
 .prep-icon span { font-size: 22px; }
@@ -131,11 +134,11 @@ body { font-family: 'Nunito', sans-serif; background: #f8fafc; color: #0f172a; m
 <div class="view" id="view-prep">
   <h2 style="font-size:20px;font-weight:800;margin-bottom:4px">Sunday Prep</h2>
   <p style="font-size:12px;color:#64748b;margin-bottom:20px">~90 min total · Follow in order</p>
-  <div class="prep-step"><div class="prep-icon"><span>📦</span><div class="prep-time">0–5 min</div></div><div><div class="prep-step-title">Set up</div><div class="prep-step-desc">Get out 5 lunch containers + 5 breakfast jars. Preheat oven to 200°C.</div></div></div>
+  <div class="prep-step"><div class="prep-icon"><span>📦</span><div class="prep-time">0–5 min</div></div><div><div class="prep-step-title">Set up</div><div class="prep-step-desc">Get out 5 lunch containers + 5 breakfast jars + your kitchen scale. Preheat oven to 200°C.</div></div></div>
   <div class="prep-step"><div class="prep-icon"><span>🔪</span><div class="prep-time">5–15 min</div></div><div><div class="prep-step-title">Prep everything first</div><div class="prep-step-desc">Season your protein, chop all veg, measure spices. Get it all ready before anything hits the heat.</div></div></div>
-  <div class="prep-step"><div class="prep-icon"><span>🔥</span><div class="prep-time">15–55 min</div></div><div><div class="prep-step-title">Cook proteins & roast veg</div><div class="prep-step-desc">Everything into the oven or on the hob. Roast veg goes in at the same time. Run it all in parallel to save time.</div></div></div>
-  <div class="prep-step"><div class="prep-icon"><span>❄</span><div class="prep-time">55–60 min</div></div><div><div class="prep-step-title">Cauliflower rice</div><div class="prep-step-desc">If using fresh cauliflower rice, cook now. Or use frozen — microwave straight from the bag in 3 min, no prep needed.</div></div></div>
-  <div class="prep-step"><div class="prep-icon"><span>📐</span><div class="prep-time">60–80 min</div></div><div><div class="prep-step-title">Portion lunches</div><div class="prep-step-desc">Divide everything equally across 5 containers. Let them cool fully — 20–30 min — before sealing.</div></div></div>
+  <div class="prep-step"><div class="prep-icon"><span>🔥</span><div class="prep-time">15–55 min</div></div><div><div class="prep-step-title">Cook proteins & roast veg</div><div class="prep-step-desc">Everything into the oven or on the hob. Roast veg goes in at the same time. Run it all in parallel.</div></div></div>
+  <div class="prep-step"><div class="prep-icon"><span>❄</span><div class="prep-time">55–60 min</div></div><div><div class="prep-step-title">Cauliflower rice</div><div class="prep-step-desc">Microwave frozen cauliflower rice bags per packet — usually 4–5 min. No chopping needed.</div></div></div>
+  <div class="prep-step"><div class="prep-icon"><span>⚖️</span><div class="prep-time">60–80 min</div></div><div><div class="prep-step-title">Weigh & portion</div><div class="prep-step-desc">Weigh total cooked protein, divide by 5. Do the same for veg and cauliflower rice. Use your scale for each container — this is how you guarantee even macros across all 5.</div></div></div>
   <div class="prep-step"><div class="prep-icon"><span>🫙</span><div class="prep-time">80–90 min</div></div><div><div class="prep-step-title">Breakfast jars</div><div class="prep-step-desc">Fill 5 jars: oats, milk, yogurt, chia seeds, vanilla. Stir, seal, refrigerate. Done.</div></div></div>
   <div class="alert-blue-lg"><h4>❄ Freezer reminder</h4><p>Sunday: containers 1–3 → fridge, 4–5 → freezer<br>Wednesday night: move Thursday's to fridge<br>Thursday night: move Friday's to fridge</p></div>
 </div>
@@ -148,7 +151,6 @@ const CUISINE_COLORS = {
   'Mediterranean': { bg: '#ede9fe', color: '#5b21b6' },
   'Mexican': { bg: '#fee2e2', color: '#991b1b' },
   'North African': { bg: '#fef9c3', color: '#854d0e' },
-  'British': { bg: '#e0f2fe', color: '#075985' },
   '': { bg: '#f1f5f9', color: '#475569' }
 };
 
@@ -159,6 +161,14 @@ const MEALS = {
     prepTime: '10 min', isSingle: true, cuisine: '',
     heroColor: '#dcfce7', heroTextColor: '#16a34a',
     tip: 'Fairlife milk has 13g protein per 200ml vs 7g in regular skimmed — the single biggest lever here. Or use skimmed milk + 1 scoop unflavoured whey.',
+    portioning: [
+      { item: 'Oats', perContainer: '50g' },
+      { item: 'Protein milk', perContainer: '200ml' },
+      { item: 'Greek yogurt', perContainer: '100g' },
+      { item: 'Chia seeds', perContainer: '10g' },
+      { item: 'Berries (morning)', perContainer: '80g' },
+    ],
+    portionNote: 'Measure directly into each jar — no weighing the full batch needed. Each jar is built individually.',
     ingredients: [
       { name: 'Rolled oats', qty: '250g (50g × 5)' },
       { name: 'Fairlife protein milk', qty: '1 litre (200ml × 5)' },
@@ -183,6 +193,12 @@ const MEALS = {
       prepTime: '35 min', heroColor: '#fef2f2', heroTextColor: '#dc2626',
       tip: 'Use 5% fat beef mince — 20% mince has nearly 3x the fat calories. Always check the label.',
       storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      portioning: [
+        { item: 'Cooked beef mince', perContainer: '~200g' },
+        { item: 'Roasted veg (total)', perContainer: '~330g' },
+        { item: 'Cauliflower rice', perContainer: '~200g' },
+      ],
+      portionNote: 'Weigh total cooked beef, divide by 5. Weigh total roasted veg, divide by 5. Do cauliflower rice last. Each container should weigh roughly the same total — aim for within 20g of each other.',
       ingredients: [
         { name: 'Extra-lean beef mince (5% fat)', qty: '1,000g' },
         { name: 'Frozen cauliflower rice', qty: '1kg bag' },
@@ -198,10 +214,11 @@ const MEALS = {
         'Spray a large non-stick pan. Brown all beef mince on high heat, breaking it up.',
         'Season with smoked paprika, crushed garlic, salt and pepper. Add soy sauce, stir 2 min. Set aside.',
         'Spread broccoli, courgette and cherry tomatoes on 2 baking trays. Spray with Frylight. Roast at 200°C for 20–22 min.',
-        'Microwave cauliflower rice bags per packet instructions (usually 4–5 min). Divide across 5 containers.',
-        'Top each container with beef and roasted veg equally.',
-        'Cool completely before sealing. 3 to fridge, 2 to freezer.',
-        'Reheat at work: microwave 2–2.5 min, stir halfway.',
+        'Microwave cauliflower rice per packet (usually 4–5 min). Set aside.',
+        'Weigh total cooked beef — divide by 5 and add that weight to each container.',
+        'Weigh total roasted veg — divide by 5 and add to each container.',
+        'Weigh total cauliflower rice — divide by 5 and add to each container.',
+        'Cool completely before sealing. 3 to fridge, 2 to freezer. Reheat: microwave 2–2.5 min.',
       ]
     },
     {
@@ -210,6 +227,13 @@ const MEALS = {
       prepTime: '30 min', heroColor: '#fef3c7', heroTextColor: '#d97706',
       tip: 'Don\'t skip the rice vinegar — it lifts the whole sauce and stops the soy tasting flat after reheating.',
       storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      portioning: [
+        { item: 'Cooked sliced chicken', perContainer: '~220g' },
+        { item: 'Broccoli + edamame', perContainer: '~280g' },
+        { item: 'Cauliflower rice', perContainer: '~200g' },
+        { item: 'Soy-ginger sauce', perContainer: 'Equal drizzle (divide sauce into 5)' },
+      ],
+      portionNote: 'Weigh the total sliced chicken and divide by 5. Do the same for broccoli and edamame combined. Divide the remaining sauce equally — pour a fifth over each container.',
       ingredients: [
         { name: 'Chicken breast', qty: '1,100g' },
         { name: 'Frozen cauliflower rice', qty: '1kg bag' },
@@ -224,11 +248,13 @@ const MEALS = {
       ],
       steps: [
         'Mix soy sauce, grated ginger, crushed garlic and rice vinegar into a sauce.',
-        'Season chicken with salt and pepper. Cook in batches in a non-stick pan with Frylight — 6–7 min each side.',
+        'Season chicken with salt and pepper. Cook in batches with Frylight — 6–7 min each side.',
         'Slice all chicken and toss in half the sauce.',
         'Steam broccoli 3 min. Defrost edamame in boiling water 2 min, drain.',
-        'Microwave cauliflower rice per packet. Divide across 5 containers.',
-        'Top with chicken, broccoli, edamame. Drizzle remaining sauce. Sprinkle sesame seeds.',
+        'Microwave cauliflower rice per packet. Set aside.',
+        'Weigh total sliced chicken — divide by 5 into each container.',
+        'Weigh broccoli and edamame combined — divide by 5 into each container.',
+        'Divide cauliflower rice by 5 into each container. Drizzle remaining sauce equally. Sprinkle sesame seeds.',
         'Cool completely. 3 to fridge, 2 to freezer. Reheat: microwave 2 min.',
       ]
     },
@@ -238,6 +264,12 @@ const MEALS = {
       prepTime: '45 min', heroColor: '#fff7ed', heroTextColor: '#ea580c',
       tip: 'Skinless thighs give far more flavour and juiciness than breast for barely more calories — important when eating the same meal 5 days running.',
       storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      portioning: [
+        { item: 'Cooked chicken thighs', perContainer: '~280g' },
+        { item: 'Roasted veg (total)', perContainer: '~300g' },
+        { item: 'Cauliflower rice', perContainer: '~200g' },
+      ],
+      portionNote: 'Weigh all cooked thighs together and divide by 5. If thighs vary in size, cutting them up and weighing the combined meat ensures each container gets exactly the same amount.',
       ingredients: [
         { name: 'Skinless chicken thighs', qty: '1,400g' },
         { name: 'Frozen cauliflower rice', qty: '1kg bag' },
@@ -254,10 +286,12 @@ const MEALS = {
       steps: [
         'Preheat oven to 200°C. Remove any remaining skin from thighs.',
         'Mix smoked paprika, thyme, lemon zest, crushed garlic, salt and pepper. Rub all over every thigh.',
-        'Place thighs in a large baking dish. Pour stock into the bottom — stops them drying out. Bake 35–40 min until golden.',
-        'Toss courgette, peppers and green beans in a tray with Frylight. Roast alongside chicken for last 20 min.',
-        'Microwave cauliflower rice per packet. Divide across 5 containers.',
-        'Add chicken and roasted veg to each container equally.',
+        'Place thighs in a large baking dish. Pour stock into the bottom. Bake 35–40 min until golden.',
+        'Toss courgette, peppers and green beans in a tray with Frylight. Roast alongside for last 20 min.',
+        'Microwave cauliflower rice per packet. Set aside.',
+        'Weigh all cooked thighs together — divide by 5 into each container. Slice or leave whole.',
+        'Weigh total roasted veg — divide by 5 into each container.',
+        'Divide cauliflower rice by 5 into each container.',
         'Cool completely. 3 to fridge, 2 to freezer. Reheat: microwave 2.5–3 min.',
       ]
     },
@@ -265,8 +299,15 @@ const MEALS = {
       id: 'korean-beef', name: 'Korean Beef Bowl', emoji: '🫙',
       cuisine: 'Asian', macros: { protein: 62, calories: 370, carbs: 10, fat: 12 },
       prepTime: '25 min', heroColor: '#fef3c7', heroTextColor: '#d97706',
-      tip: 'The sauce is everything here — don\'t rush it. Let the beef soak in the sauce off the heat for 5 min before portioning.',
+      tip: 'The sauce is everything here — let the beef sit off the heat for 5 min before portioning so it fully absorbs.',
       storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      portioning: [
+        { item: 'Cooked beef in sauce', perContainer: '~200g' },
+        { item: 'Broccoli', perContainer: '~120g' },
+        { item: 'Cucumber + carrot', perContainer: 'Divide equally by eye (or weigh)' },
+        { item: 'Cauliflower rice', perContainer: '~200g' },
+      ],
+      portionNote: 'Weigh the beef and sauce together as one combined weight — divide by 5. This keeps the sauce distribution even so every container gets the same flavour intensity.',
       ingredients: [
         { name: 'Extra-lean beef mince (5% fat)', qty: '1,000g' },
         { name: 'Frozen cauliflower rice', qty: '1kg bag' },
@@ -284,13 +325,15 @@ const MEALS = {
         { name: 'Cooking spray', qty: '1 bottle' },
       ],
       steps: [
-        'Mix soy sauce, garlic, ginger, sesame oil, rice vinegar and chilli flakes into a Korean-style sauce.',
+        'Mix soy sauce, garlic, ginger, sesame oil, rice vinegar and chilli flakes into a sauce.',
         'Thinly slice cucumber and carrots into ribbons or matchsticks. Set aside.',
         'Brown beef mince in a large pan with Frylight on high heat, breaking it up.',
-        'Pour sauce over beef, stir well. Cook 2 min then remove from heat. Let it sit and absorb for 5 min.',
+        'Pour sauce over beef, stir well. Cook 2 min then remove from heat. Rest 5 min.',
         'Steam broccoli 3 min. Microwave cauliflower rice per packet.',
-        'Divide cauliflower rice across 5 containers. Top with beef, broccoli, cucumber and carrot.',
-        'Sprinkle spring onions and sesame seeds. Cool completely. 3 to fridge, 2 to freezer.',
+        'Weigh total beef + sauce combined — divide by 5 into each container.',
+        'Weigh broccoli — divide by 5 into each container.',
+        'Divide cauliflower rice by 5. Add cucumber, carrot, spring onions and sesame seeds equally.',
+        'Cool completely. 3 to fridge, 2 to freezer.',
       ]
     },
     {
@@ -299,6 +342,14 @@ const MEALS = {
       prepTime: '35 min', heroColor: '#ede9fe', heroTextColor: '#7c3aed',
       tip: 'Lean lamb mince (10% fat or less) keeps the calories down. Most supermarkets stock it — check the label.',
       storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      portioning: [
+        { item: 'Lamb meatballs', perContainer: '5–6 meatballs (weigh to confirm ~200g)' },
+        { item: 'Tomato & cucumber mix', perContainer: 'Divide by 5 equally' },
+        { item: 'Baby spinach', perContainer: '~40g' },
+        { item: 'Cauliflower rice', perContainer: '~200g' },
+        { item: 'Tzatziki', perContainer: '1 tbsp (50g)' },
+      ],
+      portionNote: 'Make all meatballs the same size — weigh 40g of raw mixture per meatball before rolling. This guarantees every container gets identical protein. 5 meatballs per container.',
       ingredients: [
         { name: 'Lean lamb mince (10% fat)', qty: '1,000g' },
         { name: 'Frozen cauliflower rice', qty: '1kg bag' },
@@ -315,20 +366,27 @@ const MEALS = {
       ],
       steps: [
         'Mix lamb mince with crushed garlic, oregano, cumin, lemon zest, parsley, salt and pepper.',
-        'Roll into 25–30 small meatballs (roughly golf-ball-sized).',
+        'Weigh 40g of mixture per meatball and roll — you should get 25 meatballs total (5 per container).',
         'Spray a large baking tray. Place meatballs on tray and roast at 200°C for 18–20 min until golden.',
         'Halve cherry tomatoes and slice cucumber. Toss in lemon juice.',
-        'Microwave cauliflower rice per packet. Divide across 5 containers.',
-        'Add meatballs (5–6 per container), tomato & cucumber mix, and baby spinach.',
-        'Add a tablespoon of tzatziki per container on the side. Cool before sealing. 3 to fridge, 2 to freezer.',
+        'Microwave cauliflower rice per packet. Divide by 5 into each container.',
+        'Add exactly 5 meatballs per container.',
+        'Divide tomato & cucumber mix equally. Add 40g baby spinach and 50g tzatziki per container.',
+        'Cool before sealing. 3 to fridge, 2 to freezer.',
       ]
     },
     {
       id: 'moroccan-lamb', name: 'Moroccan Spiced Lamb & Roasted Veg', emoji: '🌿',
       cuisine: 'North African', macros: { protein: 62, calories: 410, carbs: 12, fat: 16 },
       prepTime: '50 min', heroColor: '#fef9c3', heroTextColor: '#a16207',
-      tip: 'The spice rub — cumin, coriander, cinnamon, paprika, ginger — is what makes this dish. Mix it the night before and rub into the lamb overnight for even deeper flavour.',
+      tip: 'Mix the spice rub the night before and coat the lamb overnight — the flavour goes much deeper and the meat is noticeably more tender.',
       storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      portioning: [
+        { item: 'Cooked lamb (with sauce)', perContainer: '~240g' },
+        { item: 'Roasted veg', perContainer: '~300g' },
+        { item: 'Cauliflower rice', perContainer: '~200g' },
+      ],
+      portionNote: 'Weigh the cooked lamb and sauce together as one unit — divide by 5. This is critical for this dish as the sauce carries a lot of the flavour and calories. Weigh roasted veg separately and divide by 5.',
       ingredients: [
         { name: 'Lamb shoulder (diced, lean)', qty: '1,200g' },
         { name: 'Frozen cauliflower rice', qty: '1kg bag' },
@@ -347,21 +405,31 @@ const MEALS = {
         { name: 'Cooking spray', qty: '1 bottle' },
       ],
       steps: [
-        'Mix cumin, coriander, paprika, cinnamon and ginger into a spice rub. Coat all lamb pieces thoroughly.',
-        'Spray a large oven-proof casserole dish. Brown lamb in batches on high heat until sealed all over.',
+        'Mix cumin, coriander, paprika, cinnamon and ginger into a spice rub. Coat all lamb pieces.',
+        'Spray a large oven-proof casserole. Brown lamb in batches on high heat until sealed all over.',
         'Add crushed garlic, chopped tomatoes and stock. Stir, bring to a simmer.',
         'Cover and cook in oven at 180°C for 35–40 min until lamb is tender.',
-        'Meanwhile, roast courgette, peppers and aubergine on a tray at 200°C with Frylight for 20 min.',
-        'Microwave cauliflower rice per packet. Divide across 5 containers.',
-        'Top with lamb, roasted veg and scatter fresh mint. Cool completely. 3 to fridge, 2 to freezer.',
+        'Meanwhile, roast courgette, peppers and aubergine at 200°C with Frylight for 20 min.',
+        'Microwave cauliflower rice per packet. Set aside.',
+        'Weigh total lamb + sauce combined — divide by 5 into each container.',
+        'Weigh total roasted veg — divide by 5 into each container.',
+        'Divide cauliflower rice by 5. Scatter fresh mint over each container.',
+        'Cool completely. 3 to fridge, 2 to freezer.',
       ]
     },
     {
       id: 'lemon-chicken', name: 'Lemon Herb Chicken & Asparagus', emoji: '🍋',
       cuisine: 'Mediterranean', macros: { protein: 64, calories: 350, carbs: 8, fat: 8 },
       prepTime: '30 min', heroColor: '#f0fdf4', heroTextColor: '#16a34a',
-      tip: 'Don\'t overcook the asparagus — 8–10 min in the oven at 200°C is enough. It should still have a slight bite when it goes into the container as it softens on reheating.',
+      tip: 'Don\'t overcook the asparagus — 8–10 min at 200°C is enough. It softens more on reheating so pull it while it still has a slight bite.',
       storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      portioning: [
+        { item: 'Cooked sliced chicken', perContainer: '~240g' },
+        { item: 'Asparagus + green beans + tomatoes', perContainer: '~260g' },
+        { item: 'Cauliflower rice', perContainer: '~200g' },
+        { item: 'Pan juices', perContainer: 'Divide equally — drizzle over each' },
+      ],
+      portionNote: 'Slice all chicken before weighing — this gives an accurate total. Weigh, divide by 5. Do the same for all roasted veg combined. Pour any pan juices into a jug and split equally across containers.',
       ingredients: [
         { name: 'Chicken breast', qty: '1,200g' },
         { name: 'Frozen cauliflower rice', qty: '1kg bag' },
@@ -378,11 +446,13 @@ const MEALS = {
       ],
       steps: [
         'Mix lemon zest, lemon juice, crushed garlic, mustard, rosemary and thyme into a marinade.',
-        'Coat all chicken breasts in the marinade. If time allows, leave 30 min.',
+        'Coat all chicken breasts thoroughly. Leave 30 min if time allows.',
         'Place chicken in a baking dish, pour stock into the bottom. Bake at 200°C for 25–28 min.',
-        'Add asparagus, green beans and cherry tomatoes to a tray with Frylight. Roast for last 10 min of chicken cook time.',
-        'Slice chicken. Microwave cauliflower rice per packet. Divide across 5 containers.',
-        'Add sliced chicken and roasted veg to each container. Drizzle any pan juices over.',
+        'Add asparagus, green beans and cherry tomatoes to a tray with Frylight. Roast last 10 min.',
+        'Slice all chicken. Microwave cauliflower rice per packet.',
+        'Weigh total sliced chicken — divide by 5 into each container.',
+        'Weigh total roasted veg combined — divide by 5 into each container.',
+        'Divide cauliflower rice by 5. Pour pan juices equally over each container.',
         'Cool completely. 3 to fridge, 2 to freezer. Reheat: microwave 2 min.',
       ]
     },
@@ -390,8 +460,15 @@ const MEALS = {
       id: 'teriyaki-salmon', name: 'Teriyaki Salmon & Stir-Fried Veg', emoji: '🍣',
       cuisine: 'Asian', macros: { protein: 60, calories: 430, carbs: 10, fat: 18 },
       prepTime: '25 min', heroColor: '#fef3c7', heroTextColor: '#d97706',
-      tip: 'Make your own teriyaki — soy sauce, a tiny bit of honey, garlic and ginger. Shop-bought teriyaki sauces are often loaded with sugar and sodium.',
-      storage: 'Fridge only — all 5 containers. Salmon doesn\'t freeze well once cooked. Eat within 3–4 days; best Mon–Thu.',
+      tip: 'Make your own teriyaki — soy sauce, a tiny bit of honey, garlic and ginger. Shop-bought versions are loaded with sugar and sodium.',
+      storage: 'Fridge only — all 5 containers. Salmon doesn\'t freeze well once cooked. Best Mon–Thu.',
+      portioning: [
+        { item: 'Salmon fillets', perContainer: '1 fillet per container (200g each — buy equal-sized fillets)' },
+        { item: 'Stir-fried veg', perContainer: '~280g' },
+        { item: 'Cauliflower rice', perContainer: '~200g' },
+        { item: 'Teriyaki glaze', perContainer: 'Divide remaining glaze equally into 5' },
+      ],
+      portionNote: 'Salmon is the easiest to portion — buy 5 equal-sized fillets (200g each) and one goes per container. No weighing needed for the protein. Weigh and divide the veg evenly.',
       ingredients: [
         { name: 'Salmon fillets (skinless)', qty: '1,000g (5 × 200g)' },
         { name: 'Frozen cauliflower rice', qty: '1kg bag' },
@@ -408,20 +485,30 @@ const MEALS = {
       ],
       steps: [
         'Mix soy sauce, honey, ginger, garlic and rice vinegar into a teriyaki glaze.',
-        'Place salmon fillets on a lined baking tray. Brush generously with glaze.',
-        'Bake at 200°C for 12–15 min until just cooked through. Brush with more glaze halfway.',
-        'Stir-fry broccoli, sugar snap peas and peppers in a large pan with Frylight on high heat for 4–5 min.',
-        'Microwave cauliflower rice per packet. Divide across 5 containers.',
-        'Add one salmon fillet and stir-fried veg per container. Sprinkle sesame seeds. Drizzle remaining glaze.',
-        'Cool completely before sealing. All 5 to fridge. Best eaten Mon–Thu.',
+        'Place 5 equal salmon fillets on a lined baking tray. Brush generously with glaze.',
+        'Bake at 200°C for 12–15 min. Brush with more glaze halfway through.',
+        'Stir-fry broccoli, sugar snap peas and peppers with Frylight on high heat for 4–5 min.',
+        'Microwave cauliflower rice per packet. Divide by 5 into each container.',
+        'Add one salmon fillet per container.',
+        'Weigh total stir-fried veg — divide by 5 into each container.',
+        'Drizzle remaining glaze equally across all 5. Sprinkle sesame seeds.',
+        'Cool completely. All 5 to fridge. Best eaten Mon–Thu.',
       ]
     },
     {
       id: 'mexican-chicken', name: 'Mexican Spiced Chicken Bowl', emoji: '🌶️',
       cuisine: 'Mexican', macros: { protein: 63, calories: 360, carbs: 10, fat: 8 },
       prepTime: '30 min', heroColor: '#fee2e2', heroTextColor: '#dc2626',
-      tip: 'Chipotle paste is the secret here — one tablespoon adds a deep smoky heat that makes the whole dish. Find it in any supermarket spice aisle.',
+      tip: 'Chipotle paste is the secret — one tablespoon adds a deep smoky heat that transforms the whole dish. Find it in any supermarket spice aisle.',
       storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
+      portioning: [
+        { item: 'Cooked chicken (shredded)', perContainer: '~240g' },
+        { item: 'Roasted peppers, onion & tomatoes', perContainer: '~280g' },
+        { item: 'Baby spinach', perContainer: '~30g' },
+        { item: 'Cauliflower rice', perContainer: '~200g' },
+        { item: 'Greek yogurt', perContainer: '30g (add after reheating)' },
+      ],
+      portionNote: 'Shred all chicken first, then weigh the total and divide by 5 — shredded chicken distributes far more evenly than sliced. Weigh roasted veg and divide by 5. Add yogurt after reheating, not before.',
       ingredients: [
         { name: 'Chicken breast', qty: '1,200g' },
         { name: 'Frozen cauliflower rice', qty: '1kg bag' },
@@ -440,19 +527,27 @@ const MEALS = {
       steps: [
         'Mix chipotle paste, cumin, smoked paprika, crushed garlic and lime juice into a marinade.',
         'Coat all chicken breasts thoroughly. Leave 30 min if time allows.',
-        'Bake chicken at 200°C for 25–28 min until cooked through. Slice or shred.',
+        'Bake chicken at 200°C for 25–28 min until cooked through. Shred with two forks.',
         'Roast peppers, red onion and cherry tomatoes on a tray with Frylight at 200°C for 20 min.',
-        'Microwave cauliflower rice per packet. Divide across 5 containers.',
-        'Add chicken, roasted veg and baby spinach to each container. Add a dollop of Greek yogurt on the side.',
-        'Cool completely. 3 to fridge, 2 to freezer. Reheat: microwave 2 min. Add yogurt after reheating.',
+        'Microwave cauliflower rice per packet. Set aside.',
+        'Weigh total shredded chicken — divide by 5 into each container.',
+        'Weigh total roasted veg — divide by 5 into each container.',
+        'Divide cauliflower rice by 5. Add 30g baby spinach per container.',
+        'Cool completely. 3 to fridge, 2 to freezer. Add 30g yogurt after reheating.',
       ]
     },
     {
       id: 'baked-cod', name: 'Baked Cod & Roasted Veg', emoji: '🐟',
       cuisine: '', macros: { protein: 60, calories: 300, carbs: 10, fat: 5 },
       prepTime: '25 min', heroColor: '#e0f2fe', heroTextColor: '#0369a1',
-      tip: 'Cod is the lowest calorie meal in the whole rotation. If you\'re having a lighter week on Mounjaro, this is the one to pick. It\'s also very mild — easy on the stomach.',
-      storage: 'Fridge only — all 5 containers. Fish doesn\'t freeze well once cooked. Eat within 3–4 days; best Mon–Thu.',
+      tip: 'Cod is the lowest calorie meal in the whole rotation. If you\'re having a lighter week, this is the one to choose. Very mild and easy on the stomach.',
+      storage: 'Fridge only — all 5 containers. Fish doesn\'t freeze well once cooked. Best Mon–Thu.',
+      portioning: [
+        { item: 'Cod fillets', perContainer: '1 fillet per container (200g each — buy equal-sized)' },
+        { item: 'Roasted veg', perContainer: '~280g' },
+        { item: 'Cauliflower rice', perContainer: '~200g' },
+      ],
+      portionNote: 'Like salmon — buy 5 equal-sized fillets so portioning is automatic. One fillet per container. Weigh and divide the roasted veg evenly across all 5.',
       ingredients: [
         { name: 'Cod fillets', qty: '1,000g (5 × 200g)' },
         { name: 'Frozen cauliflower rice', qty: '1kg bag' },
@@ -467,13 +562,15 @@ const MEALS = {
         { name: 'Cooking spray', qty: '1 bottle' },
       ],
       steps: [
-        'Place cod fillets on a lined baking tray. Spray with Frylight.',
-        'Season with smoked paprika, crushed garlic, salt and pepper. Lay lemon slices on top of each fillet.',
+        'Place 5 equal cod fillets on a lined baking tray. Spray with Frylight.',
+        'Season with smoked paprika, crushed garlic, salt and pepper. Lay lemon slices on top.',
         'Toss broccoli, Brussels sprouts and cherry tomatoes on a separate tray with Frylight.',
-        'Roast both trays at 200°C — veg for 20–22 min, cod for 15–18 min until it flakes easily.',
-        'Microwave cauliflower rice per packet. Divide across 5 containers.',
-        'Add one cod fillet and roasted veg per container. Scatter capers and fresh parsley.',
-        'Cool completely before sealing. All 5 to fridge. Reheat gently: microwave 90 seconds.',
+        'Roast both trays at 200°C — veg 20–22 min, cod 15–18 min until it flakes easily.',
+        'Microwave cauliflower rice per packet. Divide by 5 into each container.',
+        'Add one cod fillet per container.',
+        'Weigh total roasted veg — divide by 5 into each container.',
+        'Scatter capers and fresh parsley equally. Cool completely before sealing.',
+        'All 5 to fridge. Reheat gently: microwave 90 seconds.',
       ]
     }
   ]
@@ -486,7 +583,6 @@ let activeLunch = 'beef-veg';
 let checkedItems = {};
 let checkedSteps = {};
 let currentView = 'plan';
-let currentRecipeMeal = null;
 
 function categorise(name) {
   const n = name.toLowerCase();
@@ -520,7 +616,6 @@ function buildShoppingList(lunchId) {
 function renderPlan() {
   const lunch = getLunch();
   let html = '';
-  // Breakfast
   html += `<div class="section-label" style="margin-top:0">Breakfast · Every day</div>`;
   html += `<div class="card" style="cursor:pointer;margin-bottom:24px" onclick="openRecipe('breakfast')">
     <div class="meal-row">
@@ -529,27 +624,16 @@ function renderPlan() {
       <div class="meal-macros"><div class="macro-protein">38g</div><div class="macro-label">protein</div><div class="macro-cal">350 kcal</div></div>
     </div>
   </div>`;
-
-  // Lunches
   html += `<div class="section-label">This week's lunch</div>`;
   html += `<p style="font-size:12px;color:#64748b;margin-bottom:12px">Pick one — cook a big batch, divide into 5.</p>`;
-
   MEALS.lunches.forEach(meal => {
     const active = meal.id === activeLunch;
     const cTag = meal.cuisine ? `<span class="cuisine-tag" style="background:${CUISINE_COLORS[meal.cuisine].bg};color:${CUISINE_COLORS[meal.cuisine].color}">${meal.cuisine}</span>` : '';
     html += `<div class="card ${active ? 'selected' : ''}">
       <div class="meal-row">
         <div class="meal-icon ${active ? 'active-icon' : ''}">${meal.emoji}</div>
-        <div class="meal-info">
-          ${cTag}
-          <div class="meal-name">${meal.name}</div>
-          <div class="meal-meta">${meal.prepTime} · batch of 5</div>
-        </div>
-        <div class="meal-macros">
-          <div class="macro-protein">${meal.macros.protein}g</div>
-          <div class="macro-label">protein</div>
-          <div class="macro-cal">${meal.macros.calories} kcal</div>
-        </div>
+        <div class="meal-info">${cTag}<div class="meal-name">${meal.name}</div><div class="meal-meta">${meal.prepTime} · batch of 5</div></div>
+        <div class="meal-macros"><div class="macro-protein">${meal.macros.protein}g</div><div class="macro-label">protein</div><div class="macro-cal">${meal.macros.calories} kcal</div></div>
       </div>
       <div class="btn-row">
         <button class="btn btn-select ${active ? 'chosen' : ''}" onclick="selectLunch('${meal.id}')">${active ? '✓ Selected' : 'Select'}</button>
@@ -557,21 +641,19 @@ function renderPlan() {
       </div>
     </div>`;
   });
-
-  // Totals
   const tp = 38 + lunch.macros.protein;
   const tc = 350 + lunch.macros.calories;
   const tcarb = 42 + lunch.macros.carbs;
   const tf = 6 + lunch.macros.fat;
+  const fishOnly = lunch.id === 'teriyaki-salmon' || lunch.id === 'baked-cod';
   html += `<div class="card" style="margin-top:4px">
     <div class="section-label" style="margin-bottom:12px">Daily totals · Breakfast + Lunch</div>
     <div class="totals-row"><span class="totals-key">Protein</span><span class="totals-val green">${tp}g</span></div>
     <div class="totals-row"><span class="totals-key">Calories</span><span class="totals-val">${tc} kcal</span></div>
     <div class="totals-row"><span class="totals-key">Carbs</span><span class="totals-val" style="color:#64748b">${tcarb}g</span></div>
     <div class="totals-row" style="border:none"><span class="totals-key">Fat</span><span class="totals-val" style="color:#64748b">${tf}g</span></div>
-    <div class="freeze-note">❄ Containers 1–3 → fridge · Containers 4–5 → freezer<br>Move Thu out Wed night · Move Fri out Thu night<br><em style="color:#bfdbfe">${lunch.id === 'teriyaki-salmon' || lunch.id === 'baked-cod' ? '⚠ This meal: fridge only — all 5 containers' : ''}</em></div>
+    <div class="freeze-note">❄ ${fishOnly ? '⚠ This meal: fridge only — all 5 containers' : 'Containers 1–3 → fridge · Containers 4–5 → freezer<br>Move Thu out Wed night · Move Fri out Thu night'}</div>
   </div>`;
-
   document.getElementById('view-plan').innerHTML = html;
 }
 
@@ -583,19 +665,20 @@ function selectLunch(id) {
 
 function openRecipe(mealId) {
   const meal = mealId === 'breakfast' ? MEALS.breakfast : MEALS.lunches.find(l => l.id === mealId);
-  currentRecipeMeal = mealId;
   const cTag = meal.cuisine ? `<span class="cuisine-tag" style="background:${CUISINE_COLORS[meal.cuisine].bg};color:${CUISINE_COLORS[meal.cuisine].color};margin-bottom:6px;display:inline-block">${meal.cuisine}</span>` : '';
   let html = `<button class="recipe-back" onclick="closeRecipe()">← Back</button>`;
-  html += `<div class="recipe-hero" style="background:${meal.heroColor}">
-    <div class="recipe-hero-emoji">${meal.emoji}</div>
-    <div>${cTag}<h2>${meal.name}</h2><p style="color:${meal.heroTextColor}">${meal.isSingle ? '5 jars · ' : 'Batch of 5 · '}${meal.prepTime}</p></div>
-  </div>`;
-  html += `<div class="macro-pills">
-    ${[{l:'Protein',v:meal.macros.protein+'g',h:true},{l:'Calories',v:meal.macros.calories},{l:'Carbs',v:meal.macros.carbs+'g'},{l:'Fat',v:meal.macros.fat+'g'}]
-    .map(m=>`<div class="macro-pill ${m.h?'hl':'pl'}"><div class="pval">${m.v}</div><div class="plbl">${m.l}</div></div>`).join('')}
-  </div>`;
+  html += `<div class="recipe-hero" style="background:${meal.heroColor}"><div class="recipe-hero-emoji">${meal.emoji}</div><div>${cTag}<h2>${meal.name}</h2><p style="color:${meal.heroTextColor}">${meal.isSingle ? '5 jars · ' : 'Batch of 5 · '}${meal.prepTime}</p></div></div>`;
+  html += `<div class="macro-pills">${[{l:'Protein',v:meal.macros.protein+'g',h:true},{l:'Calories',v:meal.macros.calories},{l:'Carbs',v:meal.macros.carbs+'g'},{l:'Fat',v:meal.macros.fat+'g'}].map(m=>`<div class="macro-pill ${m.h?'hl':'pl'}"><div class="pval">${m.v}</div><div class="plbl">${m.l}</div></div>`).join('')}</div>`;
   html += `<div class="alert-yellow"><strong>💡 </strong>${meal.tip}</div>`;
   if (meal.storage) html += `<div class="alert-blue"><strong>❄ Storage: </strong>${meal.storage}</div>`;
+
+  // Portioning section
+  html += `<div class="alert-green">
+    <h4>⚖️ How to portion (per container)</h4>
+    ${meal.portioning.map(p => `<div class="portion-row"><span class="portion-key">${p.item}</span><span class="portion-val">${p.perContainer}</span></div>`).join('')}
+    <p style="font-size:11px;color:#16a34a;margin-top:8px;line-height:1.5">${meal.portionNote}</p>
+  </div>`;
+
   html += `<div class="section-label">${meal.isSingle ? 'Ingredients · 5 servings' : 'Ingredients · Full batch (5 portions)'}</div>`;
   html += `<div class="ing-list">${meal.ingredients.map(ing=>`<div class="ing-row"><span class="ing-name">${ing.name}</span><span class="ing-qty">${ing.qty}</span></div>`).join('')}</div>`;
   html += `<div class="section-label">Method</div>`;
@@ -603,17 +686,19 @@ function openRecipe(mealId) {
     const key=meal.id+'-'+i; const done=checkedSteps[key];
     return `<div class="step ${done?'done':''}" onclick="toggleStep('${meal.id}',${i})"><div class="step-num">${done?'✓':i+1}</div><div class="step-text">${step}</div></div>`;
   }).join('')}</div>`;
+
   document.getElementById('view-recipe').innerHTML = html;
   showView('recipe');
 }
 
 function toggleStep(mealId, i) {
   checkedSteps[mealId+'-'+i] = !checkedSteps[mealId+'-'+i];
+  const scrollY = window.scrollY;
   openRecipe(mealId);
-  // keep scroll position
+  window.scrollTo(0, scrollY);
 }
 
-function closeRecipe() { showView('plan'); currentRecipeMeal = null; }
+function closeRecipe() { showView('plan'); }
 
 function renderShopping() {
   const lunch = getLunch();
@@ -622,40 +707,23 @@ function renderShopping() {
   const checked = Object.values(checkedItems).filter(Boolean).length;
   const pct = total > 0 ? (checked/total*100) : 0;
   document.getElementById('tab-shopping').textContent = checked > 0 ? `Shop (${checked}/${total})` : 'Shopping';
-
   const grouped = {};
   items.forEach(item => {
     if (!grouped[item.cat]) grouped[item.cat] = [];
     grouped[item.cat].push(item);
   });
-
-  // Emoji grid (2 rows of 5)
-  const emojiGrid = MEALS.lunches.map(m =>
-    `<button class="lunch-emoji-btn ${m.id===activeLunch?'active':''}" onclick="switchShoppingLunch('${m.id}')" title="${m.name}">${m.emoji}</button>`
-  ).join('');
-
-  let html = `<div class="shop-header"><div><div class="shop-title">Shopping List</div><div class="shop-sub">Breakfast + ${lunch.name}</div></div>
-    <button class="reset-btn" onclick="resetShopping()">Reset</button></div>
+  const emojiGrid = MEALS.lunches.map(m=>`<button class="lunch-emoji-btn ${m.id===activeLunch?'active':''}" onclick="switchShoppingLunch('${m.id}')" title="${m.name}">${m.emoji}</button>`).join('');
+  let html = `<div class="shop-header"><div><div class="shop-title">Shopping List</div><div class="shop-sub">Breakfast + ${lunch.name}</div></div><button class="reset-btn" onclick="resetShopping()">Reset</button></div>
   <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-  <div class="lunch-switcher">
-    <div class="lunch-switcher-label">Lunch this week</div>
-    <div class="lunch-emoji-grid">${emojiGrid}</div>
-  </div>`;
-
+  <div class="lunch-switcher"><div class="lunch-switcher-label">Lunch this week</div><div class="lunch-emoji-grid">${emojiGrid}</div></div>`;
   CAT_ORDER.filter(c=>grouped[c]).forEach(cat => {
     html += `<div class="cat-label">${CAT_ICONS[cat]} ${cat}</div><div class="shop-list">`;
-    grouped[cat].forEach((item,i) => {
-      const key = item.name.toLowerCase();
-      const done = checkedItems[key];
-      html += `<div class="shop-row ${done?'checked':''}" onclick="toggleCheck('${key}')">
-        <div class="shop-row-left"><div class="checkbox ${done?'checked':''}">${done?'✓':''}</div>
-        <span class="shop-item-name">${item.name}</span></div>
-        <span class="shop-item-qty">${item.qty}</span>
-      </div>`;
+    grouped[cat].forEach(item => {
+      const key = item.name.toLowerCase(); const done = checkedItems[key];
+      html += `<div class="shop-row ${done?'checked':''}" onclick="toggleCheck('${key}')"><div class="shop-row-left"><div class="checkbox ${done?'checked':''}">${done?'✓':''}</div><span class="shop-item-name">${item.name}</span></div><span class="shop-item-qty">${item.qty}</span></div>`;
     });
     html += `</div>`;
   });
-
   document.getElementById('view-shopping').innerHTML = html;
 }
 
@@ -668,18 +736,12 @@ function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById('view-'+name).classList.add('active');
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  const tabMap = { plan:0, shopping:1, prep:2, recipe:0 };
-  document.querySelectorAll('.tab')[tabMap[name]??0].classList.add('active');
-  const hints = { plan:'Tap a meal to see the full recipe', recipe:'Tap each step to mark it done', shopping:'Tap items to check off · Switch meal with emoji buttons', prep:'Run proteins and veg in parallel to save time' };
-  document.getElementById('bottom-hint').textContent = hints[name]||'';
+  document.querySelectorAll('.tab')[{plan:0,shopping:1,prep:2,recipe:0}[name]??0].classList.add('active');
+  document.getElementById('bottom-hint').textContent = {plan:'Tap a meal to see the full recipe',recipe:'Tap each step to mark it done',shopping:'Tap items to check off · Switch meal with emoji buttons',prep:'Run proteins and veg in parallel to save time'}[name]||'';
   window.scrollTo(0,0);
 }
 
-function switchTab(name) {
-  if (name === 'shopping') renderShopping();
-  showView(name);
-}
-
+function switchTab(name) { if (name==='shopping') renderShopping(); showView(name); }
 renderPlan();
 </script>
 </body>
