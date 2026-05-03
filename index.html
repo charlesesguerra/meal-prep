@@ -3,746 +3,1088 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Meal Prep</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>Plate Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { font-family: 'Nunito', sans-serif; background: #f8fafc; color: #0f172a; max-width: 480px; margin: 0 auto; padding-bottom: 80px; min-height: 100vh; }
-.header { background: #fff; padding: 28px 20px 18px; border-bottom: 1px solid #f1f5f9; }
-.header-sub { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 2px; }
-.header h1 { font-size: 26px; font-weight: 800; color: #0f172a; letter-spacing: -0.04em; }
-.header p { font-size: 13px; color: #64748b; margin-top: 4px; }
-.tabs { background: #fff; display: flex; border-bottom: 1px solid #f1f5f9; position: sticky; top: 0; z-index: 100; }
-.tab { flex: 1; padding: 13px 4px; border: none; background: none; cursor: pointer; font-size: 12px; font-weight: 500; color: #94a3b8; border-bottom: 2px solid transparent; font-family: 'Nunito', sans-serif; transition: all 0.15s; }
-.tab.active { font-weight: 700; color: #16a34a; border-bottom: 2px solid #16a34a; }
-.view { display: none; padding: 20px 16px; }
-.view.active { display: block; }
-.section-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
-.card { background: #fff; border-radius: 16px; padding: 16px; border: 1px solid #f1f5f9; box-shadow: 0 1px 4px rgba(0,0,0,0.05); margin-bottom: 10px; }
-.card.selected { border: 2px solid #16a34a; box-shadow: 0 0 0 3px #dcfce7; }
-.meal-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.meal-icon { width: 44px; height: 44px; border-radius: 12px; background: #f8fafc; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-.meal-icon.active-icon { background: #dcfce7; }
-.meal-info { flex: 1; min-width: 0; }
-.meal-name { font-weight: 700; font-size: 13px; color: #0f172a; line-height: 1.3; }
-.meal-meta { font-size: 11px; color: #94a3b8; margin-top: 2px; }
-.cuisine-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; margin-bottom: 4px; }
-.meal-macros { text-align: right; min-width: 52px; flex-shrink: 0; }
-.macro-protein { font-size: 15px; font-weight: 800; color: #16a34a; }
-.macro-label { font-size: 10px; color: #94a3b8; }
-.macro-cal { font-size: 11px; color: #64748b; margin-top: 2px; }
-.btn-row { display: flex; gap: 8px; margin-top: 12px; }
-.btn { flex: 1; padding: 9px; border-radius: 10px; border: none; font-weight: 700; font-size: 13px; cursor: pointer; font-family: 'Nunito', sans-serif; transition: all 0.15s; }
-.btn-select { background: #f1f5f9; color: #64748b; }
-.btn-select.chosen { background: #16a34a; color: #fff; }
-.btn-view { background: #fff; border: 1px solid #e2e8f0; color: #64748b; }
-.btn-view.chosen { border-color: #86efac; color: #16a34a; }
-.totals-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f8fafc; }
-.totals-row:last-child { border-bottom: none; }
-.totals-key { font-size: 13px; color: #64748b; }
-.totals-val { font-size: 13px; font-weight: 700; color: #0f172a; }
-.totals-val.green { color: #16a34a; }
-.freeze-note { font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 10px; }
-.recipe-back { background: none; border: none; color: #64748b; font-size: 13px; cursor: pointer; padding: 0 0 16px; font-family: 'Nunito', sans-serif; }
-.recipe-hero { border-radius: 20px; padding: 20px; margin-bottom: 16px; display: flex; gap: 14px; align-items: center; }
-.recipe-hero-emoji { font-size: 44px; }
-.recipe-hero h2 { font-size: 17px; font-weight: 800; color: #0f172a; line-height: 1.2; }
-.recipe-hero p { font-size: 12px; margin-top: 4px; }
-.macro-pills { display: flex; gap: 8px; margin-bottom: 16px; }
-.macro-pill { flex: 1; border-radius: 12px; padding: 10px 4px; text-align: center; }
-.macro-pill.hl { background: #16a34a; }
-.macro-pill.pl { background: #fff; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-.macro-pill .pval { font-size: 14px; font-weight: 800; }
-.macro-pill.hl .pval { color: #fff; }
-.macro-pill.pl .pval { color: #0f172a; }
-.macro-pill .plbl { font-size: 10px; margin-top: 2px; }
-.macro-pill.hl .plbl { color: #bbf7d0; }
-.macro-pill.pl .plbl { color: #94a3b8; }
-.alert-yellow { background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; font-size: 12px; color: #92400e; line-height: 1.5; }
-.alert-blue { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; font-size: 12px; color: #1e40af; line-height: 1.5; }
-.alert-green { background: #f0fdf4; border: 1px solid #86efac; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
-.alert-green h4 { font-size: 12px; font-weight: 800; color: #16a34a; margin-bottom: 8px; }
-.portion-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #dcfce7; font-size: 12px; }
-.portion-row:last-child { border-bottom: none; }
-.portion-key { color: #334155; }
-.portion-val { font-weight: 800; color: #16a34a; }
-.alert-blue-lg { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 14px; padding: 16px; margin-top: 8px; }
-.alert-blue-lg h4 { font-size: 12px; font-weight: 700; color: #1e40af; margin-bottom: 6px; }
-.alert-blue-lg p { font-size: 12px; color: #3b82f6; line-height: 1.8; }
-.ing-list { background: #fff; border-radius: 14px; overflow: hidden; margin-bottom: 20px; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-.ing-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; border-bottom: 1px solid #f8fafc; font-size: 13px; gap: 8px; }
-.ing-row:last-child { border-bottom: none; }
-.ing-name { color: #334155; flex: 1; }
-.ing-qty { font-weight: 700; color: #16a34a; text-align: right; flex-shrink: 0; }
-.steps-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-.step { display: flex; gap: 12px; align-items: flex-start; background: #fff; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: all 0.15s; }
-.step.done { background: #f0fdf4; border-color: #86efac; }
-.step-num { min-width: 24px; height: 24px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #94a3b8; flex-shrink: 0; transition: all 0.15s; }
-.step.done .step-num { background: #16a34a; color: #fff; }
-.step-text { font-size: 13px; color: #334155; line-height: 1.5; }
-.step.done .step-text { color: #94a3b8; text-decoration: line-through; }
-.shop-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
-.shop-title { font-size: 20px; font-weight: 800; }
-.shop-sub { font-size: 12px; color: #64748b; margin-top: 3px; }
-.reset-btn { background: none; border: none; color: #94a3b8; font-size: 12px; cursor: pointer; font-family: 'Nunito', sans-serif; }
-.progress-bar { background: #f1f5f9; border-radius: 99px; height: 6px; margin: 14px 0 20px; overflow: hidden; }
-.progress-fill { background: #16a34a; height: 100%; border-radius: 99px; transition: width 0.3s; }
-.lunch-switcher { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 20px; border: 1px solid #f1f5f9; }
-.lunch-switcher-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-.lunch-emoji-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
-.lunch-emoji-btn { padding: 8px 4px; border-radius: 8px; border: none; background: #f1f5f9; font-size: 20px; cursor: pointer; transition: all 0.15s; line-height: 1; }
-.lunch-emoji-btn.active { background: #16a34a; }
-.cat-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-.shop-list { background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.04); margin-bottom: 20px; }
-.shop-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid #f8fafc; cursor: pointer; transition: background 0.15s; }
-.shop-row:last-child { border-bottom: none; }
-.shop-row.checked { background: #f0fdf4; }
-.shop-row-left { display: flex; align-items: center; gap: 10px; }
-.checkbox { width: 20px; height: 20px; border-radius: 6px; border: 2px solid #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; font-weight: 800; flex-shrink: 0; transition: all 0.15s; }
-.checkbox.checked { background: #16a34a; border-color: #16a34a; }
-.shop-item-name { font-size: 13px; color: #334155; }
-.shop-row.checked .shop-item-name { color: #94a3b8; text-decoration: line-through; }
-.shop-item-qty { font-size: 12px; font-weight: 700; color: #16a34a; }
-.shop-row.checked .shop-item-qty { color: #94a3b8; }
-.prep-step { display: flex; gap: 14px; align-items: flex-start; background: #fff; border-radius: 14px; padding: 14px; margin-bottom: 8px; border: 1px solid #f1f5f9; }
-.prep-icon { text-align: center; min-width: 44px; }
-.prep-icon span { font-size: 22px; }
-.prep-time { font-size: 9px; color: #94a3b8; font-weight: 700; margin-top: 2px; }
-.prep-step-title { font-weight: 700; font-size: 14px; color: #0f172a; margin-bottom: 3px; }
-.prep-step-desc { font-size: 12px; color: #64748b; line-height: 1.5; }
-.bottom-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: #fff; border-top: 1px solid #f1f5f9; padding: 11px 20px; text-align: center; }
-.bottom-bar p { font-size: 11px; color: #cbd5e1; }
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito',sans-serif;background:#f8fafc;color:#0f172a;max-width:480px;margin:0 auto;padding-bottom:72px;min-height:100vh}
+.app-header{background:#fff;padding:16px 20px 14px;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center}
+.app-logo{display:flex;align-items:center;gap:10px}
+.app-logo-icon{width:34px;height:34px;background:#16a34a;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.logo-text{font-size:19px;font-weight:900;letter-spacing:-0.04em;color:#0f172a}
+.logo-text span{color:#16a34a}
+.header-date{font-size:11px;color:#94a3b8;font-weight:600;text-align:right;line-height:1.4}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #f1f5f9;display:flex;z-index:200}
+.nav-btn{flex:1;padding:8px 2px 6px;border:none;background:none;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px}
+.nav-icon{font-size:19px;line-height:1}
+.nav-label{font-size:9px;font-weight:700;color:#94a3b8;letter-spacing:0.02em}
+.nav-btn.active .nav-label{color:#16a34a}
+.view{display:none;padding:14px 14px 0}
+.view.active{display:block}
+.section-label{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.card{background:#fff;border-radius:14px;padding:14px;border:1px solid #f1f5f9;box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:8px}
+.green-btn{background:#16a34a;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;font-size:13px;cursor:pointer;font-family:'Nunito',sans-serif}
+.ghost-btn{background:#fff;color:#64748b;border:1px solid #e2e8f0;border-radius:10px;padding:9px 14px;font-weight:700;font-size:12px;cursor:pointer;font-family:'Nunito',sans-serif}
+.alert-y{background:#fffbeb;border:1px solid #fde68a;border-radius:11px;padding:11px 13px;margin-bottom:11px;font-size:12px;color:#92400e;line-height:1.5}
+.alert-b{background:#eff6ff;border:1px solid #bfdbfe;border-radius:11px;padding:11px 13px;margin-bottom:11px;font-size:12px;color:#1e40af;line-height:1.5}
+.alert-g{background:#f0fdf4;border:1px solid #86efac;border-radius:11px;padding:11px 13px;margin-bottom:11px;font-size:12px;color:#16a34a;line-height:1.5}
+/* Onboarding */
+.onboard-wrap{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:24px 20px;background:#f8fafc}
+.onboard-logo{display:flex;align-items:center;gap:10px;margin-bottom:32px;justify-content:center}
+.onboard-logo-icon{width:48px;height:48px;background:#16a34a;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.onboard-logo-text{font-size:26px;font-weight:900;letter-spacing:-0.04em;color:#0f172a}
+.onboard-logo-text span{color:#16a34a}
+.onboard-card{background:#fff;border-radius:20px;padding:24px;border:1px solid #f1f5f9;box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:16px}
+.onboard-card h2{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:6px}
+.onboard-card p{font-size:13px;color:#64748b;margin-bottom:20px;line-height:1.5}
+.onboard-field{margin-bottom:14px}
+.onboard-field label{display:block;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.onboard-field input{width:100%;padding:12px 14px;border:2px solid #e2e8f0;border-radius:12px;font-size:15px;font-family:'Nunito',sans-serif;font-weight:700;color:#0f172a}
+.onboard-field input:focus{outline:none;border-color:#16a34a}
+.onboard-field .hint{font-size:11px;color:#94a3b8;margin-top:4px}
+.onboard-start-btn{width:100%;padding:14px;background:#16a34a;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:4px}
+/* Portion */
+.portion-bar{background:#fff;border-radius:13px;padding:12px 14px;border:1px solid #f1f5f9;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.portion-label{font-size:13px;font-weight:700;color:#0f172a}
+.portion-sub{font-size:11px;color:#94a3b8;margin-top:1px}
+.portion-controls{display:flex;align-items:center;gap:10px}
+.portion-btn{width:30px;height:30px;border-radius:8px;border:none;background:#f1f5f9;font-size:17px;cursor:pointer;font-weight:700;color:#0f172a;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif}
+.portion-num{font-size:20px;font-weight:900;color:#16a34a;min-width:20px;text-align:center}
+/* Meal cards */
+.meal-card{background:#fff;border-radius:14px;padding:12px;border:1px solid #f1f5f9;box-shadow:0 1px 3px rgba(0,0,0,0.04);margin-bottom:7px;transition:border 0.15s,box-shadow 0.15s}
+.meal-card.selected{border:2px solid #16a34a;box-shadow:0 0 0 3px #dcfce7}
+.meal-row{display:flex;gap:10px;align-items:center}
+.meal-icon{width:40px;height:40px;border-radius:10px;background:#f8fafc;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;transition:background 0.15s}
+.meal-icon.sel{background:#dcfce7}
+.meal-info{flex:1;min-width:0}
+.meal-name{font-weight:700;font-size:13px;color:#0f172a;line-height:1.3}
+.meal-meta{font-size:10px;color:#94a3b8;margin-top:1px}
+.cuisine-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;margin-bottom:3px}
+.pill{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;margin-bottom:3px}
+.pill-batch{background:#dcfce7;color:#16a34a}
+.pill-fresh{background:#fef3c7;color:#d97706}
+.meal-macros{text-align:right;flex-shrink:0;min-width:48px}
+.m-prot{font-size:14px;font-weight:800;color:#16a34a}
+.m-lbl{font-size:9px;color:#94a3b8}
+.m-cal{font-size:10px;color:#64748b;margin-top:1px}
+.meal-btns{display:flex;gap:6px;margin-top:9px}
+.meal-btns button{flex:1;padding:7px;border-radius:8px;border:none;font-weight:700;font-size:12px;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s}
+.btn-sel{background:#f1f5f9;color:#64748b}
+.btn-sel.on{background:#16a34a;color:#fff}
+.btn-rec{background:#fff;border:1px solid #e2e8f0;color:#64748b}
+.btn-rec.on{border-color:#86efac;color:#16a34a}
+/* Recipe */
+.back-btn{background:none;border:none;color:#64748b;font-size:13px;cursor:pointer;padding:0 0 12px;font-family:'Nunito',sans-serif;display:block}
+.recipe-hero{border-radius:16px;padding:16px;margin-bottom:12px;display:flex;gap:12px;align-items:center}
+.r-emoji{font-size:40px;line-height:1}
+.r-name{font-size:16px;font-weight:800;color:#0f172a;line-height:1.2}
+.r-meta{font-size:11px;margin-top:3px}
+.mpills{display:flex;gap:6px;margin-bottom:12px}
+.mpill{flex:1;border-radius:10px;padding:8px 4px;text-align:center}
+.mpill.hl{background:#16a34a}
+.mpill.pl{background:#fff;border:1px solid #f1f5f9}
+.mpill .pv{font-size:13px;font-weight:800}
+.mpill.hl .pv{color:#fff}
+.mpill.pl .pv{color:#0f172a}
+.mpill .plb{font-size:9px;margin-top:1px}
+.mpill.hl .plb{color:#bbf7d0}
+.mpill.pl .plb{color:#94a3b8}
+.ing-list{background:#fff;border-radius:12px;overflow:hidden;margin-bottom:14px;border:1px solid #f1f5f9}
+.ing-row{display:flex;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #f8fafc;font-size:12px;gap:8px}
+.ing-row:last-child{border-bottom:none}
+.ing-n{color:#334155;flex:1}
+.ing-q{font-weight:700;color:#16a34a;text-align:right;flex-shrink:0}
+.steps-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.step{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid #f1f5f9;border-radius:10px;padding:10px 12px;cursor:pointer;transition:all 0.15s}
+.step.done{background:#f0fdf4;border-color:#86efac}
+.step-num{min-width:20px;height:20px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#94a3b8;flex-shrink:0;transition:all 0.15s}
+.step.done .step-num{background:#16a34a;color:#fff}
+.step-text{font-size:12px;color:#334155;line-height:1.5}
+.step.done .step-text{color:#94a3b8;text-decoration:line-through}
+/* Prep in recipe */
+.prep-section{background:#f8fafc;border-radius:13px;padding:14px;margin-bottom:14px;border:1px solid #f1f5f9}
+.prep-section-title{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+.prep-step-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px}
+.prep-step-row:last-child{margin-bottom:0}
+.prep-step-icon{font-size:17px;width:26px;text-align:center;flex-shrink:0;margin-top:1px}
+.prep-step-content{}
+.prep-step-title{font-size:12px;font-weight:700;color:#0f172a;margin-bottom:1px}
+.prep-step-desc{font-size:11px;color:#64748b;line-height:1.5}
+/* Plan (week) */
+.day-card{background:#fff;border-radius:13px;border:1px solid #f1f5f9;overflow:hidden;margin-bottom:7px}
+.day-header{display:flex;justify-content:space-between;align-items:center;padding:12px 13px;cursor:pointer}
+.day-name{font-weight:700;font-size:13px;color:#0f172a}
+.day-today-badge{background:#dcfce7;color:#16a34a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px}
+.day-weekend-badge{background:#f1f5f9;color:#64748b;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px}
+.day-preview{font-size:11px;color:#94a3b8;margin-top:2px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.day-preview.set{color:#16a34a;font-weight:600}
+.day-body{display:none;padding:0 13px 13px;border-top:1px solid #f8fafc}
+.day-body.open{display:block}
+.day-section-lbl{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin:10px 0 6px}
+.day-opt{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:8px;cursor:pointer;margin-bottom:3px;transition:background 0.1s}
+.day-opt:hover{background:#f8fafc}
+.day-opt.chosen{background:#f0fdf4}
+.day-opt-emoji{font-size:17px;width:26px;text-align:center}
+.day-opt-name{font-size:12px;font-weight:600;color:#334155;flex:1}
+.day-opt.chosen .day-opt-name{color:#16a34a}
+.day-opt-check{width:17px;height:17px;border-radius:5px;border:2px solid #e2e8f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;transition:all 0.15s}
+.day-opt.chosen .day-opt-check{background:#16a34a;border-color:#16a34a}
+/* Shop */
+.shop-toggle{display:flex;background:#f1f5f9;border-radius:10px;padding:3px;margin-bottom:14px}
+.shop-tab-btn{flex:1;padding:8px;border:none;background:none;border-radius:8px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:#64748b;cursor:pointer;transition:all 0.15s}
+.shop-tab-btn.active{background:#fff;color:#16a34a;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
+.prog-bar{background:#f1f5f9;border-radius:99px;height:5px;margin-bottom:14px;overflow:hidden}
+.prog-fill{background:#16a34a;height:100%;border-radius:99px;transition:width 0.3s}
+.shop-list{background:#fff;border-radius:12px;overflow:hidden;border:1px solid #f1f5f9;margin-bottom:14px}
+.shop-row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid #f8fafc;cursor:pointer;transition:background 0.1s}
+.shop-row:last-child{border-bottom:none}
+.shop-row.chk{background:#f0fdf4}
+.shop-left{display:flex;align-items:center;gap:8px}
+.chkbox{width:18px;height:18px;border-radius:5px;border:2px solid #e2e8f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;transition:all 0.15s}
+.chkbox.on{background:#16a34a;border-color:#16a34a}
+.shop-name{font-size:12px;color:#334155}
+.shop-row.chk .shop-name{color:#94a3b8;text-decoration:line-through}
+.shop-qty{font-size:11px;font-weight:700;color:#16a34a;flex-shrink:0}
+.shop-row.chk .shop-qty{color:#94a3b8}
+.cat-lbl{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px}
+/* Daily */
+.date-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.date-nav-btn{background:#f1f5f9;border:none;border-radius:8px;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.date-nav-btn:disabled{opacity:0.3;cursor:default}
+.date-lbl{font-size:14px;font-weight:800;color:#0f172a}
+.macro-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.macro-box{background:#fff;border-radius:13px;padding:12px;border:1px solid #f1f5f9;text-align:center}
+.macro-box.big{grid-column:span 2;background:#16a34a}
+.macro-box-val{font-size:20px;font-weight:900}
+.macro-box.big .macro-box-val{color:#fff}
+.macro-box-lbl{font-size:10px;margin-top:2px}
+.macro-box.big .macro-box-lbl{color:#bbf7d0}
+.log-entry{background:#fff;border-radius:12px;padding:11px 13px;border:1px solid #f1f5f9;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.log-entry-info{flex:1;min-width:0}
+.log-entry-name{font-size:13px;font-weight:700;color:#0f172a}
+.log-entry-macros{font-size:11px;color:#64748b;margin-top:1px}
+.remove-btn{background:none;border:none;color:#ef4444;cursor:pointer;font-size:18px;padding:2px 4px;line-height:1}
+.add-meal-panel{background:#fff;border-radius:14px;border:1px solid #f1f5f9;margin-bottom:10px;overflow:hidden}
+.add-meal-header{padding:12px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.add-meal-header h4{font-size:13px;font-weight:700;color:#0f172a}
+.add-meal-body{padding:12px 14px;border-top:1px solid #f8fafc}
+.add-tabs{display:flex;gap:6px;margin-bottom:12px}
+.add-tab{flex:1;padding:7px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;font-size:11px;font-weight:700;color:#64748b;cursor:pointer;font-family:'Nunito',sans-serif;text-align:center;transition:all 0.15s}
+.add-tab.active{background:#16a34a;color:#fff;border-color:#16a34a}
+.meal-picker{display:flex;flex-direction:column;gap:5px;max-height:260px;overflow-y:auto;margin-bottom:10px}
+.picker-opt{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;border:1px solid #f1f5f9;cursor:pointer;background:#fff;transition:all 0.15s}
+.picker-opt:active{background:#f0fdf4}
+.picker-opt-emoji{font-size:20px;width:28px;text-align:center;flex-shrink:0}
+.picker-opt-info{flex:1}
+.picker-opt-name{font-size:12px;font-weight:700;color:#0f172a}
+.picker-opt-macros{font-size:10px;color:#64748b;margin-top:1px}
+.manual-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.field-grp{display:flex;flex-direction:column;gap:3px}
+.field-grp label{font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.05em}
+.field-grp input{padding:8px 10px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:'Nunito',sans-serif;color:#0f172a;width:100%}
+.field-grp input:focus{outline:none;border-color:#86efac}
+.field-grp.full{grid-column:span 2}
+/* Progress */
+.prog-week{background:#fff;border-radius:14px;border:1px solid #f1f5f9;overflow:hidden;margin-bottom:8px}
+.prog-week-header{padding:12px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.prog-week-title{font-size:13px;font-weight:700;color:#0f172a}
+.prog-week-body{display:none;border-top:1px solid #f8fafc;padding:10px 14px}
+.prog-week-body.open{display:block}
+.prog-day-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f8fafc}
+.prog-day-row:last-child{border-bottom:none}
+.prog-day-date{font-size:12px;font-weight:700;color:#0f172a}
+.prog-day-meals{font-size:10px;color:#94a3b8;margin-top:1px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prog-day-protein{font-size:12px;font-weight:800;color:#16a34a}
+.prog-day-cal{font-size:10px;color:#64748b}
+.goal-badge{width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;margin-left:3px;vertical-align:middle}
+.goal-ok{background:#dcfce7;color:#16a34a}
+.goal-miss{background:#fee2e2;color:#ef4444}
+/* Settings */
+.settings-section{margin-bottom:20px}
+.settings-section h3{font-size:13px;font-weight:800;color:#0f172a;margin-bottom:10px}
+.settings-field{background:#fff;border-radius:12px;padding:12px 14px;border:1px solid #f1f5f9;margin-bottom:8px}
+.settings-field label{display:block;font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+.settings-field input{width:100%;padding:8px 10px;border:1px solid #e2e8f0;border-radius:8px;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;color:#0f172a}
+.settings-field input:focus{outline:none;border-color:#16a34a}
+.settings-field .hint{font-size:11px;color:#94a3b8;margin-top:5px}
+.settings-save-btn{width:100%;padding:12px;background:#16a34a;color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:4px}
+.settings-saved{background:#f0fdf4;color:#16a34a;border:1px solid #86efac;border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:700;margin-top:8px;display:none}
+/* Empty */
+.empty{text-align:center;padding:32px 16px;color:#94a3b8}
+.empty-icon{font-size:32px;margin-bottom:8px}
+.empty-text{font-size:13px;line-height:1.5}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-sub">Weekly</div>
-  <h1>Meal Prep</h1>
-  <p>60g+ protein · Low carb · Mon–Fri</p>
+<div id="onboarding" style="display:none">
+  <div class="onboard-wrap">
+    <div class="onboard-logo">
+      <div class="onboard-logo-icon">🍽</div>
+      <div class="onboard-logo-text">Plate<span>Plan</span></div>
+    </div>
+    <div class="onboard-card">
+      <h2>Welcome to Plate Plan</h2>
+      <p>Set your daily nutrition targets so the app can track your progress accurately. You can change these anytime in Settings.</p>
+      <div class="onboard-field">
+        <label>Your name</label>
+        <input type="text" id="ob-name" placeholder="e.g. Charles">
+        <div class="hint">Used to personalise your app</div>
+      </div>
+      <div class="onboard-field">
+        <label>Daily protein target (g)</label>
+        <input type="number" id="ob-protein" placeholder="e.g. 120" min="0">
+        <div class="hint">Recommended: total across all meals including dinner</div>
+      </div>
+      <div class="onboard-field">
+        <label>Daily calorie target (kcal)</label>
+        <input type="number" id="ob-cals" placeholder="e.g. 1800" min="0">
+        <div class="hint">Your total daily calorie goal</div>
+      </div>
+      <button class="onboard-start-btn" onclick="completeOnboarding()">Get Started →</button>
+    </div>
+  </div>
 </div>
 
-<div class="tabs">
-  <button class="tab active" onclick="switchTab('plan')">Plan</button>
-  <button class="tab" onclick="switchTab('shopping')" id="tab-shopping">Shopping</button>
-  <button class="tab" onclick="switchTab('prep')">Prep Guide</button>
-</div>
+<div id="main-app" style="display:none">
+  <div class="app-header">
+    <div class="app-logo">
+      <div class="app-logo-icon">🍽</div>
+      <div class="logo-text">Plate<span>Plan</span></div>
+    </div>
+    <div class="header-date" id="header-date"></div>
+  </div>
 
-<div class="view active" id="view-plan"></div>
-<div class="view" id="view-recipe"></div>
-<div class="view" id="view-shopping"></div>
-<div class="view" id="view-prep">
-  <h2 style="font-size:20px;font-weight:800;margin-bottom:4px">Sunday Prep</h2>
-  <p style="font-size:12px;color:#64748b;margin-bottom:20px">~90 min total · Follow in order</p>
-  <div class="prep-step"><div class="prep-icon"><span>📦</span><div class="prep-time">0–5 min</div></div><div><div class="prep-step-title">Set up</div><div class="prep-step-desc">Get out 5 lunch containers + 5 breakfast jars + your kitchen scale. Preheat oven to 200°C.</div></div></div>
-  <div class="prep-step"><div class="prep-icon"><span>🔪</span><div class="prep-time">5–15 min</div></div><div><div class="prep-step-title">Prep everything first</div><div class="prep-step-desc">Season your protein, chop all veg, measure spices. Get it all ready before anything hits the heat.</div></div></div>
-  <div class="prep-step"><div class="prep-icon"><span>🔥</span><div class="prep-time">15–55 min</div></div><div><div class="prep-step-title">Cook proteins & roast veg</div><div class="prep-step-desc">Everything into the oven or on the hob. Roast veg goes in at the same time. Run it all in parallel.</div></div></div>
-  <div class="prep-step"><div class="prep-icon"><span>❄</span><div class="prep-time">55–60 min</div></div><div><div class="prep-step-title">Cauliflower rice</div><div class="prep-step-desc">Microwave frozen cauliflower rice bags per packet — usually 4–5 min. No chopping needed.</div></div></div>
-  <div class="prep-step"><div class="prep-icon"><span>⚖️</span><div class="prep-time">60–80 min</div></div><div><div class="prep-step-title">Weigh & portion</div><div class="prep-step-desc">Weigh total cooked protein, divide by 5. Do the same for veg and cauliflower rice. Use your scale for each container — this is how you guarantee even macros across all 5.</div></div></div>
-  <div class="prep-step"><div class="prep-icon"><span>🫙</span><div class="prep-time">80–90 min</div></div><div><div class="prep-step-title">Breakfast jars</div><div class="prep-step-desc">Fill 5 jars: oats, milk, yogurt, chia seeds, vanilla. Stir, seal, refrigerate. Done.</div></div></div>
-  <div class="alert-blue-lg"><h4>❄ Freezer reminder</h4><p>Sunday: containers 1–3 → fridge, 4–5 → freezer<br>Wednesday night: move Thursday's to fridge<br>Thursday night: move Friday's to fridge</p></div>
-</div>
+  <div class="view active" id="view-meals"></div>
+  <div class="view" id="view-plan"></div>
+  <div class="view" id="view-shop"></div>
+  <div class="view" id="view-daily"></div>
+  <div class="view" id="view-progress"></div>
+  <div class="view" id="view-settings"></div>
+  <div class="view" id="view-recipe"></div>
 
-<div class="bottom-bar"><p id="bottom-hint">Tap a meal to see the full recipe</p></div>
+  <div class="bottom-nav">
+    <button class="nav-btn active" id="nav-meals" onclick="showView('meals')"><span class="nav-icon">🍽</span><span class="nav-label">Meals</span></button>
+    <button class="nav-btn" id="nav-plan" onclick="showView('plan')"><span class="nav-icon">🗓</span><span class="nav-label">Plan</span></button>
+    <button class="nav-btn" id="nav-shop" onclick="showView('shop')"><span class="nav-icon">🛒</span><span class="nav-label">Shop</span></button>
+    <button class="nav-btn" id="nav-daily" onclick="showView('daily')"><span class="nav-icon">☀️</span><span class="nav-label">Daily</span></button>
+    <button class="nav-btn" id="nav-progress" onclick="showView('progress')"><span class="nav-icon">📈</span><span class="nav-label">Progress</span></button>
+    <button class="nav-btn" id="nav-settings" onclick="showView('settings')"><span class="nav-icon">⚙️</span><span class="nav-label">Settings</span></button>
+  </div>
+</div>
 
 <script>
-const CUISINE_COLORS = {
-  'Asian': { bg: '#fef3c7', color: '#92400e' },
-  'Mediterranean': { bg: '#ede9fe', color: '#5b21b6' },
-  'Mexican': { bg: '#fee2e2', color: '#991b1b' },
-  'North African': { bg: '#fef9c3', color: '#854d0e' },
-  '': { bg: '#f1f5f9', color: '#475569' }
-};
+const CC={Asian:{bg:'#fef3c7',c:'#92400e'},Mediterranean:{bg:'#ede9fe',c:'#5b21b6'},Mexican:{bg:'#fee2e2',c:'#991b1b'},'North African':{bg:'#fef9c3',c:'#854d0e'},'':{bg:'#f1f5f9',c:'#475569'}};
 
-const MEALS = {
-  breakfast: {
-    id: 'breakfast', name: 'High-Protein Overnight Oats', emoji: '🥣',
-    macros: { protein: 38, calories: 350, carbs: 42, fat: 6 },
-    prepTime: '10 min', isSingle: true, cuisine: '',
-    heroColor: '#dcfce7', heroTextColor: '#16a34a',
-    tip: 'Fairlife milk has 13g protein per 200ml vs 7g in regular skimmed — the single biggest lever here. Or use skimmed milk + 1 scoop unflavoured whey.',
-    portioning: [
-      { item: 'Oats', perContainer: '50g' },
-      { item: 'Protein milk', perContainer: '200ml' },
-      { item: 'Greek yogurt', perContainer: '100g' },
-      { item: 'Chia seeds', perContainer: '10g' },
-      { item: 'Berries (morning)', perContainer: '80g' },
-    ],
-    portionNote: 'Measure directly into each jar — no weighing the full batch needed. Each jar is built individually.',
-    ingredients: [
-      { name: 'Rolled oats', qty: '250g (50g × 5)' },
-      { name: 'Fairlife protein milk', qty: '1 litre (200ml × 5)' },
-      { name: '0% Greek yogurt', qty: '500g (100g × 5)' },
-      { name: 'Chia seeds', qty: '50g (10g × 5)' },
-      { name: 'Vanilla extract', qty: '5 tsp' },
-      { name: 'Mixed berries (fresh or frozen)', qty: '400g (80g × 5)' },
-    ],
-    steps: [
-      'In each mason jar, add 50g rolled oats.',
-      'Pour in 200ml Fairlife protein milk.',
-      'Add 100g 0% Greek yogurt and 10g chia seeds.',
-      'Add a splash of vanilla extract. Stir well.',
-      'Seal and refrigerate overnight (minimum 6 hours).',
-      'Morning: top with 80g mixed berries. Eat cold or microwave 60–90 seconds.',
-    ]
-  },
-  lunches: [
-    {
-      id: 'beef-veg', name: 'Lean Beef & Roasted Veg Bowl', emoji: '🥩',
-      cuisine: '', macros: { protein: 62, calories: 380, carbs: 10, fat: 11 },
-      prepTime: '35 min', heroColor: '#fef2f2', heroTextColor: '#dc2626',
-      tip: 'Use 5% fat beef mince — 20% mince has nearly 3x the fat calories. Always check the label.',
-      storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
-      portioning: [
-        { item: 'Cooked beef mince', perContainer: '~200g' },
-        { item: 'Roasted veg (total)', perContainer: '~330g' },
-        { item: 'Cauliflower rice', perContainer: '~200g' },
-      ],
-      portionNote: 'Weigh total cooked beef, divide by 5. Weigh total roasted veg, divide by 5. Do cauliflower rice last. Each container should weigh roughly the same total — aim for within 20g of each other.',
-      ingredients: [
-        { name: 'Extra-lean beef mince (5% fat)', qty: '1,000g' },
-        { name: 'Frozen cauliflower rice', qty: '1kg bag' },
-        { name: 'Broccoli florets', qty: '750g' },
-        { name: 'Courgette', qty: '500g' },
-        { name: 'Cherry tomatoes', qty: '400g' },
-        { name: 'Low-sodium soy sauce', qty: '75ml' },
-        { name: 'Garlic cloves', qty: '10' },
-        { name: 'Smoked paprika', qty: '5 tsp' },
-        { name: 'Cooking spray (Frylight)', qty: '1 bottle' },
-      ],
-      steps: [
-        'Spray a large non-stick pan. Brown all beef mince on high heat, breaking it up.',
-        'Season with smoked paprika, crushed garlic, salt and pepper. Add soy sauce, stir 2 min. Set aside.',
-        'Spread broccoli, courgette and cherry tomatoes on 2 baking trays. Spray with Frylight. Roast at 200°C for 20–22 min.',
-        'Microwave cauliflower rice per packet (usually 4–5 min). Set aside.',
-        'Weigh total cooked beef — divide by 5 and add that weight to each container.',
-        'Weigh total roasted veg — divide by 5 and add to each container.',
-        'Weigh total cauliflower rice — divide by 5 and add to each container.',
-        'Cool completely before sealing. 3 to fridge, 2 to freezer. Reheat: microwave 2–2.5 min.',
-      ]
-    },
-    {
-      id: 'chicken-soy', name: 'Chicken Breast & Broccoli Soy-Ginger Bowl', emoji: '🍗',
-      cuisine: 'Asian', macros: { protein: 65, calories: 360, carbs: 12, fat: 6 },
-      prepTime: '30 min', heroColor: '#fef3c7', heroTextColor: '#d97706',
-      tip: 'Don\'t skip the rice vinegar — it lifts the whole sauce and stops the soy tasting flat after reheating.',
-      storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
-      portioning: [
-        { item: 'Cooked sliced chicken', perContainer: '~220g' },
-        { item: 'Broccoli + edamame', perContainer: '~280g' },
-        { item: 'Cauliflower rice', perContainer: '~200g' },
-        { item: 'Soy-ginger sauce', perContainer: 'Equal drizzle (divide sauce into 5)' },
-      ],
-      portionNote: 'Weigh the total sliced chicken and divide by 5. Do the same for broccoli and edamame combined. Divide the remaining sauce equally — pour a fifth over each container.',
-      ingredients: [
-        { name: 'Chicken breast', qty: '1,100g' },
-        { name: 'Frozen cauliflower rice', qty: '1kg bag' },
-        { name: 'Broccoli florets', qty: '1,000g' },
-        { name: 'Edamame (shelled, frozen)', qty: '400g' },
-        { name: 'Low-sodium soy sauce', qty: '100ml' },
-        { name: 'Fresh ginger (grated)', qty: '25g' },
-        { name: 'Garlic cloves', qty: '10' },
-        { name: 'Rice vinegar', qty: '50ml' },
-        { name: 'Sesame seeds', qty: '25g' },
-        { name: 'Cooking spray', qty: '1 bottle' },
-      ],
-      steps: [
-        'Mix soy sauce, grated ginger, crushed garlic and rice vinegar into a sauce.',
-        'Season chicken with salt and pepper. Cook in batches with Frylight — 6–7 min each side.',
-        'Slice all chicken and toss in half the sauce.',
-        'Steam broccoli 3 min. Defrost edamame in boiling water 2 min, drain.',
-        'Microwave cauliflower rice per packet. Set aside.',
-        'Weigh total sliced chicken — divide by 5 into each container.',
-        'Weigh broccoli and edamame combined — divide by 5 into each container.',
-        'Divide cauliflower rice by 5 into each container. Drizzle remaining sauce equally. Sprinkle sesame seeds.',
-        'Cool completely. 3 to fridge, 2 to freezer. Reheat: microwave 2 min.',
-      ]
-    },
-    {
-      id: 'chicken-thigh', name: 'Baked Chicken Thigh & Roasted Veg', emoji: '🍠',
-      cuisine: '', macros: { protein: 63, calories: 370, carbs: 12, fat: 12 },
-      prepTime: '45 min', heroColor: '#fff7ed', heroTextColor: '#ea580c',
-      tip: 'Skinless thighs give far more flavour and juiciness than breast for barely more calories — important when eating the same meal 5 days running.',
-      storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
-      portioning: [
-        { item: 'Cooked chicken thighs', perContainer: '~280g' },
-        { item: 'Roasted veg (total)', perContainer: '~300g' },
-        { item: 'Cauliflower rice', perContainer: '~200g' },
-      ],
-      portionNote: 'Weigh all cooked thighs together and divide by 5. If thighs vary in size, cutting them up and weighing the combined meat ensures each container gets exactly the same amount.',
-      ingredients: [
-        { name: 'Skinless chicken thighs', qty: '1,400g' },
-        { name: 'Frozen cauliflower rice', qty: '1kg bag' },
-        { name: 'Green beans', qty: '750g' },
-        { name: 'Courgette', qty: '500g' },
-        { name: 'Red peppers', qty: '4' },
-        { name: 'Garlic cloves', qty: '15' },
-        { name: 'Smoked paprika', qty: '7 tsp' },
-        { name: 'Dried thyme', qty: '5 tsp' },
-        { name: 'Lemon (zested)', qty: '2' },
-        { name: 'Low-salt chicken stock', qty: '250ml' },
-        { name: 'Cooking spray', qty: '1 bottle' },
-      ],
-      steps: [
-        'Preheat oven to 200°C. Remove any remaining skin from thighs.',
-        'Mix smoked paprika, thyme, lemon zest, crushed garlic, salt and pepper. Rub all over every thigh.',
-        'Place thighs in a large baking dish. Pour stock into the bottom. Bake 35–40 min until golden.',
-        'Toss courgette, peppers and green beans in a tray with Frylight. Roast alongside for last 20 min.',
-        'Microwave cauliflower rice per packet. Set aside.',
-        'Weigh all cooked thighs together — divide by 5 into each container. Slice or leave whole.',
-        'Weigh total roasted veg — divide by 5 into each container.',
-        'Divide cauliflower rice by 5 into each container.',
-        'Cool completely. 3 to fridge, 2 to freezer. Reheat: microwave 2.5–3 min.',
-      ]
-    },
-    {
-      id: 'korean-beef', name: 'Korean Beef Bowl', emoji: '🫙',
-      cuisine: 'Asian', macros: { protein: 62, calories: 370, carbs: 10, fat: 12 },
-      prepTime: '25 min', heroColor: '#fef3c7', heroTextColor: '#d97706',
-      tip: 'The sauce is everything here — let the beef sit off the heat for 5 min before portioning so it fully absorbs.',
-      storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
-      portioning: [
-        { item: 'Cooked beef in sauce', perContainer: '~200g' },
-        { item: 'Broccoli', perContainer: '~120g' },
-        { item: 'Cucumber + carrot', perContainer: 'Divide equally by eye (or weigh)' },
-        { item: 'Cauliflower rice', perContainer: '~200g' },
-      ],
-      portionNote: 'Weigh the beef and sauce together as one combined weight — divide by 5. This keeps the sauce distribution even so every container gets the same flavour intensity.',
-      ingredients: [
-        { name: 'Extra-lean beef mince (5% fat)', qty: '1,000g' },
-        { name: 'Frozen cauliflower rice', qty: '1kg bag' },
-        { name: 'Broccoli florets', qty: '600g' },
-        { name: 'Cucumber', qty: '2' },
-        { name: 'Carrots', qty: '3' },
-        { name: 'Low-sodium soy sauce', qty: '80ml' },
-        { name: 'Garlic cloves', qty: '10' },
-        { name: 'Fresh ginger (grated)', qty: '20g' },
-        { name: 'Sesame oil', qty: '2 tsp' },
-        { name: 'Rice vinegar', qty: '40ml' },
-        { name: 'Chilli flakes', qty: '1 tsp' },
-        { name: 'Spring onions', qty: '6' },
-        { name: 'Sesame seeds', qty: '20g' },
-        { name: 'Cooking spray', qty: '1 bottle' },
-      ],
-      steps: [
-        'Mix soy sauce, garlic, ginger, sesame oil, rice vinegar and chilli flakes into a sauce.',
-        'Thinly slice cucumber and carrots into ribbons or matchsticks. Set aside.',
-        'Brown beef mince in a large pan with Frylight on high heat, breaking it up.',
-        'Pour sauce over beef, stir well. Cook 2 min then remove from heat. Rest 5 min.',
-        'Steam broccoli 3 min. Microwave cauliflower rice per packet.',
-        'Weigh total beef + sauce combined — divide by 5 into each container.',
-        'Weigh broccoli — divide by 5 into each container.',
-        'Divide cauliflower rice by 5. Add cucumber, carrot, spring onions and sesame seeds equally.',
-        'Cool completely. 3 to fridge, 2 to freezer.',
-      ]
-    },
-    {
-      id: 'greek-lamb', name: 'Greek Lamb Meatball Bowl', emoji: '🫔',
-      cuisine: 'Mediterranean', macros: { protein: 61, calories: 420, carbs: 10, fat: 18 },
-      prepTime: '35 min', heroColor: '#ede9fe', heroTextColor: '#7c3aed',
-      tip: 'Lean lamb mince (10% fat or less) keeps the calories down. Most supermarkets stock it — check the label.',
-      storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
-      portioning: [
-        { item: 'Lamb meatballs', perContainer: '5–6 meatballs (weigh to confirm ~200g)' },
-        { item: 'Tomato & cucumber mix', perContainer: 'Divide by 5 equally' },
-        { item: 'Baby spinach', perContainer: '~40g' },
-        { item: 'Cauliflower rice', perContainer: '~200g' },
-        { item: 'Tzatziki', perContainer: '1 tbsp (50g)' },
-      ],
-      portionNote: 'Make all meatballs the same size — weigh 40g of raw mixture per meatball before rolling. This guarantees every container gets identical protein. 5 meatballs per container.',
-      ingredients: [
-        { name: 'Lean lamb mince (10% fat)', qty: '1,000g' },
-        { name: 'Frozen cauliflower rice', qty: '1kg bag' },
-        { name: 'Cherry tomatoes', qty: '400g' },
-        { name: 'Cucumber', qty: '2' },
-        { name: 'Baby spinach', qty: '200g' },
-        { name: 'Low-fat tzatziki', qty: '250g' },
-        { name: 'Garlic cloves', qty: '8' },
-        { name: 'Dried oregano', qty: '4 tsp' },
-        { name: 'Ground cumin', qty: '2 tsp' },
-        { name: 'Lemon (zested & juiced)', qty: '2' },
-        { name: 'Fresh parsley', qty: '30g' },
-        { name: 'Cooking spray', qty: '1 bottle' },
-      ],
-      steps: [
-        'Mix lamb mince with crushed garlic, oregano, cumin, lemon zest, parsley, salt and pepper.',
-        'Weigh 40g of mixture per meatball and roll — you should get 25 meatballs total (5 per container).',
-        'Spray a large baking tray. Place meatballs on tray and roast at 200°C for 18–20 min until golden.',
-        'Halve cherry tomatoes and slice cucumber. Toss in lemon juice.',
-        'Microwave cauliflower rice per packet. Divide by 5 into each container.',
-        'Add exactly 5 meatballs per container.',
-        'Divide tomato & cucumber mix equally. Add 40g baby spinach and 50g tzatziki per container.',
-        'Cool before sealing. 3 to fridge, 2 to freezer.',
-      ]
-    },
-    {
-      id: 'moroccan-lamb', name: 'Moroccan Spiced Lamb & Roasted Veg', emoji: '🌿',
-      cuisine: 'North African', macros: { protein: 62, calories: 410, carbs: 12, fat: 16 },
-      prepTime: '50 min', heroColor: '#fef9c3', heroTextColor: '#a16207',
-      tip: 'Mix the spice rub the night before and coat the lamb overnight — the flavour goes much deeper and the meat is noticeably more tender.',
-      storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
-      portioning: [
-        { item: 'Cooked lamb (with sauce)', perContainer: '~240g' },
-        { item: 'Roasted veg', perContainer: '~300g' },
-        { item: 'Cauliflower rice', perContainer: '~200g' },
-      ],
-      portionNote: 'Weigh the cooked lamb and sauce together as one unit — divide by 5. This is critical for this dish as the sauce carries a lot of the flavour and calories. Weigh roasted veg separately and divide by 5.',
-      ingredients: [
-        { name: 'Lamb shoulder (diced, lean)', qty: '1,200g' },
-        { name: 'Frozen cauliflower rice', qty: '1kg bag' },
-        { name: 'Courgette', qty: '500g' },
-        { name: 'Red peppers', qty: '4' },
-        { name: 'Aubergine', qty: '2' },
-        { name: 'Tinned chopped tomatoes', qty: '400g' },
-        { name: 'Low-salt chicken stock', qty: '300ml' },
-        { name: 'Ground cumin', qty: '3 tsp' },
-        { name: 'Ground coriander', qty: '3 tsp' },
-        { name: 'Smoked paprika', qty: '2 tsp' },
-        { name: 'Ground cinnamon', qty: '1 tsp' },
-        { name: 'Ground ginger', qty: '1 tsp' },
-        { name: 'Garlic cloves', qty: '10' },
-        { name: 'Fresh mint', qty: '20g' },
-        { name: 'Cooking spray', qty: '1 bottle' },
-      ],
-      steps: [
-        'Mix cumin, coriander, paprika, cinnamon and ginger into a spice rub. Coat all lamb pieces.',
-        'Spray a large oven-proof casserole. Brown lamb in batches on high heat until sealed all over.',
-        'Add crushed garlic, chopped tomatoes and stock. Stir, bring to a simmer.',
-        'Cover and cook in oven at 180°C for 35–40 min until lamb is tender.',
-        'Meanwhile, roast courgette, peppers and aubergine at 200°C with Frylight for 20 min.',
-        'Microwave cauliflower rice per packet. Set aside.',
-        'Weigh total lamb + sauce combined — divide by 5 into each container.',
-        'Weigh total roasted veg — divide by 5 into each container.',
-        'Divide cauliflower rice by 5. Scatter fresh mint over each container.',
-        'Cool completely. 3 to fridge, 2 to freezer.',
-      ]
-    },
-    {
-      id: 'lemon-chicken', name: 'Lemon Herb Chicken & Asparagus', emoji: '🍋',
-      cuisine: 'Mediterranean', macros: { protein: 64, calories: 350, carbs: 8, fat: 8 },
-      prepTime: '30 min', heroColor: '#f0fdf4', heroTextColor: '#16a34a',
-      tip: 'Don\'t overcook the asparagus — 8–10 min at 200°C is enough. It softens more on reheating so pull it while it still has a slight bite.',
-      storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
-      portioning: [
-        { item: 'Cooked sliced chicken', perContainer: '~240g' },
-        { item: 'Asparagus + green beans + tomatoes', perContainer: '~260g' },
-        { item: 'Cauliflower rice', perContainer: '~200g' },
-        { item: 'Pan juices', perContainer: 'Divide equally — drizzle over each' },
-      ],
-      portionNote: 'Slice all chicken before weighing — this gives an accurate total. Weigh, divide by 5. Do the same for all roasted veg combined. Pour any pan juices into a jug and split equally across containers.',
-      ingredients: [
-        { name: 'Chicken breast', qty: '1,200g' },
-        { name: 'Frozen cauliflower rice', qty: '1kg bag' },
-        { name: 'Asparagus spears', qty: '600g' },
-        { name: 'Green beans', qty: '400g' },
-        { name: 'Cherry tomatoes', qty: '300g' },
-        { name: 'Lemon (zested & juiced)', qty: '3' },
-        { name: 'Garlic cloves', qty: '10' },
-        { name: 'Fresh rosemary', qty: '4 sprigs' },
-        { name: 'Fresh thyme', qty: '4 sprigs' },
-        { name: 'Dijon mustard', qty: '2 tsp' },
-        { name: 'Low-salt chicken stock', qty: '100ml' },
-        { name: 'Cooking spray', qty: '1 bottle' },
-      ],
-      steps: [
-        'Mix lemon zest, lemon juice, crushed garlic, mustard, rosemary and thyme into a marinade.',
-        'Coat all chicken breasts thoroughly. Leave 30 min if time allows.',
-        'Place chicken in a baking dish, pour stock into the bottom. Bake at 200°C for 25–28 min.',
-        'Add asparagus, green beans and cherry tomatoes to a tray with Frylight. Roast last 10 min.',
-        'Slice all chicken. Microwave cauliflower rice per packet.',
-        'Weigh total sliced chicken — divide by 5 into each container.',
-        'Weigh total roasted veg combined — divide by 5 into each container.',
-        'Divide cauliflower rice by 5. Pour pan juices equally over each container.',
-        'Cool completely. 3 to fridge, 2 to freezer. Reheat: microwave 2 min.',
-      ]
-    },
-    {
-      id: 'teriyaki-salmon', name: 'Teriyaki Salmon & Stir-Fried Veg', emoji: '🍣',
-      cuisine: 'Asian', macros: { protein: 60, calories: 430, carbs: 10, fat: 18 },
-      prepTime: '25 min', heroColor: '#fef3c7', heroTextColor: '#d97706',
-      tip: 'Make your own teriyaki — soy sauce, a tiny bit of honey, garlic and ginger. Shop-bought versions are loaded with sugar and sodium.',
-      storage: 'Fridge only — all 5 containers. Salmon doesn\'t freeze well once cooked. Best Mon–Thu.',
-      portioning: [
-        { item: 'Salmon fillets', perContainer: '1 fillet per container (200g each — buy equal-sized fillets)' },
-        { item: 'Stir-fried veg', perContainer: '~280g' },
-        { item: 'Cauliflower rice', perContainer: '~200g' },
-        { item: 'Teriyaki glaze', perContainer: 'Divide remaining glaze equally into 5' },
-      ],
-      portionNote: 'Salmon is the easiest to portion — buy 5 equal-sized fillets (200g each) and one goes per container. No weighing needed for the protein. Weigh and divide the veg evenly.',
-      ingredients: [
-        { name: 'Salmon fillets (skinless)', qty: '1,000g (5 × 200g)' },
-        { name: 'Frozen cauliflower rice', qty: '1kg bag' },
-        { name: 'Tenderstem broccoli', qty: '500g' },
-        { name: 'Sugar snap peas', qty: '400g' },
-        { name: 'Red peppers', qty: '3' },
-        { name: 'Low-sodium soy sauce', qty: '80ml' },
-        { name: 'Honey', qty: '1 tbsp' },
-        { name: 'Fresh ginger (grated)', qty: '20g' },
-        { name: 'Garlic cloves', qty: '6' },
-        { name: 'Rice vinegar', qty: '30ml' },
-        { name: 'Sesame seeds', qty: '20g' },
-        { name: 'Cooking spray', qty: '1 bottle' },
-      ],
-      steps: [
-        'Mix soy sauce, honey, ginger, garlic and rice vinegar into a teriyaki glaze.',
-        'Place 5 equal salmon fillets on a lined baking tray. Brush generously with glaze.',
-        'Bake at 200°C for 12–15 min. Brush with more glaze halfway through.',
-        'Stir-fry broccoli, sugar snap peas and peppers with Frylight on high heat for 4–5 min.',
-        'Microwave cauliflower rice per packet. Divide by 5 into each container.',
-        'Add one salmon fillet per container.',
-        'Weigh total stir-fried veg — divide by 5 into each container.',
-        'Drizzle remaining glaze equally across all 5. Sprinkle sesame seeds.',
-        'Cool completely. All 5 to fridge. Best eaten Mon–Thu.',
-      ]
-    },
-    {
-      id: 'mexican-chicken', name: 'Mexican Spiced Chicken Bowl', emoji: '🌶️',
-      cuisine: 'Mexican', macros: { protein: 63, calories: 360, carbs: 10, fat: 8 },
-      prepTime: '30 min', heroColor: '#fee2e2', heroTextColor: '#dc2626',
-      tip: 'Chipotle paste is the secret — one tablespoon adds a deep smoky heat that transforms the whole dish. Find it in any supermarket spice aisle.',
-      storage: '3 containers → fridge · 2 → freezer. Move Thu to fridge Wed night, Fri to fridge Thu night.',
-      portioning: [
-        { item: 'Cooked chicken (shredded)', perContainer: '~240g' },
-        { item: 'Roasted peppers, onion & tomatoes', perContainer: '~280g' },
-        { item: 'Baby spinach', perContainer: '~30g' },
-        { item: 'Cauliflower rice', perContainer: '~200g' },
-        { item: 'Greek yogurt', perContainer: '30g (add after reheating)' },
-      ],
-      portionNote: 'Shred all chicken first, then weigh the total and divide by 5 — shredded chicken distributes far more evenly than sliced. Weigh roasted veg and divide by 5. Add yogurt after reheating, not before.',
-      ingredients: [
-        { name: 'Chicken breast', qty: '1,200g' },
-        { name: 'Frozen cauliflower rice', qty: '1kg bag' },
-        { name: 'Red peppers', qty: '4' },
-        { name: 'Red onion', qty: '3' },
-        { name: 'Cherry tomatoes', qty: '400g' },
-        { name: 'Baby spinach', qty: '150g' },
-        { name: 'Chipotle paste', qty: '3 tbsp' },
-        { name: 'Ground cumin', qty: '3 tsp' },
-        { name: 'Smoked paprika', qty: '3 tsp' },
-        { name: 'Garlic cloves', qty: '8' },
-        { name: 'Lime (juiced)', qty: '3' },
-        { name: 'Low-fat Greek yogurt', qty: '150g' },
-        { name: 'Cooking spray', qty: '1 bottle' },
-      ],
-      steps: [
-        'Mix chipotle paste, cumin, smoked paprika, crushed garlic and lime juice into a marinade.',
-        'Coat all chicken breasts thoroughly. Leave 30 min if time allows.',
-        'Bake chicken at 200°C for 25–28 min until cooked through. Shred with two forks.',
-        'Roast peppers, red onion and cherry tomatoes on a tray with Frylight at 200°C for 20 min.',
-        'Microwave cauliflower rice per packet. Set aside.',
-        'Weigh total shredded chicken — divide by 5 into each container.',
-        'Weigh total roasted veg — divide by 5 into each container.',
-        'Divide cauliflower rice by 5. Add 30g baby spinach per container.',
-        'Cool completely. 3 to fridge, 2 to freezer. Add 30g yogurt after reheating.',
-      ]
-    },
-    {
-      id: 'baked-cod', name: 'Baked Cod & Roasted Veg', emoji: '🐟',
-      cuisine: '', macros: { protein: 60, calories: 300, carbs: 10, fat: 5 },
-      prepTime: '25 min', heroColor: '#e0f2fe', heroTextColor: '#0369a1',
-      tip: 'Cod is the lowest calorie meal in the whole rotation. If you\'re having a lighter week, this is the one to choose. Very mild and easy on the stomach.',
-      storage: 'Fridge only — all 5 containers. Fish doesn\'t freeze well once cooked. Best Mon–Thu.',
-      portioning: [
-        { item: 'Cod fillets', perContainer: '1 fillet per container (200g each — buy equal-sized)' },
-        { item: 'Roasted veg', perContainer: '~280g' },
-        { item: 'Cauliflower rice', perContainer: '~200g' },
-      ],
-      portionNote: 'Like salmon — buy 5 equal-sized fillets so portioning is automatic. One fillet per container. Weigh and divide the roasted veg evenly across all 5.',
-      ingredients: [
-        { name: 'Cod fillets', qty: '1,000g (5 × 200g)' },
-        { name: 'Frozen cauliflower rice', qty: '1kg bag' },
-        { name: 'Tenderstem broccoli', qty: '500g' },
-        { name: 'Brussels sprouts (halved)', qty: '400g' },
-        { name: 'Cherry tomatoes', qty: '300g' },
-        { name: 'Lemon (sliced)', qty: '2' },
-        { name: 'Smoked paprika', qty: '5 tsp' },
-        { name: 'Garlic cloves', qty: '8' },
-        { name: 'Fresh parsley', qty: '30g' },
-        { name: 'Capers', qty: '2 tbsp' },
-        { name: 'Cooking spray', qty: '1 bottle' },
-      ],
-      steps: [
-        'Place 5 equal cod fillets on a lined baking tray. Spray with Frylight.',
-        'Season with smoked paprika, crushed garlic, salt and pepper. Lay lemon slices on top.',
-        'Toss broccoli, Brussels sprouts and cherry tomatoes on a separate tray with Frylight.',
-        'Roast both trays at 200°C — veg 20–22 min, cod 15–18 min until it flakes easily.',
-        'Microwave cauliflower rice per packet. Divide by 5 into each container.',
-        'Add one cod fillet per container.',
-        'Weigh total roasted veg — divide by 5 into each container.',
-        'Scatter capers and fresh parsley equally. Cool completely before sealing.',
-        'All 5 to fridge. Reheat gently: microwave 90 seconds.',
-      ]
-    }
-  ]
-};
+const BREAKFASTS=[
+  {id:'oats',name:'High-Protein Overnight Oats',emoji:'🫙',type:'batch',
+   macros:{protein:38,calories:350,carbs:42,fat:6},prepTime:'10 min',
+   heroColor:'#dcfce7',heroText:'#16a34a',
+   tip:'Fairlife milk has 13g protein per 200ml vs 7g in regular skimmed. Or use skimmed milk + 1 scoop unflavoured whey.',
+   prepSteps:[
+     {icon:'🫙',title:'Make 5 jars Sunday',desc:'Fill each mason jar with oats, milk, yogurt and chia seeds. Stir well, seal, refrigerate overnight.'},
+     {icon:'🧊',title:'Storage',desc:'Fridge all week. Grab one each morning and top with berries.'},
+     {icon:'♨️',title:'Serving',desc:'Eat cold or microwave 60–90 seconds. Add berries after heating.'}
+   ],
+   ingredients:[{name:'Rolled oats',qty:50,unit:'g'},{name:'Fairlife protein milk',qty:200,unit:'ml'},{name:'0% Greek yogurt',qty:100,unit:'g'},{name:'Chia seeds',qty:10,unit:'g'},{name:'Vanilla extract',qty:1,unit:'tsp'},{name:'Mixed berries',qty:80,unit:'g'}],
+   steps:['Add 50g rolled oats to each jar.','Pour in 200ml Fairlife protein milk.','Add 100g Greek yogurt and 10g chia seeds.','Add a splash of vanilla. Stir well.','Seal and refrigerate overnight (min 6 hrs).','Morning: top with 80g berries. Eat cold or microwave 60–90 sec.']},
+  {id:'egg-muffins',name:'Egg & Veggie Muffins',emoji:'🥚',type:'batch',
+   macros:{protein:32,calories:260,carbs:6,fat:14},prepTime:'25 min',
+   heroColor:'#fff7ed',heroText:'#ea580c',
+   tip:'Make on Sunday, eat 2 each morning. Reheat in 60 seconds. Mix up the veg each week.',
+   prepSteps:[
+     {icon:'🧁',title:'Batch bake Sunday',desc:'Make 10 muffins (2 per morning). Bake 18–20 min at 180°C. Cool completely before storing.'},
+     {icon:'🧊',title:'Storage',desc:'Fridge all week in an airtight container.'},
+     {icon:'♨️',title:'Reheating',desc:'Microwave 2 muffins for 60 seconds each morning.'}
+   ],
+   ingredients:[{name:'Eggs',qty:6,unit:''},{name:'Egg whites',qty:4,unit:''},{name:'Baby spinach',qty:60,unit:'g'},{name:'Red pepper (diced)',qty:80,unit:'g'},{name:'Spring onions',qty:3,unit:''},{name:'Reduced-fat cheddar',qty:40,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Preheat oven to 180°C. Spray a muffin tin.','Whisk eggs and egg whites. Season well.','Divide spinach, pepper and spring onions across muffin holes.','Pour egg mix over veg — fill ¾ full.','Sprinkle cheese over each muffin.','Bake 18–20 min until set and golden.','Cool before storing. Reheat 2 muffins: microwave 60 sec.']},
+  {id:'cottage-cheese',name:'Cottage Cheese & Berry Bowl',emoji:'🍓',type:'batch',
+   macros:{protein:28,calories:220,carbs:18,fat:4},prepTime:'5 min',
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'Low-fat cottage cheese is one of the highest protein-per-calorie foods available. Cold with berries — it works.',
+   prepSteps:[
+     {icon:'🍱',title:'Portion Sunday',desc:'Spoon cottage cheese into containers, top with berries and chia seeds. Seal and refrigerate.'},
+     {icon:'🧊',title:'Storage',desc:'Fridge all week. Grab and go each morning.'},
+     {icon:'❄️',title:'Serving',desc:'Eat cold — no reheating needed.'}
+   ],
+   ingredients:[{name:'Low-fat cottage cheese',qty:200,unit:'g'},{name:'Mixed berries',qty:100,unit:'g'},{name:'Chia seeds',qty:8,unit:'g'},{name:'Honey (optional)',qty:1,unit:'tsp'}],
+   steps:['Spoon 200g cottage cheese into each container.','Top with 100g berries and 8g chia seeds.','Drizzle with honey if using.','Seal and refrigerate. Ready each morning.','Eat cold — no reheating needed.']},
+  {id:'omelette',name:'Protein Omelette',emoji:'🍳',type:'fresh',
+   macros:{protein:36,calories:300,carbs:4,fat:16},prepTime:'8 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'Make fresh each morning — omelettes don\'t reheat well. Add smoked salmon for an extra protein boost.',
+   prepSteps:[
+     {icon:'🥚',title:'No Sunday prep needed',desc:'This is a fresh daily breakfast. Made each morning in 8 minutes.'},
+     {icon:'🛒',title:'Shopping note',desc:'Keep eggs, egg whites, spinach, tomatoes and feta stocked in the fridge.'},
+     {icon:'⏱',title:'Morning routine',desc:'Takes 8 minutes. Make it while your coffee brews.'}
+   ],
+   ingredients:[{name:'Eggs',qty:2,unit:''},{name:'Egg whites',qty:3,unit:''},{name:'Baby spinach',qty:40,unit:'g'},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Reduced-fat feta',qty:30,unit:'g'},{name:'Cooking spray',qty:3,unit:'sprays'}],
+   steps:['Whisk 2 eggs and 3 egg whites. Season well.','Spray a non-stick pan on medium heat.','Pour in egg mix. Let it set 30 sec then pull edges inward.','Add spinach, tomatoes and feta to one half.','Fold over filling. Cook 1 more min. Serve immediately.']},
+  {id:'scrambled-salmon',name:'Scrambled Eggs & Smoked Salmon',emoji:'🐠',type:'fresh',
+   macros:{protein:42,calories:320,carbs:2,fat:18},prepTime:'8 min',
+   heroColor:'#e0f2fe',heroText:'#0369a1',
+   tip:'The highest protein breakfast on the list. 8 minutes, zero batch prep needed.',
+   prepSteps:[
+     {icon:'🐠',title:'No Sunday prep needed',desc:'Made fresh each morning in 8 minutes.'},
+     {icon:'🛒',title:'Shopping note',desc:'Keep smoked salmon, eggs and egg whites stocked. Smoked salmon lasts well in the fridge unopened.'},
+     {icon:'⏱',title:'Key technique',desc:'Cook eggs low and slow — they finish cooking off the heat. Fold salmon in at the end.'}
+   ],
+   ingredients:[{name:'Eggs',qty:2,unit:''},{name:'Egg whites',qty:3,unit:''},{name:'Smoked salmon',qty:80,unit:'g'},{name:'Chives (optional)',qty:1,unit:'small bunch'},{name:'Black pepper',qty:1,unit:'pinch'},{name:'Cooking spray',qty:3,unit:'sprays'}],
+   steps:['Whisk 2 eggs and 3 egg whites. Season with pepper only.','Spray a non-stick pan on low-medium heat.','Add eggs and stir slowly — low and slow is key.','When almost set but still glossy, remove from heat.','Fold in smoked salmon. Serve immediately.']},
+  {id:'protein-pancakes',name:'Protein Pancakes',emoji:'🥞',type:'batch',
+   macros:{protein:34,calories:370,carbs:28,fat:8},prepTime:'20 min',
+   heroColor:'#fdf4ff',heroText:'#9333ea',
+   tip:'Batch all pancakes Sunday, stack in fridge. Microwave 2 each morning for 45 seconds.',
+   prepSteps:[
+     {icon:'🥞',title:'Batch cook Sunday',desc:'Make all pancakes at once. Cool completely before stacking — put parchment paper between each to stop sticking.'},
+     {icon:'🧊',title:'Storage',desc:'Fridge all week. Stack of 2 per morning, ready to grab.'},
+     {icon:'♨️',title:'Reheating',desc:'Microwave 2 pancakes for 45 seconds. Top with berries or a drizzle of honey.'}
+   ],
+   ingredients:[{name:'Banana (mashed)',qty:1,unit:''},{name:'Eggs',qty:2,unit:''},{name:'Egg whites',qty:2,unit:''},{name:'Vanilla whey protein powder',qty:30,unit:'g'},{name:'Rolled oats (blended to flour)',qty:40,unit:'g'},{name:'Baking powder',qty:0.5,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mash banana in a bowl.','Add eggs, egg whites, protein powder, oat flour and baking powder. Mix into batter.','Spray a non-stick pan on medium-low heat.','Pour 2 tbsp rounds. Cook 2 min until bubbles form, flip, 1 more min.','Cool completely before stacking in fridge.','Reheat: 2 pancakes, 45 seconds in microwave.']}
+];
 
-const CAT_ORDER = ['Protein','Fruit & Veg','Grains & Pulses','Dairy & Eggs','Pantry & Condiments'];
-const CAT_ICONS = { 'Protein':'🥩', 'Fruit & Veg':'🥦', 'Grains & Pulses':'🌾', 'Dairy & Eggs':'🥛', 'Pantry & Condiments':'🧴' };
+const LUNCHES=[
+  {id:'beef-veg',name:'Lean Beef & Roasted Veg Bowl',emoji:'🥩',cuisine:'',
+   macros:{protein:62,calories:380,carbs:10,fat:11},prepTime:'35 min',
+   heroColor:'#fef2f2',heroText:'#dc2626',
+   tip:'Use 5% fat beef mince — 20% mince has nearly 3x the fat calories. Always check the label.',
+   prepSteps:[
+     {icon:'🔥',title:'Cook proteins first',desc:'Brown all beef mince on high heat in a large pan. Season with paprika, garlic and soy sauce.'},
+     {icon:'🫕',title:'Roast veg in parallel',desc:'While beef cooks, roast broccoli, courgette and tomatoes at 200°C for 20 min.'},
+     {icon:'⚖️',title:'Portion evenly',desc:'Weigh total cooked beef, divide by number of portions. Same for veg and cauliflower rice.'},
+     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer. Move to fridge the night before eating.'}
+   ],
+   ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Broccoli florets',qty:150,unit:'g'},{name:'Courgette',qty:100,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Low-sodium soy sauce',qty:15,unit:'ml'},{name:'Garlic cloves',qty:2,unit:''},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Brown beef mince in a pan on high heat, breaking it up.','Season with paprika, garlic, salt and pepper. Add soy sauce, stir 2 min.','Roast broccoli, courgette and tomatoes at 200°C for 20 min with Frylight.','Microwave cauliflower rice per packet.','Divide equally into containers. Cool before sealing.','Reheat: microwave 2–2.5 min, stir halfway.']},
+  {id:'chicken-soy',name:'Chicken Breast & Broccoli Soy-Ginger',emoji:'🫕',cuisine:'Asian',
+   macros:{protein:65,calories:360,carbs:12,fat:6},prepTime:'30 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'Don\'t skip the rice vinegar — it lifts the sauce and stops the soy tasting flat after reheating.',
+   prepSteps:[
+     {icon:'🍗',title:'Cook chicken in batches',desc:'6–7 min each side in a non-stick pan. Slice all chicken before portioning — easier to weigh evenly.'},
+     {icon:'🥦',title:'Steam broccoli & defrost edamame',desc:'Steam broccoli 3 min. Defrost edamame in boiling water 2 min. Both can be done simultaneously.'},
+     {icon:'⚖️',title:'Portion evenly',desc:'Weigh sliced chicken, divide by portions. Same for broccoli and edamame combined.'},
+     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
+   ],
+   ingredients:[{name:'Chicken breast',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Broccoli florets',qty:200,unit:'g'},{name:'Edamame (shelled, frozen)',qty:80,unit:'g'},{name:'Low-sodium soy sauce',qty:20,unit:'ml'},{name:'Fresh ginger (grated)',qty:5,unit:'g'},{name:'Garlic cloves',qty:2,unit:''},{name:'Rice vinegar',qty:10,unit:'ml'},{name:'Sesame seeds',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix soy, ginger, garlic and rice vinegar into a sauce.','Cook chicken with Frylight 6–7 min each side. Slice and toss in half the sauce.','Steam broccoli 3 min. Defrost edamame in boiling water 2 min.','Microwave cauliflower rice. Assemble containers.','Drizzle remaining sauce. Sprinkle sesame seeds. Cool before sealing.','Reheat: microwave 2 min.']},
+  {id:'chicken-thigh',name:'Baked Chicken Thigh & Roasted Veg',emoji:'🍗',cuisine:'',
+   macros:{protein:63,calories:370,carbs:12,fat:12},prepTime:'45 min',
+   heroColor:'#fff7ed',heroText:'#ea580c',
+   tip:'Skinless thighs give far more flavour than breast for barely more calories.',
+   prepSteps:[
+     {icon:'🔥',title:'Bake thighs with stock',desc:'The stock in the bottom of the dish is essential — it stops the chicken drying out. 35–40 min at 200°C.'},
+     {icon:'🥦',title:'Roast veg in same oven',desc:'Add veg tray to the oven for the last 20 min of the chicken cook time.'},
+     {icon:'⚖️',title:'Portion evenly',desc:'Slice or portion thighs by weight — they vary in size so weighing is important here.'},
+     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
+   ],
+   ingredients:[{name:'Skinless chicken thighs',qty:280,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Green beans',qty:150,unit:'g'},{name:'Courgette',qty:100,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Smoked paprika',qty:1.5,unit:'tsp'},{name:'Dried thyme',qty:1,unit:'tsp'},{name:'Lemon (zested)',qty:0.5,unit:''},{name:'Low-salt chicken stock',qty:50,unit:'ml'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Rub thighs with paprika, thyme, lemon zest, garlic, salt and pepper.','Bake in dish with stock at 200°C for 35–40 min.','Roast veg alongside for last 20 min.','Microwave cauliflower rice. Assemble containers.','Cool completely. Reheat: microwave 2.5–3 min.']},
+  {id:'korean-beef',name:'Korean Beef Bowl',emoji:'🥢',cuisine:'Asian',
+   macros:{protein:62,calories:370,carbs:10,fat:12},prepTime:'25 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'Weigh beef and sauce together as one unit — keeps flavour intensity identical across all containers.',
+   prepSteps:[
+     {icon:'🥢',title:'Rest the beef in sauce',desc:'After adding the sauce to the beef, remove from heat and rest 5 min. This lets the meat absorb the sauce before portioning.'},
+     {icon:'🥒',title:'Prep fresh veg last',desc:'Slice cucumber and carrot into thin ribbons. Add fresh to each container on top — don\'t mix with hot beef.'},
+     {icon:'⚖️',title:'Portion evenly',desc:'Weigh beef + sauce together as one combined total. Divide by portions.'},
+     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
+   ],
+   ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Broccoli florets',qty:120,unit:'g'},{name:'Cucumber',qty:0.5,unit:''},{name:'Carrot',qty:1,unit:''},{name:'Low-sodium soy sauce',qty:16,unit:'ml'},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh ginger (grated)',qty:4,unit:'g'},{name:'Sesame oil',qty:0.5,unit:'tsp'},{name:'Rice vinegar',qty:8,unit:'ml'},{name:'Chilli flakes',qty:0.25,unit:'tsp'},{name:'Spring onions',qty:1,unit:''},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix soy, garlic, ginger, sesame oil, vinegar and chilli into a sauce.','Slice cucumber and carrot into thin ribbons.','Brown beef mince. Pour sauce over, stir 2 min. Rest 5 min off heat.','Steam broccoli 3 min. Microwave cauliflower rice.','Assemble containers. Top with cucumber, carrot, spring onion and sesame seeds.']},
+  {id:'greek-lamb',name:'Greek Lamb Meatball Bowl',emoji:'🍢',cuisine:'Mediterranean',
+   macros:{protein:61,calories:420,carbs:10,fat:18},prepTime:'35 min',
+   heroColor:'#ede9fe',heroText:'#7c3aed',
+   tip:'Weigh 40g of raw mixture per meatball before rolling — guarantees identical protein in every container.',
+   prepSteps:[
+     {icon:'⚖️',title:'Weigh meatballs before rolling',desc:'40g raw mixture per meatball. Roll all at once before any go in the oven — this keeps the process efficient.'},
+     {icon:'🔥',title:'Roast at 200°C',desc:'18–20 min until golden. While they cook, prep the salad veg.'},
+     {icon:'🫙',title:'Add tzatziki last',desc:'Add tzatziki to each container separately — don\'t mix it in. It keeps better and the flavour stays fresh.'},
+     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
+   ],
+   ingredients:[{name:'Lean lamb mince (10% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Cucumber',qty:0.5,unit:''},{name:'Baby spinach',qty:40,unit:'g'},{name:'Low-fat tzatziki',qty:50,unit:'g'},{name:'Garlic cloves',qty:2,unit:''},{name:'Dried oregano',qty:1,unit:'tsp'},{name:'Ground cumin',qty:0.5,unit:'tsp'},{name:'Lemon',qty:0.5,unit:''},{name:'Fresh parsley',qty:6,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix lamb with garlic, oregano, cumin, lemon zest, parsley, salt and pepper.','Weigh 40g portions and roll into meatballs.','Roast at 200°C for 18–20 min until golden.','Halve tomatoes, slice cucumber, toss in lemon juice.','Microwave cauliflower rice. Assemble: rice, meatballs, veg, spinach, tzatziki.']},
+  {id:'moroccan-lamb',name:'Moroccan Spiced Lamb & Roasted Veg',emoji:'🏺',cuisine:'North African',
+   macros:{protein:62,calories:410,carbs:12,fat:16},prepTime:'50 min',
+   heroColor:'#fef9c3',heroText:'#a16207',
+   tip:'Coat the lamb in the spice rub the night before — the flavour goes much deeper overnight.',
+   prepSteps:[
+     {icon:'🏺',title:'Brown lamb in batches',desc:'Don\'t crowd the pan — brown in batches so it seals properly. This builds the deep flavour base.'},
+     {icon:'🔥',title:'Braise at 180°C',desc:'Cover tightly and braise for 35–40 min. While it braises, roast veg at 200°C in a separate tray.'},
+     {icon:'⚖️',title:'Portion lamb + sauce together',desc:'Weigh lamb and sauce as one combined total — the sauce carries calories and flavour.'},
+     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer. Freezes exceptionally well.'}
+   ],
+   ingredients:[{name:'Diced lean lamb shoulder',qty:240,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Courgette',qty:100,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Aubergine',qty:0.5,unit:''},{name:'Chopped tomatoes (tinned)',qty:80,unit:'g'},{name:'Low-salt chicken stock',qty:60,unit:'ml'},{name:'Ground cumin',qty:0.75,unit:'tsp'},{name:'Ground coriander',qty:0.75,unit:'tsp'},{name:'Smoked paprika',qty:0.5,unit:'tsp'},{name:'Ground cinnamon',qty:0.25,unit:'tsp'},{name:'Ground ginger',qty:0.25,unit:'tsp'},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh mint',qty:4,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix spices into a rub. Coat all lamb pieces.','Brown lamb in batches in a casserole dish.','Add garlic, tomatoes and stock. Cover and cook at 180°C for 35–40 min.','Roast courgette, pepper and aubergine at 200°C with Frylight for 20 min.','Microwave cauliflower rice. Assemble containers. Scatter fresh mint.']},
+  {id:'lemon-chicken',name:'Lemon Herb Chicken & Asparagus',emoji:'🍋',cuisine:'Mediterranean',
+   macros:{protein:64,calories:350,carbs:8,fat:8},prepTime:'30 min',
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'Pull asparagus out while it still has a bite — it softens more during reheating.',
+   prepSteps:[
+     {icon:'🍋',title:'Marinate if time allows',desc:'Even 30 min in the marinade makes a noticeable difference to flavour. Mix it first while the oven heats.'},
+     {icon:'🔥',title:'Roast veg in final 10 min',desc:'Add the asparagus, beans and tomatoes in the last 10 min of chicken cook time — uses the same oven.'},
+     {icon:'💧',title:'Keep the pan juices',desc:'Pour any juices from the chicken dish equally over each container — they add flavour and keep the chicken moist.'},
+     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
+   ],
+   ingredients:[{name:'Chicken breast',qty:240,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Asparagus spears',qty:120,unit:'g'},{name:'Green beans',qty:80,unit:'g'},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Lemon (zested & juiced)',qty:1,unit:''},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh rosemary',qty:1,unit:'sprig'},{name:'Dijon mustard',qty:0.5,unit:'tsp'},{name:'Low-salt chicken stock',qty:20,unit:'ml'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix lemon zest, juice, garlic, mustard and rosemary into a marinade.','Coat chicken and leave 30 min if possible.','Bake in dish with stock at 200°C for 25–28 min. Slice.','Roast asparagus, beans and tomatoes last 10 min.','Microwave cauliflower rice. Assemble. Drizzle pan juices.']},
+  {id:'teriyaki-salmon',name:'Teriyaki Salmon & Stir-Fried Veg',emoji:'🫕',cuisine:'Asian',
+   macros:{protein:60,calories:430,carbs:10,fat:18},prepTime:'25 min',fridgeOnly:true,
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'Make your own teriyaki — soy, a tiny bit of honey, garlic and ginger. Shop-bought versions are loaded with sugar.',
+   prepSteps:[
+     {icon:'🐟',title:'Buy 5 equal-sized fillets',desc:'One fillet per container — no weighing needed if they\'re the same size. Ask your fishmonger or check weight labels.'},
+     {icon:'🫕',title:'Stir-fry veg on high heat',desc:'High heat, 4–5 min only. You want the veg to have colour and a slight bite, not steamed soft.'},
+     {icon:'⚠️',title:'Fridge only',desc:'Salmon doesn\'t freeze well once cooked. All containers go in the fridge. Best eaten within 3–4 days.'},
+     {icon:'♨️',title:'Reheating',desc:'Microwave 2 min on medium power — salmon reheats better on medium than full power.'}
+   ],
+   ingredients:[{name:'Salmon fillet (skinless)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tenderstem broccoli',qty:100,unit:'g'},{name:'Sugar snap peas',qty:80,unit:'g'},{name:'Red pepper',qty:0.5,unit:''},{name:'Low-sodium soy sauce',qty:16,unit:'ml'},{name:'Honey',qty:0.25,unit:'tsp'},{name:'Fresh ginger (grated)',qty:4,unit:'g'},{name:'Garlic cloves',qty:1,unit:''},{name:'Rice vinegar',qty:6,unit:'ml'},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix soy, honey, ginger, garlic and vinegar into a teriyaki glaze.','Brush salmon with glaze. Bake at 200°C for 12–15 min.','Stir-fry broccoli, snap peas and pepper with Frylight for 4–5 min.','Microwave cauliflower rice. Assemble containers.','Drizzle remaining glaze. Sprinkle sesame seeds. All containers to fridge only.']},
+  {id:'mexican-chicken',name:'Mexican Spiced Chicken Bowl',emoji:'🌶️',cuisine:'Mexican',
+   macros:{protein:63,calories:360,carbs:10,fat:8},prepTime:'30 min',
+   heroColor:'#fee2e2',heroText:'#dc2626',
+   tip:'Chipotle paste is the key — it adds deep smoky heat. Find it in any supermarket spice aisle.',
+   prepSteps:[
+     {icon:'🌶️',title:'Marinate before baking',desc:'30 min in the chipotle marinade makes a big difference. Do this while the oven heats.'},
+     {icon:'🍗',title:'Shred before portioning',desc:'Shred all chicken first, then weigh — shredded distributes far more evenly than sliced.'},
+     {icon:'🥛',title:'Add yogurt after reheating',desc:'Keep yogurt separate in a small pot. Add after reheating at work — not before sealing the container.'},
+     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
+   ],
+   ingredients:[{name:'Chicken breast',qty:240,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Red onion',qty:0.5,unit:''},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Baby spinach',qty:30,unit:'g'},{name:'Chipotle paste',qty:1,unit:'tbsp'},{name:'Ground cumin',qty:0.75,unit:'tsp'},{name:'Smoked paprika',qty:0.75,unit:'tsp'},{name:'Garlic cloves',qty:2,unit:''},{name:'Lime',qty:0.5,unit:''},{name:'Low-fat Greek yogurt',qty:30,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix chipotle, cumin, paprika, garlic and lime into a marinade. Coat chicken.','Bake at 200°C for 25–28 min. Shred with two forks.','Roast peppers, onion and tomatoes at 200°C for 20 min.','Microwave cauliflower rice. Assemble containers with spinach.','Add yogurt after reheating — not before sealing.']},
+  {id:'baked-cod',name:'Baked Cod & Roasted Veg',emoji:'🐟',cuisine:'',
+   macros:{protein:60,calories:300,carbs:10,fat:5},prepTime:'25 min',fridgeOnly:true,
+   heroColor:'#e0f2fe',heroText:'#0369a1',
+   tip:'The lowest calorie meal in the rotation. Very mild, easy on the stomach — good for lighter weeks.',
+   prepSteps:[
+     {icon:'🐟',title:'Buy 5 equal-sized fillets',desc:'One fillet per container — like salmon, no weighing needed if fillets are matched in size.'},
+     {icon:'🔥',title:'Two trays, same oven',desc:'Cod and veg roast simultaneously at 200°C. Cod takes less time — pull it at 15–18 min, leave veg for 20–22 min.'},
+     {icon:'⚠️',title:'Fridge only',desc:'Fish doesn\'t freeze well once cooked. All containers to fridge. Best within 3–4 days.'},
+     {icon:'♨️',title:'Reheating',desc:'Microwave 90 seconds on medium power. Cod is delicate — don\'t overheat.'}
+   ],
+   ingredients:[{name:'Cod fillet',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tenderstem broccoli',qty:100,unit:'g'},{name:'Brussels sprouts (halved)',qty:80,unit:'g'},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Lemon (sliced)',qty:0.5,unit:''},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh parsley',qty:6,unit:'g'},{name:'Capers',qty:0.5,unit:'tbsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Place cod on a lined tray. Season with paprika, garlic, salt and pepper. Top with lemon.','Toss broccoli, sprouts and tomatoes on a separate tray with Frylight.','Roast both at 200°C — veg 20–22 min, cod 15–18 min.','Microwave cauliflower rice. Assemble containers.','Scatter capers and parsley. Cool. Reheat: 90 seconds.']}
+];
 
-let activeLunch = 'beef-veg';
-let checkedItems = {};
-let checkedSteps = {};
-let currentView = 'plan';
+const CAT_ORDER=['Protein','Fruit & Veg','Grains & Pulses','Dairy & Eggs','Pantry & Condiments'];
+const CAT_ICONS={'Protein':'🥩','Fruit & Veg':'🥦','Grains & Pulses':'🌾','Dairy & Eggs':'🥛','Pantry & Condiments':'🧴'};
+const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
-function categorise(name) {
-  const n = name.toLowerCase();
-  if (/chicken|beef|lamb|salmon|cod|mince/.test(n)) return 'Protein';
-  if (/oat|cauliflower rice|edamame/.test(n)) return 'Grains & Pulses';
-  if (/yogurt|milk|tzatziki/.test(n)) return 'Dairy & Eggs';
-  if (/broccoli|courgette|tomato|spinach|onion|bean|potato|pepper|salad|berr|ginger|lemon|lime|garlic|spring|asparagus|aubergine|carrot|cucumber|mint|parsley|rosemary|thyme|snap|sprout|tenderstem/.test(n)) return 'Fruit & Veg';
-  return 'Pantry & Condiments';
+// ── STATE ────────────────────────────────────────────────────────────────────
+function loadState(){try{return JSON.parse(localStorage.getItem('plateplan_v4'))||{};}catch(e){return{};}}
+function saveState(){try{localStorage.setItem('plateplan_v4',JSON.stringify(S));}catch(e){}}
+
+let S=loadState();
+if(!S.portions)S.portions=5;
+if(!S.activeLunch)S.activeLunch='beef-veg';
+if(!S.activeBreakfast)S.activeBreakfast='oats';
+if(!S.weekPlan)S.weekPlan={};
+if(!S.shopBf)S.shopBf={};
+if(!S.shopLunch)S.shopLunch={};
+if(!S.steps)S.steps={};
+if(!S.macroLog)S.macroLog={};
+if(!S.settings)S.settings={name:'',proteinTarget:120,calorieTarget:1800};
+
+let currentView='meals';
+let recipeFrom='meals';
+let recipeType='';
+let recipeId='';
+let trackDate=todayStr();
+let shopTab='lunch';
+let expandedDay=null;
+let expandedWeek=null;
+let addMealOpen=false;
+let addMealTab='meals';
+
+// ── ONBOARDING ───────────────────────────────────────────────────────────────
+function initApp(){
+  const hasSetup=S.settings&&S.settings.proteinTarget&&S.settings.calorieTarget&&S.settings.onboarded;
+  if(!hasSetup){
+    document.getElementById('onboarding').style.display='block';
+    document.getElementById('main-app').style.display='none';
+  }else{
+    document.getElementById('onboarding').style.display='none';
+    document.getElementById('main-app').style.display='block';
+    setHeaderDate();
+    renderMeals();
+  }
 }
 
-function getLunch() { return MEALS.lunches.find(l => l.id === activeLunch); }
+function completeOnboarding(){
+  const name=document.getElementById('ob-name').value.trim();
+  const protein=parseInt(document.getElementById('ob-protein').value)||120;
+  const cals=parseInt(document.getElementById('ob-cals').value)||1800;
+  if(!name){alert('Please enter your name.');return;}
+  S.settings={name,proteinTarget:protein,calorieTarget:cals,onboarded:true};
+  saveState();
+  document.getElementById('onboarding').style.display='none';
+  document.getElementById('main-app').style.display='block';
+  setHeaderDate();
+  renderMeals();
+}
 
-function buildShoppingList(lunchId) {
-  const lunch = MEALS.lunches.find(l => l.id === lunchId);
-  const map = {};
-  const bfIngs = [
-    { name: 'Rolled oats', qty: '250g' },
-    { name: 'Fairlife protein milk', qty: '1 litre' },
-    { name: '0% Greek yogurt', qty: '500g' },
-    { name: 'Chia seeds', qty: '50g' },
-    { name: 'Vanilla extract', qty: '1 bottle' },
-    { name: 'Mixed berries', qty: '400g' },
-  ];
-  [...bfIngs, ...lunch.ingredients].forEach(ing => {
-    const key = ing.name.toLowerCase();
-    if (!map[key]) map[key] = { name: ing.name, qty: ing.qty, cat: categorise(ing.name) };
+function setHeaderDate(){
+  const now=new Date();
+  const name=S.settings.name?S.settings.name+' · ':'';
+  document.getElementById('header-date').innerHTML=
+    now.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})+'<br>'+
+    '<span style="color:#16a34a;font-weight:800">'+name+'</span>'+now.getFullYear();
+}
+
+// ── UTILS ────────────────────────────────────────────────────────────────────
+function todayStr(){return new Date().toISOString().split('T')[0];}
+function offsetDate(str,d){const dt=new Date(str+'T12:00:00');dt.setDate(dt.getDate()+d);return dt.toISOString().split('T')[0];}
+function fmtDateShort(str){return new Date(str+'T12:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});}
+function fmtQty(q,u){const v=Math.round(q*10)/10;return v+(u?' '+u:'');}
+function getLunch(){return LUNCHES.find(l=>l.id===S.activeLunch);}
+function getBreakfast(){return BREAKFASTS.find(b=>b.id===S.activeBreakfast);}
+function categorise(name){
+  const n=name.toLowerCase();
+  if(/chicken|beef|lamb|salmon|cod|mince/.test(n))return'Protein';
+  if(/\begg/.test(n)&&!/cauliflower|eggplant/.test(n))return'Protein';
+  if(/smoked salmon/.test(n))return'Protein';
+  if(/oat|cauliflower rice|edamame|protein powder/.test(n))return'Grains & Pulses';
+  if(/yogurt|milk|tzatziki|cottage cheese|cheddar|feta/.test(n))return'Dairy & Eggs';
+  if(/broccoli|courgette|tomato|spinach|onion|bean|potato|pepper|berr|ginger|lemon|lime|garlic|spring|asparagus|aubergine|carrot|cucumber|mint|parsley|rosemary|thyme|snap|sprout|tenderstem|banana|chive/.test(n))return'Fruit & Veg';
+  return'Pantry & Condiments';
+}
+function buildList(ingredients,mult){
+  const map={};
+  ingredients.forEach(ing=>{
+    const key=ing.name.toLowerCase();
+    const qty=typeof ing.qty==='number'?ing.qty*mult:ing.qty;
+    if(!map[key])map[key]={name:ing.name,qty:0,unit:ing.unit,cat:categorise(ing.name)};
+    if(typeof qty==='number')map[key].qty+=qty;
+    else map[key].qty=qty;
   });
   return Object.values(map);
 }
 
-function renderPlan() {
-  const lunch = getLunch();
-  let html = '';
-  html += `<div class="section-label" style="margin-top:0">Breakfast · Every day</div>`;
-  html += `<div class="card" style="cursor:pointer;margin-bottom:24px" onclick="openRecipe('breakfast')">
-    <div class="meal-row">
-      <div class="meal-icon active-icon">🥣</div>
-      <div class="meal-info"><div class="meal-name">High-Protein Overnight Oats</div><div class="meal-meta">5 jars · 10 min Sunday</div></div>
-      <div class="meal-macros"><div class="macro-protein">38g</div><div class="macro-label">protein</div><div class="macro-cal">350 kcal</div></div>
+// ── MEALS VIEW ───────────────────────────────────────────────────────────────
+function renderMeals(){
+  const lunch=getLunch();const bf=getBreakfast();
+  let h=`<div class="portion-bar">
+    <div><div class="portion-label">Portions</div><div class="portion-sub">Scales all ingredients</div></div>
+    <div class="portion-controls">
+      <button class="portion-btn" onclick="chgPortion(-1)">−</button>
+      <div class="portion-num">${S.portions}</div>
+      <button class="portion-btn" onclick="chgPortion(1)">+</button>
     </div>
-  </div>`;
-  html += `<div class="section-label">This week's lunch</div>`;
-  html += `<p style="font-size:12px;color:#64748b;margin-bottom:12px">Pick one — cook a big batch, divide into 5.</p>`;
-  MEALS.lunches.forEach(meal => {
-    const active = meal.id === activeLunch;
-    const cTag = meal.cuisine ? `<span class="cuisine-tag" style="background:${CUISINE_COLORS[meal.cuisine].bg};color:${CUISINE_COLORS[meal.cuisine].color}">${meal.cuisine}</span>` : '';
-    html += `<div class="card ${active ? 'selected' : ''}">
+  </div>
+  <div class="section-label">Breakfast</div>`;
+
+  BREAKFASTS.forEach(b=>{
+    const active=b.id===S.activeBreakfast;
+    const pill=b.type==='batch'?`<span class="pill pill-batch">Batch Sunday</span>`:`<span class="pill pill-fresh">Fresh daily</span>`;
+    h+=`<div class="meal-card ${active?'selected':''}">
       <div class="meal-row">
-        <div class="meal-icon ${active ? 'active-icon' : ''}">${meal.emoji}</div>
-        <div class="meal-info">${cTag}<div class="meal-name">${meal.name}</div><div class="meal-meta">${meal.prepTime} · batch of 5</div></div>
-        <div class="meal-macros"><div class="macro-protein">${meal.macros.protein}g</div><div class="macro-label">protein</div><div class="macro-cal">${meal.macros.calories} kcal</div></div>
+        <div class="meal-icon ${active?'sel':''}">${b.emoji}</div>
+        <div class="meal-info">${pill}<div class="meal-name">${b.name}</div><div class="meal-meta">${b.prepTime} · ${b.macros.protein}g protein</div></div>
+        <div class="meal-macros"><div class="m-prot">${b.macros.protein}g</div><div class="m-lbl">protein</div><div class="m-cal">${b.macros.calories} kcal</div></div>
       </div>
-      <div class="btn-row">
-        <button class="btn btn-select ${active ? 'chosen' : ''}" onclick="selectLunch('${meal.id}')">${active ? '✓ Selected' : 'Select'}</button>
-        <button class="btn btn-view ${active ? 'chosen' : ''}" onclick="openRecipe('${meal.id}')">View Recipe</button>
+      <div class="meal-btns">
+        <button class="btn-sel ${active?'on':''}" onclick="selBf('${b.id}')">${active?'✓ Selected':'Select'}</button>
+        <button class="btn-rec ${active?'on':''}" onclick="openRecipe('breakfast','${b.id}')">Recipe</button>
       </div>
     </div>`;
   });
-  const tp = 38 + lunch.macros.protein;
-  const tc = 350 + lunch.macros.calories;
-  const tcarb = 42 + lunch.macros.carbs;
-  const tf = 6 + lunch.macros.fat;
-  const fishOnly = lunch.id === 'teriyaki-salmon' || lunch.id === 'baked-cod';
-  html += `<div class="card" style="margin-top:4px">
-    <div class="section-label" style="margin-bottom:12px">Daily totals · Breakfast + Lunch</div>
-    <div class="totals-row"><span class="totals-key">Protein</span><span class="totals-val green">${tp}g</span></div>
-    <div class="totals-row"><span class="totals-key">Calories</span><span class="totals-val">${tc} kcal</span></div>
-    <div class="totals-row"><span class="totals-key">Carbs</span><span class="totals-val" style="color:#64748b">${tcarb}g</span></div>
-    <div class="totals-row" style="border:none"><span class="totals-key">Fat</span><span class="totals-val" style="color:#64748b">${tf}g</span></div>
-    <div class="freeze-note">❄ ${fishOnly ? '⚠ This meal: fridge only — all 5 containers' : 'Containers 1–3 → fridge · Containers 4–5 → freezer<br>Move Thu out Wed night · Move Fri out Thu night'}</div>
+
+  h+=`<div class="section-label" style="margin-top:12px">Lunch</div>`;
+  LUNCHES.forEach(m=>{
+    const active=m.id===S.activeLunch;
+    const cTag=m.cuisine?`<span class="cuisine-tag" style="background:${CC[m.cuisine].bg};color:${CC[m.cuisine].c}">${m.cuisine}</span>`:'';
+    h+=`<div class="meal-card ${active?'selected':''}">
+      <div class="meal-row">
+        <div class="meal-icon ${active?'sel':''}">${m.emoji}</div>
+        <div class="meal-info">${cTag}<div class="meal-name">${m.name}</div><div class="meal-meta">${m.prepTime} · ${S.portions} portion${S.portions>1?'s':''}</div></div>
+        <div class="meal-macros"><div class="m-prot">${m.macros.protein}g</div><div class="m-lbl">protein</div><div class="m-cal">${m.macros.calories} kcal</div></div>
+      </div>
+      <div class="meal-btns">
+        <button class="btn-sel ${active?'on':''}" onclick="selLunch('${m.id}')">${active?'✓ Selected':'Select'}</button>
+        <button class="btn-rec ${active?'on':''}" onclick="openRecipe('lunch','${m.id}')">Recipe</button>
+      </div>
+    </div>`;
+  });
+
+  const tp=bf.macros.protein+lunch.macros.protein;
+  const tc=bf.macros.calories+lunch.macros.calories;
+  h+=`<div class="card" style="margin-top:8px">
+    <div class="section-label" style="margin-bottom:8px">Daily totals · Breakfast + Lunch</div>
+    ${[['Protein',tp+'g','#16a34a'],['Calories',tc+' kcal','#0f172a'],['Carbs',(bf.macros.carbs+lunch.macros.carbs)+'g','#64748b'],['Fat',(bf.macros.fat+lunch.macros.fat)+'g','#64748b']].map(([k,v,c])=>
+    `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f8fafc"><span style="font-size:12px;color:#64748b">${k}</span><span style="font-size:12px;font-weight:700;color:${c}">${v}</span></div>`).join('')}
   </div>`;
-  document.getElementById('view-plan').innerHTML = html;
+  document.getElementById('view-meals').innerHTML=h;
 }
 
-function selectLunch(id) {
-  activeLunch = id;
-  renderPlan();
-  if (currentView === 'shopping') renderShopping();
-}
+function chgPortion(d){S.portions=Math.max(1,Math.min(7,S.portions+d));saveState();renderMeals();renderShop();}
+function selBf(id){S.activeBreakfast=id;saveState();renderMeals();}
+function selLunch(id){S.activeLunch=id;saveState();renderMeals();renderShop();}
 
-function openRecipe(mealId) {
-  const meal = mealId === 'breakfast' ? MEALS.breakfast : MEALS.lunches.find(l => l.id === mealId);
-  const cTag = meal.cuisine ? `<span class="cuisine-tag" style="background:${CUISINE_COLORS[meal.cuisine].bg};color:${CUISINE_COLORS[meal.cuisine].color};margin-bottom:6px;display:inline-block">${meal.cuisine}</span>` : '';
-  let html = `<button class="recipe-back" onclick="closeRecipe()">← Back</button>`;
-  html += `<div class="recipe-hero" style="background:${meal.heroColor}"><div class="recipe-hero-emoji">${meal.emoji}</div><div>${cTag}<h2>${meal.name}</h2><p style="color:${meal.heroTextColor}">${meal.isSingle ? '5 jars · ' : 'Batch of 5 · '}${meal.prepTime}</p></div></div>`;
-  html += `<div class="macro-pills">${[{l:'Protein',v:meal.macros.protein+'g',h:true},{l:'Calories',v:meal.macros.calories},{l:'Carbs',v:meal.macros.carbs+'g'},{l:'Fat',v:meal.macros.fat+'g'}].map(m=>`<div class="macro-pill ${m.h?'hl':'pl'}"><div class="pval">${m.v}</div><div class="plbl">${m.l}</div></div>`).join('')}</div>`;
-  html += `<div class="alert-yellow"><strong>💡 </strong>${meal.tip}</div>`;
-  if (meal.storage) html += `<div class="alert-blue"><strong>❄ Storage: </strong>${meal.storage}</div>`;
+// ── RECIPE VIEW ──────────────────────────────────────────────────────────────
+function openRecipe(type,id){
+  recipeFrom=currentView;recipeType=type;recipeId=id;
+  const meal=type==='breakfast'?BREAKFASTS.find(b=>b.id===id):LUNCHES.find(l=>l.id===id);
+  const mult=S.portions;
+  const cTag=meal.cuisine?`<span class="cuisine-tag" style="background:${CC[meal.cuisine].bg};color:${CC[meal.cuisine].c};margin-bottom:5px;display:inline-block">${meal.cuisine}</span>`:'';
+  const typePill=type==='breakfast'?(meal.type==='batch'?`<span class="pill pill-batch" style="margin-bottom:5px;display:inline-block">Batch Sunday</span>`:`<span class="pill pill-fresh" style="margin-bottom:5px;display:inline-block">Fresh daily</span>`):'';
+  const servingLabel=type==='breakfast'&&meal.type==='fresh'?`${mult} serving${mult>1?'s':''}`:`${mult} portion${mult>1?'s':''}`;
 
-  // Portioning section
-  html += `<div class="alert-green">
-    <h4>⚖️ How to portion (per container)</h4>
-    ${meal.portioning.map(p => `<div class="portion-row"><span class="portion-key">${p.item}</span><span class="portion-val">${p.perContainer}</span></div>`).join('')}
-    <p style="font-size:11px;color:#16a34a;margin-top:8px;line-height:1.5">${meal.portionNote}</p>
+  let h=`<button class="back-btn" onclick="closeRecipe()">← Back</button>`;
+  h+=`<div class="recipe-hero" style="background:${meal.heroColor}">
+    <div class="r-emoji">${meal.emoji}</div>
+    <div>${cTag}${typePill}<div class="r-name">${meal.name}</div>
+    <div class="r-meta" style="color:${meal.heroText}">${servingLabel} · ${meal.prepTime}</div></div>
   </div>`;
+  h+=`<div class="mpills">${[{l:'Protein',v:meal.macros.protein+'g',hl:true},{l:'Calories',v:meal.macros.calories},{l:'Carbs',v:meal.macros.carbs+'g'},{l:'Fat',v:meal.macros.fat+'g'}].map(m=>`<div class="mpill ${m.hl?'hl':'pl'}"><div class="pv">${m.v}</div><div class="plb">${m.l}</div></div>`).join('')}</div>`;
+  h+=`<div class="alert-y"><strong>💡 </strong>${meal.tip}</div>`;
+  if(meal.fridgeOnly)h+=`<div class="alert-b"><strong>❄ Fridge only</strong> — don't freeze this meal. Best within 3–4 days.</div>`;
 
-  html += `<div class="section-label">${meal.isSingle ? 'Ingredients · 5 servings' : 'Ingredients · Full batch (5 portions)'}</div>`;
-  html += `<div class="ing-list">${meal.ingredients.map(ing=>`<div class="ing-row"><span class="ing-name">${ing.name}</span><span class="ing-qty">${ing.qty}</span></div>`).join('')}</div>`;
-  html += `<div class="section-label">Method</div>`;
-  html += `<div class="steps-list">${meal.steps.map((step,i)=>{
-    const key=meal.id+'-'+i; const done=checkedSteps[key];
-    return `<div class="step ${done?'done':''}" onclick="toggleStep('${meal.id}',${i})"><div class="step-num">${done?'✓':i+1}</div><div class="step-text">${step}</div></div>`;
+  h+=`<div class="section-label">Ingredients · ${servingLabel}</div>`;
+  h+=`<div class="ing-list">${meal.ingredients.map(ing=>{
+    let q;
+    if(typeof ing.qty==='number'){
+      if(ing.unit===''&&Number.isInteger(ing.qty)){q=Math.ceil(ing.qty*mult)+'';}
+      else{q=fmtQty(ing.qty*mult,ing.unit);}
+    }else{q=ing.qty;}
+    return `<div class="ing-row"><span class="ing-n">${ing.name}</span><span class="ing-q">${q}</span></div>`;
   }).join('')}</div>`;
 
-  document.getElementById('view-recipe').innerHTML = html;
-  showView('recipe');
+  h+=`<div class="section-label">Method</div>`;
+  h+=`<div class="steps-list">${meal.steps.map((step,i)=>{
+    const key=`${meal.id}-${i}`;const done=S.steps[key];
+    return `<div class="step ${done?'done':''}" onclick="toggleStep('${meal.id}',${i})">
+      <div class="step-num">${done?'✓':i+1}</div><div class="step-text">${step}</div></div>`;
+  }).join('')}</div>`;
+
+  // Prep guide section
+  if(meal.prepSteps&&meal.prepSteps.length>0){
+    h+=`<div class="prep-section">
+      <div class="prep-section-title">⏱ Prep Guide</div>
+      ${meal.prepSteps.map(ps=>`
+        <div class="prep-step-row">
+          <div class="prep-step-icon">${ps.icon}</div>
+          <div class="prep-step-content">
+            <div class="prep-step-title">${ps.title}</div>
+            <div class="prep-step-desc">${ps.desc}</div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+  }
+
+  document.getElementById('view-recipe').innerHTML=h;
+  showView('recipe',true);
 }
 
-function toggleStep(mealId, i) {
-  checkedSteps[mealId+'-'+i] = !checkedSteps[mealId+'-'+i];
-  const scrollY = window.scrollY;
-  openRecipe(mealId);
-  window.scrollTo(0, scrollY);
+function toggleStep(mealId,i){
+  const key=`${mealId}-${i}`;S.steps[key]=!S.steps[key];saveState();
+  const scroll=window.scrollY;openRecipe(recipeType,recipeId);window.scrollTo(0,scroll);
 }
+function closeRecipe(){showView(recipeFrom);}
 
-function closeRecipe() { showView('plan'); }
+// ── PLAN VIEW (7 days) ───────────────────────────────────────────────────────
+function renderPlan(){
+  const todayName=new Date().toLocaleDateString('en-GB',{weekday:'long'});
+  const weekendDays=['Saturday','Sunday'];
+  let h=`<div style="font-size:17px;font-weight:800;color:#0f172a;margin-bottom:3px">Week Plan</div>
+  <p style="font-size:12px;color:#64748b;margin-bottom:14px">Assign meals to each day. Tap a selected meal again to deselect.</p>`;
 
-function renderShopping() {
-  const lunch = getLunch();
-  const items = buildShoppingList(activeLunch);
-  const total = items.length;
-  const checked = Object.values(checkedItems).filter(Boolean).length;
-  const pct = total > 0 ? (checked/total*100) : 0;
-  document.getElementById('tab-shopping').textContent = checked > 0 ? `Shop (${checked}/${total})` : 'Shopping';
-  const grouped = {};
-  items.forEach(item => {
-    if (!grouped[item.cat]) grouped[item.cat] = [];
-    grouped[item.cat].push(item);
+  DAYS.forEach(day=>{
+    const plan=S.weekPlan[day]||{};
+    const bfMeal=plan.breakfast?BREAKFASTS.find(b=>b.id===plan.breakfast):null;
+    const lMeal=plan.lunch?LUNCHES.find(l=>l.id===plan.lunch):null;
+    const isOpen=expandedDay===day;
+    const isTod=todayName===day;
+    const isWeekend=weekendDays.includes(day);
+    const preview=[];
+    if(bfMeal)preview.push(bfMeal.emoji+' '+bfMeal.name);
+    if(lMeal)preview.push(lMeal.emoji+' '+lMeal.name);
+    const hasAny=preview.length>0;
+
+    h+=`<div class="day-card">
+      <div class="day-header" onclick="toggleDay('${day}')">
+        <div>
+          <div style="display:flex;align-items:center">
+            <span class="day-name">${day}</span>
+            ${isTod?'<span class="day-today-badge">Today</span>':''}
+            ${isWeekend&&!isTod?'<span class="day-weekend-badge">Weekend</span>':''}
+          </div>
+          <div class="day-preview ${hasAny?'set':''}">${hasAny?preview.join(' · '):'Tap to assign meals'}</div>
+        </div>
+        <div style="color:#94a3b8;font-size:14px">${isOpen?'▲':'▼'}</div>
+      </div>
+      <div class="day-body ${isOpen?'open':''}">
+        <div class="day-section-lbl">Breakfast</div>
+        ${BREAKFASTS.map(m=>{
+          const chosen=plan.breakfast===m.id;
+          return `<div class="day-opt ${chosen?'chosen':''}" onclick="toggleDayMeal('${day}','breakfast','${m.id}')">
+            <div class="day-opt-emoji">${m.emoji}</div>
+            <div class="day-opt-name">${m.name}</div>
+            <div class="day-opt-check">${chosen?'✓':''}</div>
+          </div>`;
+        }).join('')}
+        <div class="day-section-lbl" style="margin-top:8px">Lunch / Dinner</div>
+        ${LUNCHES.map(m=>{
+          const chosen=plan.lunch===m.id;
+          return `<div class="day-opt ${chosen?'chosen':''}" onclick="toggleDayMeal('${day}','lunch','${m.id}')">
+            <div class="day-opt-emoji">${m.emoji}</div>
+            <div class="day-opt-name">${m.name}</div>
+            <div class="day-opt-check">${chosen?'✓':''}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
   });
-  const emojiGrid = MEALS.lunches.map(m=>`<button class="lunch-emoji-btn ${m.id===activeLunch?'active':''}" onclick="switchShoppingLunch('${m.id}')" title="${m.name}">${m.emoji}</button>`).join('');
-  let html = `<div class="shop-header"><div><div class="shop-title">Shopping List</div><div class="shop-sub">Breakfast + ${lunch.name}</div></div><button class="reset-btn" onclick="resetShopping()">Reset</button></div>
-  <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-  <div class="lunch-switcher"><div class="lunch-switcher-label">Lunch this week</div><div class="lunch-emoji-grid">${emojiGrid}</div></div>`;
-  CAT_ORDER.filter(c=>grouped[c]).forEach(cat => {
-    html += `<div class="cat-label">${CAT_ICONS[cat]} ${cat}</div><div class="shop-list">`;
-    grouped[cat].forEach(item => {
-      const key = item.name.toLowerCase(); const done = checkedItems[key];
-      html += `<div class="shop-row ${done?'checked':''}" onclick="toggleCheck('${key}')"><div class="shop-row-left"><div class="checkbox ${done?'checked':''}">${done?'✓':''}</div><span class="shop-item-name">${item.name}</span></div><span class="shop-item-qty">${item.qty}</span></div>`;
+  document.getElementById('view-plan').innerHTML=h;
+}
+
+function toggleDay(day){expandedDay=expandedDay===day?null:day;renderPlan();}
+function toggleDayMeal(day,type,id){
+  if(!S.weekPlan[day])S.weekPlan[day]={};
+  if(S.weekPlan[day][type]===id)delete S.weekPlan[day][type];
+  else S.weekPlan[day][type]=id;
+  saveState();renderPlan();
+}
+
+// ── SHOP VIEW ────────────────────────────────────────────────────────────────
+function renderShop(){
+  const lunch=getLunch();const bf=getBreakfast();
+  const lunchItems=buildList(lunch.ingredients,S.portions);
+  const bfItems=buildList(bf.ingredients,S.portions);
+  const items=shopTab==='lunch'?lunchItems:bfItems;
+  const checked=shopTab==='lunch'?S.shopLunch:S.shopBf;
+  const total=items.length;
+  const doneCount=Object.values(checked).filter(Boolean).length;
+  const pct=total>0?(doneCount/total*100):0;
+  const grouped={};
+  items.forEach(item=>{const cat=categorise(item.name);if(!grouped[cat])grouped[cat]=[];grouped[cat].push(item);});
+
+  let h=`<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+    <div><div style="font-size:17px;font-weight:800;color:#0f172a">Shopping List</div>
+    <div style="font-size:11px;color:#64748b;margin-top:2px">${shopTab==='lunch'?lunch.name:bf.name} · ${S.portions} portion${S.portions>1?'s':''}</div></div>
+    ${doneCount>0?`<button class="ghost-btn" onclick="resetShop()">Reset</button>`:''}
+  </div>
+  <div class="prog-bar" style="margin-top:10px"><div class="prog-fill" style="width:${pct}%"></div></div>
+  <div class="shop-toggle">
+    <button class="shop-tab-btn ${shopTab==='breakfast'?'active':''}" onclick="setShopTab('breakfast')">🥣 Breakfast</button>
+    <button class="shop-tab-btn ${shopTab==='lunch'?'active':''}" onclick="setShopTab('lunch')">🍽 Lunch</button>
+  </div>`;
+
+  if(shopTab==='breakfast'&&bf.type==='fresh'){
+    h+=`<div class="alert-y">This breakfast is made fresh each morning. Quantities shown are per serving × ${S.portions}.</div>`;
+  }
+
+  CAT_ORDER.filter(c=>grouped[c]).forEach(cat=>{
+    h+=`<div class="cat-lbl">${CAT_ICONS[cat]} ${cat}</div><div class="shop-list">`;
+    grouped[cat].forEach(item=>{
+      const key=item.name.toLowerCase();const done=checked[key];
+      h+=`<div class="shop-row ${done?'chk':''}" onclick="toggleShop('${key}')">
+        <div class="shop-left"><div class="chkbox ${done?'on':''}">${done?'✓':''}</div>
+        <span class="shop-name">${item.name}</span></div>
+        <span class="shop-qty">${typeof item.qty==='number'?fmtQty(item.qty,item.unit):item.qty}</span>
+      </div>`;
     });
-    html += `</div>`;
+    h+=`</div>`;
   });
-  document.getElementById('view-shopping').innerHTML = html;
+  document.getElementById('view-shop').innerHTML=h;
 }
 
-function switchShoppingLunch(id) { activeLunch = id; checkedItems = {}; renderShopping(); renderPlan(); }
-function toggleCheck(key) { checkedItems[key] = !checkedItems[key]; renderShopping(); }
-function resetShopping() { checkedItems = {}; renderShopping(); }
+function setShopTab(t){shopTab=t;renderShop();}
+function toggleShop(key){
+  if(shopTab==='lunch')S.shopLunch[key]=!S.shopLunch[key];
+  else S.shopBf[key]=!S.shopBf[key];
+  saveState();renderShop();
+}
+function resetShop(){
+  if(shopTab==='lunch')S.shopLunch={};else S.shopBf={};
+  saveState();renderShop();
+}
 
-function showView(name) {
-  currentView = name;
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+// ── DAILY VIEW ───────────────────────────────────────────────────────────────
+function renderDaily(){
+  const log=S.macroLog[trackDate]||{};
+  let totalP=0,totalC=0;
+  if(log.entries)log.entries.forEach(e=>{totalP+=(e.protein||0);totalC+=(e.calories||0);});
+
+  const todayBool=trackDate===todayStr();
+  const pt=S.settings.proteinTarget||120;
+  const ct=S.settings.calorieTarget||1800;
+  const goalMet=totalP>=pt;
+  const pctP=Math.min(100,Math.round((totalP/pt)*100));
+  const pctC=Math.min(100,Math.round((totalC/ct)*100));
+
+  let h=`<div style="font-size:17px;font-weight:800;color:#0f172a;margin-bottom:12px">Daily Log</div>
+  <div class="date-nav">
+    <button class="date-nav-btn" onclick="chgTrackDate(-1)">←</button>
+    <div class="date-lbl">${todayBool?'Today — '+new Date().toLocaleDateString('en-GB',{weekday:'long'}):fmtDateShort(trackDate)}</div>
+    <button class="date-nav-btn" onclick="chgTrackDate(1)" ${todayBool?'disabled':''}>→</button>
+  </div>`;
+
+  // Summary boxes
+  h+=`<div class="macro-grid">
+    <div class="macro-box big">
+      <div class="macro-box-val">${totalP}g <span style="font-size:14px;font-weight:600;opacity:0.7">/ ${pt}g</span></div>
+      <div class="macro-box-lbl">${goalMet?'✓ Protein goal met!':'Protein · '+Math.max(0,pt-totalP)+'g to go'}</div>
+    </div>
+    <div class="macro-box">
+      <div class="macro-box-val" style="color:#0f172a;font-size:18px">${totalC}</div>
+      <div class="macro-box-lbl" style="color:#64748b">/ ${ct} kcal</div>
+    </div>
+    <div class="macro-box">
+      <div class="macro-box-val" style="font-size:15px;color:${pctP>=100?'#16a34a':pctP>=60?'#f59e0b':'#ef4444'}">${pctP}%</div>
+      <div class="macro-box-lbl" style="color:#64748b">Protein target</div>
+    </div>
+  </div>`;
+
+  // Progress bars
+  h+=`<div style="margin-bottom:14px">
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:4px"><span>Protein</span><span>${totalP}g / ${pt}g</span></div>
+    <div class="prog-bar" style="margin-bottom:8px"><div class="prog-fill" style="width:${pctP}%;background:${pctP>=100?'#16a34a':pctP>=60?'#f59e0b':'#ef4444'}"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:4px"><span>Calories</span><span>${totalC} / ${ct}</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:${pctC}%;background:${pctC>=100?'#ef4444':pctC>=80?'#f59e0b':'#16a34a'}"></div></div>
+  </div>`;
+
+  // Logged entries
+  if(log.entries&&log.entries.length>0){
+    h+=`<div class="section-label">Logged</div>`;
+    log.entries.forEach((e,i)=>{
+      h+=`<div class="log-entry">
+        <div class="log-entry-info">
+          <div class="log-entry-name">${e.emoji||'🍴'} ${e.name}</div>
+          <div class="log-entry-macros">${e.protein||0}g protein · ${e.calories||0} kcal</div>
+        </div>
+        <button class="remove-btn" onclick="removeEntry(${i})">×</button>
+      </div>`;
+    });
+  }else{
+    h+=`<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nothing logged yet.<br>Add a meal below to get started.</div></div>`;
+  }
+
+  // Add meal panel
+  h+=`<div class="add-meal-panel">
+    <div class="add-meal-header" onclick="toggleAddMeal()">
+      <h4>+ Add meal or snack</h4>
+      <span style="color:#94a3b8;font-size:14px">${addMealOpen?'▲':'▼'}</span>
+    </div>`;
+  if(addMealOpen){
+    h+=`<div class="add-meal-body">
+      <div class="add-tabs">
+        <button class="add-tab ${addMealTab==='meals'?'active':''}" onclick="setAddTab('meals')">My Meals</button>
+        <button class="add-tab ${addMealTab==='manual'?'active':''}" onclick="setAddTab('manual')">Manual Entry</button>
+      </div>`;
+    if(addMealTab==='meals'){
+      h+=`<div class="meal-picker">
+        <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;padding:2px 2px 6px">Breakfasts</div>`;
+      BREAKFASTS.forEach(m=>{
+        h+=`<div class="picker-opt" onclick="addMealEntry('${m.id}','breakfast')">
+          <div class="picker-opt-emoji">${m.emoji}</div>
+          <div class="picker-opt-info"><div class="picker-opt-name">${m.name}</div><div class="picker-opt-macros">${m.macros.protein}g protein · ${m.macros.calories} kcal</div></div>
+        </div>`;
+      });
+      h+=`<div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;padding:8px 2px 6px">Lunches & Dinners</div>`;
+      LUNCHES.forEach(m=>{
+        h+=`<div class="picker-opt" onclick="addMealEntry('${m.id}','lunch')">
+          <div class="picker-opt-emoji">${m.emoji}</div>
+          <div class="picker-opt-info"><div class="picker-opt-name">${m.name}</div><div class="picker-opt-macros">${m.macros.protein}g protein · ${m.macros.calories} kcal</div></div>
+        </div>`;
+      });
+      h+=`</div>`;
+    }else{
+      h+=`<div class="manual-fields">
+        <div class="field-grp full"><label>Meal name</label><input type="text" id="m-name" placeholder="e.g. Dinner, Protein shake, Snack"></div>
+        <div class="field-grp"><label>Protein (g)</label><input type="number" id="m-protein" placeholder="0" min="0"></div>
+        <div class="field-grp"><label>Calories</label><input type="number" id="m-cals" placeholder="0" min="0"></div>
+      </div>
+      <button class="green-btn" style="width:100%" onclick="addManualEntry()">Add</button>`;
+    }
+    h+=`</div>`;
+  }
+  h+=`</div>`;
+  document.getElementById('view-daily').innerHTML=h;
+}
+
+function chgTrackDate(d){trackDate=offsetDate(trackDate,d);if(trackDate>todayStr())trackDate=todayStr();renderDaily();}
+function toggleAddMeal(){addMealOpen=!addMealOpen;renderDaily();}
+function setAddTab(t){addMealTab=t;renderDaily();}
+function addMealEntry(id,type){
+  const meal=type==='breakfast'?BREAKFASTS.find(b=>b.id===id):LUNCHES.find(l=>l.id===id);
+  if(!meal)return;
+  if(!S.macroLog[trackDate])S.macroLog[trackDate]={entries:[]};
+  if(!S.macroLog[trackDate].entries)S.macroLog[trackDate].entries=[];
+  S.macroLog[trackDate].entries.push({name:meal.name,emoji:meal.emoji,protein:meal.macros.protein,calories:meal.macros.calories});
+  saveState();addMealOpen=false;renderDaily();
+}
+function addManualEntry(){
+  const name=document.getElementById('m-name').value.trim();
+  const protein=parseFloat(document.getElementById('m-protein').value)||0;
+  const calories=parseFloat(document.getElementById('m-cals').value)||0;
+  if(!name)return;
+  if(!S.macroLog[trackDate])S.macroLog[trackDate]={entries:[]};
+  if(!S.macroLog[trackDate].entries)S.macroLog[trackDate].entries=[];
+  S.macroLog[trackDate].entries.push({name,emoji:'🍴',protein,calories});
+  saveState();addMealOpen=false;renderDaily();
+}
+function removeEntry(idx){
+  S.macroLog[trackDate].entries.splice(idx,1);
+  saveState();renderDaily();
+}
+
+// ── PROGRESS VIEW ────────────────────────────────────────────────────────────
+function renderProgress(){
+  const pt=S.settings.proteinTarget||120;
+  const ct=S.settings.calorieTarget||1800;
+  const logDates=Object.keys(S.macroLog).filter(d=>S.macroLog[d]&&S.macroLog[d].entries&&S.macroLog[d].entries.length>0).sort((a,b)=>b.localeCompare(a));
+
+  if(logDates.length===0){
+    document.getElementById('view-progress').innerHTML=`
+      <div style="font-size:17px;font-weight:800;color:#0f172a;margin-bottom:3px">Progress</div>
+      <div class="empty" style="margin-top:40px"><div class="empty-icon">📈</div><div class="empty-text">No data yet.<br>Start logging in Daily to see your progress here.</div></div>`;
+    return;
+  }
+
+  function getWeekStart(str){
+    const d=new Date(str+'T12:00:00');
+    const day=d.getDay();
+    const diff=d.getDate()-(day===0?6:day-1);
+    const mon=new Date(d);mon.setDate(diff);
+    return mon.toISOString().split('T')[0];
+  }
+
+  const weeks={};
+  logDates.forEach(date=>{
+    const ws=getWeekStart(date);
+    if(!weeks[ws])weeks[ws]=[];
+    weeks[ws].push(date);
+  });
+
+  let h=`<div style="font-size:17px;font-weight:800;color:#0f172a;margin-bottom:3px">Progress</div>
+  <p style="font-size:12px;color:#64748b;margin-bottom:14px">Protein target: <strong>${pt}g</strong> · Calorie target: <strong>${ct} kcal</strong></p>`;
+
+  Object.keys(weeks).sort((a,b)=>b.localeCompare(a)).forEach(ws=>{
+    const dates=weeks[ws];
+    const isOpen=expandedWeek===ws;
+    let goalDays=0;
+    const dayData=[];
+
+    dates.forEach(date=>{
+      const log=S.macroLog[date];
+      if(!log||!log.entries)return;
+      let p=0,c=0;
+      log.entries.forEach(e=>{p+=(e.protein||0);c+=(e.calories||0);});
+      if(p>=pt)goalDays++;
+      dayData.push({date,p,c,entries:log.entries});
+    });
+
+    const we=offsetDate(ws,6);
+    const wsLabel=fmtDateShort(ws)+' – '+fmtDateShort(we);
+
+    h+=`<div class="prog-week">
+      <div class="prog-week-header" onclick="toggleWeek('${ws}')">
+        <div>
+          <div class="prog-week-title">${wsLabel}</div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:2px">${dates.length} day${dates.length>1?'s':''} logged · <span style="color:${goalDays===dates.length?'#16a34a':'#f59e0b'}">${goalDays}/${dates.length} protein goal days</span></div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:11px;color:#94a3b8">${isOpen?'▲':'▼'}</div>
+        </div>
+      </div>
+      <div class="prog-week-body ${isOpen?'open':''}">`;
+
+    dayData.sort((a,b)=>b.date.localeCompare(a.date)).forEach(day=>{
+      const mealNames=day.entries.map(e=>e.emoji+' '+e.name).join(' · ');
+      const goalMet=day.p>=pt;
+      h+=`<div class="prog-day-row">
+        <div>
+          <div class="prog-day-date">${fmtDateShort(day.date)}${day.date===todayStr()?'<span style="background:#dcfce7;color:#16a34a;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:4px">Today</span>':''}</div>
+          <div class="prog-day-meals">${mealNames}</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div class="prog-day-protein">${day.p}g<span class="goal-badge ${goalMet?'goal-ok':'goal-miss'}">${goalMet?'✓':'✗'}</span></div>
+          <div class="prog-day-cal">${day.c} kcal</div>
+        </div>
+      </div>`;
+    });
+    h+=`</div></div>`;
+  });
+
+  document.getElementById('view-progress').innerHTML=h;
+}
+
+function toggleWeek(ws){expandedWeek=expandedWeek===ws?null:ws;renderProgress();}
+
+// ── SETTINGS VIEW ────────────────────────────────────────────────────────────
+function renderSettings(){
+  const s=S.settings;
+  let h=`<div style="font-size:17px;font-weight:800;color:#0f172a;margin-bottom:14px">Settings</div>
+  <div class="settings-section">
+    <h3>Your profile</h3>
+    <div class="settings-field">
+      <label>Your name</label>
+      <input type="text" id="s-name" value="${s.name||''}" placeholder="Your name">
+    </div>
+  </div>
+  <div class="settings-section">
+    <h3>Daily nutrition targets</h3>
+    <div class="settings-field">
+      <label>Protein target (g)</label>
+      <input type="number" id="s-protein" value="${s.proteinTarget||120}" min="0" placeholder="120">
+      <div class="hint">Total daily protein goal across all meals</div>
+    </div>
+    <div class="settings-field">
+      <label>Calorie target (kcal)</label>
+      <input type="number" id="s-cals" value="${s.calorieTarget||1800}" min="0" placeholder="1800">
+      <div class="hint">Total daily calorie goal</div>
+    </div>
+  </div>
+  <button class="settings-save-btn" onclick="saveSettings()">Save changes</button>
+  <div class="settings-saved" id="settings-saved">✓ Settings saved</div>
+
+  <div class="settings-section" style="margin-top:24px">
+    <h3>About</h3>
+    <div class="card" style="font-size:12px;color:#64748b;line-height:1.7">
+      <div><strong style="color:#0f172a">Plate Plan</strong> — your personal meal prep companion.</div>
+      <div style="margin-top:6px">Data saves locally on this device. Reload-safe.</div>
+      <div style="margin-top:6px">Each person who opens this app on their own device gets their own separate data and targets.</div>
+    </div>
+  </div>`;
+
+  document.getElementById('view-settings').innerHTML=h;
+}
+
+function saveSettings(){
+  S.settings.name=document.getElementById('s-name').value.trim();
+  S.settings.proteinTarget=parseInt(document.getElementById('s-protein').value)||120;
+  S.settings.calorieTarget=parseInt(document.getElementById('s-cals').value)||1800;
+  saveState();
+  setHeaderDate();
+  const saved=document.getElementById('settings-saved');
+  saved.style.display='block';
+  setTimeout(()=>saved.style.display='none',2000);
+}
+
+// ── NAVIGATION ───────────────────────────────────────────────────────────────
+function showView(name,skipRender){
+  currentView=name;
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('view-'+name).classList.add('active');
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab')[{plan:0,shopping:1,prep:2,recipe:0}[name]??0].classList.add('active');
-  document.getElementById('bottom-hint').textContent = {plan:'Tap a meal to see the full recipe',recipe:'Tap each step to mark it done',shopping:'Tap items to check off · Switch meal with emoji buttons',prep:'Run proteins and veg in parallel to save time'}[name]||'';
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const navMap={meals:'meals',plan:'plan',shop:'shop',daily:'daily',progress:'progress',settings:'settings',recipe:recipeFrom||'meals'};
+  const nb=document.getElementById('nav-'+(navMap[name]||name));
+  if(nb)nb.classList.add('active');
+  if(!skipRender){
+    if(name==='meals')renderMeals();
+    else if(name==='plan')renderPlan();
+    else if(name==='shop')renderShop();
+    else if(name==='daily'){addMealOpen=false;renderDaily();}
+    else if(name==='progress')renderProgress();
+    else if(name==='settings')renderSettings();
+  }
   window.scrollTo(0,0);
 }
 
-function switchTab(name) { if (name==='shopping') renderShopping(); showView(name); }
-renderPlan();
+// ── INIT ─────────────────────────────────────────────────────────────────────
+initApp();
 </script>
 </body>
 </html>
