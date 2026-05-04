@@ -337,7 +337,7 @@ body{font-family:'Nunito',sans-serif;background:#f8fafc;color:#0f172a;max-width:
 
 <script>
 // ── CUISINE COLOURS ──────────────────────────────────────────────────────────
-const CC={Asian:{bg:'#fef3c7',c:'#92400e'},Mediterranean:{bg:'#ede9fe',c:'#5b21b6'},Mexican:{bg:'#fee2e2',c:'#991b1b'},'North African':{bg:'#fef9c3',c:'#854d0e'},'':{bg:'#f1f5f9',c:'#475569'}};
+const CC={Asian:{bg:'#fef3c7',c:'#92400e'},Mediterranean:{bg:'#ede9fe',c:'#5b21b6'},Mexican:{bg:'#fee2e2',c:'#991b1b'},'North African':{bg:'#fef9c3',c:'#854d0e'},Japanese:{bg:'#fce7f3',c:'#9d174d'},Indian:{bg:'#fff7ed',c:'#c2410c'},Thai:{bg:'#dcfce7',c:'#15803d'},'Middle Eastern':{bg:'#fef9c3',c:'#a16207'},Caribbean:{bg:'#cffafe',c:'#0e7490'},Spanish:{bg:'#fef2f2',c:'#991b1b'},Greek:{bg:'#eff6ff',c:'#1d4ed8'},'American BBQ':{bg:'#fef3c7',c:'#b45309'},'':{bg:'#f1f5f9',c:'#475569'}};
 
 // ── MEAL DATA ────────────────────────────────────────────────────────────────
 const BREAKFASTS=[
@@ -383,6 +383,84 @@ const BREAKFASTS=[
    prepSteps:[{icon:'🥞',title:'Batch cook Sunday',desc:'Cool completely before stacking. Parchment between each.'},{icon:'♨️',title:'Reheating',desc:'2 pancakes, 45 seconds. Top with berries or honey.'}],
    ingredients:[{name:'Banana (mashed)',qty:1,unit:''},{name:'Eggs',qty:2,unit:''},{name:'Egg whites',qty:2,unit:''},{name:'Vanilla whey protein powder',qty:30,unit:'g'},{name:'Rolled oats (blended)',qty:40,unit:'g'},{name:'Baking powder',qty:0.5,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
    steps:['Mash banana.','Add eggs, egg whites, protein powder, oat flour, baking powder. Mix.','Spray pan on medium-low.','Pour 2 tbsp rounds. Cook 2 min until bubbles form, flip, 1 more min.','Cool before stacking in fridge.']}
+  ,
+
+  // ── NEW BATCH BREAKFASTS ──────────────────────────────────────────────────
+
+  {id:'chia-pudding',name:'Chia Pudding & Mango',emoji:'🥭',type:'batch',cuisine:'',proteins:['chia','yogurt'],
+   macros:{protein:26,calories:290,carbs:28,fat:8},prepTime:'10 min',
+   heroColor:'#fff7ed',heroText:'#ea580c',
+   tip:'Use ripe mango — it adds natural sweetness so you don\'t need any added sugar. Frozen mango works just as well and is cheaper.',
+   prepSteps:[{icon:'🫙',title:'Make jars Sunday',desc:'Layer chia mixture into jars, refrigerate overnight. Chia swells into a thick pudding.'},{icon:'🥭',title:'Add mango morning of',desc:'Keep mango separate — add fresh each morning so it stays vibrant.'},{icon:'🧊',title:'Storage',desc:'Fridge all week. Keeps well for 5 days.'}],
+   ingredients:[{name:'Chia seeds',qty:35,unit:'g'},{name:'Fairlife protein milk',qty:220,unit:'ml'},{name:'0% Greek yogurt',qty:80,unit:'g'},{name:'Vanilla extract',qty:0.5,unit:'tsp'},{name:'Honey',qty:0.5,unit:'tsp'},{name:'Fresh or frozen mango',qty:80,unit:'g'},{name:'Lime zest',qty:0.5,unit:''}],
+   steps:['Mix chia seeds, protein milk, Greek yogurt and vanilla in each jar.','Stir well — make sure no chia clumps at the bottom.','Add a tiny drizzle of honey. Stir again.','Seal and refrigerate overnight (minimum 4 hours).','Morning: top with diced mango and a grate of lime zest.']},
+
+  {id:'salmon-yogurt-pots',name:'Smoked Salmon & Cucumber Yogurt Pots',emoji:'🫙',type:'batch',cuisine:'',proteins:['salmon','yogurt'],
+   macros:{protein:34,calories:240,carbs:8,fat:9},prepTime:'10 min',
+   heroColor:'#e0f2fe',heroText:'#0369a1',
+   tip:'Season the yogurt generously — it needs salt, dill and lemon to really sing. Under-seasoned yogurt is the only way this dish falls flat.',
+   prepSteps:[{icon:'🫙',title:'Build layers Sunday',desc:'Season yogurt first, then layer with cucumber and salmon.'},{icon:'🧊',title:'Storage',desc:'Fridge up to 4 days. Smoked salmon keeps well sealed.'},{icon:'❄️',title:'Serving',desc:'Eat cold. Squeeze lemon over just before eating.'}],
+   ingredients:[{name:'0% Greek yogurt',qty:150,unit:'g'},{name:'Smoked salmon',qty:80,unit:'g'},{name:'Cucumber (diced)',qty:60,unit:'g'},{name:'Fresh dill',qty:5,unit:'g'},{name:'Lemon (juiced)',qty:0.5,unit:''},{name:'Capers',qty:1,unit:'tsp'},{name:'Black pepper',qty:1,unit:'pinch'}],
+   steps:['Season Greek yogurt with dill, lemon juice, capers and black pepper.','Dice cucumber into small pieces. Pat dry.','Spoon seasoned yogurt into each container.','Layer cucumber on top, then smoked salmon.','Seal and refrigerate. Squeeze extra lemon just before eating.']},
+
+  {id:'chicken-pepper-muffins',name:'Roasted Red Pepper & Chicken Egg Muffins',emoji:'🫑',type:'batch',cuisine:'',proteins:['eggs','chicken'],
+   macros:{protein:35,calories:270,carbs:5,fat:13},prepTime:'30 min',
+   heroColor:'#fee2e2',heroText:'#dc2626',
+   tip:'Roast the peppers yourself if you have time — the sweetness is completely different to jarred. But jarred roasted peppers work perfectly well on a Sunday.',
+   prepSteps:[{icon:'🧁',title:'Batch bake Sunday',desc:'Makes 10 muffins — 2 per morning. Cool completely before storing.'},{icon:'🧊',title:'Storage',desc:'Fridge all week in an airtight container.'},{icon:'♨️',title:'Reheating',desc:'Microwave 2 muffins for 60–70 seconds.'}],
+   ingredients:[{name:'Eggs',qty:5,unit:''},{name:'Egg whites',qty:5,unit:''},{name:'Cooked chicken breast (diced)',qty:100,unit:'g'},{name:'Roasted red peppers (jarred)',qty:80,unit:'g'},{name:'Baby spinach',qty:50,unit:'g'},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Garlic powder',qty:0.5,unit:'tsp'},{name:'Reduced-fat feta',qty:30,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Preheat oven to 180°C. Spray a 10-hole muffin tin.','Whisk eggs and egg whites. Season with paprika, garlic powder, salt and pepper.','Divide chicken, peppers and spinach across muffin holes.','Pour egg mix over, filling 3/4 full. Crumble feta over each.','Bake 18–22 min until set and golden. Cool before storing.']},
+
+  {id:'acai-bowl',name:'High-Protein Açaí Bowl',emoji:'🫐',type:'batch',cuisine:'',proteins:['yogurt','protein powder'],
+   macros:{protein:30,calories:310,carbs:32,fat:7},prepTime:'10 min',
+   heroColor:'#ede9fe',heroText:'#7c3aed',
+   tip:'Blend the açaí base thick — it should be the consistency of soft-serve ice cream, not a smoothie. Too thin and it loses the whole experience.',
+   prepSteps:[{icon:'🫐',title:'Blend base Sunday',desc:'Pour into containers. Fridge first 2, freeze the rest. Move from freezer to fridge the night before.'},{icon:'🍓',title:'Toppings morning of',desc:'Add berries, chia seeds and honey fresh each morning.'}],
+   ingredients:[{name:'Frozen açaí packets (unsweetened)',qty:100,unit:'g'},{name:'Frozen mixed berries',qty:80,unit:'g'},{name:'Vanilla whey protein powder',qty:25,unit:'g'},{name:'0% Greek yogurt',qty:100,unit:'g'},{name:'Fairlife protein milk',qty:60,unit:'ml'},{name:'Fresh berries (topping)',qty:50,unit:'g'},{name:'Chia seeds (topping)',qty:5,unit:'g'},{name:'Honey (optional)',qty:0.5,unit:'tsp'}],
+   steps:['Blend frozen açaí, frozen berries, protein powder, Greek yogurt and protein milk until thick and smooth.','Taste — should be slightly sweet. Add honey if needed.','Pour into containers. Consistency should be thick like soft-serve.','Refrigerate first 2 portions. Freeze the rest.','Morning: top with fresh berries and chia seeds. Eat immediately.']},
+
+  // ── NEW FRESH BREAKFASTS ──────────────────────────────────────────────────
+
+  {id:'poached-eggs-avo',name:'Poached Eggs & Avocado',emoji:'🥑',type:'fresh',cuisine:'',proteins:['eggs'],
+   macros:{protein:28,calories:340,carbs:8,fat:22},prepTime:'10 min',
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'Fresh eggs poach better — the whites hold together. Add a splash of white wine vinegar to the water and swirl before dropping the egg in.',
+   prepSteps:[{icon:'🥚',title:'No Sunday prep',desc:'Made fresh each morning in 10 minutes.'},{icon:'⏱',title:'Technique',desc:'Swirl the water, add vinegar, drop the egg in the centre. 3 min for runny yolk.'}],
+   ingredients:[{name:'Eggs',qty:2,unit:''},{name:'Avocado (half)',qty:0.5,unit:''},{name:'Wholegrain toast',qty:1,unit:'slice'},{name:'Chilli flakes',qty:0.25,unit:'tsp'},{name:'Lemon juice',qty:1,unit:'tsp'},{name:'White wine vinegar',qty:1,unit:'tsp'},{name:'Salt & pepper',qty:1,unit:'pinch'}],
+   steps:['Bring a deep pan of water to a gentle simmer. Add a splash of white wine vinegar.','Mash avocado with lemon juice, salt and pepper.','Crack each egg into a small cup. Create a gentle swirl in the water.','Drop eggs in one at a time. Poach 3 min for runny yolk, 4 min for set.','Toast bread. Spread with smashed avocado. Top with poached eggs.','Sprinkle chilli flakes. Serve immediately.']},
+
+  {id:'yogurt-honey-walnuts',name:'Greek Yogurt with Honey & Walnuts',emoji:'🍯',type:'fresh',cuisine:'Greek',proteins:['yogurt'],
+   macros:{protein:26,calories:280,carbs:18,fat:12},prepTime:'3 min',
+   heroColor:'#fef9c3',heroText:'#a16207',
+   tip:'Use proper Greek honey if you can find it — thyme honey has a depth that standard runny honey doesn\'t. Makes a simple breakfast feel special.',
+   prepSteps:[{icon:'⏱',title:'2 minutes to assemble',desc:'No cooking, no prep. Fastest breakfast on the list.'},{icon:'🛒',title:'Keep stocked',desc:'Greek yogurt, walnuts and honey in the fridge and cupboard at all times.'}],
+   ingredients:[{name:'0% Greek yogurt',qty:200,unit:'g'},{name:'Walnuts (roughly chopped)',qty:20,unit:'g'},{name:'Honey',qty:1,unit:'tsp'},{name:'Cinnamon',qty:0.25,unit:'tsp'},{name:'Fresh berries (optional)',qty:50,unit:'g'}],
+   steps:['Spoon Greek yogurt into a bowl.','Roughly chop walnuts and scatter over.','Drizzle honey in a thin stream across the top.','Dust with cinnamon.','Add berries if using. Eat immediately.']},
+
+  {id:'egg-feta-toast',name:'Smashed Egg & Feta Toast',emoji:'🍞',type:'fresh',cuisine:'Mediterranean',proteins:['eggs','feta'],
+   macros:{protein:32,calories:320,carbs:22,fat:14},prepTime:'8 min',
+   heroColor:'#ede9fe',heroText:'#7c3aed',
+   tip:'Smash the eggs while they\'re still warm — the yolk breaks and coats everything. Season aggressively with salt, pepper and chilli.',
+   prepSteps:[{icon:'🥚',title:'No Sunday prep',desc:'Made fresh each morning in 8 minutes.'},{icon:'⏱',title:'Technique',desc:'Cook eggs over easy — you want the yolk to break when smashed, coating the toast.'}],
+   ingredients:[{name:'Eggs',qty:2,unit:''},{name:'Wholegrain bread',qty:2,unit:'slices'},{name:'Reduced-fat feta',qty:40,unit:'g'},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Chilli flakes',qty:0.25,unit:'tsp'},{name:'Fresh oregano or dried',qty:0.5,unit:'tsp'},{name:'Cooking spray',qty:2,unit:'sprays'}],
+   steps:['Toast bread until golden and crisp.','Spray pan. Fry eggs over-easy — 2 min each side. Yolk should still be soft.','Place eggs on toast. Press down gently with a fork to smash.','Crumble feta generously over the top.','Halve cherry tomatoes and scatter around.','Finish with chilli flakes and oregano.']},
+
+  {id:'shakshuka',name:'Shakshuka',emoji:'🍅',type:'fresh',cuisine:'Middle Eastern',proteins:['eggs'],
+   macros:{protein:24,calories:290,carbs:18,fat:14},prepTime:'20 min',
+   heroColor:'#fef2f2',heroText:'#dc2626',
+   tip:'The spiced tomato base is everything — let it reduce and concentrate before adding the eggs. Don\'t rush this step or the sauce will be watery.',
+   prepSteps:[{icon:'🍅',title:'No Sunday prep',desc:'Made fresh. Takes 20 min but mostly hands-off while the sauce simmers.'},{icon:'💡',title:'Batch hack',desc:'Make the tomato base Sunday and refrigerate. Each morning reheat and poach eggs in it — cuts morning time to 8 min.'}],
+   ingredients:[{name:'Eggs',qty:2,unit:''},{name:'Tinned chopped tomatoes',qty:200,unit:'g'},{name:'Red pepper (diced)',qty:80,unit:'g'},{name:'Onion (half, diced)',qty:0.5,unit:''},{name:'Garlic cloves',qty:2,unit:''},{name:'Ground cumin',qty:0.75,unit:'tsp'},{name:'Smoked paprika',qty:0.75,unit:'tsp'},{name:'Chilli flakes',qty:0.25,unit:'tsp'},{name:'Fresh parsley',qty:5,unit:'g'},{name:'Cooking spray',qty:3,unit:'sprays'}],
+   steps:['Spray a small pan. Fry onion and pepper on medium heat for 4–5 min until softened.','Add garlic, cumin, paprika and chilli flakes. Stir 1 min.','Pour in tinned tomatoes. Simmer 8–10 min until sauce thickens.','Make 2 wells in the sauce. Crack an egg into each.','Cover and cook 4–5 min for runny yolk, 6–7 for set.','Scatter fresh parsley over. Serve straight from the pan.']},
+
+  {id:'breakfast-quesadilla',name:'Breakfast Quesadilla',emoji:'🫔',type:'fresh',cuisine:'Mexican',proteins:['eggs','cheese'],
+   macros:{protein:34,calories:360,carbs:26,fat:14},prepTime:'10 min',
+   heroColor:'#fee2e2',heroText:'#dc2626',
+   tip:'Use a dry pan — no oil or spray needed. The tortilla crisps up beautifully without any fat.',
+   prepSteps:[{icon:'🫔',title:'No Sunday prep',desc:'Made fresh in 10 minutes.'},{icon:'⏱',title:'Key technique',desc:'Scramble the eggs slightly underdone — they finish cooking inside the quesadilla and won\'t dry out.'}],
+   ingredients:[{name:'Wholemeal tortilla (medium)',qty:1,unit:''},{name:'Eggs',qty:2,unit:''},{name:'Egg whites',qty:2,unit:''},{name:'Reduced-fat cheddar',qty:30,unit:'g'},{name:'Baby spinach',qty:30,unit:'g'},{name:'Salsa (shop-bought)',qty:2,unit:'tbsp'},{name:'Chilli flakes',qty:0.25,unit:'tsp'},{name:'Cooking spray',qty:2,unit:'sprays'}],
+   steps:['Whisk eggs and egg whites. Season with chilli flakes, salt and pepper.','Spray a pan. Scramble eggs on medium until just underdone. Remove from heat.','Place tortilla in a dry pan on medium heat.','On one half: layer spinach, scrambled eggs, cheddar and salsa.','Fold tortilla over. Press down. Cook 2 min each side until golden and crisp.','Slice and serve immediately.']}
+
 ];
 
 const LUNCHES=[
@@ -456,13 +534,431 @@ const LUNCHES=[
    prepSteps:[{icon:'🐟',title:'Equal-sized fillets',desc:'One per container. No weighing needed if matched in size.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 3–4 days.'},{icon:'♨️',title:'Reheating',desc:'90 seconds on medium power. Cod is delicate.'}],
    ingredients:[{name:'Cod fillet',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tenderstem broccoli',qty:100,unit:'g'},{name:'Brussels sprouts (halved)',qty:80,unit:'g'},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Lemon (sliced)',qty:0.5,unit:''},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh parsley',qty:6,unit:'g'},{name:'Capers',qty:0.5,unit:'tbsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
    steps:['Place cod on lined tray. Season with paprika, garlic, salt and pepper. Top with lemon.','Toss broccoli, sprouts and tomatoes on separate tray with Frylight.','Roast at 200°C — veg 20–22 min, cod 15–18 min.','Microwave cauliflower rice. Assemble.','Scatter capers and parsley. Reheat: 90 seconds.']}
+  ,
+
+  // ── CHICKEN ──────────────────────────────────────────────────────────────
+
+  {id:'chicken-tikka',name:'Chicken Tikka Masala Bowl',emoji:'🍛',cuisine:'Indian',proteins:['chicken'],
+   macros:{protein:62,calories:390,carbs:12,fat:10},prepTime:'40 min',
+   heroColor:'#fff7ed',heroText:'#ea580c',
+   tip:'Marinate the chicken in yogurt and spices for at least 30 min — the yogurt tenderises and the spices penetrate deeply. Overnight in the fridge is even better.',
+   prepSteps:[{icon:'🔥',title:'Char the chicken',desc:'High heat is essential — you want slightly charred edges, not steamed chicken. This is where the flavour comes from.'},{icon:'🫕',title:'Build the sauce separately',desc:'Tomato base needs to cook down properly before adding chicken.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Freezes beautifully.'}],
+   ingredients:[{name:'Chicken breast',qty:220,unit:'g'},{name:'0% Greek yogurt',qty:60,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tinned chopped tomatoes',qty:120,unit:'g'},{name:'Onion (half)',qty:0.5,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Fresh ginger (grated)',qty:6,unit:'g'},{name:'Garam masala',qty:1.5,unit:'tsp'},{name:'Ground cumin',qty:1,unit:'tsp'},{name:'Ground coriander',qty:1,unit:'tsp'},{name:'Smoked paprika',qty:0.5,unit:'tsp'},{name:'Turmeric',qty:0.25,unit:'tsp'},{name:'Chilli powder',qty:0.25,unit:'tsp'},{name:'Fresh coriander',qty:6,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix yogurt, half the spices, garlic and ginger. Coat chicken. Marinate 30 min minimum.','Spray a hot pan. Cook chicken on high heat until charred at edges. Slice and set aside.','In same pan, fry onion 4 min. Add remaining spices, garlic and ginger. Stir 1 min.','Add tinned tomatoes. Simmer 10 min until sauce thickens.','Add sliced chicken back in. Simmer 5 min.','Microwave cauliflower rice. Assemble. Top with fresh coriander.']},
+
+  {id:'chicken-katsu',name:'Japanese Chicken Katsu & Slaw',emoji:'🍱',cuisine:'Japanese',proteins:['chicken'],
+   macros:{protein:60,calories:420,carbs:18,fat:9},prepTime:'35 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'The katsu sauce is everything — soy, Worcestershire, ketchup and a touch of honey. Make extra and keep it in the fridge all week.',
+   prepSteps:[{icon:'🍗',title:'Bake not fry',desc:'Coat in panko and spray generously with Frylight. Bake at 200°C for 20–22 min. Same crunch, far fewer calories.'},{icon:'🥗',title:'Make slaw Sunday',desc:'Dress the slaw lightly — it improves as it sits and softens slightly.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Keep sauce separate.'}],
+   ingredients:[{name:'Chicken breast',qty:220,unit:'g'},{name:'Panko breadcrumbs',qty:30,unit:'g'},{name:'Egg white',qty:1,unit:''},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'White cabbage (shredded)',qty:100,unit:'g'},{name:'Carrot (grated)',qty:60,unit:'g'},{name:'Rice vinegar',qty:10,unit:'ml'},{name:'Low-sodium soy sauce',qty:20,unit:'ml'},{name:'Worcestershire sauce',qty:1,unit:'tsp'},{name:'Tomato ketchup',qty:1,unit:'tsp'},{name:'Honey',qty:0.5,unit:'tsp'},{name:'Garlic powder',qty:0.5,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Flatten chicken breast to even thickness. Dip in egg white then press into panko.','Place on lined tray. Spray generously with Frylight. Bake at 200°C for 20–22 min until golden.','Mix soy sauce, Worcestershire, ketchup, honey and garlic powder into katsu sauce.','Toss shredded cabbage and carrot with rice vinegar and a pinch of salt for the slaw.','Microwave cauliflower rice. Slice katsu chicken.','Assemble: rice, sliced katsu, slaw alongside. Drizzle sauce over chicken.']},
+
+  {id:'thai-green-chicken',name:'Thai Green Chicken Curry Bowl',emoji:'🌿',cuisine:'Thai',proteins:['chicken'],
+   macros:{protein:61,calories:380,carbs:10,fat:12},prepTime:'30 min',
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'Use light coconut milk, not full fat — you get all the flavour for less than half the calories. A good Thai green paste does most of the work so don\'t skimp on it.',
+   prepSteps:[{icon:'🫕',title:'Build the curry base first',desc:'Fry paste in a dry pan until fragrant before adding liquid — this releases the aromatics properly.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Reheats perfectly.'}],
+   ingredients:[{name:'Chicken breast',qty:220,unit:'g'},{name:'Light coconut milk',qty:100,unit:'ml'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Thai green curry paste',qty:1.5,unit:'tbsp'},{name:'Tenderstem broccoli',qty:100,unit:'g'},{name:'Baby spinach',qty:60,unit:'g'},{name:'Lemongrass stalk',qty:1,unit:''},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh ginger',qty:5,unit:'g'},{name:'Fish sauce',qty:1,unit:'tsp'},{name:'Lime',qty:0.5,unit:''},{name:'Fresh coriander',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray a pan. Fry green curry paste, garlic, ginger and lemongrass on medium for 2 min until fragrant.','Add sliced chicken. Cook 4–5 min until sealed.','Pour in coconut milk and a splash of water. Simmer 10 min.','Add broccoli and spinach. Cook 3 min.','Add fish sauce and lime juice. Taste and adjust.','Microwave cauliflower rice. Assemble. Top with fresh coriander.']},
+
+  {id:'chicken-shawarma',name:'Chicken Shawarma Bowl',emoji:'🌯',cuisine:'Middle Eastern',proteins:['chicken'],
+   macros:{protein:63,calories:370,carbs:10,fat:9},prepTime:'35 min',
+   heroColor:'#fef9c3',heroText:'#a16207',
+   tip:'The shawarma spice mix is the magic — cumin, coriander, turmeric, cinnamon, paprika and allspice together. Make a big batch of the dry mix and keep it in a jar.',
+   prepSteps:[{icon:'🔥',title:'High heat is essential',desc:'Shawarma needs colour — cook on high heat to get slightly caramelised edges on the chicken.'},{icon:'🥗',title:'Garlic sauce',desc:'Mix yogurt, garlic, lemon and a pinch of salt. This is the sauce — simple and essential.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Chicken thighs (skinless)',qty:230,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'0% Greek yogurt',qty:40,unit:'g'},{name:'Cherry tomatoes',qty:70,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Red onion (sliced)',qty:0.5,unit:''},{name:'Ground cumin',qty:1,unit:'tsp'},{name:'Ground coriander',qty:0.75,unit:'tsp'},{name:'Turmeric',qty:0.25,unit:'tsp'},{name:'Cinnamon',qty:0.25,unit:'tsp'},{name:'Smoked paprika',qty:0.75,unit:'tsp'},{name:'Garlic cloves',qty:3,unit:''},{name:'Lemon',qty:0.5,unit:''},{name:'Fresh parsley',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix all spices with 2 crushed garlic cloves. Coat chicken thighs thoroughly.','Spray a hot pan. Cook chicken on high heat 5–6 min each side until charred and cooked through. Slice.','Mix yogurt, 1 crushed garlic clove and lemon juice into garlic sauce.','Slice cucumber and halve tomatoes. Thinly slice red onion.','Microwave cauliflower rice. Assemble: rice, sliced shawarma chicken, salad vegetables.','Drizzle garlic sauce over. Scatter parsley.']},
+
+  {id:'jerk-chicken',name:'Jerk Chicken & Roasted Peppers',emoji:'🌶️',cuisine:'Caribbean',proteins:['chicken'],
+   macros:{protein:62,calories:360,carbs:10,fat:10},prepTime:'40 min',
+   heroColor:'#fee2e2',heroText:'#dc2626',
+   tip:'Jerk marinade needs time — minimum 2 hours, overnight is transformative. The Scotch bonnet is what makes it authentic but use less if you want lower heat.',
+   prepSteps:[{icon:'🌶️',title:'Marinate overnight',desc:'This is the most important step. The longer the better.'},{icon:'🔥',title:'High heat cooking',desc:'Jerk chicken needs char. Cook on high heat or under the grill for the last 5 min.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Chicken thighs (skinless)',qty:230,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Red peppers',qty:2,unit:''},{name:'Yellow pepper',qty:1,unit:''},{name:'Spring onions',qty:3,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Fresh ginger',qty:6,unit:'g'},{name:'Scotch bonnet (half, deseeded)',qty:0.5,unit:''},{name:'Ground allspice',qty:1,unit:'tsp'},{name:'Dried thyme',qty:1,unit:'tsp'},{name:'Ground cinnamon',qty:0.25,unit:'tsp'},{name:'Low-sodium soy sauce',qty:15,unit:'ml'},{name:'Lime',qty:1,unit:''},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Blend spring onions, garlic, ginger, scotch bonnet, allspice, thyme, cinnamon, soy sauce and lime juice into jerk marinade.','Coat chicken. Marinate minimum 2 hours, overnight if possible.','Bake at 200°C for 30 min. Grill on high for last 5 min for char.','Roast peppers alongside chicken for last 20 min with Frylight.','Microwave cauliflower rice. Assemble. Squeeze lime over.']},
+
+  {id:'spanish-chicken-chorizo',name:'Spanish Chicken & Chorizo Bowl',emoji:'🥘',cuisine:'Spanish',proteins:['chicken'],
+   macros:{protein:61,calories:400,carbs:10,fat:14},prepTime:'35 min',
+   heroColor:'#fee2e2',heroText:'#991b1b',
+   tip:'A little chorizo goes a long way — use just 30g per portion. It releases its oil as it cooks which flavours everything else. You don\'t need any other fat.',
+   prepSteps:[{icon:'🥘',title:'Cook chorizo first',desc:'Render the chorizo in a dry pan until it releases its oil. Everything else cooks in that oil.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Flavour intensifies overnight.'}],
+   ingredients:[{name:'Chicken breast',qty:200,unit:'g'},{name:'Chorizo (diced)',qty:30,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Baby spinach',qty:60,unit:'g'},{name:'Garlic cloves',qty:3,unit:''},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Dried oregano',qty:0.5,unit:'tsp'},{name:'Low-salt chicken stock',qty:50,unit:'ml'},{name:'Fresh parsley',qty:5,unit:'g'}],
+   steps:['Cook diced chorizo in a dry pan on medium heat until it releases its oil, about 3 min.','Add diced chicken. Cook in chorizo oil on high heat until golden, about 5–6 min.','Add garlic, peppers, paprika and oregano. Stir 1 min.','Add tomatoes and stock. Simmer 8 min.','Stir in spinach until wilted.','Microwave cauliflower rice. Assemble. Scatter fresh parsley.']},
+
+  {id:'chicken-souvlaki',name:'Chicken Souvlaki Bowl',emoji:'🏛️',cuisine:'Greek',proteins:['chicken'],
+   macros:{protein:63,calories:350,carbs:10,fat:8},prepTime:'30 min',
+   heroColor:'#ede9fe',heroText:'#7c3aed',
+   tip:'The marinade is simple — lemon, olive oil, garlic and oregano — but it needs time. The lemon juice starts to cook the chicken slightly, making it incredibly tender.',
+   prepSteps:[{icon:'🍋',title:'Marinate minimum 1 hour',desc:'The lemon and olive oil work together to tenderise the chicken. Overnight gives the best result.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Chicken breast',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Red onion',qty:0.5,unit:''},{name:'Low-fat tzatziki',qty:50,unit:'g'},{name:'Lemon',qty:1,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Dried oregano',qty:1.5,unit:'tsp'},{name:'Olive oil',qty:1,unit:'tsp'},{name:'Fresh parsley',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix lemon juice, olive oil, crushed garlic and oregano. Coat chicken. Marinate 1 hour minimum.','Cook chicken on a hot griddle pan or under the grill for 5–6 min each side until charred and cooked through.','Slice chicken. Halve tomatoes, dice cucumber, thinly slice red onion.','Microwave cauliflower rice. Assemble bowl.','Add tzatziki. Scatter parsley and squeeze lemon over.']},
+
+  {id:'tandoori-chicken',name:'Tandoori Chicken & Raita Bowl',emoji:'🫙',cuisine:'Indian',proteins:['chicken'],
+   macros:{protein:64,calories:340,carbs:10,fat:7},prepTime:'35 min',
+   heroColor:'#fff7ed',heroText:'#ea580c',
+   tip:'The yogurt marinade is non-negotiable — it tenderises the chicken and keeps it moist during high-heat cooking. Don\'t skip it.',
+   prepSteps:[{icon:'🔥',title:'Grill on high heat',desc:'Tandoori is traditionally cooked in a very hot clay oven. Get your grill as hot as possible for authentic char.'},{icon:'🫙',title:'Make raita fresh',desc:'Cucumber raita takes 2 min and cools the heat beautifully. Make it Sunday and keep in a separate pot.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Chicken breast',qty:220,unit:'g'},{name:'0% Greek yogurt',qty:80,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Fresh mint',qty:5,unit:'g'},{name:'Garlic cloves',qty:3,unit:''},{name:'Fresh ginger',qty:6,unit:'g'},{name:'Tandoori masala powder',qty:2,unit:'tsp'},{name:'Ground cumin',qty:0.5,unit:'tsp'},{name:'Turmeric',qty:0.25,unit:'tsp'},{name:'Lemon',qty:0.5,unit:''},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix 60g yogurt with garlic, ginger, tandoori masala, cumin, turmeric and lemon juice. Coat chicken. Marinate 1 hour minimum.','Grill on high heat 6–7 min each side until charred and cooked through. Slice.','Mix remaining 20g yogurt with diced cucumber and mint for raita.','Microwave cauliflower rice. Assemble bowl with chicken.','Add raita on the side. Squeeze lemon over.']},
+
+  {id:'chicken-fajita',name:'Chicken Fajita Bowl',emoji:'🌮',cuisine:'Mexican',proteins:['chicken'],
+   macros:{protein:61,calories:360,carbs:12,fat:9},prepTime:'25 min',
+   heroColor:'#fee2e2',heroText:'#dc2626',
+   tip:'Cook the peppers and onions on high heat until they have real colour and slight char. Fajita veg should be caramelised, not steamed soft.',
+   prepSteps:[{icon:'🔥',title:'High heat throughout',desc:'Chicken and veg both need high heat for fajita flavour. Don\'t crowd the pan.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Chicken breast',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Yellow pepper',qty:1,unit:''},{name:'Red onion',qty:0.5,unit:''},{name:'Baby spinach',qty:40,unit:'g'},{name:'Ground cumin',qty:1,unit:'tsp'},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Garlic powder',qty:0.5,unit:'tsp'},{name:'Chilli powder',qty:0.25,unit:'tsp'},{name:'Lime',qty:1,unit:''},{name:'Low-fat Greek yogurt',qty:30,unit:'g'},{name:'Fresh coriander',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Slice chicken into strips. Mix spices and toss chicken in them.','Spray a hot pan. Cook chicken strips on high heat 4–5 min until coloured. Set aside.','In same pan, cook sliced peppers and onion on high heat until slightly charred, about 5 min.','Add chicken back in. Squeeze lime over. Stir.','Microwave cauliflower rice. Assemble with spinach.','Add yogurt on the side. Scatter coriander.']},
+
+  {id:'hoisin-chicken',name:'Hoisin Chicken & Stir-Fried Veg',emoji:'🥡',cuisine:'Asian',proteins:['chicken'],
+   macros:{protein:60,calories:370,carbs:16,fat:7},prepTime:'25 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'Hoisin sauce is quite calorie-dense so measure it — 15ml per portion is enough for full flavour. Cut with a splash of rice vinegar to lighten it.',
+   prepSteps:[{icon:'🥡',title:'Wok on highest heat',desc:'Stir-fry at maximum heat for maximum flavour. 5 min total in the wok.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Chicken breast',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tenderstem broccoli',qty:100,unit:'g'},{name:'Sugar snap peas',qty:80,unit:'g'},{name:'Red pepper',qty:0.5,unit:''},{name:'Spring onions',qty:2,unit:''},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh ginger',qty:4,unit:'g'},{name:'Hoisin sauce',qty:15,unit:'ml'},{name:'Low-sodium soy sauce',qty:10,unit:'ml'},{name:'Rice vinegar',qty:8,unit:'ml'},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Slice chicken into strips. Mix hoisin, soy and rice vinegar into a sauce.','Spray a wok on high heat. Cook chicken strips 4–5 min until cooked. Set aside.','In same wok, stir-fry broccoli, snap peas and pepper for 3 min on high heat.','Add garlic, ginger and spring onions. Stir 1 min.','Add chicken back. Pour sauce over. Toss together 1 min.','Microwave cauliflower rice. Assemble. Sprinkle sesame seeds.']},
+
+  // ── BEEF ─────────────────────────────────────────────────────────────────
+
+  {id:'beef-bulgogi',name:'Beef Bulgogi Bowl',emoji:'🥩',cuisine:'Asian',proteins:['beef'],
+   macros:{protein:62,calories:380,carbs:12,fat:13},prepTime:'25 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'Bulgogi literally means "fire meat" — it needs high heat and quick cooking. Thin slices cook in 2 min. Don\'t overcook or the beef goes tough.',
+   prepSteps:[{icon:'🔥',title:'Slice thin and cook fast',desc:'Thin slices on screaming hot pan — 1–2 min. Quick and high.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Baby spinach',qty:60,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Carrot',qty:1,unit:''},{name:'Spring onions',qty:2,unit:''},{name:'Low-sodium soy sauce',qty:20,unit:'ml'},{name:'Garlic cloves',qty:3,unit:''},{name:'Fresh ginger',qty:5,unit:'g'},{name:'Sesame oil',qty:0.5,unit:'tsp'},{name:'Rice vinegar',qty:8,unit:'ml'},{name:'Honey',qty:0.5,unit:'tsp'},{name:'Chilli flakes',qty:0.25,unit:'tsp'},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix soy, garlic, ginger, sesame oil, rice vinegar, honey and chilli into bulgogi sauce.','Brown beef mince on high heat. Drain any excess fat. Pour sauce over. Cook 2 min.','Shred carrot and cucumber into thin ribbons.','Microwave cauliflower rice. Assemble: rice, beef, spinach, carrot, cucumber.','Scatter spring onions and sesame seeds over. Serve immediately.']},
+
+  {id:'bbq-beef',name:'American BBQ Beef Bowl',emoji:'🍖',cuisine:'American BBQ',proteins:['beef'],
+   macros:{protein:61,calories:390,carbs:12,fat:12},prepTime:'30 min',
+   heroColor:'#fef2f2',heroText:'#dc2626',
+   tip:'Make your own BBQ sauce — ketchup, Worcestershire, smoked paprika, a touch of honey and apple cider vinegar. Shop-bought BBQ sauce is loaded with sugar.',
+   prepSteps:[{icon:'🍖',title:'Low and slow for pulled texture',desc:'Cook beef mince until almost dry, then add sauce and let it absorb. Creates a pulled-style texture.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'White cabbage (shredded)',qty:80,unit:'g'},{name:'Carrot (grated)',qty:60,unit:'g'},{name:'Spring onions',qty:2,unit:''},{name:'Tomato ketchup',qty:1,unit:'tbsp'},{name:'Worcestershire sauce',qty:1,unit:'tsp'},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Apple cider vinegar',qty:1,unit:'tsp'},{name:'Honey',qty:0.5,unit:'tsp'},{name:'Garlic powder',qty:0.5,unit:'tsp'},{name:'Low-fat Greek yogurt',qty:20,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Brown beef mince on high heat. Break up well. Drain excess fat.','Mix ketchup, Worcestershire, paprika, vinegar, honey and garlic into BBQ sauce.','Pour sauce over beef. Cook on low heat 5 min until sauce absorbs.','Toss shredded cabbage and carrot with yogurt, a splash of vinegar and pinch of salt for slaw.','Microwave cauliflower rice. Assemble: rice, BBQ beef, slaw.','Scatter spring onions over.']},
+
+  {id:'beef-kofta',name:'Beef Kofta & Tabbouleh Bowl',emoji:'🍢',cuisine:'Middle Eastern',proteins:['beef'],
+   macros:{protein:60,calories:370,carbs:10,fat:14},prepTime:'35 min',
+   heroColor:'#fef9c3',heroText:'#a16207',
+   tip:'Mix the kofta mixture well and chill for 15 min before shaping — it holds together better and the spices meld into the meat.',
+   prepSteps:[{icon:'🍢',title:'Chill before shaping',desc:'15 min in the fridge makes the mixture easier to shape and stops it falling apart.'},{icon:'🥗',title:'Tabbouleh is the key side',desc:'Heavy on parsley, light on everything else. It should be green, not grainy.'}],
+   ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Fresh parsley',qty:30,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Spring onions',qty:2,unit:''},{name:'Low-fat tzatziki',qty:40,unit:'g'},{name:'Ground cumin',qty:1,unit:'tsp'},{name:'Ground coriander',qty:0.75,unit:'tsp'},{name:'Smoked paprika',qty:0.5,unit:'tsp'},{name:'Cinnamon',qty:0.25,unit:'tsp'},{name:'Garlic cloves',qty:2,unit:''},{name:'Lemon',qty:0.5,unit:''},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix beef mince with cumin, coriander, paprika, cinnamon, garlic, salt and pepper. Chill 15 min.','Shape into small sausage-shaped koftas. Spray with Frylight.','Grill or pan-fry on high heat for 10–12 min, turning regularly until cooked through.','Finely chop parsley. Mix with halved tomatoes, diced cucumber, spring onion and lemon juice for tabbouleh.','Microwave cauliflower rice. Assemble with koftas and tabbouleh.','Add tzatziki on the side.']},
+
+  {id:'thai-basil-beef',name:'Thai Basil Beef Bowl',emoji:'🌿',cuisine:'Thai',proteins:['beef'],
+   macros:{protein:62,calories:360,carbs:10,fat:12},prepTime:'20 min',
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'Thai basil is different from regular basil — it has an anise note that makes this dish. If you can\'t find it, regular basil works but adds it at the very last second off heat.',
+   prepSteps:[{icon:'🔥',title:'Screaming hot wok',desc:'This is a fast dish — everything happens in 10 min on maximum heat.'},{icon:'🌿',title:'Basil goes in last',desc:'Add Thai basil at the very end off heat. It wilts instantly and loses flavour quickly if overcooked.'}],
+   ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Red pepper',qty:0.5,unit:''},{name:'Green beans',qty:80,unit:'g'},{name:'Garlic cloves',qty:4,unit:''},{name:'Red chilli',qty:1,unit:''},{name:'Thai basil leaves',qty:15,unit:'g'},{name:'Low-sodium soy sauce',qty:15,unit:'ml'},{name:'Oyster sauce',qty:1,unit:'tsp'},{name:'Fish sauce',qty:0.5,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray wok on maximum heat. Fry garlic and chilli 30 seconds.','Add beef mince. Break up and cook on high heat until browned and slightly crispy, about 5 min.','Add pepper and green beans. Stir-fry 2 min.','Add soy sauce, oyster sauce and fish sauce. Toss everything together 1 min.','Remove from heat. Fold in Thai basil leaves.','Microwave cauliflower rice. Assemble immediately.']},
+
+  {id:'chilli-con-carne',name:'Chilli Con Carne Bowl',emoji:'🌶️',cuisine:'Mexican',proteins:['beef'],
+   macros:{protein:61,calories:400,carbs:18,fat:11},prepTime:'40 min',
+   heroColor:'#fee2e2',heroText:'#dc2626',
+   tip:'The secret to great chilli is time — let it simmer low and slow for at least 30 min. The flavour builds significantly with patience.',
+   prepSteps:[{icon:'⏱',title:'Low and slow',desc:'30 min minimum simmer. The longer the better. Make it Sunday and the flavour will develop all week.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. One of the best freezer meals on the list.'}],
+   ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tinned chopped tomatoes',qty:120,unit:'g'},{name:'Kidney beans (tinned, drained)',qty:60,unit:'g'},{name:'Red pepper',qty:0.5,unit:''},{name:'Onion (half)',qty:0.5,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Ground cumin',qty:1,unit:'tsp'},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Chilli powder',qty:0.5,unit:'tsp'},{name:'Dried oregano',qty:0.5,unit:'tsp'},{name:'Low-salt beef stock',qty:50,unit:'ml'},{name:'Low-fat Greek yogurt',qty:20,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray pan. Fry onion and pepper 4 min. Add garlic and all spices. Stir 1 min.','Add beef mince. Break up and brown on high heat.','Add tinned tomatoes, kidney beans and beef stock.','Simmer on low heat 30 min minimum, stirring occasionally. Season well.','Microwave cauliflower rice. Assemble.','Add a dollop of yogurt on top. Serve.']},
+
+  {id:'beef-stroganoff',name:'Beef & Mushroom Stroganoff Bowl',emoji:'🍄',cuisine:'',proteins:['beef'],
+   macros:{protein:60,calories:380,carbs:10,fat:11},prepTime:'30 min',
+   heroColor:'#fef9c3',heroText:'#a16207',
+   tip:'Use 0% Greek yogurt instead of cream and a splash of Worcestershire sauce for depth. The result is indistinguishable from the full-fat version.',
+   prepSteps:[{icon:'🍄',title:'Brown mushrooms properly',desc:'Cook mushrooms in batches on high heat until golden. Crowding the pan steams them instead.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Add a splash of water when reheating if sauce has thickened.'}],
+   ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Chestnut mushrooms (sliced)',qty:120,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'0% Greek yogurt',qty:60,unit:'g'},{name:'Onion (half)',qty:0.5,unit:''},{name:'Garlic cloves',qty:2,unit:''},{name:'Worcestershire sauce',qty:1,unit:'tsp'},{name:'Dijon mustard',qty:0.5,unit:'tsp'},{name:'Low-salt beef stock',qty:60,unit:'ml'},{name:'Smoked paprika',qty:0.5,unit:'tsp'},{name:'Fresh parsley',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray pan on high heat. Brown mushrooms in batches until golden. Set aside.','In same pan, fry onion 3 min. Add garlic and beef. Brown on high heat.','Add Worcestershire sauce, mustard, paprika and stock. Simmer 8 min.','Remove from heat. Stir in Greek yogurt — don\'t boil after adding or it will split.','Add mushrooms back in. Season well.','Microwave cauliflower rice. Assemble. Scatter fresh parsley.']},
+
+  {id:'beef-keema',name:'Spiced Beef Keema Bowl',emoji:'🫕',cuisine:'Indian',proteins:['beef'],
+   macros:{protein:62,calories:370,carbs:10,fat:12},prepTime:'30 min',
+   heroColor:'#fff7ed',heroText:'#ea580c',
+   tip:'Keema is dry-cooked minced meat — cook it until almost all the moisture has evaporated. This concentrates the spice and creates a texture that\'s completely different to a sauce-based mince dish.',
+   prepSteps:[{icon:'🔥',title:'Cook until dry',desc:'Keep cooking the keema until the moisture evaporates and the mince is almost frying in its own fat. This is the key technique.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Frozen peas',qty:60,unit:'g'},{name:'Onion (half)',qty:0.5,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Fresh ginger',qty:6,unit:'g'},{name:'Tinned chopped tomatoes',qty:80,unit:'g'},{name:'Garam masala',qty:1.5,unit:'tsp'},{name:'Ground cumin',qty:1,unit:'tsp'},{name:'Ground coriander',qty:0.75,unit:'tsp'},{name:'Turmeric',qty:0.25,unit:'tsp'},{name:'Chilli powder',qty:0.25,unit:'tsp'},{name:'Fresh coriander',qty:6,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray pan. Fry onion 4 min. Add garlic, ginger and all spices. Stir 2 min.','Add beef mince. Break up and cook on high heat.','Add tinned tomatoes. Cook until almost all liquid evaporates — about 15 min.','Add frozen peas. Cook 2 more min.','Season well. Top with fresh coriander.','Microwave cauliflower rice. Assemble.']},
+
+  {id:'beef-ragu',name:'Beef Ragu Bowl',emoji:'🍅',cuisine:'Mediterranean',proteins:['beef'],
+   macros:{protein:61,calories:380,carbs:12,fat:11},prepTime:'45 min',
+   heroColor:'#fef2f2',heroText:'#dc2626',
+   tip:'A good ragu needs time — 40 min minimum simmer. Don\'t rush it. The tomatoes need to cook down and the flavours need to develop. The result should be rich and thick, not watery.',
+   prepSteps:[{icon:'⏱',title:'Long simmer is non-negotiable',desc:'40 min minimum. The sauce transforms with time — from acidic and thin to rich and complex.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Gets better every day.'}],
+   ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tinned chopped tomatoes',qty:150,unit:'g'},{name:'Onion (half)',qty:0.5,unit:''},{name:'Celery stalk',qty:1,unit:''},{name:'Carrot (small)',qty:0.5,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Dried oregano',qty:1,unit:'tsp'},{name:'Dried basil',qty:0.5,unit:'tsp'},{name:'Bay leaf',qty:1,unit:''},{name:'Low-salt beef stock',qty:60,unit:'ml'},{name:'Fresh basil',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Finely dice onion, celery and carrot. Spray pan and cook on medium heat 5 min until softened.','Add garlic, oregano and basil. Stir 1 min.','Add beef mince. Break up and brown on high heat.','Add tinned tomatoes, stock and bay leaf. Bring to simmer.','Cook on low heat 40 min, stirring occasionally, until sauce is thick and rich. Remove bay leaf.','Microwave cauliflower rice. Assemble. Top with fresh basil.']},
+
+  // ── LAMB ─────────────────────────────────────────────────────────────────
+
+  {id:'lamb-shawarma',name:'Lamb Shawarma Bowl',emoji:'🌯',cuisine:'Middle Eastern',proteins:['lamb'],
+   macros:{protein:61,calories:410,carbs:10,fat:18},prepTime:'40 min',
+   heroColor:'#fef9c3',heroText:'#a16207',
+   tip:'Lamb shawarma spice is a specific blend — cumin, coriander, cinnamon, allspice and turmeric together. Don\'t substitute with a general curry powder.',
+   prepSteps:[{icon:'🌯',title:'Marinate overnight',desc:'Lamb benefits even more from an overnight marinade than chicken.'},{icon:'🔥',title:'High heat for char',desc:'Roast at 220°C for last 10 min or grill to get the caramelised edges that define shawarma.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Lean lamb shoulder (diced)',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'0% Greek yogurt',qty:40,unit:'g'},{name:'Cherry tomatoes',qty:70,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Red onion',qty:0.5,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Ground cumin',qty:1,unit:'tsp'},{name:'Ground coriander',qty:0.75,unit:'tsp'},{name:'Cinnamon',qty:0.25,unit:'tsp'},{name:'Ground allspice',qty:0.25,unit:'tsp'},{name:'Turmeric',qty:0.25,unit:'tsp'},{name:'Lemon',qty:0.5,unit:''},{name:'Fresh parsley',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix all spices with garlic and lemon juice. Coat lamb thoroughly. Marinate overnight.','Roast lamb at 200°C for 25–30 min. Grill on high for last 8 min for char.','Mix yogurt with garlic and lemon for sauce.','Slice tomatoes and cucumber. Thinly slice red onion.','Microwave cauliflower rice. Assemble.','Drizzle yogurt sauce over. Scatter parsley.']},
+
+  {id:'lamb-rogan-josh',name:'Lamb Rogan Josh Bowl',emoji:'🍲',cuisine:'Indian',proteins:['lamb'],
+   macros:{protein:62,calories:420,carbs:10,fat:18},prepTime:'55 min',
+   heroColor:'#fee2e2',heroText:'#dc2626',
+   tip:'Rogan Josh gets its distinctive red colour from Kashmiri chilli — mild heat but incredible colour and flavour. Worth finding in an Asian supermarket.',
+   prepSteps:[{icon:'🍲',title:'Brown lamb in batches',desc:'Don\'t crowd the pan. Proper browning builds the deep flavour base.'},{icon:'⏱',title:'Long braise',desc:'45 min minimum. Lamb should be pull-apart tender.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Gets significantly better overnight.'}],
+   ingredients:[{name:'Lean lamb shoulder (diced)',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'0% Greek yogurt',qty:60,unit:'g'},{name:'Tinned chopped tomatoes',qty:100,unit:'g'},{name:'Onion (half)',qty:0.5,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Fresh ginger',qty:6,unit:'g'},{name:'Kashmiri chilli powder',qty:1,unit:'tsp'},{name:'Ground coriander',qty:1,unit:'tsp'},{name:'Ground cumin',qty:0.75,unit:'tsp'},{name:'Garam masala',qty:1,unit:'tsp'},{name:'Ground cardamom',qty:0.25,unit:'tsp'},{name:'Bay leaves',qty:2,unit:''},{name:'Fresh coriander',qty:6,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Brown lamb in batches in a hot sprayed casserole. Set aside.','Fry onion 5 min. Add garlic, ginger and all spices. Stir 2 min.','Add yogurt 1 tbsp at a time, stirring between each addition.','Add tomatoes, lamb and bay leaves. Cover and simmer 45 min until lamb is tender.','Season well. Remove bay leaves.','Microwave cauliflower rice. Assemble. Top with fresh coriander.']},
+
+  {id:'lamb-souvlaki',name:'Lamb Souvlaki Bowl',emoji:'🏛️',cuisine:'Greek',proteins:['lamb'],
+   macros:{protein:61,calories:400,carbs:10,fat:19},prepTime:'35 min',
+   heroColor:'#ede9fe',heroText:'#7c3aed',
+   tip:'Use leg of lamb rather than shoulder for a leaner cut that still has great flavour.',
+   prepSteps:[{icon:'🍋',title:'Marinate in lemon and herbs',desc:'Lemon, garlic and oregano. Simple but perfect. Minimum 1 hour.'},{icon:'🔥',title:'Grill on high heat',desc:'Griddle pan or grill — souvlaki needs char.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Lean lamb leg (diced)',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Red onion',qty:0.5,unit:''},{name:'Low-fat tzatziki',qty:50,unit:'g'},{name:'Lemon',qty:1,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Dried oregano',qty:1.5,unit:'tsp'},{name:'Olive oil',qty:1,unit:'tsp'},{name:'Fresh mint',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix lemon juice, olive oil, garlic and oregano. Coat lamb. Marinate 1 hour minimum.','Thread onto skewers or cook directly on a hot griddle pan 4–5 min each side.','Halve tomatoes, dice cucumber, slice red onion.','Microwave cauliflower rice. Assemble bowl.','Add tzatziki. Scatter mint. Squeeze lemon over.']},
+
+  {id:'harissa-lamb',name:'Harissa Lamb & Roasted Veg',emoji:'🌶️',cuisine:'North African',proteins:['lamb'],
+   macros:{protein:62,calories:410,carbs:12,fat:18},prepTime:'45 min',
+   heroColor:'#fee2e2',heroText:'#991b1b',
+   tip:'Harissa paste varies enormously in heat between brands — taste it before using. A good harissa has depth beyond just chilli: cumin, caraway and smoked peppers.',
+   prepSteps:[{icon:'🌶️',title:'Rub harissa directly on lamb',desc:'No need to mix with anything — harissa is a complete marinade on its own.'},{icon:'🔥',title:'Roast hot and fast',desc:'200°C for 30–35 min. The harissa crust should be slightly dark at the edges.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Lean lamb shoulder (diced)',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Harissa paste',qty:2,unit:'tbsp'},{name:'Courgette',qty:100,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Aubergine',qty:0.5,unit:''},{name:'Red onion',qty:0.5,unit:''},{name:'0% Greek yogurt',qty:40,unit:'g'},{name:'Fresh mint',qty:5,unit:'g'},{name:'Lemon',qty:0.5,unit:''},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Coat lamb thoroughly with harissa paste. Marinate 30 min minimum.','Roast lamb at 200°C for 30–35 min until cooked through with dark crust.','Toss courgette, pepper, aubergine and onion with Frylight. Roast alongside lamb for last 20 min.','Mix yogurt with lemon juice and mint.','Microwave cauliflower rice. Assemble.','Drizzle minted yogurt over.']},
+
+  {id:'lamb-chickpea',name:'Lamb & Chickpea Stew',emoji:'🫘',cuisine:'Mediterranean',proteins:['lamb'],
+   macros:{protein:60,calories:430,carbs:18,fat:16},prepTime:'50 min',
+   heroColor:'#ede9fe',heroText:'#5b21b6',
+   tip:'Chickpeas absorb the lamb cooking juices as they simmer together — by the end they\'re flavoured all the way through. Don\'t add them too early or they go mushy.',
+   prepSteps:[{icon:'⏱',title:'Add chickpeas in last 15 min',desc:'They need to heat through and absorb flavour but not go mushy.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Excellent freezer meal.'}],
+   ingredients:[{name:'Lean lamb shoulder (diced)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Chickpeas (tinned, drained)',qty:80,unit:'g'},{name:'Tinned chopped tomatoes',qty:100,unit:'g'},{name:'Onion (half)',qty:0.5,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Ground cumin',qty:1,unit:'tsp'},{name:'Smoked paprika',qty:0.75,unit:'tsp'},{name:'Ground cinnamon',qty:0.25,unit:'tsp'},{name:'Low-salt chicken stock',qty:80,unit:'ml'},{name:'Baby spinach',qty:60,unit:'g'},{name:'Fresh coriander',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Brown lamb in batches in a hot sprayed casserole.','Fry onion 4 min. Add garlic and all spices. Stir 1 min.','Add tomatoes and stock. Return lamb. Simmer covered for 30 min.','Add chickpeas. Cook uncovered 15 min.','Stir in spinach until wilted. Season well.','Microwave cauliflower rice. Assemble. Top with coriander.']},
+
+  // ── PORK ─────────────────────────────────────────────────────────────────
+
+  {id:'korean-pork',name:'Korean BBQ Pork Bowl',emoji:'🐷',cuisine:'Asian',proteins:['pork'],
+   macros:{protein:60,calories:390,carbs:12,fat:13},prepTime:'25 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'Pork tenderloin is the leanest cut — almost as lean as chicken breast. The gochujang (Korean chilli paste) is what makes this dish. Find it in any Asian supermarket.',
+   prepSteps:[{icon:'🔥',title:'Slice thin and cook hot',desc:'Thin slices cook in 2–3 min on high heat. Don\'t overcook pork tenderloin or it dries out.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Pork tenderloin',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Baby spinach',qty:60,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Carrot',qty:1,unit:''},{name:'Spring onions',qty:2,unit:''},{name:'Gochujang paste',qty:1,unit:'tbsp'},{name:'Low-sodium soy sauce',qty:15,unit:'ml'},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh ginger',qty:4,unit:'g'},{name:'Sesame oil',qty:0.5,unit:'tsp'},{name:'Honey',qty:0.5,unit:'tsp'},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Slice pork tenderloin into thin strips. Mix gochujang, soy, garlic, ginger, sesame oil and honey into marinade.','Coat pork in marinade. Leave 20 min if time allows.','Spray a hot pan. Cook pork strips on high heat 2–3 min each side. Don\'t overcook.','Shred carrot and slice cucumber.','Microwave cauliflower rice. Assemble: rice, pork, spinach, carrot, cucumber.','Scatter spring onions and sesame seeds.']},
+
+  {id:'char-siu-pork',name:'Char Siu Pork & Stir-Fried Veg',emoji:'🥢',cuisine:'Asian',proteins:['pork'],
+   macros:{protein:60,calories:380,carbs:14,fat:11},prepTime:'30 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'Char siu gets its characteristic glaze from honey and a small amount of hoisin. The secret is basting during cooking — layer the glaze on every 10 min.',
+   prepSteps:[{icon:'🍖',title:'Baste during roasting',desc:'3 layers of glaze during roasting builds the sticky, lacquered finish that defines char siu.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Pork tenderloin',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tenderstem broccoli',qty:100,unit:'g'},{name:'Sugar snap peas',qty:80,unit:'g'},{name:'Red pepper',qty:0.5,unit:''},{name:'Low-sodium soy sauce',qty:15,unit:'ml'},{name:'Hoisin sauce',qty:10,unit:'ml'},{name:'Honey',qty:1,unit:'tsp'},{name:'Chinese five spice',qty:0.5,unit:'tsp'},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh ginger',qty:4,unit:'g'},{name:'Spring onions',qty:2,unit:''},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix soy, hoisin, honey, five spice, garlic and ginger into char siu glaze.','Coat pork. Marinate 30 min. Roast at 200°C for 20–22 min, basting with glaze every 7 min.','Stir-fry broccoli, snap peas and pepper in a hot sprayed pan for 4 min.','Slice pork.','Microwave cauliflower rice. Assemble.','Scatter spring onions over.']},
+
+  {id:'pulled-pork',name:'Pulled Pork & Slaw Bowl',emoji:'🍖',cuisine:'American BBQ',proteins:['pork'],
+   macros:{protein:60,calories:390,carbs:12,fat:12},prepTime:'50 min',
+   heroColor:'#fef2f2',heroText:'#dc2626',
+   tip:'True pulled pork takes hours. For meal prep, use pork tenderloin cooked in stock in the oven for 40 min — it shreds easily and keeps the calories low.',
+   prepSteps:[{icon:'🍖',title:'Cook in stock for moisture',desc:'Braising in stock keeps pork tenderloin from drying out and creates a natural sauce to mix back in.'},{icon:'🥗',title:'Slaw is essential',desc:'The cool, crunchy slaw against the warm pulled pork is the whole point of this dish.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Pork tenderloin',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'White cabbage (shredded)',qty:80,unit:'g'},{name:'Red cabbage (shredded)',qty:50,unit:'g'},{name:'Carrot (grated)',qty:60,unit:'g'},{name:'Low-fat Greek yogurt',qty:25,unit:'g'},{name:'Smoked paprika',qty:1.5,unit:'tsp'},{name:'Garlic powder',qty:0.5,unit:'tsp'},{name:'Onion powder',qty:0.5,unit:'tsp'},{name:'Tomato ketchup',qty:1,unit:'tbsp'},{name:'Apple cider vinegar',qty:1,unit:'tsp'},{name:'Worcestershire sauce',qty:1,unit:'tsp'},{name:'Low-salt chicken stock',qty:80,unit:'ml'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Rub pork with paprika, garlic powder and onion powder.','Place in baking dish with stock. Cover with foil. Roast at 180°C for 40 min.','Shred pork with two forks. Mix with ketchup, vinegar and Worcestershire sauce.','Toss both cabbages and carrot with yogurt and a splash of vinegar for slaw.','Microwave cauliflower rice. Assemble: rice, pulled pork, slaw alongside.']},
+
+  {id:'pork-chimichurri',name:'Pork Tenderloin with Chimichurri',emoji:'🌿',cuisine:'',proteins:['pork'],
+   macros:{protein:60,calories:340,carbs:6,fat:12},prepTime:'30 min',
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'Chimichurri is one of the most flavourful sauces in the world with almost no calories. Make a big batch — it keeps in the fridge for a week and works on anything.',
+   prepSteps:[{icon:'🌿',title:'Make chimichurri first',desc:'It needs 15 min to sit so flavours meld. Don\'t blend — chop everything finely by hand.'},{icon:'🍖',title:'Rest the pork',desc:'Rest 5 min after cooking before slicing — keeps it juicy.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Keep chimichurri separate.'}],
+   ingredients:[{name:'Pork tenderloin',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Green beans',qty:100,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Fresh parsley',qty:25,unit:'g'},{name:'Fresh coriander',qty:10,unit:'g'},{name:'Garlic cloves',qty:3,unit:''},{name:'Red chilli (half)',qty:0.5,unit:''},{name:'Red wine vinegar',qty:15,unit:'ml'},{name:'Olive oil',qty:1,unit:'tsp'},{name:'Dried oregano',qty:0.5,unit:'tsp'},{name:'Lemon',qty:0.5,unit:''},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Finely chop parsley, coriander, garlic and chilli. Mix with olive oil, red wine vinegar, oregano and lemon juice. Set aside 15 min.','Season pork tenderloin with salt and pepper. Spray a hot pan.','Sear pork on high heat 3–4 min each side until golden. Finish in oven at 200°C for 10 min.','Rest 5 min then slice.','Steam green beans 3 min. Halve tomatoes.','Microwave cauliflower rice. Assemble. Spoon chimichurri generously over pork.']},
+
+  {id:'thai-pork-larb',name:'Thai Pork Larb Bowl',emoji:'🌿',cuisine:'Thai',proteins:['pork'],
+   macros:{protein:60,calories:340,carbs:8,fat:11},prepTime:'20 min',
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'Larb is a Thai minced meat salad — one of the lightest and most flavourful dishes in Thai cooking. The toasted rice powder adds a nutty texture that\'s completely unique.',
+   prepSteps:[{icon:'🌿',title:'Toast rice powder',desc:'Dry-fry a tablespoon of raw rice until golden, then grind. This takes 3 min and makes a big difference to the texture.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Best eaten within 3 days.'}],
+   ingredients:[{name:'Pork tenderloin (minced or finely chopped)',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Shallots (thinly sliced)',qty:2,unit:''},{name:'Spring onions',qty:3,unit:''},{name:'Fresh mint',qty:15,unit:'g'},{name:'Fresh coriander',qty:10,unit:'g'},{name:'Red chilli',qty:1,unit:''},{name:'Fish sauce',qty:1.5,unit:'tsp'},{name:'Lime',qty:1,unit:''},{name:'Raw jasmine rice (for toasting)',qty:1,unit:'tbsp'},{name:'Chilli flakes',qty:0.25,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Dry-fry 1 tbsp rice in a hot pan until golden. Grind to coarse powder in a pestle or blender.','Spray pan. Cook minced pork on high heat, breaking up well. Cook until cooked through and slightly caramelised.','Remove from heat. Add fish sauce, lime juice and chilli flakes. Toss.','Add sliced shallots, spring onions, mint, coriander and sliced chilli.','Sprinkle toasted rice powder over. Toss gently.','Microwave cauliflower rice. Assemble.']},
+
+  // ── SALMON & FISH ─────────────────────────────────────────────────────────
+
+  {id:'miso-salmon',name:'Miso-Glazed Salmon Bowl',emoji:'🍱',cuisine:'Japanese',proteins:['salmon'],
+   macros:{protein:60,calories:430,carbs:12,fat:18},prepTime:'20 min',fridgeOnly:true,
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'White miso is milder and sweeter than red miso — use white for this glaze. The miso-mirin-soy combination is one of the most balanced flavour profiles in Japanese cooking.',
+   prepSteps:[{icon:'🍱',title:'Marinate minimum 30 min',desc:'The miso glaze needs time to penetrate. Overnight in the fridge gives the best result.'},{icon:'⚠️',title:'Fridge only',desc:'All containers to fridge. Best within 3–4 days.'},{icon:'♨️',title:'Reheating',desc:'Microwave 90 seconds on medium power.'}],
+   ingredients:[{name:'Salmon fillet (skinless)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tenderstem broccoli',qty:100,unit:'g'},{name:'Edamame (shelled)',qty:60,unit:'g'},{name:'White miso paste',qty:1,unit:'tbsp'},{name:'Low-sodium soy sauce',qty:10,unit:'ml'},{name:'Rice vinegar',qty:8,unit:'ml'},{name:'Honey',qty:0.5,unit:'tsp'},{name:'Garlic cloves',qty:1,unit:''},{name:'Fresh ginger',qty:3,unit:'g'},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Spring onions',qty:1,unit:''}],
+   steps:['Mix miso, soy, rice vinegar, honey, garlic and ginger into glaze.','Coat salmon. Marinate 30 min minimum.','Bake salmon at 200°C for 12–14 min, basting once halfway.','Steam broccoli 3 min. Defrost edamame in boiling water 2 min.','Microwave cauliflower rice. Assemble.','Sprinkle sesame seeds and spring onions.']},
+
+  {id:'cajun-salmon',name:'Cajun Salmon & Roasted Veg',emoji:'🌶️',cuisine:'American BBQ',proteins:['salmon'],
+   macros:{protein:60,calories:420,carbs:10,fat:18},prepTime:'25 min',fridgeOnly:true,
+   heroColor:'#fee2e2',heroText:'#dc2626',
+   tip:'Make your own Cajun seasoning — paprika, cayenne, garlic powder, onion powder, thyme and oregano. It\'s better than shop-bought and costs almost nothing.',
+   prepSteps:[{icon:'🌶️',title:'Pat salmon dry before seasoning',desc:'Dry surface means the spice rub sticks properly and you get a crust, not a paste.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 3–4 days.'}],
+   ingredients:[{name:'Salmon fillet (skinless)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Courgette',qty:100,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Cayenne pepper',qty:0.25,unit:'tsp'},{name:'Garlic powder',qty:0.5,unit:'tsp'},{name:'Onion powder',qty:0.25,unit:'tsp'},{name:'Dried thyme',qty:0.25,unit:'tsp'},{name:'Dried oregano',qty:0.25,unit:'tsp'},{name:'Lemon',qty:0.5,unit:''},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix all spices into Cajun seasoning. Pat salmon dry. Press spice mix firmly onto salmon.','Toss courgette, pepper and tomatoes with Frylight on a roasting tray.','Place salmon on a separate lined tray. Spray with Frylight.','Roast both at 200°C — veg 20 min, salmon 12–14 min.','Microwave cauliflower rice. Assemble.','Squeeze lemon over salmon just before serving.']},
+
+  {id:'sea-bass-med',name:'Sea Bass & Roasted Mediterranean Veg',emoji:'🐠',cuisine:'Mediterranean',proteins:['sea bass'],
+   macros:{protein:58,calories:330,carbs:10,fat:12},prepTime:'30 min',fridgeOnly:true,
+   heroColor:'#ede9fe',heroText:'#5b21b6',
+   tip:'Sea bass is a delicate fish — it needs gentle cooking. The skin crisps beautifully if you score it and cook skin-side down first.',
+   prepSteps:[{icon:'🐠',title:'Score the skin',desc:'Three diagonal cuts through the skin stops it curling and helps it crisp evenly.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 2–3 days. Sea bass is most delicate of the fish on the list.'},{icon:'♨️',title:'Reheating',desc:'60 seconds on medium. Very gentle — sea bass overcooks quickly.'}],
+   ingredients:[{name:'Sea bass fillets',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Courgette',qty:80,unit:'g'},{name:'Red pepper',qty:0.5,unit:''},{name:'Black olives (pitted)',qty:20,unit:'g'},{name:'Garlic cloves',qty:2,unit:''},{name:'Lemon',qty:1,unit:''},{name:'Fresh thyme',qty:2,unit:'sprigs'},{name:'Capers',qty:1,unit:'tsp'},{name:'Fresh basil',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Score sea bass skin with 3 diagonal cuts. Season well with salt and pepper.','Toss cherry tomatoes, courgette and pepper with garlic, thyme and Frylight. Roast at 200°C for 18 min.','Spray a non-stick pan on medium-high. Cook sea bass skin-side down 3–4 min until skin is crisp.','Flip. Cook 1–2 min more. Squeeze lemon over.','Microwave cauliflower rice. Assemble with roasted veg.','Scatter olives, capers and basil over.']},
+
+  {id:'paprika-haddock',name:'Smoky Paprika Haddock & Salsa Verde',emoji:'🐡',cuisine:'',proteins:['haddock'],
+   macros:{protein:58,calories:290,carbs:8,fat:7},prepTime:'25 min',fridgeOnly:true,
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'Salsa verde is one of the most versatile sauces in the world — herbs, capers, garlic and lemon. It elevates haddock from mild to genuinely exciting.',
+   prepSteps:[{icon:'🌿',title:'Make salsa verde Sunday',desc:'Chop everything finely by hand. Keeps in the fridge all week. Don\'t blend — the texture should be chunky.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 3–4 days.'}],
+   ingredients:[{name:'Haddock fillet',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Green beans',qty:100,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Smoked paprika',qty:1.5,unit:'tsp'},{name:'Fresh parsley',qty:20,unit:'g'},{name:'Fresh basil',qty:10,unit:'g'},{name:'Capers',qty:1,unit:'tbsp'},{name:'Garlic cloves',qty:2,unit:''},{name:'Lemon',qty:1,unit:''},{name:'Dijon mustard',qty:0.5,unit:'tsp'},{name:'Olive oil',qty:1,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Make salsa verde: finely chop parsley, basil, capers and garlic. Mix with lemon juice, mustard and olive oil. Set aside.','Pat haddock dry. Press smoked paprika and salt firmly onto both sides.','Spray a pan on medium-high. Cook haddock 3–4 min each side until cooked through and slightly crusted.','Steam green beans 3 min. Halve tomatoes.','Microwave cauliflower rice. Assemble.','Spoon salsa verde generously over haddock.']},
+
+  {id:'thai-fishcakes',name:'Thai Salmon Fishcakes & Slaw',emoji:'🫙',cuisine:'Thai',proteins:['salmon'],
+   macros:{protein:58,calories:360,carbs:12,fat:14},prepTime:'35 min',
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'Don\'t over-process the salmon — pulse it a few times, not to a smooth paste. You want some texture in the fishcakes.',
+   prepSteps:[{icon:'🫙',title:'Chill before cooking',desc:'15 min in the fridge makes fishcakes hold together better.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Fishcakes freeze very well.'}],
+   ingredients:[{name:'Salmon fillet (skinless)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'White cabbage (shredded)',qty:80,unit:'g'},{name:'Carrot (grated)',qty:60,unit:'g'},{name:'Thai red curry paste',qty:1,unit:'tbsp'},{name:'Spring onions',qty:3,unit:''},{name:'Fresh coriander',qty:10,unit:'g'},{name:'Lime',qty:1,unit:''},{name:'Fish sauce',qty:0.5,unit:'tsp'},{name:'Egg white',qty:1,unit:''},{name:'Rice vinegar',qty:1,unit:'tsp'},{name:'Sweet chilli sauce',qty:1,unit:'tbsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Roughly chop salmon. Pulse in a food processor with curry paste, spring onions, coriander, fish sauce and egg white. Don\'t over-blend.','Shape into 4 fishcakes per portion. Chill 15 min in fridge.','Spray a pan on medium heat. Cook fishcakes 3–4 min each side until golden and cooked through.','Toss cabbage and carrot with rice vinegar and a pinch of salt for slaw.','Microwave cauliflower rice. Assemble: rice, fishcakes, slaw.','Drizzle sweet chilli sauce over. Squeeze lime.']},
+
+  {id:'miso-sea-bass',name:'Miso & Ginger Sea Bass Bowl',emoji:'🍜',cuisine:'Japanese',proteins:['sea bass'],
+   macros:{protein:57,calories:340,carbs:12,fat:13},prepTime:'25 min',fridgeOnly:true,
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'The miso-ginger marinade does double duty — it flavours the fish and forms a glaze as it bakes. Watch it carefully after 10 min as miso can burn.',
+   prepSteps:[{icon:'🍜',title:'Marinate 20 min minimum',desc:'The miso needs time to penetrate the delicate flesh.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 2–3 days.'},{icon:'♨️',title:'Reheating',desc:'60–90 seconds on medium power.'}],
+   ingredients:[{name:'Sea bass fillets',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Pak choi',qty:150,unit:'g'},{name:'Edamame (shelled)',qty:60,unit:'g'},{name:'White miso paste',qty:1,unit:'tbsp'},{name:'Fresh ginger (grated)',qty:5,unit:'g'},{name:'Low-sodium soy sauce',qty:10,unit:'ml'},{name:'Rice vinegar',qty:8,unit:'ml'},{name:'Honey',qty:0.25,unit:'tsp'},{name:'Spring onions',qty:2,unit:''},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Lime',qty:0.5,unit:''}],
+   steps:['Mix miso, ginger, soy, rice vinegar and honey into glaze.','Coat sea bass. Marinate 20 min minimum.','Bake at 200°C for 10–12 min. Watch carefully after 10 min.','Stir-fry pak choi in a sprayed pan 2–3 min. Defrost edamame 2 min.','Microwave cauliflower rice. Assemble.','Scatter spring onions, sesame seeds. Squeeze lime.']},
+
+  {id:'smoky-haddock',name:'Smoky Haddock & Cauliflower Bowl',emoji:'🐡',cuisine:'',proteins:['haddock'],
+   macros:{protein:57,calories:280,carbs:10,fat:6},prepTime:'25 min',fridgeOnly:true,
+   heroColor:'#e0f2fe',heroText:'#0369a1',
+   tip:'Use smoked haddock for this one — the smokiness does most of the flavour work and makes a very simple dish genuinely interesting.',
+   prepSteps:[{icon:'🐡',title:'Poach in milk',desc:'Poaching smoked haddock in a small amount of milk keeps it incredibly moist and mellows the salt.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 3 days.'}],
+   ingredients:[{name:'Smoked haddock fillet',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Skimmed milk',qty:80,unit:'ml'},{name:'Green beans',qty:100,unit:'g'},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Garlic cloves',qty:2,unit:''},{name:'Smoked paprika',qty:0.5,unit:'tsp'},{name:'Fresh parsley',qty:8,unit:'g'},{name:'Lemon',qty:0.5,unit:''},{name:'Black pepper',qty:1,unit:'pinch'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Place smoked haddock in a pan with milk and garlic. Bring to a gentle simmer.','Poach on low heat 6–8 min until fish flakes easily. Remove and flake into chunks.','Steam green beans 3 min. Halve tomatoes.','Microwave cauliflower rice. Season with paprika and black pepper.','Assemble: rice, flaked haddock, green beans, tomatoes.','Scatter parsley. Squeeze lemon over.']},
+
+  {id:'caribbean-salmon',name:'Caribbean Spiced Salmon Bowl',emoji:'🌴',cuisine:'Caribbean',proteins:['salmon'],
+   macros:{protein:60,calories:430,carbs:10,fat:19},prepTime:'25 min',fridgeOnly:true,
+   heroColor:'#dcfce7',heroText:'#16a34a',
+   tip:'The allspice, thyme and scotch bonnet combination is the soul of Caribbean cooking. Use just a little scotch bonnet — it\'s very hot but has a fruity flavour that\'s irreplaceable.',
+   prepSteps:[{icon:'🌴',title:'Marinate minimum 20 min',desc:'The spice rub needs time to penetrate the salmon flesh.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 3–4 days.'}],
+   ingredients:[{name:'Salmon fillet (skinless)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Spring onions',qty:3,unit:''},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Ground allspice',qty:0.75,unit:'tsp'},{name:'Dried thyme',qty:0.75,unit:'tsp'},{name:'Smoked paprika',qty:0.5,unit:'tsp'},{name:'Garlic powder',qty:0.5,unit:'tsp'},{name:'Scotch bonnet (pinch, deseeded)',qty:1,unit:'pinch'},{name:'Lime',qty:1,unit:''},{name:'Fresh coriander',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix allspice, thyme, paprika, garlic powder and scotch bonnet. Coat salmon. Marinate 20 min.','Roast salmon at 200°C for 12–14 min.','Roast peppers and tomatoes alongside for 15 min with Frylight.','Microwave cauliflower rice. Assemble.','Scatter spring onions and coriander. Squeeze lime generously over.']},
+
+  // ── PRAWNS ───────────────────────────────────────────────────────────────
+
+  {id:'thai-prawn',name:'Thai Prawn Stir-Fry Bowl',emoji:'🦐',cuisine:'Thai',proteins:['prawns'],
+   macros:{protein:56,calories:320,carbs:10,fat:8},prepTime:'20 min',fridgeOnly:true,
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'Prawns cook in 2 minutes — literally. Overcooked prawns are rubbery and tasteless. When they turn pink and curl into a C shape, they\'re done. Remove from heat immediately.',
+   prepSteps:[{icon:'🦐',title:'Cook prawns last',desc:'Add prawns after all veg is cooked. 2 min maximum — remove from heat the moment they turn pink.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 2–3 days. Prawns don\'t freeze well once cooked.'}],
+   ingredients:[{name:'Raw king prawns (peeled)',qty:180,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tenderstem broccoli',qty:100,unit:'g'},{name:'Sugar snap peas',qty:80,unit:'g'},{name:'Red pepper',qty:0.5,unit:''},{name:'Thai red curry paste',qty:1,unit:'tbsp'},{name:'Light coconut milk',qty:60,unit:'ml'},{name:'Fish sauce',qty:0.5,unit:'tsp'},{name:'Lime',qty:0.5,unit:''},{name:'Fresh coriander',qty:5,unit:'g'},{name:'Spring onions',qty:2,unit:''},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray wok on high heat. Stir-fry broccoli, snap peas and pepper for 3 min.','Add curry paste. Stir 1 min until fragrant.','Add coconut milk. Simmer 2 min.','Add prawns. Cook 2 min until pink and curled into C shape. Remove from heat immediately.','Add fish sauce and lime juice.','Microwave cauliflower rice. Assemble. Scatter coriander and spring onions.']},
+
+  {id:'garlic-prawns',name:'Garlic Butter Prawns & Roasted Veg',emoji:'🧄',cuisine:'Mediterranean',proteins:['prawns'],
+   macros:{protein:55,calories:300,carbs:8,fat:9},prepTime:'20 min',fridgeOnly:true,
+   heroColor:'#ede9fe',heroText:'#5b21b6',
+   tip:'You don\'t need butter — a tiny amount of olive oil with lots of garlic gives the same effect for far fewer calories. The trick is cooking the garlic low and slow until golden, not burnt.',
+   prepSteps:[{icon:'🧄',title:'Cook garlic low and slow',desc:'Golden garlic adds sweetness. Burnt garlic ruins the whole dish.'},{icon:'🦐',title:'Prawns at the end',desc:'2 min in the garlic oil. That\'s all they need.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 2–3 days.'}],
+   ingredients:[{name:'Raw king prawns (peeled)',qty:180,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Courgette',qty:100,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Asparagus spears',qty:80,unit:'g'},{name:'Garlic cloves',qty:4,unit:''},{name:'Olive oil',qty:1,unit:'tsp'},{name:'Lemon',qty:1,unit:''},{name:'Fresh parsley',qty:8,unit:'g'},{name:'Chilli flakes',qty:0.25,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Roast courgette, tomatoes and asparagus at 200°C with Frylight for 18 min.','Heat olive oil in a pan on low-medium. Add sliced garlic. Cook 3–4 min until golden.','Turn heat to high. Add prawns and chilli flakes. Cook 2 min until pink.','Squeeze lemon over. Remove from heat.','Microwave cauliflower rice. Assemble with roasted veg.','Scatter fresh parsley over.']},
+
+  {id:'prawn-avocado',name:'Prawn & Avocado Bowl',emoji:'🥑',cuisine:'',proteins:['prawns'],
+   macros:{protein:54,calories:350,carbs:8,fat:16},prepTime:'15 min',fridgeOnly:true,
+   heroColor:'#f0fdf4',heroText:'#16a34a',
+   tip:'This is a no-cook bowl — use cooked prawns and ripe avocado. The quality of both ingredients matters here more than any other dish on the list.',
+   prepSteps:[{icon:'🥑',title:'Use ripe avocado',desc:'Underripe avocado ruins this. Gently squeeze — it should yield slightly. Buy it a day early.'},{icon:'⚠️',title:'Fridge only, eat within 2 days',desc:'Avocado discolours quickly. Squeeze lemon over immediately after cutting.'}],
+   ingredients:[{name:'Cooked king prawns',qty:180,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Avocado (half)',qty:0.5,unit:''},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Baby spinach',qty:40,unit:'g'},{name:'Lemon',qty:0.5,unit:''},{name:'Chilli flakes',qty:0.25,unit:'tsp'},{name:'Fresh coriander',qty:5,unit:'g'},{name:'Low-fat Greek yogurt',qty:20,unit:'g'},{name:'Hot sauce (optional)',qty:1,unit:'tsp'}],
+   steps:['Microwave cauliflower rice. Allow to cool slightly.','Halve and slice avocado. Squeeze lemon over immediately to prevent browning.','Halve tomatoes. Dice cucumber.','Mix yogurt with lemon juice and a pinch of salt as dressing.','Assemble: rice, spinach, prawns, avocado, tomatoes, cucumber.','Drizzle dressing and hot sauce over. Scatter coriander.']},
+
+  {id:'cajun-prawns',name:'Cajun Prawn Bowl',emoji:'🌶️',cuisine:'American BBQ',proteins:['prawns'],
+   macros:{protein:55,calories:310,carbs:10,fat:8},prepTime:'20 min',fridgeOnly:true,
+   heroColor:'#fee2e2',heroText:'#dc2626',
+   tip:'Cajun seasoning on prawns works beautifully — the spices cling to the surface and caramelise in seconds on high heat.',
+   prepSteps:[{icon:'🌶️',title:'Season right before cooking',desc:'Don\'t marinate prawns in acidic spices for long — the acid starts to cook them.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 2–3 days.'}],
+   ingredients:[{name:'Raw king prawns (peeled)',qty:180,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Corn (frozen)',qty:60,unit:'g'},{name:'Baby spinach',qty:50,unit:'g'},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Cayenne pepper',qty:0.25,unit:'tsp'},{name:'Garlic powder',qty:0.5,unit:'tsp'},{name:'Onion powder',qty:0.25,unit:'tsp'},{name:'Dried thyme',qty:0.25,unit:'tsp'},{name:'Lime',qty:1,unit:''},{name:'Low-fat Greek yogurt',qty:20,unit:'g'},{name:'Fresh coriander',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix all spices into Cajun seasoning. Toss prawns in seasoning just before cooking.','Spray a hot pan. Cook peppers and corn on high heat 3–4 min until slightly charred.','Push veg aside. Add prawns to hot pan. Cook 1 min each side until pink.','Add spinach. Stir until wilted. Squeeze lime over.','Microwave cauliflower rice. Assemble.','Add yogurt on the side. Scatter coriander.']},
+
+  {id:'prawn-masala',name:'Indian Prawn Masala Bowl',emoji:'🍛',cuisine:'Indian',proteins:['prawns'],
+   macros:{protein:55,calories:330,carbs:12,fat:9},prepTime:'25 min',fridgeOnly:true,
+   heroColor:'#fff7ed',heroText:'#ea580c',
+   tip:'Prawn masala cooks fast — the whole dish from pan to plate in 15 min. The spice base needs time but the prawns go in at the very end for just 2–3 min.',
+   prepSteps:[{icon:'🍛',title:'Build spice base first',desc:'Cook the tomato and spice base for 10 min before adding prawns. This is where all the flavour develops.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 2–3 days.'}],
+   ingredients:[{name:'Raw king prawns (peeled)',qty:180,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tinned chopped tomatoes',qty:100,unit:'g'},{name:'Onion (half)',qty:0.5,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Fresh ginger',qty:5,unit:'g'},{name:'Garam masala',qty:1,unit:'tsp'},{name:'Ground cumin',qty:0.75,unit:'tsp'},{name:'Ground coriander',qty:0.75,unit:'tsp'},{name:'Turmeric',qty:0.25,unit:'tsp'},{name:'Chilli powder',qty:0.25,unit:'tsp'},{name:'Fresh coriander',qty:6,unit:'g'},{name:'Lime',qty:0.5,unit:''},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray pan. Fry onion 4 min. Add garlic, ginger and all spices. Stir 2 min.','Add tinned tomatoes. Simmer 8–10 min until sauce thickens.','Add prawns. Cook 2–3 min until pink. Remove from heat.','Add lime juice. Season well.','Microwave cauliflower rice. Assemble. Top with coriander.']},
+
+  // ── TUNA ─────────────────────────────────────────────────────────────────
+
+  {id:'tuna-nicoise',name:'Tuna Niçoise Bowl',emoji:'🫒',cuisine:'Mediterranean',proteins:['tuna'],
+   macros:{protein:58,calories:340,carbs:10,fat:12},prepTime:'15 min',
+   heroColor:'#ede9fe',heroText:'#5b21b6',
+   tip:'The dressing is key — good Dijon mustard, red wine vinegar, a tiny bit of olive oil, garlic and herbs. Don\'t skip the anchovies in the dressing if you can find them — they add incredible depth.',
+   prepSteps:[{icon:'🫒',title:'No cooking needed',desc:'This is an assembly bowl using canned tuna and boiled eggs. Fast and genuinely delicious.'},{icon:'🧊',title:'Storage',desc:'3 to fridge. Keep dressing separate until eating. Dress just before eating.'}],
+   ingredients:[{name:'Canned tuna in water (drained)',qty:160,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Eggs (hard boiled)',qty:2,unit:''},{name:'Green beans',qty:80,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Black olives (pitted)',qty:20,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Dijon mustard',qty:1,unit:'tsp'},{name:'Red wine vinegar',qty:10,unit:'ml'},{name:'Olive oil',qty:0.5,unit:'tsp'},{name:'Garlic clove',qty:1,unit:''},{name:'Fresh parsley',qty:5,unit:'g'}],
+   steps:['Hard boil eggs: bring to boil, simmer 8 min, cool in cold water, peel.','Steam green beans 3 min until tender.','Make dressing: whisk mustard, red wine vinegar, olive oil, crushed garlic and parsley.','Microwave cauliflower rice. Allow to cool slightly.','Assemble: rice, tuna, halved eggs, green beans, tomatoes, olives, cucumber.','Drizzle dressing over just before eating.']},
+
+  {id:'spicy-tuna',name:'Spicy Tuna & Cucumber Bowl',emoji:'🥢',cuisine:'Asian',proteins:['tuna'],
+   macros:{protein:56,calories:300,carbs:8,fat:8},prepTime:'10 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'Use tuna in water not oil — canned tuna in olive oil is already dressed and you can\'t control the flavour. In water gives you a clean canvas.',
+   prepSteps:[{icon:'🥢',title:'Quick assembly bowl',desc:'No cooking except the cauliflower rice. Everything else is mixed raw.'},{icon:'🧊',title:'Storage',desc:'3 to fridge. Keep dressing separate.'}],
+   ingredients:[{name:'Canned tuna in water (drained)',qty:160,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Cucumber',qty:80,unit:'g'},{name:'Avocado (half)',qty:0.5,unit:''},{name:'Spring onions',qty:2,unit:''},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Low-sodium soy sauce',qty:15,unit:'ml'},{name:'Sriracha',qty:1,unit:'tsp'},{name:'Rice vinegar',qty:8,unit:'ml'},{name:'Sesame oil',qty:0.25,unit:'tsp'},{name:'Lime',qty:0.5,unit:''}],
+   steps:['Mix tuna with soy sauce, sriracha, rice vinegar and sesame oil.','Dice cucumber and slice avocado.','Microwave cauliflower rice. Allow to cool slightly.','Assemble: rice, spicy tuna mixture, cucumber, avocado, spring onions.','Sprinkle sesame seeds. Squeeze lime over.']},
+
+  {id:'tuna-sweetcorn',name:'Tuna, Roasted Veg & Lemon Bowl',emoji:'🐟',cuisine:'',proteins:['tuna'],
+   macros:{protein:56,calories:300,carbs:10,fat:7},prepTime:'25 min',
+   heroColor:'#e0f2fe',heroText:'#0369a1',
+   tip:'Canned tuna is one of the cheapest high-protein foods available. This bowl makes it genuinely exciting with proper seasoning and roasted veg.',
+   prepSteps:[{icon:'🔥',title:'Roast veg with plenty of seasoning',desc:'The veg carries the flavour here — season well and roast until slightly caramelised.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Canned tuna in water (drained)',qty:160,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Courgette',qty:100,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Red onion',qty:0.5,unit:''},{name:'Garlic cloves',qty:2,unit:''},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Lemon',qty:1,unit:''},{name:'Fresh parsley',qty:8,unit:'g'},{name:'Capers',qty:1,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Toss courgette, pepper, tomatoes and red onion with garlic, paprika and Frylight.','Roast at 200°C for 20–22 min until slightly caramelised.','Microwave cauliflower rice.','Assemble: rice, drained tuna, roasted veg.','Scatter capers and parsley. Squeeze lemon generously over.','Season well with salt and pepper.']},
+
+  {id:'tuna-poke',name:'Tuna Poke Bowl',emoji:'🍣',cuisine:'Japanese',proteins:['tuna'],
+   macros:{protein:57,calories:360,carbs:12,fat:10},prepTime:'15 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'For poke you want sushi-grade tuna ideally. But a good quality canned tuna in water works well for a weekly meal prep version — season it boldly.',
+   prepSteps:[{icon:'🍣',title:'Quick assembly bowl',desc:'No heat cooking needed except the cauliflower rice.'},{icon:'🧊',title:'Storage',desc:'3 to fridge. Keep dressing separate until eating.'}],
+   ingredients:[{name:'Canned tuna in water (drained)',qty:160,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Edamame (shelled)',qty:60,unit:'g'},{name:'Cucumber',qty:60,unit:'g'},{name:'Avocado (half)',qty:0.5,unit:''},{name:'Spring onions',qty:2,unit:''},{name:'Pickled ginger',qty:10,unit:'g'},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Low-sodium soy sauce',qty:15,unit:'ml'},{name:'Sesame oil',qty:0.25,unit:'tsp'},{name:'Rice vinegar',qty:8,unit:'ml'},{name:'Sriracha',qty:0.5,unit:'tsp'}],
+   steps:['Mix tuna with soy sauce, sesame oil, rice vinegar and sriracha.','Defrost edamame in boiling water 2 min. Drain.','Dice cucumber and slice avocado.','Microwave cauliflower rice. Allow to cool slightly.','Assemble: rice, seasoned tuna, edamame, cucumber, avocado.','Top with spring onions, pickled ginger and sesame seeds.']},
+
+  // ── EGGS ─────────────────────────────────────────────────────────────────
+
+  {id:'shakshuka-lunch',name:'Shakshuka Lunch Bowl',emoji:'🍳',cuisine:'Middle Eastern',proteins:['eggs'],
+   macros:{protein:28,calories:320,carbs:16,fat:16},prepTime:'25 min',
+   heroColor:'#fef2f2',heroText:'#dc2626',
+   tip:'Add a can of chickpeas to the tomato base to boost the protein and make this genuinely filling as a lunch.',
+   prepSteps:[{icon:'🍳',title:'Make base Sunday',desc:'The tomato and chickpea base keeps all week. Just reheat and add fresh eggs each morning or at lunch.'},{icon:'🧊',title:'Storage',desc:'Store base in fridge. Make fresh eggs each time.'}],
+   ingredients:[{name:'Eggs',qty:3,unit:''},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Chickpeas (tinned, drained)',qty:80,unit:'g'},{name:'Tinned chopped tomatoes',qty:200,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Onion (half)',qty:0.5,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Ground cumin',qty:1,unit:'tsp'},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Harissa paste',qty:1,unit:'tsp'},{name:'Fresh parsley',qty:8,unit:'g'},{name:'Reduced-fat feta',qty:30,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray pan. Fry onion and pepper 4 min. Add garlic, cumin, paprika and harissa. Stir 1 min.','Add tinned tomatoes and chickpeas. Simmer 10 min.','Make 3 wells. Crack eggs in. Cover and cook 5–6 min for runny yolk.','Crumble feta over. Scatter parsley.','Microwave cauliflower rice. Assemble alongside shakshuka.']},
+
+  {id:'egg-fried-cauli',name:'Egg Fried Cauliflower Rice Bowl',emoji:'🍳',cuisine:'Asian',proteins:['eggs'],
+   macros:{protein:28,calories:300,carbs:12,fat:14},prepTime:'20 min',
+   heroColor:'#fef3c7',heroText:'#d97706',
+   tip:'The key to great egg fried rice is using cold, day-old cauliflower rice. Freshly cooked will be too wet and won\'t fry properly.',
+   prepSteps:[{icon:'🍳',title:'Cook cauli rice day before',desc:'Cook Sunday, use Monday. Cold rice fries — warm rice steams.'},{icon:'🔥',title:'Maximum heat',desc:'Egg fried rice needs a screaming hot wok. Everything happens in 5 min.'}],
+   ingredients:[{name:'Eggs',qty:3,unit:''},{name:'Egg whites',qty:2,unit:''},{name:'Frozen cauliflower rice (cooked and cooled)',qty:200,unit:'g'},{name:'Frozen peas',qty:60,unit:'g'},{name:'Spring onions',qty:3,unit:''},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh ginger',qty:4,unit:'g'},{name:'Low-sodium soy sauce',qty:20,unit:'ml'},{name:'Sesame oil',qty:0.5,unit:'tsp'},{name:'Carrot (grated)',qty:60,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray wok on maximum heat. Add cooked cold cauliflower rice. Stir-fry 3 min without stirring too much — you want some colour.','Add garlic and ginger. Stir 30 seconds.','Push rice to sides. Add beaten eggs to the centre. Scramble until almost set then mix into rice.','Add peas, carrot, spring onions, soy sauce and sesame oil. Toss everything together 2 min.','Season well. Serve immediately.']},
+
+  {id:'spanish-omelette',name:'Spanish Omelette Bowl',emoji:'🥘',cuisine:'Spanish',proteins:['eggs'],
+   macros:{protein:28,calories:290,carbs:8,fat:16},prepTime:'25 min',
+   heroColor:'#fef9c3',heroText:'#a16207',
+   tip:'A proper tortilla española is set slowly on very low heat. Don\'t rush it — 15 min on low gives a creamy interior that\'s completely different to a frittata.',
+   prepSteps:[{icon:'🥘',title:'Low and slow',desc:'15 min on the lowest heat. The centre should still be slightly wobbly when you flip — it finishes cooking off the heat.'},{icon:'🧊',title:'Storage',desc:'3 to fridge. Spanish omelette is one of the few egg dishes that keeps well.'}],
+   ingredients:[{name:'Eggs',qty:4,unit:''},{name:'Egg whites',qty:3,unit:''},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Onion (half)',qty:0.5,unit:''},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Baby spinach',qty:50,unit:'g'},{name:'Garlic cloves',qty:2,unit:''},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Fresh parsley',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray pan. Fry onion, pepper and garlic on medium heat 5 min until softened.','Add spinach. Wilt 1 min. Add paprika. Season well.','Beat eggs and egg whites. Pour over veg in pan.','Cook on lowest possible heat for 12–15 min until mostly set but slightly wobbly in centre.','Place under grill 2–3 min to finish top. Cool then slice into wedges.','Microwave cauliflower rice. Assemble with tomatoes and parsley.']},
+
+  {id:'middle-eastern-eggs',name:'Middle Eastern Egg & Feta Bowl',emoji:'🥚',cuisine:'Middle Eastern',proteins:['eggs','feta'],
+   macros:{protein:30,calories:310,carbs:10,fat:18},prepTime:'20 min',
+   heroColor:'#fef9c3',heroText:'#a16207',
+   tip:'Za\'atar is the spice that makes this dish — dried thyme, sesame, sumac and oregano. Find it in any Middle Eastern shop or online. Once you have it you\'ll put it on everything.',
+   prepSteps:[{icon:'🥚',title:'Baked eggs',desc:'Baking eggs in a spiced sauce is the Middle Eastern method — set whites, runny yolk, rich sauce.'},{icon:'🧊',title:'Storage',desc:'3 to fridge. Make fresh eggs each time, reheat the sauce.'}],
+   ingredients:[{name:'Eggs',qty:3,unit:''},{name:'Reduced-fat feta',qty:50,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Cherry tomatoes',qty:100,unit:'g'},{name:'Red onion',qty:0.5,unit:''},{name:'Garlic cloves',qty:2,unit:''},{name:'Za\'atar spice blend',qty:1.5,unit:'tsp'},{name:'Olive oil',qty:0.5,unit:'tsp'},{name:'Fresh mint',qty:5,unit:'g'},{name:'Lemon',qty:0.5,unit:''},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Spray pan. Fry red onion 3 min. Add garlic and halved tomatoes. Cook 5 min until tomatoes collapse.','Season with za\'atar, salt and pepper.','Make 3 wells. Crack eggs in. Cover and cook 4–5 min for runny yolk.','Crumble feta over. Scatter mint.','Microwave cauliflower rice. Assemble.','Drizzle olive oil and squeeze lemon over.']},
+
+  {id:'masala-eggs',name:'Masala Egg Bowl',emoji:'🍛',cuisine:'Indian',proteins:['eggs'],
+   macros:{protein:28,calories:300,carbs:12,fat:16},prepTime:'20 min',
+   heroColor:'#fff7ed',heroText:'#ea580c',
+   tip:'Hard boil the eggs then score them before adding to the masala sauce — this allows the sauce to penetrate and flavour the whites.',
+   prepSteps:[{icon:'🥚',title:'Score boiled eggs',desc:'3–4 shallow cuts through the white before adding to the sauce. The masala gets inside.'},{icon:'🧊',title:'Storage',desc:'3 to fridge. Sauce keeps all week — eggs added fresh or kept in sauce.'}],
+   ingredients:[{name:'Eggs',qty:3,unit:''},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tinned chopped tomatoes',qty:150,unit:'g'},{name:'Onion (half)',qty:0.5,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Fresh ginger',qty:5,unit:'g'},{name:'Garam masala',qty:1.5,unit:'tsp'},{name:'Ground cumin',qty:0.75,unit:'tsp'},{name:'Ground coriander',qty:0.75,unit:'tsp'},{name:'Turmeric',qty:0.25,unit:'tsp'},{name:'Chilli powder',qty:0.25,unit:'tsp'},{name:'Fresh coriander',qty:6,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Hard boil eggs 8 min. Cool, peel and score each egg with 4 shallow cuts.','Spray pan. Fry onion 4 min. Add garlic, ginger and all spices. Stir 2 min.','Add tinned tomatoes. Simmer 10 min until sauce thickens.','Add scored eggs. Simmer 3 min, spooning sauce over eggs.','Microwave cauliflower rice. Assemble.','Top with fresh coriander.']}
+
 ];
 
 const ALL_MEALS=[...BREAKFASTS,...LUNCHES];
 const CAT_ORDER=['Protein','Fruit & Veg','Grains & Pulses','Dairy & Eggs','Pantry & Condiments'];
 const CAT_ICONS={'Protein':'🥩','Fruit & Veg':'🥦','Grains & Pulses':'🌾','Dairy & Eggs':'🥛','Pantry & Condiments':'🧴'};
 const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-const CUISINES=['Asian','Mediterranean','Mexican','North African'];
+const CUISINES=['Asian','Mediterranean','Mexican','North African','Indian','Japanese','Thai','Middle Eastern','Caribbean','Spanish','Greek','American BBQ'];
 const PROTEINS=['chicken','beef','lamb','salmon','cod','eggs','cottage cheese','oats'];
 
 // ── STATE ────────────────────────────────────────────────────────────────────
@@ -675,7 +1171,6 @@ function mealCardHTML(meal,type){
   const pill=type==='breakfast'?(meal.type==='batch'?`<span class="pill pill-batch">Batch</span>`:`<span class="pill pill-fresh">Fresh</span>`):'';
   return `<div class="meal-card ${active?'selected':''}">
     <div class="meal-row">
-      <div class="meal-icon ${active?'sel':''}">${meal.emoji}</div>
       <div class="meal-info">${cTag}${pill}<div class="meal-name">${meal.name}</div><div class="meal-meta">${meal.prepTime} · ${meal.macros.protein}g protein</div></div>
       <div class="meal-macros"><div class="m-prot">${meal.macros.protein}g</div><div class="m-lbl">protein</div><div class="m-cal">${meal.macros.calories} kcal</div></div>
     </div>
@@ -710,7 +1205,6 @@ function openRecipe(type,id){
 
   let h=`<button class="back-btn" onclick="closeRecipe()">← Back</button>`;
   h+=`<div class="recipe-hero" style="background:${meal.heroColor}">
-    <div class="r-emoji">${meal.emoji}</div>
     <div>${cTag}${pill}<div class="r-name">${meal.name}</div>
     <div class="r-meta" style="color:${meal.heroText}">${servLbl} · ${meal.prepTime}</div></div>
   </div>`;
@@ -815,14 +1309,14 @@ function renderPlan(){
       h+=BREAKFASTS.map(m=>{
         const chosen=plan.breakfast===m.id;
         return `<div class="day-opt ${chosen?'chosen':''}" onclick="toggleDayMeal('${weekKey}','${day}','breakfast','${m.id}')">
-          <div class="day-opt-emoji">${m.emoji}</div><div class="day-opt-name">${m.name}</div>
+          <div class="day-opt-name">${m.name}</div>
           <div class="day-opt-check">${chosen?'✓':''}</div></div>`;
       }).join('');
       h+=`<div class="day-sec-lbl" style="margin-top:7px">Lunch / Dinner</div>`;
       h+=LUNCHES.map(m=>{
         const chosen=plan.lunch===m.id;
         return `<div class="day-opt ${chosen?'chosen':''}" onclick="toggleDayMeal('${weekKey}','${day}','lunch','${m.id}')">
-          <div class="day-opt-emoji">${m.emoji}</div><div class="day-opt-name">${m.name}</div>
+          <div class="day-opt-name">${m.name}</div>
           <div class="day-opt-check">${chosen?'✓':''}</div></div>`;
       }).join('');
     }
@@ -956,7 +1450,7 @@ function renderDaily(){
     autoMeals.forEach(e=>{
       h+=`<div class="log-entry">
         <div class="log-entry-info">
-          <div class="log-entry-name">${e.emoji} ${e.name}</div>
+          <div class="log-entry-name">${e.name}</div>
           <div class="log-entry-macros">${e.protein}g protein · ${e.calories} kcal</div>
           <div class="log-entry-auto">📅 Auto-added from week plan</div>
         </div>
@@ -970,7 +1464,7 @@ function renderDaily(){
     manualEntries.forEach((e,i)=>{
       h+=`<div class="log-entry">
         <div class="log-entry-info">
-          <div class="log-entry-name">${e.emoji||'🍴'} ${e.name}</div>
+          <div class="log-entry-name">${e.name}</div>
           <div class="log-entry-macros">${e.protein||0}g protein · ${e.calories||0} kcal</div>
         </div>
         <button class="remove-btn" onclick="removeEntry(${i})">×</button>
@@ -997,9 +1491,9 @@ function renderDaily(){
     if(addMealTab==='meals'){
       h+=`<div class="meal-picker">
         <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;padding:2px 0 5px">Breakfasts</div>`;
-      BREAKFASTS.forEach(m=>{h+=`<div class="picker-opt" onclick="addMealEntry('${m.id}','breakfast')"><div class="picker-opt-emoji">${m.emoji}</div><div><div class="picker-opt-name">${m.name}</div><div class="picker-opt-macros">${m.macros.protein}g protein · ${m.macros.calories} kcal</div></div></div>`;});
+      BREAKFASTS.forEach(m=>{h+=`<div class="picker-opt" onclick="addMealEntry('${m.id}','breakfast')"><div><div class="picker-opt-name">${m.name}</div><div class="picker-opt-macros">${m.macros.protein}g protein · ${m.macros.calories} kcal</div></div></div>`;});
       h+=`<div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;padding:7px 0 5px">Lunches & Dinners</div>`;
-      LUNCHES.forEach(m=>{h+=`<div class="picker-opt" onclick="addMealEntry('${m.id}','lunch')"><div class="picker-opt-emoji">${m.emoji}</div><div><div class="picker-opt-name">${m.name}</div><div class="picker-opt-macros">${m.macros.protein}g protein · ${m.macros.calories} kcal</div></div></div>`;});
+      LUNCHES.forEach(m=>{h+=`<div class="picker-opt" onclick="addMealEntry('${m.id}','lunch')"><div><div class="picker-opt-name">${m.name}</div><div class="picker-opt-macros">${m.macros.protein}g protein · ${m.macros.calories} kcal</div></div></div>`;});
       h+=`</div>`;
     }else{
       h+=`<div class="manual-fields">
