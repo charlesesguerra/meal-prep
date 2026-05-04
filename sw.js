@@ -1,4 +1,4 @@
-const CACHE_NAME = 'plateplan-v2';
+const CACHE_NAME = 'plateplan-v3';
 const ASSETS = [
   '/',
   '/index.html',
