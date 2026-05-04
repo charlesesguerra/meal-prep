@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>Plate Plan</title>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#16a34a">
@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Nunito',sans-serif;background:#f8fafc;color:#0f172a;max-width:480px;margin:0 auto;padding-bottom:72px;min-height:100vh}
+body{font-family:'Nunito',sans-serif;background:#f8fafc;color:#0f172a;max-width:480px;margin:0 auto;padding-bottom:calc(72px + env(safe-area-inset-bottom));min-height:100vh}
 .app-header{background:#fff;padding:14px 16px 12px;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:150}
 .app-logo{display:flex;align-items:center;gap:8px}
 .app-logo-icon{width:32px;height:32px;background:#16a34a;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
@@ -22,8 +22,8 @@ body{font-family:'Nunito',sans-serif;background:#f8fafc;color:#0f172a;max-width:
 .header-right{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
 .header-date{font-size:10px;color:#94a3b8;font-weight:600}
 .header-name{font-size:11px;color:#16a34a;font-weight:800}
-.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #f1f5f9;display:flex;z-index:200}
-.nav-btn{flex:1;padding:7px 2px 5px;border:none;background:none;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #f1f5f9;display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom)}
+.nav-btn{flex:1;padding:7px 2px 8px;border:none;background:none;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px}
 .nav-icon{font-size:18px;line-height:1}
 .nav-label{font-size:9px;font-weight:700;color:#94a3b8}
 .nav-btn.active .nav-label{color:#16a34a}
