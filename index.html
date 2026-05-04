@@ -4,246 +4,305 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Plate Plan</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#16a34a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Plate Plan">
+<link rel="apple-touch-icon" href="/icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Nunito',sans-serif;background:#f8fafc;color:#0f172a;max-width:480px;margin:0 auto;padding-bottom:72px;min-height:100vh}
-.app-header{background:#fff;padding:16px 20px 14px;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center}
-.app-logo{display:flex;align-items:center;gap:10px}
-.app-logo-icon{width:34px;height:34px;background:#16a34a;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px}
-.logo-text{font-size:19px;font-weight:900;letter-spacing:-0.04em;color:#0f172a}
+.app-header{background:#fff;padding:14px 16px 12px;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:150}
+.app-logo{display:flex;align-items:center;gap:8px}
+.app-logo-icon{width:32px;height:32px;background:#16a34a;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.logo-text{font-size:18px;font-weight:900;letter-spacing:-0.04em;color:#0f172a}
 .logo-text span{color:#16a34a}
-.header-date{font-size:11px;color:#94a3b8;font-weight:600;text-align:right;line-height:1.4}
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.header-date{font-size:10px;color:#94a3b8;font-weight:600}
+.header-name{font-size:11px;color:#16a34a;font-weight:800}
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #f1f5f9;display:flex;z-index:200}
-.nav-btn{flex:1;padding:8px 2px 6px;border:none;background:none;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px}
-.nav-icon{font-size:19px;line-height:1}
-.nav-label{font-size:9px;font-weight:700;color:#94a3b8;letter-spacing:0.02em}
+.nav-btn{flex:1;padding:7px 2px 5px;border:none;background:none;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px}
+.nav-icon{font-size:18px;line-height:1}
+.nav-label{font-size:9px;font-weight:700;color:#94a3b8}
 .nav-btn.active .nav-label{color:#16a34a}
-.view{display:none;padding:14px 14px 0}
+.view{display:none;padding:12px 12px 0}
 .view.active{display:block}
-.section-label{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
-.card{background:#fff;border-radius:14px;padding:14px;border:1px solid #f1f5f9;box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:8px}
+.sec-lbl{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px}
+.card{background:#fff;border-radius:13px;padding:13px;border:1px solid #f1f5f9;box-shadow:0 1px 3px rgba(0,0,0,0.04);margin-bottom:8px}
 .green-btn{background:#16a34a;color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;font-size:13px;cursor:pointer;font-family:'Nunito',sans-serif}
-.ghost-btn{background:#fff;color:#64748b;border:1px solid #e2e8f0;border-radius:10px;padding:9px 14px;font-weight:700;font-size:12px;cursor:pointer;font-family:'Nunito',sans-serif}
-.alert-y{background:#fffbeb;border:1px solid #fde68a;border-radius:11px;padding:11px 13px;margin-bottom:11px;font-size:12px;color:#92400e;line-height:1.5}
-.alert-b{background:#eff6ff;border:1px solid #bfdbfe;border-radius:11px;padding:11px 13px;margin-bottom:11px;font-size:12px;color:#1e40af;line-height:1.5}
-.alert-g{background:#f0fdf4;border:1px solid #86efac;border-radius:11px;padding:11px 13px;margin-bottom:11px;font-size:12px;color:#16a34a;line-height:1.5}
+.ghost-btn{background:#fff;color:#64748b;border:1px solid #e2e8f0;border-radius:9px;padding:8px 12px;font-weight:700;font-size:12px;cursor:pointer;font-family:'Nunito',sans-serif}
+.alert-y{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:#92400e;line-height:1.5}
+.alert-b{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:#1e40af;line-height:1.5}
+.alert-g{background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:#16a34a;line-height:1.5}
 /* Onboarding */
-.onboard-wrap{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:24px 20px;background:#f8fafc}
-.onboard-logo{display:flex;align-items:center;gap:10px;margin-bottom:32px;justify-content:center}
-.onboard-logo-icon{width:48px;height:48px;background:#16a34a;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px}
-.onboard-logo-text{font-size:26px;font-weight:900;letter-spacing:-0.04em;color:#0f172a}
-.onboard-logo-text span{color:#16a34a}
-.onboard-card{background:#fff;border-radius:20px;padding:24px;border:1px solid #f1f5f9;box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:16px}
-.onboard-card h2{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:6px}
-.onboard-card p{font-size:13px;color:#64748b;margin-bottom:20px;line-height:1.5}
-.onboard-field{margin-bottom:14px}
-.onboard-field label{display:block;font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
-.onboard-field input{width:100%;padding:12px 14px;border:2px solid #e2e8f0;border-radius:12px;font-size:15px;font-family:'Nunito',sans-serif;font-weight:700;color:#0f172a}
-.onboard-field input:focus{outline:none;border-color:#16a34a}
-.onboard-field .hint{font-size:11px;color:#94a3b8;margin-top:4px}
-.onboard-start-btn{width:100%;padding:14px;background:#16a34a;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:4px}
+.ob-wrap{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:20px;background:#f8fafc}
+.ob-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px;justify-content:center}
+.ob-logo-icon{width:46px;height:46px;background:#16a34a;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.ob-logo-text{font-size:24px;font-weight:900;letter-spacing:-0.04em}
+.ob-logo-text span{color:#16a34a}
+.ob-card{background:#fff;border-radius:18px;padding:20px;border:1px solid #f1f5f9;box-shadow:0 4px 20px rgba(0,0,0,0.06);margin-bottom:12px}
+.ob-card h2{font-size:17px;font-weight:800;color:#0f172a;margin-bottom:5px}
+.ob-card p{font-size:12px;color:#64748b;margin-bottom:18px;line-height:1.5}
+.ob-field{margin-bottom:12px}
+.ob-field label{display:block;font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px}
+.ob-field input{width:100%;padding:11px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:'Nunito',sans-serif;font-weight:700;color:#0f172a}
+.ob-field input:focus{outline:none;border-color:#16a34a}
+.ob-field .hint{font-size:11px;color:#94a3b8;margin-top:3px}
+.ob-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.unit-toggle{display:flex;background:#f1f5f9;border-radius:8px;padding:2px;margin-bottom:12px}
+.unit-btn{flex:1;padding:7px;border:none;background:none;border-radius:7px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:#64748b;cursor:pointer}
+.unit-btn.active{background:#fff;color:#16a34a;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
+.ob-start{width:100%;padding:13px;background:#16a34a;color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:4px}
 /* Portion */
-.portion-bar{background:#fff;border-radius:13px;padding:12px 14px;border:1px solid #f1f5f9;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
-.portion-label{font-size:13px;font-weight:700;color:#0f172a}
-.portion-sub{font-size:11px;color:#94a3b8;margin-top:1px}
-.portion-controls{display:flex;align-items:center;gap:10px}
-.portion-btn{width:30px;height:30px;border-radius:8px;border:none;background:#f1f5f9;font-size:17px;cursor:pointer;font-weight:700;color:#0f172a;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif}
-.portion-num{font-size:20px;font-weight:900;color:#16a34a;min-width:20px;text-align:center}
+.portion-bar{background:#fff;border-radius:12px;padding:11px 13px;border:1px solid #f1f5f9;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.portion-lbl{font-size:13px;font-weight:700;color:#0f172a}
+.portion-sub{font-size:10px;color:#94a3b8;margin-top:1px}
+.portion-controls{display:flex;align-items:center;gap:9px}
+.p-btn{width:28px;height:28px;border-radius:7px;border:none;background:#f1f5f9;font-size:16px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif}
+.p-num{font-size:19px;font-weight:900;color:#16a34a;min-width:18px;text-align:center}
+/* Search & filter */
+.search-wrap{margin-bottom:10px}
+.search-input{width:100%;padding:10px 14px 10px 36px;border:1.5px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:'Nunito',sans-serif;color:#0f172a;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2394a3b8' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 11px center}
+.search-input:focus{outline:none;border-color:#16a34a}
+.filter-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.chip{padding:5px 11px;border-radius:20px;border:1.5px solid #e2e8f0;background:#fff;font-size:11px;font-weight:700;color:#64748b;cursor:pointer;white-space:nowrap;transition:all 0.15s}
+.chip.active{background:#16a34a;color:#fff;border-color:#16a34a}
+/* Meal tabs within Meals view */
+.meal-view-tabs{display:flex;background:#f1f5f9;border-radius:10px;padding:3px;margin-bottom:12px}
+.mvt-btn{flex:1;padding:7px;border:none;background:none;border-radius:8px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:#64748b;cursor:pointer;transition:all 0.15s}
+.mvt-btn.active{background:#fff;color:#16a34a;box-shadow:0 1px 3px rgba(0,0,0,0.07)}
 /* Meal cards */
-.meal-card{background:#fff;border-radius:14px;padding:12px;border:1px solid #f1f5f9;box-shadow:0 1px 3px rgba(0,0,0,0.04);margin-bottom:7px;transition:border 0.15s,box-shadow 0.15s}
+.meal-card{background:#fff;border-radius:13px;padding:11px;border:1px solid #f1f5f9;box-shadow:0 1px 3px rgba(0,0,0,0.04);margin-bottom:6px;transition:border 0.15s,box-shadow 0.15s}
 .meal-card.selected{border:2px solid #16a34a;box-shadow:0 0 0 3px #dcfce7}
-.meal-row{display:flex;gap:10px;align-items:center}
-.meal-icon{width:40px;height:40px;border-radius:10px;background:#f8fafc;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;transition:background 0.15s}
+.meal-row{display:flex;gap:9px;align-items:center}
+.meal-icon{width:38px;height:38px;border-radius:9px;background:#f8fafc;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;transition:background 0.15s}
 .meal-icon.sel{background:#dcfce7}
 .meal-info{flex:1;min-width:0}
-.meal-name{font-weight:700;font-size:13px;color:#0f172a;line-height:1.3}
+.meal-name{font-weight:700;font-size:12px;color:#0f172a;line-height:1.3}
 .meal-meta{font-size:10px;color:#94a3b8;margin-top:1px}
-.cuisine-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;margin-bottom:3px}
-.pill{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;margin-bottom:3px}
+.cuisine-tag{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-bottom:2px}
+.pill{display:inline-block;padding:2px 6px;border-radius:20px;font-size:9px;font-weight:700;margin-bottom:2px}
 .pill-batch{background:#dcfce7;color:#16a34a}
 .pill-fresh{background:#fef3c7;color:#d97706}
-.meal-macros{text-align:right;flex-shrink:0;min-width:48px}
-.m-prot{font-size:14px;font-weight:800;color:#16a34a}
+.meal-macros{text-align:right;flex-shrink:0;min-width:44px}
+.m-prot{font-size:13px;font-weight:800;color:#16a34a}
 .m-lbl{font-size:9px;color:#94a3b8}
 .m-cal{font-size:10px;color:#64748b;margin-top:1px}
-.meal-btns{display:flex;gap:6px;margin-top:9px}
-.meal-btns button{flex:1;padding:7px;border-radius:8px;border:none;font-weight:700;font-size:12px;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s}
+.meal-btns{display:flex;gap:5px;margin-top:8px;align-items:center}
+.meal-btns button{flex:1;padding:6px;border-radius:7px;border:none;font-weight:700;font-size:11px;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s}
 .btn-sel{background:#f1f5f9;color:#64748b}
 .btn-sel.on{background:#16a34a;color:#fff}
 .btn-rec{background:#fff;border:1px solid #e2e8f0;color:#64748b}
 .btn-rec.on{border-color:#86efac;color:#16a34a}
+.fav-btn{width:28px;height:28px;border-radius:7px;border:1px solid #e2e8f0;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:all 0.15s}
+.fav-btn.faved{background:#fef2f2;border-color:#fecaca}
 /* Recipe */
-.back-btn{background:none;border:none;color:#64748b;font-size:13px;cursor:pointer;padding:0 0 12px;font-family:'Nunito',sans-serif;display:block}
-.recipe-hero{border-radius:16px;padding:16px;margin-bottom:12px;display:flex;gap:12px;align-items:center}
-.r-emoji{font-size:40px;line-height:1}
-.r-name{font-size:16px;font-weight:800;color:#0f172a;line-height:1.2}
-.r-meta{font-size:11px;margin-top:3px}
-.mpills{display:flex;gap:6px;margin-bottom:12px}
-.mpill{flex:1;border-radius:10px;padding:8px 4px;text-align:center}
+.back-btn{background:none;border:none;color:#64748b;font-size:12px;cursor:pointer;padding:0 0 11px;font-family:'Nunito',sans-serif;display:block}
+.recipe-hero{border-radius:14px;padding:14px;margin-bottom:11px;display:flex;gap:11px;align-items:center}
+.r-emoji{font-size:38px;line-height:1}
+.r-name{font-size:15px;font-weight:800;color:#0f172a;line-height:1.2}
+.r-meta{font-size:10px;margin-top:2px}
+.mpills{display:flex;gap:5px;margin-bottom:11px}
+.mpill{flex:1;border-radius:9px;padding:7px 3px;text-align:center}
 .mpill.hl{background:#16a34a}
 .mpill.pl{background:#fff;border:1px solid #f1f5f9}
-.mpill .pv{font-size:13px;font-weight:800}
+.mpill .pv{font-size:12px;font-weight:800}
 .mpill.hl .pv{color:#fff}
 .mpill.pl .pv{color:#0f172a}
 .mpill .plb{font-size:9px;margin-top:1px}
 .mpill.hl .plb{color:#bbf7d0}
 .mpill.pl .plb{color:#94a3b8}
-.ing-list{background:#fff;border-radius:12px;overflow:hidden;margin-bottom:14px;border:1px solid #f1f5f9}
-.ing-row{display:flex;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #f8fafc;font-size:12px;gap:8px}
+.ing-list{background:#fff;border-radius:11px;overflow:hidden;margin-bottom:12px;border:1px solid #f1f5f9}
+.ing-row{display:flex;justify-content:space-between;padding:9px 11px;border-bottom:1px solid #f8fafc;font-size:12px;gap:8px}
 .ing-row:last-child{border-bottom:none}
 .ing-n{color:#334155;flex:1}
 .ing-q{font-weight:700;color:#16a34a;text-align:right;flex-shrink:0}
-.steps-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-.step{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid #f1f5f9;border-radius:10px;padding:10px 12px;cursor:pointer;transition:all 0.15s}
+.steps-list{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.step{display:flex;gap:8px;align-items:flex-start;background:#fff;border:1px solid #f1f5f9;border-radius:9px;padding:9px 11px;cursor:pointer;transition:all 0.15s}
 .step.done{background:#f0fdf4;border-color:#86efac}
-.step-num{min-width:20px;height:20px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#94a3b8;flex-shrink:0;transition:all 0.15s}
+.step-num{min-width:19px;height:19px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#94a3b8;flex-shrink:0;transition:all 0.15s}
 .step.done .step-num{background:#16a34a;color:#fff}
-.step-text{font-size:12px;color:#334155;line-height:1.5}
+.step-text{font-size:11px;color:#334155;line-height:1.5}
 .step.done .step-text{color:#94a3b8;text-decoration:line-through}
-/* Prep in recipe */
-.prep-section{background:#f8fafc;border-radius:13px;padding:14px;margin-bottom:14px;border:1px solid #f1f5f9}
-.prep-section-title{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
-.prep-step-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px}
-.prep-step-row:last-child{margin-bottom:0}
-.prep-step-icon{font-size:17px;width:26px;text-align:center;flex-shrink:0;margin-top:1px}
-.prep-step-content{}
-.prep-step-title{font-size:12px;font-weight:700;color:#0f172a;margin-bottom:1px}
-.prep-step-desc{font-size:11px;color:#64748b;line-height:1.5}
-/* Plan (week) */
-.day-card{background:#fff;border-radius:13px;border:1px solid #f1f5f9;overflow:hidden;margin-bottom:7px}
-.day-header{display:flex;justify-content:space-between;align-items:center;padding:12px 13px;cursor:pointer}
-.day-name{font-weight:700;font-size:13px;color:#0f172a}
-.day-today-badge{background:#dcfce7;color:#16a34a;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px}
-.day-weekend-badge{background:#f1f5f9;color:#64748b;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:6px}
-.day-preview{font-size:11px;color:#94a3b8;margin-top:2px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prep-section{background:#f8fafc;border-radius:11px;padding:12px;margin-bottom:12px;border:1px solid #f1f5f9}
+.prep-sec-title{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.prep-row{display:flex;gap:9px;align-items:flex-start;margin-bottom:8px}
+.prep-row:last-child{margin-bottom:0}
+.prep-row-icon{font-size:16px;width:24px;text-align:center;flex-shrink:0;margin-top:1px}
+.prep-row-title{font-size:11px;font-weight:700;color:#0f172a;margin-bottom:1px}
+.prep-row-desc{font-size:11px;color:#64748b;line-height:1.4}
+/* Plan tab */
+.week-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;background:#fff;border-radius:12px;padding:10px 13px;border:1px solid #f1f5f9}
+.week-nav-btn{background:#f1f5f9;border:none;border-radius:7px;width:30px;height:30px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.week-nav-btn:disabled{opacity:0.3;cursor:default}
+.week-lbl{text-align:center}
+.week-lbl-main{font-size:13px;font-weight:800;color:#0f172a}
+.week-lbl-sub{font-size:10px;color:#94a3b8;margin-top:1px}
+.week-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:5px}
+.badge-current{background:#dcfce7;color:#16a34a}
+.badge-next{background:#dbeafe;color:#1d4ed8}
+.badge-past{background:#f1f5f9;color:#64748b}
+.day-card{background:#fff;border-radius:12px;border:1px solid #f1f5f9;overflow:hidden;margin-bottom:6px}
+.day-header{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;cursor:pointer}
+.day-name-wrap{display:flex;align-items:center;gap:6px}
+.day-name{font-weight:700;font-size:12px;color:#0f172a}
+.day-date-lbl{font-size:10px;color:#94a3b8}
+.day-today-badge{background:#dcfce7;color:#16a34a;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px}
+.day-weekend-badge{background:#f1f5f9;color:#64748b;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px}
+.day-preview{font-size:10px;color:#94a3b8;margin-top:2px;max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .day-preview.set{color:#16a34a;font-weight:600}
-.day-body{display:none;padding:0 13px 13px;border-top:1px solid #f8fafc}
+.day-body{display:none;padding:0 12px 12px;border-top:1px solid #f8fafc}
 .day-body.open{display:block}
-.day-section-lbl{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin:10px 0 6px}
-.day-opt{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:8px;cursor:pointer;margin-bottom:3px;transition:background 0.1s}
+.day-sec-lbl{font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin:8px 0 5px}
+.day-opt{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:7px;cursor:pointer;margin-bottom:2px;transition:background 0.1s}
 .day-opt:hover{background:#f8fafc}
 .day-opt.chosen{background:#f0fdf4}
-.day-opt-emoji{font-size:17px;width:26px;text-align:center}
-.day-opt-name{font-size:12px;font-weight:600;color:#334155;flex:1}
+.day-opt-emoji{font-size:16px;width:24px;text-align:center}
+.day-opt-name{font-size:11px;font-weight:600;color:#334155;flex:1}
 .day-opt.chosen .day-opt-name{color:#16a34a}
-.day-opt-check{width:17px;height:17px;border-radius:5px;border:2px solid #e2e8f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;transition:all 0.15s}
+.day-opt-check{width:16px;height:16px;border-radius:4px;border:2px solid #e2e8f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:#fff;transition:all 0.15s}
 .day-opt.chosen .day-opt-check{background:#16a34a;border-color:#16a34a}
+.readonly-badge{background:#f1f5f9;color:#94a3b8;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:6px}
 /* Shop */
-.shop-toggle{display:flex;background:#f1f5f9;border-radius:10px;padding:3px;margin-bottom:14px}
-.shop-tab-btn{flex:1;padding:8px;border:none;background:none;border-radius:8px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:#64748b;cursor:pointer;transition:all 0.15s}
-.shop-tab-btn.active{background:#fff;color:#16a34a;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
-.prog-bar{background:#f1f5f9;border-radius:99px;height:5px;margin-bottom:14px;overflow:hidden}
+.shop-toggle{display:flex;background:#f1f5f9;border-radius:9px;padding:3px;margin-bottom:12px}
+.shop-tab-btn{flex:1;padding:7px;border:none;background:none;border-radius:7px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:#64748b;cursor:pointer;transition:all 0.15s}
+.shop-tab-btn.active{background:#fff;color:#16a34a;box-shadow:0 1px 3px rgba(0,0,0,0.07)}
+.prog-bar{background:#f1f5f9;border-radius:99px;height:5px;overflow:hidden}
 .prog-fill{background:#16a34a;height:100%;border-radius:99px;transition:width 0.3s}
-.shop-list{background:#fff;border-radius:12px;overflow:hidden;border:1px solid #f1f5f9;margin-bottom:14px}
-.shop-row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid #f8fafc;cursor:pointer;transition:background 0.1s}
+.shop-list{background:#fff;border-radius:11px;overflow:hidden;border:1px solid #f1f5f9;margin-bottom:12px}
+.shop-row{display:flex;justify-content:space-between;align-items:center;padding:9px 11px;border-bottom:1px solid #f8fafc;cursor:pointer;transition:background 0.1s}
 .shop-row:last-child{border-bottom:none}
 .shop-row.chk{background:#f0fdf4}
-.shop-left{display:flex;align-items:center;gap:8px}
-.chkbox{width:18px;height:18px;border-radius:5px;border:2px solid #e2e8f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;transition:all 0.15s}
+.shop-left{display:flex;align-items:center;gap:7px}
+.chkbox{width:17px;height:17px;border-radius:4px;border:2px solid #e2e8f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;transition:all 0.15s}
 .chkbox.on{background:#16a34a;border-color:#16a34a}
 .shop-name{font-size:12px;color:#334155}
 .shop-row.chk .shop-name{color:#94a3b8;text-decoration:line-through}
 .shop-qty{font-size:11px;font-weight:700;color:#16a34a;flex-shrink:0}
 .shop-row.chk .shop-qty{color:#94a3b8}
-.cat-lbl{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px}
+.cat-lbl{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
 /* Daily */
-.date-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.date-nav-btn{background:#f1f5f9;border:none;border-radius:8px;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.date-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.date-nav-btn{background:#f1f5f9;border:none;border-radius:7px;width:30px;height:30px;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .date-nav-btn:disabled{opacity:0.3;cursor:default}
-.date-lbl{font-size:14px;font-weight:800;color:#0f172a}
-.macro-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.macro-box{background:#fff;border-radius:13px;padding:12px;border:1px solid #f1f5f9;text-align:center}
+.date-lbl{font-size:13px;font-weight:800;color:#0f172a;text-align:center}
+.date-sublbl{font-size:10px;color:#94a3b8;text-align:center;margin-top:1px}
+.macro-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px}
+.macro-box{background:#fff;border-radius:12px;padding:11px;border:1px solid #f1f5f9;text-align:center}
 .macro-box.big{grid-column:span 2;background:#16a34a}
-.macro-box-val{font-size:20px;font-weight:900}
+.macro-box-val{font-size:18px;font-weight:900}
 .macro-box.big .macro-box-val{color:#fff}
-.macro-box-lbl{font-size:10px;margin-top:2px}
+.macro-box-lbl{font-size:10px;margin-top:1px}
 .macro-box.big .macro-box-lbl{color:#bbf7d0}
-.log-entry{background:#fff;border-radius:12px;padding:11px 13px;border:1px solid #f1f5f9;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.macro-bar-wrap{margin-bottom:12px}
+.macro-bar-row{margin-bottom:8px}
+.macro-bar-header{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
+.macro-bar-key{color:#64748b;font-weight:600}
+.macro-bar-val{font-weight:700;color:#0f172a}
+.log-entry{background:#fff;border-radius:11px;padding:10px 12px;border:1px solid #f1f5f9;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;gap:7px}
 .log-entry-info{flex:1;min-width:0}
-.log-entry-name{font-size:13px;font-weight:700;color:#0f172a}
-.log-entry-macros{font-size:11px;color:#64748b;margin-top:1px}
-.remove-btn{background:none;border:none;color:#ef4444;cursor:pointer;font-size:18px;padding:2px 4px;line-height:1}
-.add-meal-panel{background:#fff;border-radius:14px;border:1px solid #f1f5f9;margin-bottom:10px;overflow:hidden}
-.add-meal-header{padding:12px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.add-meal-header h4{font-size:13px;font-weight:700;color:#0f172a}
-.add-meal-body{padding:12px 14px;border-top:1px solid #f8fafc}
-.add-tabs{display:flex;gap:6px;margin-bottom:12px}
-.add-tab{flex:1;padding:7px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;font-size:11px;font-weight:700;color:#64748b;cursor:pointer;font-family:'Nunito',sans-serif;text-align:center;transition:all 0.15s}
+.log-entry-name{font-size:12px;font-weight:700;color:#0f172a}
+.log-entry-macros{font-size:10px;color:#64748b;margin-top:1px}
+.log-entry-auto{font-size:9px;color:#16a34a;font-weight:700;margin-top:1px}
+.remove-btn{background:none;border:none;color:#ef4444;cursor:pointer;font-size:17px;padding:2px;line-height:1}
+.add-meal-panel{background:#fff;border-radius:12px;border:1px solid #f1f5f9;margin-bottom:8px;overflow:hidden}
+.amp-header{padding:11px 13px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.amp-header h4{font-size:12px;font-weight:700;color:#0f172a}
+.amp-body{padding:11px 13px;border-top:1px solid #f8fafc}
+.add-tabs{display:flex;gap:5px;margin-bottom:10px}
+.add-tab{flex:1;padding:6px;border-radius:7px;border:1px solid #e2e8f0;background:#fff;font-size:11px;font-weight:700;color:#64748b;cursor:pointer;font-family:'Nunito',sans-serif;text-align:center;transition:all 0.15s}
 .add-tab.active{background:#16a34a;color:#fff;border-color:#16a34a}
-.meal-picker{display:flex;flex-direction:column;gap:5px;max-height:260px;overflow-y:auto;margin-bottom:10px}
-.picker-opt{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;border:1px solid #f1f5f9;cursor:pointer;background:#fff;transition:all 0.15s}
+.meal-picker{display:flex;flex-direction:column;gap:4px;max-height:240px;overflow-y:auto;margin-bottom:8px}
+.picker-opt{display:flex;align-items:center;gap:8px;padding:8px 9px;border-radius:8px;border:1px solid #f1f5f9;cursor:pointer;background:#fff;transition:all 0.15s}
 .picker-opt:active{background:#f0fdf4}
-.picker-opt-emoji{font-size:20px;width:28px;text-align:center;flex-shrink:0}
-.picker-opt-info{flex:1}
-.picker-opt-name{font-size:12px;font-weight:700;color:#0f172a}
+.picker-opt-emoji{font-size:18px;width:26px;text-align:center;flex-shrink:0}
+.picker-opt-name{font-size:11px;font-weight:700;color:#0f172a}
 .picker-opt-macros{font-size:10px;color:#64748b;margin-top:1px}
-.manual-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.manual-fields{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px}
 .field-grp{display:flex;flex-direction:column;gap:3px}
 .field-grp label{font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.05em}
-.field-grp input{padding:8px 10px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:'Nunito',sans-serif;color:#0f172a;width:100%}
+.field-grp input{padding:7px 9px;border:1px solid #e2e8f0;border-radius:7px;font-size:12px;font-family:'Nunito',sans-serif;color:#0f172a;width:100%}
 .field-grp input:focus{outline:none;border-color:#86efac}
 .field-grp.full{grid-column:span 2}
 /* Progress */
-.prog-week{background:#fff;border-radius:14px;border:1px solid #f1f5f9;overflow:hidden;margin-bottom:8px}
-.prog-week-header{padding:12px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.prog-week-title{font-size:13px;font-weight:700;color:#0f172a}
-.prog-week-body{display:none;border-top:1px solid #f8fafc;padding:10px 14px}
+.prog-week{background:#fff;border-radius:12px;border:1px solid #f1f5f9;overflow:hidden;margin-bottom:7px}
+.prog-week-header{padding:11px 13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.prog-week-title{font-size:12px;font-weight:700;color:#0f172a}
+.prog-week-body{display:none;border-top:1px solid #f8fafc;padding:9px 13px}
 .prog-week-body.open{display:block}
-.prog-day-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f8fafc}
+.prog-day-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f8fafc}
 .prog-day-row:last-child{border-bottom:none}
-.prog-day-date{font-size:12px;font-weight:700;color:#0f172a}
-.prog-day-meals{font-size:10px;color:#94a3b8;margin-top:1px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.prog-day-protein{font-size:12px;font-weight:800;color:#16a34a}
+.prog-day-date{font-size:11px;font-weight:700;color:#0f172a}
+.prog-day-meals{font-size:10px;color:#94a3b8;margin-top:1px;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prog-day-protein{font-size:11px;font-weight:800;color:#16a34a}
 .prog-day-cal{font-size:10px;color:#64748b}
-.goal-badge{width:15px;height:15px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;margin-left:3px;vertical-align:middle}
+.goal-badge{width:14px;height:14px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;margin-left:2px;vertical-align:middle}
 .goal-ok{background:#dcfce7;color:#16a34a}
 .goal-miss{background:#fee2e2;color:#ef4444}
+/* Weight tracking */
+.weight-input-row{display:flex;gap:8px;align-items:flex-end;margin-bottom:10px}
+.weight-input-row input{flex:1;padding:9px 11px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;color:#0f172a}
+.weight-input-row input:focus{outline:none;border-color:#16a34a}
+.weight-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px}
+.wstat{background:#fff;border-radius:10px;padding:10px 6px;border:1px solid #f1f5f9;text-align:center}
+.wstat-val{font-size:15px;font-weight:800;color:#0f172a}
+.wstat-lbl{font-size:9px;color:#94a3b8;margin-top:2px}
+.wstat.highlight .wstat-val{color:#16a34a}
+.weight-chart{background:#fff;border-radius:11px;border:1px solid #f1f5f9;padding:12px;margin-bottom:10px;overflow:hidden}
+.weight-log-list{background:#fff;border-radius:11px;border:1px solid #f1f5f9;overflow:hidden;margin-bottom:10px}
+.wlog-row{display:flex;justify-content:space-between;align-items:center;padding:9px 11px;border-bottom:1px solid #f8fafc}
+.wlog-row:last-child{border-bottom:none}
+.wlog-date{font-size:12px;font-weight:600;color:#334155}
+.wlog-val{font-size:12px;font-weight:800;color:#16a34a}
+.wlog-del{background:none;border:none;color:#ef4444;cursor:pointer;font-size:16px;padding:2px}
 /* Settings */
-.settings-section{margin-bottom:20px}
-.settings-section h3{font-size:13px;font-weight:800;color:#0f172a;margin-bottom:10px}
-.settings-field{background:#fff;border-radius:12px;padding:12px 14px;border:1px solid #f1f5f9;margin-bottom:8px}
-.settings-field label{display:block;font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
-.settings-field input{width:100%;padding:8px 10px;border:1px solid #e2e8f0;border-radius:8px;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;color:#0f172a}
+.settings-field{background:#fff;border-radius:11px;padding:11px 13px;border:1px solid #f1f5f9;margin-bottom:7px}
+.settings-field label{display:block;font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px}
+.settings-field input{width:100%;padding:7px 9px;border:1px solid #e2e8f0;border-radius:7px;font-size:14px;font-weight:700;font-family:'Nunito',sans-serif;color:#0f172a}
 .settings-field input:focus{outline:none;border-color:#16a34a}
-.settings-field .hint{font-size:11px;color:#94a3b8;margin-top:5px}
-.settings-save-btn{width:100%;padding:12px;background:#16a34a;color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:4px}
-.settings-saved{background:#f0fdf4;color:#16a34a;border:1px solid #86efac;border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:700;margin-top:8px;display:none}
+.settings-field .hint{font-size:10px;color:#94a3b8;margin-top:4px}
+.settings-save-btn{width:100%;padding:11px;background:#16a34a;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
+.settings-saved{background:#f0fdf4;color:#16a34a;border:1px solid #86efac;border-radius:9px;padding:9px;text-align:center;font-size:12px;font-weight:700;margin-top:7px;display:none}
+/* Export */
+.export-btn{width:100%;padding:11px;background:#fff;color:#0f172a;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;margin-bottom:7px;display:flex;align-items:center;justify-content:center;gap:8px}
+.export-btn:active{background:#f8fafc}
 /* Empty */
-.empty{text-align:center;padding:32px 16px;color:#94a3b8}
-.empty-icon{font-size:32px;margin-bottom:8px}
-.empty-text{font-size:13px;line-height:1.5}
+.empty{text-align:center;padding:28px 14px;color:#94a3b8}
+.empty-icon{font-size:30px;margin-bottom:7px}
+.empty-text{font-size:12px;line-height:1.5}
 </style>
 </head>
 <body>
 
 <div id="onboarding" style="display:none">
-  <div class="onboard-wrap">
-    <div class="onboard-logo">
-      <div class="onboard-logo-icon">🍽</div>
-      <div class="onboard-logo-text">Plate<span>Plan</span></div>
-    </div>
-    <div class="onboard-card">
-      <h2>Welcome to Plate Plan</h2>
-      <p>Set your daily nutrition targets so the app can track your progress accurately. You can change these anytime in Settings.</p>
-      <div class="onboard-field">
-        <label>Your name</label>
-        <input type="text" id="ob-name" placeholder="e.g. Charles">
-        <div class="hint">Used to personalise your app</div>
-      </div>
-      <div class="onboard-field">
-        <label>Daily protein target (g)</label>
-        <input type="number" id="ob-protein" placeholder="e.g. 120" min="0">
-        <div class="hint">Recommended: total across all meals including dinner</div>
-      </div>
-      <div class="onboard-field">
-        <label>Daily calorie target (kcal)</label>
-        <input type="number" id="ob-cals" placeholder="e.g. 1800" min="0">
-        <div class="hint">Your total daily calorie goal</div>
-      </div>
-      <button class="onboard-start-btn" onclick="completeOnboarding()">Get Started →</button>
-    </div>
+<div class="ob-wrap">
+  <div class="ob-logo">
+    <div class="ob-logo-icon">🍽</div>
+    <div class="ob-logo-text">Plate<span>Plan</span></div>
   </div>
+  <div class="ob-card">
+    <h2>Welcome to Plate Plan</h2>
+    <p>Set your daily nutrition targets and goals. You can update these anytime in Settings.</p>
+    <div class="ob-field"><label>Your name</label><input type="text" id="ob-name" placeholder="e.g. Charles"></div>
+    <div class="ob-row">
+      <div class="ob-field"><label>Protein target (g)</label><input type="number" id="ob-protein" placeholder="120" min="0"><div class="hint">Daily total</div></div>
+      <div class="ob-field"><label>Calorie target</label><input type="number" id="ob-cals" placeholder="1800" min="0"><div class="hint">Daily total</div></div>
+    </div>
+    <div class="ob-field"><label>Weight unit</label>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="ob-kg" onclick="setObUnit('kg')">kg</button>
+        <button class="unit-btn" id="ob-st" onclick="setObUnit('st')">st / lbs</button>
+      </div>
+    </div>
+    <div class="ob-row">
+      <div class="ob-field"><label id="ob-sw-lbl">Start weight (kg)</label><input type="number" id="ob-startw" placeholder="e.g. 90" step="0.1"></div>
+      <div class="ob-field"><label id="ob-tw-lbl">Target weight (kg)</label><input type="number" id="ob-targetw" placeholder="e.g. 80" step="0.1"></div>
+    </div>
+    <button class="ob-start" onclick="completeOnboarding()">Get Started →</button>
+  </div>
+</div>
 </div>
 
 <div id="main-app" style="display:none">
@@ -252,7 +311,10 @@ body{font-family:'Nunito',sans-serif;background:#f8fafc;color:#0f172a;max-width:
       <div class="app-logo-icon">🍽</div>
       <div class="logo-text">Plate<span>Plan</span></div>
     </div>
-    <div class="header-date" id="header-date"></div>
+    <div class="header-right">
+      <div class="header-date" id="header-date"></div>
+      <div class="header-name" id="header-name"></div>
+    </div>
   </div>
 
   <div class="view active" id="view-meals"></div>
@@ -274,218 +336,151 @@ body{font-family:'Nunito',sans-serif;background:#f8fafc;color:#0f172a;max-width:
 </div>
 
 <script>
+// ── CUISINE COLOURS ──────────────────────────────────────────────────────────
 const CC={Asian:{bg:'#fef3c7',c:'#92400e'},Mediterranean:{bg:'#ede9fe',c:'#5b21b6'},Mexican:{bg:'#fee2e2',c:'#991b1b'},'North African':{bg:'#fef9c3',c:'#854d0e'},'':{bg:'#f1f5f9',c:'#475569'}};
 
+// ── MEAL DATA ────────────────────────────────────────────────────────────────
 const BREAKFASTS=[
-  {id:'oats',name:'High-Protein Overnight Oats',emoji:'🫙',type:'batch',
+  {id:'oats',name:'High-Protein Overnight Oats',emoji:'🫙',type:'batch',cuisine:'',proteins:['oats'],
    macros:{protein:38,calories:350,carbs:42,fat:6},prepTime:'10 min',
    heroColor:'#dcfce7',heroText:'#16a34a',
-   tip:'Fairlife milk has 13g protein per 200ml vs 7g in regular skimmed. Or use skimmed milk + 1 scoop unflavoured whey.',
-   prepSteps:[
-     {icon:'🫙',title:'Make 5 jars Sunday',desc:'Fill each mason jar with oats, milk, yogurt and chia seeds. Stir well, seal, refrigerate overnight.'},
-     {icon:'🧊',title:'Storage',desc:'Fridge all week. Grab one each morning and top with berries.'},
-     {icon:'♨️',title:'Serving',desc:'Eat cold or microwave 60–90 seconds. Add berries after heating.'}
-   ],
+   tip:'Fairlife milk has 13g protein per 200ml vs 7g in regular skimmed. Or skimmed milk + 1 scoop whey.',
+   prepSteps:[{icon:'🫙',title:'Make jars Sunday',desc:'Fill each jar with oats, milk, yogurt and chia. Stir, seal, fridge overnight.'},{icon:'🧊',title:'Storage',desc:'Fridge all week. Top with berries each morning.'},{icon:'♨️',title:'Serving',desc:'Eat cold or microwave 60–90 sec.'}],
    ingredients:[{name:'Rolled oats',qty:50,unit:'g'},{name:'Fairlife protein milk',qty:200,unit:'ml'},{name:'0% Greek yogurt',qty:100,unit:'g'},{name:'Chia seeds',qty:10,unit:'g'},{name:'Vanilla extract',qty:1,unit:'tsp'},{name:'Mixed berries',qty:80,unit:'g'}],
-   steps:['Add 50g rolled oats to each jar.','Pour in 200ml Fairlife protein milk.','Add 100g Greek yogurt and 10g chia seeds.','Add a splash of vanilla. Stir well.','Seal and refrigerate overnight (min 6 hrs).','Morning: top with 80g berries. Eat cold or microwave 60–90 sec.']},
-  {id:'egg-muffins',name:'Egg & Veggie Muffins',emoji:'🥚',type:'batch',
+   steps:['Add 50g oats to each jar.','Pour in 200ml Fairlife protein milk.','Add 100g Greek yogurt and 10g chia seeds.','Add vanilla. Stir well.','Seal and refrigerate overnight (min 6 hrs).','Morning: top with berries. Eat cold or microwave 60–90 sec.']},
+  {id:'egg-muffins',name:'Egg & Veggie Muffins',emoji:'🥚',type:'batch',cuisine:'',proteins:['eggs'],
    macros:{protein:32,calories:260,carbs:6,fat:14},prepTime:'25 min',
    heroColor:'#fff7ed',heroText:'#ea580c',
-   tip:'Make on Sunday, eat 2 each morning. Reheat in 60 seconds. Mix up the veg each week.',
-   prepSteps:[
-     {icon:'🧁',title:'Batch bake Sunday',desc:'Make 10 muffins (2 per morning). Bake 18–20 min at 180°C. Cool completely before storing.'},
-     {icon:'🧊',title:'Storage',desc:'Fridge all week in an airtight container.'},
-     {icon:'♨️',title:'Reheating',desc:'Microwave 2 muffins for 60 seconds each morning.'}
-   ],
+   tip:'Make Sunday, eat 2 each morning. Reheat 60 seconds. Mix up the veg each week.',
+   prepSteps:[{icon:'🧁',title:'Batch bake Sunday',desc:'Make 10 muffins. Bake 18–20 min at 180°C. Cool before storing.'},{icon:'🧊',title:'Storage',desc:'Fridge all week in an airtight container.'},{icon:'♨️',title:'Reheating',desc:'Microwave 2 muffins for 60 seconds.'}],
    ingredients:[{name:'Eggs',qty:6,unit:''},{name:'Egg whites',qty:4,unit:''},{name:'Baby spinach',qty:60,unit:'g'},{name:'Red pepper (diced)',qty:80,unit:'g'},{name:'Spring onions',qty:3,unit:''},{name:'Reduced-fat cheddar',qty:40,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Preheat oven to 180°C. Spray a muffin tin.','Whisk eggs and egg whites. Season well.','Divide spinach, pepper and spring onions across muffin holes.','Pour egg mix over veg — fill ¾ full.','Sprinkle cheese over each muffin.','Bake 18–20 min until set and golden.','Cool before storing. Reheat 2 muffins: microwave 60 sec.']},
-  {id:'cottage-cheese',name:'Cottage Cheese & Berry Bowl',emoji:'🍓',type:'batch',
+   steps:['Preheat oven to 180°C. Spray muffin tin.','Whisk eggs and egg whites. Season.','Divide veg across muffin holes.','Pour egg mix over, fill ¾ full.','Sprinkle cheese.','Bake 18–20 min until golden.','Cool before storing.']},
+  {id:'cottage-cheese',name:'Cottage Cheese & Berry Bowl',emoji:'🍓',type:'batch',cuisine:'',proteins:['cottage cheese'],
    macros:{protein:28,calories:220,carbs:18,fat:4},prepTime:'5 min',
    heroColor:'#f0fdf4',heroText:'#16a34a',
-   tip:'Low-fat cottage cheese is one of the highest protein-per-calorie foods available. Cold with berries — it works.',
-   prepSteps:[
-     {icon:'🍱',title:'Portion Sunday',desc:'Spoon cottage cheese into containers, top with berries and chia seeds. Seal and refrigerate.'},
-     {icon:'🧊',title:'Storage',desc:'Fridge all week. Grab and go each morning.'},
-     {icon:'❄️',title:'Serving',desc:'Eat cold — no reheating needed.'}
-   ],
+   tip:'Low-fat cottage cheese is one of the highest protein-per-calorie foods available.',
+   prepSteps:[{icon:'🍱',title:'Portion Sunday',desc:'Spoon into containers, top with berries and chia. Seal and fridge.'},{icon:'❄️',title:'Serving',desc:'Eat cold — no reheating needed.'}],
    ingredients:[{name:'Low-fat cottage cheese',qty:200,unit:'g'},{name:'Mixed berries',qty:100,unit:'g'},{name:'Chia seeds',qty:8,unit:'g'},{name:'Honey (optional)',qty:1,unit:'tsp'}],
-   steps:['Spoon 200g cottage cheese into each container.','Top with 100g berries and 8g chia seeds.','Drizzle with honey if using.','Seal and refrigerate. Ready each morning.','Eat cold — no reheating needed.']},
-  {id:'omelette',name:'Protein Omelette',emoji:'🍳',type:'fresh',
+   steps:['Spoon 200g cottage cheese into each container.','Top with berries and chia seeds.','Drizzle honey if using.','Seal and refrigerate.']},
+  {id:'omelette',name:'Protein Omelette',emoji:'🍳',type:'fresh',cuisine:'',proteins:['eggs'],
    macros:{protein:36,calories:300,carbs:4,fat:16},prepTime:'8 min',
    heroColor:'#fef3c7',heroText:'#d97706',
-   tip:'Make fresh each morning — omelettes don\'t reheat well. Add smoked salmon for an extra protein boost.',
-   prepSteps:[
-     {icon:'🥚',title:'No Sunday prep needed',desc:'This is a fresh daily breakfast. Made each morning in 8 minutes.'},
-     {icon:'🛒',title:'Shopping note',desc:'Keep eggs, egg whites, spinach, tomatoes and feta stocked in the fridge.'},
-     {icon:'⏱',title:'Morning routine',desc:'Takes 8 minutes. Make it while your coffee brews.'}
-   ],
+   tip:'Made fresh each morning. Add smoked salmon for an extra protein boost.',
+   prepSteps:[{icon:'🥚',title:'No Sunday prep',desc:'Fresh daily. Made in 8 minutes each morning.'},{icon:'⏱',title:'Morning routine',desc:'Takes 8 min. Make it while your coffee brews.'}],
    ingredients:[{name:'Eggs',qty:2,unit:''},{name:'Egg whites',qty:3,unit:''},{name:'Baby spinach',qty:40,unit:'g'},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Reduced-fat feta',qty:30,unit:'g'},{name:'Cooking spray',qty:3,unit:'sprays'}],
-   steps:['Whisk 2 eggs and 3 egg whites. Season well.','Spray a non-stick pan on medium heat.','Pour in egg mix. Let it set 30 sec then pull edges inward.','Add spinach, tomatoes and feta to one half.','Fold over filling. Cook 1 more min. Serve immediately.']},
-  {id:'scrambled-salmon',name:'Scrambled Eggs & Smoked Salmon',emoji:'🐠',type:'fresh',
+   steps:['Whisk 2 eggs and 3 egg whites. Season.','Spray a non-stick pan on medium heat.','Pour in egg mix. Pull edges inward as it sets.','Add spinach, tomatoes and feta to one half.','Fold over. Cook 1 more min. Serve immediately.']},
+  {id:'scrambled-salmon',name:'Scrambled Eggs & Smoked Salmon',emoji:'🐠',type:'fresh',cuisine:'',proteins:['eggs','salmon'],
    macros:{protein:42,calories:320,carbs:2,fat:18},prepTime:'8 min',
    heroColor:'#e0f2fe',heroText:'#0369a1',
-   tip:'The highest protein breakfast on the list. 8 minutes, zero batch prep needed.',
-   prepSteps:[
-     {icon:'🐠',title:'No Sunday prep needed',desc:'Made fresh each morning in 8 minutes.'},
-     {icon:'🛒',title:'Shopping note',desc:'Keep smoked salmon, eggs and egg whites stocked. Smoked salmon lasts well in the fridge unopened.'},
-     {icon:'⏱',title:'Key technique',desc:'Cook eggs low and slow — they finish cooking off the heat. Fold salmon in at the end.'}
-   ],
-   ingredients:[{name:'Eggs',qty:2,unit:''},{name:'Egg whites',qty:3,unit:''},{name:'Smoked salmon',qty:80,unit:'g'},{name:'Chives (optional)',qty:1,unit:'small bunch'},{name:'Black pepper',qty:1,unit:'pinch'},{name:'Cooking spray',qty:3,unit:'sprays'}],
-   steps:['Whisk 2 eggs and 3 egg whites. Season with pepper only.','Spray a non-stick pan on low-medium heat.','Add eggs and stir slowly — low and slow is key.','When almost set but still glossy, remove from heat.','Fold in smoked salmon. Serve immediately.']},
-  {id:'protein-pancakes',name:'Protein Pancakes',emoji:'🥞',type:'batch',
+   tip:'The highest protein breakfast. 8 minutes, zero Sunday prep.',
+   prepSteps:[{icon:'🐠',title:'No Sunday prep',desc:'Made fresh in 8 minutes.'},{icon:'⏱',title:'Technique',desc:'Cook eggs low and slow. Fold salmon in off the heat.'}],
+   ingredients:[{name:'Eggs',qty:2,unit:''},{name:'Egg whites',qty:3,unit:''},{name:'Smoked salmon',qty:80,unit:'g'},{name:'Chives (optional)',qty:1,unit:'bunch'},{name:'Black pepper',qty:1,unit:'pinch'},{name:'Cooking spray',qty:3,unit:'sprays'}],
+   steps:['Whisk 2 eggs and 3 egg whites. Pepper only — salmon is salty.','Spray pan on low-medium heat.','Stir eggs slowly — low and slow.','Remove from heat when almost set.','Fold in salmon. Serve immediately.']},
+  {id:'protein-pancakes',name:'Protein Pancakes',emoji:'🥞',type:'batch',cuisine:'',proteins:['eggs'],
    macros:{protein:34,calories:370,carbs:28,fat:8},prepTime:'20 min',
    heroColor:'#fdf4ff',heroText:'#9333ea',
-   tip:'Batch all pancakes Sunday, stack in fridge. Microwave 2 each morning for 45 seconds.',
-   prepSteps:[
-     {icon:'🥞',title:'Batch cook Sunday',desc:'Make all pancakes at once. Cool completely before stacking — put parchment paper between each to stop sticking.'},
-     {icon:'🧊',title:'Storage',desc:'Fridge all week. Stack of 2 per morning, ready to grab.'},
-     {icon:'♨️',title:'Reheating',desc:'Microwave 2 pancakes for 45 seconds. Top with berries or a drizzle of honey.'}
-   ],
-   ingredients:[{name:'Banana (mashed)',qty:1,unit:''},{name:'Eggs',qty:2,unit:''},{name:'Egg whites',qty:2,unit:''},{name:'Vanilla whey protein powder',qty:30,unit:'g'},{name:'Rolled oats (blended to flour)',qty:40,unit:'g'},{name:'Baking powder',qty:0.5,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Mash banana in a bowl.','Add eggs, egg whites, protein powder, oat flour and baking powder. Mix into batter.','Spray a non-stick pan on medium-low heat.','Pour 2 tbsp rounds. Cook 2 min until bubbles form, flip, 1 more min.','Cool completely before stacking in fridge.','Reheat: 2 pancakes, 45 seconds in microwave.']}
+   tip:'Batch Sunday, stack in fridge. Microwave 2 each morning for 45 seconds.',
+   prepSteps:[{icon:'🥞',title:'Batch cook Sunday',desc:'Cool completely before stacking. Parchment between each.'},{icon:'♨️',title:'Reheating',desc:'2 pancakes, 45 seconds. Top with berries or honey.'}],
+   ingredients:[{name:'Banana (mashed)',qty:1,unit:''},{name:'Eggs',qty:2,unit:''},{name:'Egg whites',qty:2,unit:''},{name:'Vanilla whey protein powder',qty:30,unit:'g'},{name:'Rolled oats (blended)',qty:40,unit:'g'},{name:'Baking powder',qty:0.5,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mash banana.','Add eggs, egg whites, protein powder, oat flour, baking powder. Mix.','Spray pan on medium-low.','Pour 2 tbsp rounds. Cook 2 min until bubbles form, flip, 1 more min.','Cool before stacking in fridge.']}
 ];
 
 const LUNCHES=[
-  {id:'beef-veg',name:'Lean Beef & Roasted Veg Bowl',emoji:'🥩',cuisine:'',
+  {id:'beef-veg',name:'Lean Beef & Roasted Veg Bowl',emoji:'🥩',cuisine:'',proteins:['beef'],
    macros:{protein:62,calories:380,carbs:10,fat:11},prepTime:'35 min',
    heroColor:'#fef2f2',heroText:'#dc2626',
-   tip:'Use 5% fat beef mince — 20% mince has nearly 3x the fat calories. Always check the label.',
-   prepSteps:[
-     {icon:'🔥',title:'Cook proteins first',desc:'Brown all beef mince on high heat in a large pan. Season with paprika, garlic and soy sauce.'},
-     {icon:'🫕',title:'Roast veg in parallel',desc:'While beef cooks, roast broccoli, courgette and tomatoes at 200°C for 20 min.'},
-     {icon:'⚖️',title:'Portion evenly',desc:'Weigh total cooked beef, divide by number of portions. Same for veg and cauliflower rice.'},
-     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer. Move to fridge the night before eating.'}
-   ],
+   tip:'Use 5% fat beef mince — 20% mince has nearly 3x the fat calories.',
+   prepSteps:[{icon:'🔥',title:'Cook proteins first',desc:'Brown beef on high heat. Season with paprika, garlic and soy sauce.'},{icon:'🫕',title:'Roast veg in parallel',desc:'Roast broccoli, courgette and tomatoes at 200°C for 20 min.'},{icon:'⚖️',title:'Portion evenly',desc:'Weigh total beef, divide by portions. Same for veg and cauliflower rice.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
    ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Broccoli florets',qty:150,unit:'g'},{name:'Courgette',qty:100,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Low-sodium soy sauce',qty:15,unit:'ml'},{name:'Garlic cloves',qty:2,unit:''},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Brown beef mince in a pan on high heat, breaking it up.','Season with paprika, garlic, salt and pepper. Add soy sauce, stir 2 min.','Roast broccoli, courgette and tomatoes at 200°C for 20 min with Frylight.','Microwave cauliflower rice per packet.','Divide equally into containers. Cool before sealing.','Reheat: microwave 2–2.5 min, stir halfway.']},
-  {id:'chicken-soy',name:'Chicken Breast & Broccoli Soy-Ginger',emoji:'🫕',cuisine:'Asian',
+   steps:['Brown beef mince on high heat, breaking it up.','Season with paprika, garlic, soy sauce. Stir 2 min.','Roast broccoli, courgette and tomatoes at 200°C for 20 min.','Microwave cauliflower rice.','Divide equally into containers. Cool before sealing.','Reheat: microwave 2–2.5 min, stir halfway.']},
+  {id:'chicken-soy',name:'Chicken Breast & Broccoli Soy-Ginger',emoji:'🫕',cuisine:'Asian',proteins:['chicken'],
    macros:{protein:65,calories:360,carbs:12,fat:6},prepTime:'30 min',
    heroColor:'#fef3c7',heroText:'#d97706',
-   tip:'Don\'t skip the rice vinegar — it lifts the sauce and stops the soy tasting flat after reheating.',
-   prepSteps:[
-     {icon:'🍗',title:'Cook chicken in batches',desc:'6–7 min each side in a non-stick pan. Slice all chicken before portioning — easier to weigh evenly.'},
-     {icon:'🥦',title:'Steam broccoli & defrost edamame',desc:'Steam broccoli 3 min. Defrost edamame in boiling water 2 min. Both can be done simultaneously.'},
-     {icon:'⚖️',title:'Portion evenly',desc:'Weigh sliced chicken, divide by portions. Same for broccoli and edamame combined.'},
-     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
-   ],
-   ingredients:[{name:'Chicken breast',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Broccoli florets',qty:200,unit:'g'},{name:'Edamame (shelled, frozen)',qty:80,unit:'g'},{name:'Low-sodium soy sauce',qty:20,unit:'ml'},{name:'Fresh ginger (grated)',qty:5,unit:'g'},{name:'Garlic cloves',qty:2,unit:''},{name:'Rice vinegar',qty:10,unit:'ml'},{name:'Sesame seeds',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Mix soy, ginger, garlic and rice vinegar into a sauce.','Cook chicken with Frylight 6–7 min each side. Slice and toss in half the sauce.','Steam broccoli 3 min. Defrost edamame in boiling water 2 min.','Microwave cauliflower rice. Assemble containers.','Drizzle remaining sauce. Sprinkle sesame seeds. Cool before sealing.','Reheat: microwave 2 min.']},
-  {id:'chicken-thigh',name:'Baked Chicken Thigh & Roasted Veg',emoji:'🍗',cuisine:'',
+   tip:'Don\'t skip the rice vinegar — it stops the soy tasting flat after reheating.',
+   prepSteps:[{icon:'🍗',title:'Cook chicken in batches',desc:'6–7 min each side. Slice before portioning.'},{icon:'⚖️',title:'Portion evenly',desc:'Weigh sliced chicken. Same for broccoli and edamame.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
+   ingredients:[{name:'Chicken breast',qty:220,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Broccoli florets',qty:200,unit:'g'},{name:'Edamame (shelled)',qty:80,unit:'g'},{name:'Low-sodium soy sauce',qty:20,unit:'ml'},{name:'Fresh ginger (grated)',qty:5,unit:'g'},{name:'Garlic cloves',qty:2,unit:''},{name:'Rice vinegar',qty:10,unit:'ml'},{name:'Sesame seeds',qty:5,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
+   steps:['Mix soy, ginger, garlic and rice vinegar into sauce.','Cook chicken 6–7 min each side. Slice and toss in half the sauce.','Steam broccoli 3 min. Defrost edamame 2 min.','Microwave cauliflower rice. Assemble.','Drizzle remaining sauce. Sprinkle sesame seeds.','Reheat: microwave 2 min.']},
+  {id:'chicken-thigh',name:'Baked Chicken Thigh & Roasted Veg',emoji:'🍗',cuisine:'',proteins:['chicken'],
    macros:{protein:63,calories:370,carbs:12,fat:12},prepTime:'45 min',
    heroColor:'#fff7ed',heroText:'#ea580c',
    tip:'Skinless thighs give far more flavour than breast for barely more calories.',
-   prepSteps:[
-     {icon:'🔥',title:'Bake thighs with stock',desc:'The stock in the bottom of the dish is essential — it stops the chicken drying out. 35–40 min at 200°C.'},
-     {icon:'🥦',title:'Roast veg in same oven',desc:'Add veg tray to the oven for the last 20 min of the chicken cook time.'},
-     {icon:'⚖️',title:'Portion evenly',desc:'Slice or portion thighs by weight — they vary in size so weighing is important here.'},
-     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
-   ],
+   prepSteps:[{icon:'🔥',title:'Bake with stock',desc:'Stock in the bottom stops drying out. 35–40 min at 200°C.'},{icon:'🥦',title:'Roast veg in same oven',desc:'Add veg tray for the last 20 min.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
    ingredients:[{name:'Skinless chicken thighs',qty:280,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Green beans',qty:150,unit:'g'},{name:'Courgette',qty:100,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Garlic cloves',qty:3,unit:''},{name:'Smoked paprika',qty:1.5,unit:'tsp'},{name:'Dried thyme',qty:1,unit:'tsp'},{name:'Lemon (zested)',qty:0.5,unit:''},{name:'Low-salt chicken stock',qty:50,unit:'ml'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Rub thighs with paprika, thyme, lemon zest, garlic, salt and pepper.','Bake in dish with stock at 200°C for 35–40 min.','Roast veg alongside for last 20 min.','Microwave cauliflower rice. Assemble containers.','Cool completely. Reheat: microwave 2.5–3 min.']},
-  {id:'korean-beef',name:'Korean Beef Bowl',emoji:'🥢',cuisine:'Asian',
+   steps:['Rub thighs with paprika, thyme, lemon zest, garlic, salt and pepper.','Bake in dish with stock at 200°C for 35–40 min.','Roast veg alongside for last 20 min.','Microwave cauliflower rice. Assemble.','Reheat: microwave 2.5–3 min.']},
+  {id:'korean-beef',name:'Korean Beef Bowl',emoji:'🥢',cuisine:'Asian',proteins:['beef'],
    macros:{protein:62,calories:370,carbs:10,fat:12},prepTime:'25 min',
    heroColor:'#fef3c7',heroText:'#d97706',
-   tip:'Weigh beef and sauce together as one unit — keeps flavour intensity identical across all containers.',
-   prepSteps:[
-     {icon:'🥢',title:'Rest the beef in sauce',desc:'After adding the sauce to the beef, remove from heat and rest 5 min. This lets the meat absorb the sauce before portioning.'},
-     {icon:'🥒',title:'Prep fresh veg last',desc:'Slice cucumber and carrot into thin ribbons. Add fresh to each container on top — don\'t mix with hot beef.'},
-     {icon:'⚖️',title:'Portion evenly',desc:'Weigh beef + sauce together as one combined total. Divide by portions.'},
-     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
-   ],
+   tip:'Weigh beef and sauce together — keeps flavour identical across containers.',
+   prepSteps:[{icon:'🥢',title:'Rest beef in sauce',desc:'Remove from heat, rest 5 min before portioning.'},{icon:'🥒',title:'Fresh veg last',desc:'Add cucumber and carrot on top — don\'t mix with hot beef.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
    ingredients:[{name:'Extra-lean beef mince (5% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Broccoli florets',qty:120,unit:'g'},{name:'Cucumber',qty:0.5,unit:''},{name:'Carrot',qty:1,unit:''},{name:'Low-sodium soy sauce',qty:16,unit:'ml'},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh ginger (grated)',qty:4,unit:'g'},{name:'Sesame oil',qty:0.5,unit:'tsp'},{name:'Rice vinegar',qty:8,unit:'ml'},{name:'Chilli flakes',qty:0.25,unit:'tsp'},{name:'Spring onions',qty:1,unit:''},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Mix soy, garlic, ginger, sesame oil, vinegar and chilli into a sauce.','Slice cucumber and carrot into thin ribbons.','Brown beef mince. Pour sauce over, stir 2 min. Rest 5 min off heat.','Steam broccoli 3 min. Microwave cauliflower rice.','Assemble containers. Top with cucumber, carrot, spring onion and sesame seeds.']},
-  {id:'greek-lamb',name:'Greek Lamb Meatball Bowl',emoji:'🍢',cuisine:'Mediterranean',
+   steps:['Mix soy, garlic, ginger, sesame oil, vinegar and chilli into sauce.','Slice cucumber and carrot into ribbons.','Brown beef. Pour sauce over, stir 2 min. Rest 5 min off heat.','Steam broccoli 3 min. Microwave cauliflower rice.','Assemble with cucumber, carrot, spring onion and sesame seeds.']},
+  {id:'greek-lamb',name:'Greek Lamb Meatball Bowl',emoji:'🍢',cuisine:'Mediterranean',proteins:['lamb'],
    macros:{protein:61,calories:420,carbs:10,fat:18},prepTime:'35 min',
    heroColor:'#ede9fe',heroText:'#7c3aed',
-   tip:'Weigh 40g of raw mixture per meatball before rolling — guarantees identical protein in every container.',
-   prepSteps:[
-     {icon:'⚖️',title:'Weigh meatballs before rolling',desc:'40g raw mixture per meatball. Roll all at once before any go in the oven — this keeps the process efficient.'},
-     {icon:'🔥',title:'Roast at 200°C',desc:'18–20 min until golden. While they cook, prep the salad veg.'},
-     {icon:'🫙',title:'Add tzatziki last',desc:'Add tzatziki to each container separately — don\'t mix it in. It keeps better and the flavour stays fresh.'},
-     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
-   ],
+   tip:'Weigh 40g raw mixture per meatball — guarantees identical protein in every container.',
+   prepSteps:[{icon:'⚖️',title:'Weigh meatballs before rolling',desc:'40g per meatball. Roll all before any go in the oven.'},{icon:'🫙',title:'Tzatziki last',desc:'Add separately — don\'t mix in before sealing.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
    ingredients:[{name:'Lean lamb mince (10% fat)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Cucumber',qty:0.5,unit:''},{name:'Baby spinach',qty:40,unit:'g'},{name:'Low-fat tzatziki',qty:50,unit:'g'},{name:'Garlic cloves',qty:2,unit:''},{name:'Dried oregano',qty:1,unit:'tsp'},{name:'Ground cumin',qty:0.5,unit:'tsp'},{name:'Lemon',qty:0.5,unit:''},{name:'Fresh parsley',qty:6,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Mix lamb with garlic, oregano, cumin, lemon zest, parsley, salt and pepper.','Weigh 40g portions and roll into meatballs.','Roast at 200°C for 18–20 min until golden.','Halve tomatoes, slice cucumber, toss in lemon juice.','Microwave cauliflower rice. Assemble: rice, meatballs, veg, spinach, tzatziki.']},
-  {id:'moroccan-lamb',name:'Moroccan Spiced Lamb & Roasted Veg',emoji:'🏺',cuisine:'North African',
+   steps:['Mix lamb with garlic, oregano, cumin, lemon zest, parsley, salt and pepper.','Weigh 40g portions and roll into meatballs.','Roast at 200°C for 18–20 min until golden.','Halve tomatoes, slice cucumber, toss in lemon juice.','Microwave cauliflower rice. Assemble with spinach and tzatziki.']},
+  {id:'moroccan-lamb',name:'Moroccan Spiced Lamb & Roasted Veg',emoji:'🏺',cuisine:'North African',proteins:['lamb'],
    macros:{protein:62,calories:410,carbs:12,fat:16},prepTime:'50 min',
    heroColor:'#fef9c3',heroText:'#a16207',
-   tip:'Coat the lamb in the spice rub the night before — the flavour goes much deeper overnight.',
-   prepSteps:[
-     {icon:'🏺',title:'Brown lamb in batches',desc:'Don\'t crowd the pan — brown in batches so it seals properly. This builds the deep flavour base.'},
-     {icon:'🔥',title:'Braise at 180°C',desc:'Cover tightly and braise for 35–40 min. While it braises, roast veg at 200°C in a separate tray.'},
-     {icon:'⚖️',title:'Portion lamb + sauce together',desc:'Weigh lamb and sauce as one combined total — the sauce carries calories and flavour.'},
-     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer. Freezes exceptionally well.'}
-   ],
+   tip:'Coat the lamb in the spice rub the night before — the flavour goes much deeper.',
+   prepSteps:[{icon:'🏺',title:'Brown in batches',desc:'Don\'t crowd the pan — brown properly for deep flavour.'},{icon:'🔥',title:'Braise at 180°C',desc:'Cover tightly for 35–40 min. Roast veg in parallel.'},{icon:'⚖️',title:'Portion lamb + sauce together',desc:'Sauce carries calories and flavour.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer. Freezes exceptionally well.'}],
    ingredients:[{name:'Diced lean lamb shoulder',qty:240,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Courgette',qty:100,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Aubergine',qty:0.5,unit:''},{name:'Chopped tomatoes (tinned)',qty:80,unit:'g'},{name:'Low-salt chicken stock',qty:60,unit:'ml'},{name:'Ground cumin',qty:0.75,unit:'tsp'},{name:'Ground coriander',qty:0.75,unit:'tsp'},{name:'Smoked paprika',qty:0.5,unit:'tsp'},{name:'Ground cinnamon',qty:0.25,unit:'tsp'},{name:'Ground ginger',qty:0.25,unit:'tsp'},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh mint',qty:4,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Mix spices into a rub. Coat all lamb pieces.','Brown lamb in batches in a casserole dish.','Add garlic, tomatoes and stock. Cover and cook at 180°C for 35–40 min.','Roast courgette, pepper and aubergine at 200°C with Frylight for 20 min.','Microwave cauliflower rice. Assemble containers. Scatter fresh mint.']},
-  {id:'lemon-chicken',name:'Lemon Herb Chicken & Asparagus',emoji:'🍋',cuisine:'Mediterranean',
+   steps:['Mix spices into rub. Coat all lamb.','Brown in batches in casserole dish.','Add garlic, tomatoes and stock. Cover, cook at 180°C for 35–40 min.','Roast courgette, pepper and aubergine at 200°C for 20 min.','Microwave cauliflower rice. Assemble. Scatter mint.']},
+  {id:'lemon-chicken',name:'Lemon Herb Chicken & Asparagus',emoji:'🍋',cuisine:'Mediterranean',proteins:['chicken'],
    macros:{protein:64,calories:350,carbs:8,fat:8},prepTime:'30 min',
    heroColor:'#f0fdf4',heroText:'#16a34a',
-   tip:'Pull asparagus out while it still has a bite — it softens more during reheating.',
-   prepSteps:[
-     {icon:'🍋',title:'Marinate if time allows',desc:'Even 30 min in the marinade makes a noticeable difference to flavour. Mix it first while the oven heats.'},
-     {icon:'🔥',title:'Roast veg in final 10 min',desc:'Add the asparagus, beans and tomatoes in the last 10 min of chicken cook time — uses the same oven.'},
-     {icon:'💧',title:'Keep the pan juices',desc:'Pour any juices from the chicken dish equally over each container — they add flavour and keep the chicken moist.'},
-     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
-   ],
+   tip:'Pull asparagus while it still has a bite — it softens more on reheating.',
+   prepSteps:[{icon:'🍋',title:'Marinate first',desc:'Even 30 min makes a big difference.'},{icon:'💧',title:'Keep pan juices',desc:'Divide equally over containers — adds flavour and moisture.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
    ingredients:[{name:'Chicken breast',qty:240,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Asparagus spears',qty:120,unit:'g'},{name:'Green beans',qty:80,unit:'g'},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Lemon (zested & juiced)',qty:1,unit:''},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh rosemary',qty:1,unit:'sprig'},{name:'Dijon mustard',qty:0.5,unit:'tsp'},{name:'Low-salt chicken stock',qty:20,unit:'ml'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Mix lemon zest, juice, garlic, mustard and rosemary into a marinade.','Coat chicken and leave 30 min if possible.','Bake in dish with stock at 200°C for 25–28 min. Slice.','Roast asparagus, beans and tomatoes last 10 min.','Microwave cauliflower rice. Assemble. Drizzle pan juices.']},
-  {id:'teriyaki-salmon',name:'Teriyaki Salmon & Stir-Fried Veg',emoji:'🫕',cuisine:'Asian',
+   steps:['Mix lemon, garlic, mustard and rosemary into marinade. Coat chicken.','Marinate 30 min if possible.','Bake with stock at 200°C for 25–28 min. Slice.','Roast asparagus, beans and tomatoes last 10 min.','Microwave cauliflower rice. Assemble. Drizzle pan juices.']},
+  {id:'teriyaki-salmon',name:'Teriyaki Salmon & Stir-Fried Veg',emoji:'🫕',cuisine:'Asian',proteins:['salmon'],
    macros:{protein:60,calories:430,carbs:10,fat:18},prepTime:'25 min',fridgeOnly:true,
    heroColor:'#fef3c7',heroText:'#d97706',
-   tip:'Make your own teriyaki — soy, a tiny bit of honey, garlic and ginger. Shop-bought versions are loaded with sugar.',
-   prepSteps:[
-     {icon:'🐟',title:'Buy 5 equal-sized fillets',desc:'One fillet per container — no weighing needed if they\'re the same size. Ask your fishmonger or check weight labels.'},
-     {icon:'🫕',title:'Stir-fry veg on high heat',desc:'High heat, 4–5 min only. You want the veg to have colour and a slight bite, not steamed soft.'},
-     {icon:'⚠️',title:'Fridge only',desc:'Salmon doesn\'t freeze well once cooked. All containers go in the fridge. Best eaten within 3–4 days.'},
-     {icon:'♨️',title:'Reheating',desc:'Microwave 2 min on medium power — salmon reheats better on medium than full power.'}
-   ],
+   tip:'Make your own teriyaki — soy, honey, garlic and ginger. Shop-bought is loaded with sugar.',
+   prepSteps:[{icon:'🐟',title:'Equal-sized fillets',desc:'One per container — no weighing needed if matched in size.'},{icon:'⚠️',title:'Fridge only',desc:'All containers to fridge. Best within 3–4 days.'},{icon:'♨️',title:'Reheating',desc:'Microwave 2 min on medium power.'}],
    ingredients:[{name:'Salmon fillet (skinless)',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tenderstem broccoli',qty:100,unit:'g'},{name:'Sugar snap peas',qty:80,unit:'g'},{name:'Red pepper',qty:0.5,unit:''},{name:'Low-sodium soy sauce',qty:16,unit:'ml'},{name:'Honey',qty:0.25,unit:'tsp'},{name:'Fresh ginger (grated)',qty:4,unit:'g'},{name:'Garlic cloves',qty:1,unit:''},{name:'Rice vinegar',qty:6,unit:'ml'},{name:'Sesame seeds',qty:4,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Mix soy, honey, ginger, garlic and vinegar into a teriyaki glaze.','Brush salmon with glaze. Bake at 200°C for 12–15 min.','Stir-fry broccoli, snap peas and pepper with Frylight for 4–5 min.','Microwave cauliflower rice. Assemble containers.','Drizzle remaining glaze. Sprinkle sesame seeds. All containers to fridge only.']},
-  {id:'mexican-chicken',name:'Mexican Spiced Chicken Bowl',emoji:'🌶️',cuisine:'Mexican',
+   steps:['Mix soy, honey, ginger, garlic and vinegar into glaze.','Brush salmon with glaze. Bake at 200°C for 12–15 min.','Stir-fry broccoli, snap peas and pepper for 4–5 min.','Microwave cauliflower rice. Assemble.','Drizzle glaze. Sprinkle sesame seeds. All to fridge only.']},
+  {id:'mexican-chicken',name:'Mexican Spiced Chicken Bowl',emoji:'🌶️',cuisine:'Mexican',proteins:['chicken'],
    macros:{protein:63,calories:360,carbs:10,fat:8},prepTime:'30 min',
    heroColor:'#fee2e2',heroText:'#dc2626',
-   tip:'Chipotle paste is the key — it adds deep smoky heat. Find it in any supermarket spice aisle.',
-   prepSteps:[
-     {icon:'🌶️',title:'Marinate before baking',desc:'30 min in the chipotle marinade makes a big difference. Do this while the oven heats.'},
-     {icon:'🍗',title:'Shred before portioning',desc:'Shred all chicken first, then weigh — shredded distributes far more evenly than sliced.'},
-     {icon:'🥛',title:'Add yogurt after reheating',desc:'Keep yogurt separate in a small pot. Add after reheating at work — not before sealing the container.'},
-     {icon:'🧊',title:'Storage',desc:'3 containers → fridge. Remaining → freezer.'}
-   ],
+   tip:'Chipotle paste is the key — deep smoky heat. Find it in any supermarket.',
+   prepSteps:[{icon:'🌶️',title:'Marinate before baking',desc:'30 min in chipotle marinade makes a big difference.'},{icon:'🍗',title:'Shred before portioning',desc:'Shredded distributes more evenly than sliced.'},{icon:'🥛',title:'Add yogurt after reheating',desc:'Keep separate — don\'t seal it in.'},{icon:'🧊',title:'Storage',desc:'3 to fridge, rest to freezer.'}],
    ingredients:[{name:'Chicken breast',qty:240,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Red pepper',qty:1,unit:''},{name:'Red onion',qty:0.5,unit:''},{name:'Cherry tomatoes',qty:80,unit:'g'},{name:'Baby spinach',qty:30,unit:'g'},{name:'Chipotle paste',qty:1,unit:'tbsp'},{name:'Ground cumin',qty:0.75,unit:'tsp'},{name:'Smoked paprika',qty:0.75,unit:'tsp'},{name:'Garlic cloves',qty:2,unit:''},{name:'Lime',qty:0.5,unit:''},{name:'Low-fat Greek yogurt',qty:30,unit:'g'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Mix chipotle, cumin, paprika, garlic and lime into a marinade. Coat chicken.','Bake at 200°C for 25–28 min. Shred with two forks.','Roast peppers, onion and tomatoes at 200°C for 20 min.','Microwave cauliflower rice. Assemble containers with spinach.','Add yogurt after reheating — not before sealing.']},
-  {id:'baked-cod',name:'Baked Cod & Roasted Veg',emoji:'🐟',cuisine:'',
+   steps:['Mix chipotle, cumin, paprika, garlic and lime. Coat chicken.','Bake at 200°C for 25–28 min. Shred.','Roast peppers, onion and tomatoes 20 min.','Microwave cauliflower rice. Assemble with spinach.','Add yogurt after reheating.']},
+  {id:'baked-cod',name:'Baked Cod & Roasted Veg',emoji:'🐟',cuisine:'',proteins:['cod'],
    macros:{protein:60,calories:300,carbs:10,fat:5},prepTime:'25 min',fridgeOnly:true,
    heroColor:'#e0f2fe',heroText:'#0369a1',
-   tip:'The lowest calorie meal in the rotation. Very mild, easy on the stomach — good for lighter weeks.',
-   prepSteps:[
-     {icon:'🐟',title:'Buy 5 equal-sized fillets',desc:'One fillet per container — like salmon, no weighing needed if fillets are matched in size.'},
-     {icon:'🔥',title:'Two trays, same oven',desc:'Cod and veg roast simultaneously at 200°C. Cod takes less time — pull it at 15–18 min, leave veg for 20–22 min.'},
-     {icon:'⚠️',title:'Fridge only',desc:'Fish doesn\'t freeze well once cooked. All containers to fridge. Best within 3–4 days.'},
-     {icon:'♨️',title:'Reheating',desc:'Microwave 90 seconds on medium power. Cod is delicate — don\'t overheat.'}
-   ],
+   tip:'The lowest calorie meal in the rotation. Very mild — good for lighter weeks.',
+   prepSteps:[{icon:'🐟',title:'Equal-sized fillets',desc:'One per container. No weighing needed if matched in size.'},{icon:'⚠️',title:'Fridge only',desc:'All to fridge. Best within 3–4 days.'},{icon:'♨️',title:'Reheating',desc:'90 seconds on medium power. Cod is delicate.'}],
    ingredients:[{name:'Cod fillet',qty:200,unit:'g'},{name:'Frozen cauliflower rice',qty:200,unit:'g'},{name:'Tenderstem broccoli',qty:100,unit:'g'},{name:'Brussels sprouts (halved)',qty:80,unit:'g'},{name:'Cherry tomatoes',qty:60,unit:'g'},{name:'Lemon (sliced)',qty:0.5,unit:''},{name:'Smoked paprika',qty:1,unit:'tsp'},{name:'Garlic cloves',qty:2,unit:''},{name:'Fresh parsley',qty:6,unit:'g'},{name:'Capers',qty:0.5,unit:'tbsp'},{name:'Cooking spray',qty:1,unit:'bottle'}],
-   steps:['Place cod on a lined tray. Season with paprika, garlic, salt and pepper. Top with lemon.','Toss broccoli, sprouts and tomatoes on a separate tray with Frylight.','Roast both at 200°C — veg 20–22 min, cod 15–18 min.','Microwave cauliflower rice. Assemble containers.','Scatter capers and parsley. Cool. Reheat: 90 seconds.']}
+   steps:['Place cod on lined tray. Season with paprika, garlic, salt and pepper. Top with lemon.','Toss broccoli, sprouts and tomatoes on separate tray with Frylight.','Roast at 200°C — veg 20–22 min, cod 15–18 min.','Microwave cauliflower rice. Assemble.','Scatter capers and parsley. Reheat: 90 seconds.']}
 ];
 
+const ALL_MEALS=[...BREAKFASTS,...LUNCHES];
 const CAT_ORDER=['Protein','Fruit & Veg','Grains & Pulses','Dairy & Eggs','Pantry & Condiments'];
 const CAT_ICONS={'Protein':'🥩','Fruit & Veg':'🥦','Grains & Pulses':'🌾','Dairy & Eggs':'🥛','Pantry & Condiments':'🧴'};
 const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const CUISINES=['Asian','Mediterranean','Mexican','North African'];
+const PROTEINS=['chicken','beef','lamb','salmon','cod','eggs','cottage cheese','oats'];
 
 // ── STATE ────────────────────────────────────────────────────────────────────
-function loadState(){try{return JSON.parse(localStorage.getItem('plateplan_v4'))||{};}catch(e){return{};}}
-function saveState(){try{localStorage.setItem('plateplan_v4',JSON.stringify(S));}catch(e){}}
+function loadState(){try{return JSON.parse(localStorage.getItem('plateplan_v5'))||{};}catch(e){return{};}}
+function saveState(){try{localStorage.setItem('plateplan_v5',JSON.stringify(S));}catch(e){}}
 
 let S=loadState();
 if(!S.portions)S.portions=5;
 if(!S.activeLunch)S.activeLunch='beef-veg';
 if(!S.activeBreakfast)S.activeBreakfast='oats';
-if(!S.weekPlan)S.weekPlan={};
+if(!S.weekPlans)S.weekPlans={};
 if(!S.shopBf)S.shopBf={};
 if(!S.shopLunch)S.shopLunch={};
 if(!S.steps)S.steps={};
 if(!S.macroLog)S.macroLog={};
-if(!S.settings)S.settings={name:'',proteinTarget:120,calorieTarget:1800};
+if(!S.weightLog)S.weightLog=[];
+if(!S.favourites)S.favourites=[];
+if(!S.settings)S.settings={name:'',proteinTarget:120,calorieTarget:1800,weightUnit:'kg',startWeight:null,targetWeight:null,onboarded:false};
 
 let currentView='meals';
 let recipeFrom='meals';
@@ -497,53 +492,26 @@ let expandedDay=null;
 let expandedWeek=null;
 let addMealOpen=false;
 let addMealTab='meals';
-
-// ── ONBOARDING ───────────────────────────────────────────────────────────────
-function initApp(){
-  const hasSetup=S.settings&&S.settings.proteinTarget&&S.settings.calorieTarget&&S.settings.onboarded;
-  if(!hasSetup){
-    document.getElementById('onboarding').style.display='block';
-    document.getElementById('main-app').style.display='none';
-  }else{
-    document.getElementById('onboarding').style.display='none';
-    document.getElementById('main-app').style.display='block';
-    setHeaderDate();
-    renderMeals();
-  }
-}
-
-function completeOnboarding(){
-  const name=document.getElementById('ob-name').value.trim();
-  const protein=parseInt(document.getElementById('ob-protein').value)||120;
-  const cals=parseInt(document.getElementById('ob-cals').value)||1800;
-  if(!name){alert('Please enter your name.');return;}
-  S.settings={name,proteinTarget:protein,calorieTarget:cals,onboarded:true};
-  saveState();
-  document.getElementById('onboarding').style.display='none';
-  document.getElementById('main-app').style.display='block';
-  setHeaderDate();
-  renderMeals();
-}
-
-function setHeaderDate(){
-  const now=new Date();
-  const name=S.settings.name?S.settings.name+' · ':'';
-  document.getElementById('header-date').innerHTML=
-    now.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})+'<br>'+
-    '<span style="color:#16a34a;font-weight:800">'+name+'</span>'+now.getFullYear();
-}
+let mealViewTab='all'; // all | favourites
+let searchQ='';
+let filterCuisine='';
+let filterProtein='';
+let obUnit='kg';
+let planWeekOffset=0; // 0=current, 1=next, -1=prev etc
+let progWeightExpanded=false;
 
 // ── UTILS ────────────────────────────────────────────────────────────────────
 function todayStr(){return new Date().toISOString().split('T')[0];}
 function offsetDate(str,d){const dt=new Date(str+'T12:00:00');dt.setDate(dt.getDate()+d);return dt.toISOString().split('T')[0];}
-function fmtDateShort(str){return new Date(str+'T12:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});}
+function fmtShort(str){return new Date(str+'T12:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});}
+function fmtFull(str){return new Date(str+'T12:00:00').toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});}
 function fmtQty(q,u){const v=Math.round(q*10)/10;return v+(u?' '+u:'');}
-function getLunch(){return LUNCHES.find(l=>l.id===S.activeLunch);}
-function getBreakfast(){return BREAKFASTS.find(b=>b.id===S.activeBreakfast);}
+function getLunch(){return LUNCHES.find(l=>l.id===S.activeLunch)||LUNCHES[0];}
+function getBf(){return BREAKFASTS.find(b=>b.id===S.activeBreakfast)||BREAKFASTS[0];}
 function categorise(name){
   const n=name.toLowerCase();
   if(/chicken|beef|lamb|salmon|cod|mince/.test(n))return'Protein';
-  if(/\begg/.test(n)&&!/cauliflower|eggplant/.test(n))return'Protein';
+  if(/\begg/.test(n)&&!/plant/.test(n))return'Protein';
   if(/smoked salmon/.test(n))return'Protein';
   if(/oat|cauliflower rice|edamame|protein powder/.test(n))return'Grains & Pulses';
   if(/yogurt|milk|tzatziki|cottage cheese|cheddar|feta/.test(n))return'Dairy & Eggs';
@@ -556,120 +524,219 @@ function buildList(ingredients,mult){
     const key=ing.name.toLowerCase();
     const qty=typeof ing.qty==='number'?ing.qty*mult:ing.qty;
     if(!map[key])map[key]={name:ing.name,qty:0,unit:ing.unit,cat:categorise(ing.name)};
-    if(typeof qty==='number')map[key].qty+=qty;
-    else map[key].qty=qty;
+    if(typeof qty==='number')map[key].qty+=qty;else map[key].qty=qty;
   });
   return Object.values(map);
+}
+function getMondayOf(dateStr){
+  const d=new Date(dateStr+'T12:00:00');
+  const day=d.getDay();
+  const diff=d.getDate()-(day===0?6:day-1);
+  const mon=new Date(d);mon.setDate(diff);
+  return mon.toISOString().split('T')[0];
+}
+function getWeekKey(mondayStr){return mondayStr;}
+function getCurrentWeekMonday(){return getMondayOf(todayStr());}
+function getWeekMonday(offset){
+  const base=getCurrentWeekMonday();
+  return offsetDate(base,offset*7);
+}
+function fmtWeight(w){
+  if(!w)return'—';
+  if(S.settings.weightUnit==='st'){
+    const totalLbs=w*2.20462;
+    const st=Math.floor(totalLbs/14);
+    const lbs=Math.round(totalLbs%14*10)/10;
+    return st+'st '+lbs+'lbs';
+  }
+  return w+'kg';
+}
+function isFavourite(id){return S.favourites.includes(id);}
+function toggleFavourite(id,e){
+  if(e)e.stopPropagation();
+  if(S.favourites.includes(id))S.favourites=S.favourites.filter(f=>f!==id);
+  else S.favourites.push(id);
+  saveState();
+  renderMeals();
+}
+
+// ── ONBOARDING ───────────────────────────────────────────────────────────────
+function setObUnit(u){
+  obUnit=u;
+  document.getElementById('ob-kg').classList.toggle('active',u==='kg');
+  document.getElementById('ob-st').classList.toggle('active',u==='st');
+  document.getElementById('ob-sw-lbl').textContent='Start weight ('+(u==='kg'?'kg':'st/lbs as kg')+')';
+  document.getElementById('ob-tw-lbl').textContent='Target weight ('+(u==='kg'?'kg':'st/lbs as kg')+')';
+}
+function completeOnboarding(){
+  const name=document.getElementById('ob-name').value.trim();
+  const protein=parseInt(document.getElementById('ob-protein').value)||120;
+  const cals=parseInt(document.getElementById('ob-cals').value)||1800;
+  const startW=parseFloat(document.getElementById('ob-startw').value)||null;
+  const targetW=parseFloat(document.getElementById('ob-targetw').value)||null;
+  if(!name){alert('Please enter your name.');return;}
+  S.settings={name,proteinTarget:protein,calorieTarget:cals,weightUnit:obUnit,startWeight:startW,targetWeight:targetW,onboarded:true};
+  if(startW)S.weightLog.push({date:todayStr(),weight:startW});
+  saveState();
+  document.getElementById('onboarding').style.display='none';
+  document.getElementById('main-app').style.display='block';
+  initHeader();renderMeals();
+}
+function initApp(){
+  if(!S.settings.onboarded){
+    document.getElementById('onboarding').style.display='block';
+    document.getElementById('main-app').style.display='none';
+  }else{
+    document.getElementById('onboarding').style.display='none';
+    document.getElementById('main-app').style.display='block';
+    initHeader();renderMeals();
+  }
+}
+function initHeader(){
+  const now=new Date();
+  document.getElementById('header-date').textContent=now.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  document.getElementById('header-name').textContent=S.settings.name||'';
 }
 
 // ── MEALS VIEW ───────────────────────────────────────────────────────────────
 function renderMeals(){
-  const lunch=getLunch();const bf=getBreakfast();
-  let h=`<div class="portion-bar">
-    <div><div class="portion-label">Portions</div><div class="portion-sub">Scales all ingredients</div></div>
+  const lunch=getLunch();const bf=getBf();
+  let h='';
+
+  // Portion bar
+  h+=`<div class="portion-bar">
+    <div><div class="portion-lbl">Portions</div><div class="portion-sub">Scales all ingredients</div></div>
     <div class="portion-controls">
-      <button class="portion-btn" onclick="chgPortion(-1)">−</button>
-      <div class="portion-num">${S.portions}</div>
-      <button class="portion-btn" onclick="chgPortion(1)">+</button>
+      <button class="p-btn" onclick="chgPortion(-1)">−</button>
+      <div class="p-num">${S.portions}</div>
+      <button class="p-btn" onclick="chgPortion(1)">+</button>
     </div>
-  </div>
-  <div class="section-label">Breakfast</div>`;
+  </div>`;
 
-  BREAKFASTS.forEach(b=>{
-    const active=b.id===S.activeBreakfast;
-    const pill=b.type==='batch'?`<span class="pill pill-batch">Batch Sunday</span>`:`<span class="pill pill-fresh">Fresh daily</span>`;
-    h+=`<div class="meal-card ${active?'selected':''}">
-      <div class="meal-row">
-        <div class="meal-icon ${active?'sel':''}">${b.emoji}</div>
-        <div class="meal-info">${pill}<div class="meal-name">${b.name}</div><div class="meal-meta">${b.prepTime} · ${b.macros.protein}g protein</div></div>
-        <div class="meal-macros"><div class="m-prot">${b.macros.protein}g</div><div class="m-lbl">protein</div><div class="m-cal">${b.macros.calories} kcal</div></div>
-      </div>
-      <div class="meal-btns">
-        <button class="btn-sel ${active?'on':''}" onclick="selBf('${b.id}')">${active?'✓ Selected':'Select'}</button>
-        <button class="btn-rec ${active?'on':''}" onclick="openRecipe('breakfast','${b.id}')">Recipe</button>
-      </div>
+  // Meal view tabs
+  h+=`<div class="meal-view-tabs">
+    <button class="mvt-btn ${mealViewTab==='all'?'active':''}" onclick="setMealTab('all')">All Meals</button>
+    <button class="mvt-btn ${mealViewTab==='favourites'?'active':''}" onclick="setMealTab('favourites')">❤️ Favourites${S.favourites.length>0?' ('+S.favourites.length+')':''}</button>
+  </div>`;
+
+  // Search & filter (only on All tab)
+  if(mealViewTab==='all'){
+    h+=`<div class="search-wrap">
+      <input class="search-input" type="text" placeholder="Search meals..." value="${searchQ}" oninput="setSearch(this.value)">
+    </div>
+    <div class="filter-chips">
+      <span class="chip ${filterCuisine===''&&filterProtein===''?'active':''}" onclick="clearFilters()">All</span>
+      ${CUISINES.map(c=>`<span class="chip ${filterCuisine===c?'active':''}" onclick="setFilter('cuisine','${c}')">${c}</span>`).join('')}
+      ${['chicken','beef','lamb','salmon','cod'].map(p=>`<span class="chip ${filterProtein===p?'active':''}" onclick="setFilter('protein','${p}')">${p.charAt(0).toUpperCase()+p.slice(1)}</span>`).join('')}
     </div>`;
-  });
+  }
 
-  h+=`<div class="section-label" style="margin-top:12px">Lunch</div>`;
-  LUNCHES.forEach(m=>{
-    const active=m.id===S.activeLunch;
-    const cTag=m.cuisine?`<span class="cuisine-tag" style="background:${CC[m.cuisine].bg};color:${CC[m.cuisine].c}">${m.cuisine}</span>`:'';
-    h+=`<div class="meal-card ${active?'selected':''}">
-      <div class="meal-row">
-        <div class="meal-icon ${active?'sel':''}">${m.emoji}</div>
-        <div class="meal-info">${cTag}<div class="meal-name">${m.name}</div><div class="meal-meta">${m.prepTime} · ${S.portions} portion${S.portions>1?'s':''}</div></div>
-        <div class="meal-macros"><div class="m-prot">${m.macros.protein}g</div><div class="m-lbl">protein</div><div class="m-cal">${m.macros.calories} kcal</div></div>
-      </div>
-      <div class="meal-btns">
-        <button class="btn-sel ${active?'on':''}" onclick="selLunch('${m.id}')">${active?'✓ Selected':'Select'}</button>
-        <button class="btn-rec ${active?'on':''}" onclick="openRecipe('lunch','${m.id}')">Recipe</button>
-      </div>
-    </div>`;
-  });
+  // Filter meals
+  let bfs=BREAKFASTS;let lns=LUNCHES;
+  if(mealViewTab==='favourites'){
+    bfs=BREAKFASTS.filter(m=>isFavourite(m.id));
+    lns=LUNCHES.filter(m=>isFavourite(m.id));
+  }else{
+    if(searchQ){const q=searchQ.toLowerCase();bfs=bfs.filter(m=>m.name.toLowerCase().includes(q));lns=lns.filter(m=>m.name.toLowerCase().includes(q));}
+    if(filterCuisine)lns=lns.filter(m=>m.cuisine===filterCuisine);
+    if(filterProtein){bfs=bfs.filter(m=>m.proteins&&m.proteins.some(p=>p.includes(filterProtein)));lns=lns.filter(m=>m.proteins&&m.proteins.some(p=>p.includes(filterProtein)));}
+  }
 
+  if(mealViewTab==='favourites'&&bfs.length===0&&lns.length===0){
+    h+=`<div class="empty"><div class="empty-icon">❤️</div><div class="empty-text">No favourites yet.<br>Tap the ❤ on any meal to add it here.</div></div>`;
+  }else{
+    if(bfs.length>0){
+      h+=`<div class="sec-lbl">Breakfast</div>`;
+      bfs.forEach(b=>h+=mealCardHTML(b,'breakfast'));
+    }
+    if(lns.length>0){
+      h+=`<div class="sec-lbl" style="margin-top:10px">Lunch</div>`;
+      lns.forEach(m=>h+=mealCardHTML(m,'lunch'));
+    }
+    if(bfs.length===0&&lns.length===0)h+=`<div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">No meals match your search.</div></div>`;
+  }
+
+  // Daily totals
   const tp=bf.macros.protein+lunch.macros.protein;
   const tc=bf.macros.calories+lunch.macros.calories;
-  h+=`<div class="card" style="margin-top:8px">
-    <div class="section-label" style="margin-bottom:8px">Daily totals · Breakfast + Lunch</div>
+  h+=`<div class="card" style="margin-top:10px">
+    <div class="sec-lbl" style="margin-bottom:7px">Daily totals · Breakfast + Lunch</div>
     ${[['Protein',tp+'g','#16a34a'],['Calories',tc+' kcal','#0f172a'],['Carbs',(bf.macros.carbs+lunch.macros.carbs)+'g','#64748b'],['Fat',(bf.macros.fat+lunch.macros.fat)+'g','#64748b']].map(([k,v,c])=>
-    `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f8fafc"><span style="font-size:12px;color:#64748b">${k}</span><span style="font-size:12px;font-weight:700;color:${c}">${v}</span></div>`).join('')}
+    `<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f8fafc"><span style="font-size:12px;color:#64748b">${k}</span><span style="font-size:12px;font-weight:700;color:${c}">${v}</span></div>`).join('')}
   </div>`;
+
   document.getElementById('view-meals').innerHTML=h;
+}
+
+function mealCardHTML(meal,type){
+  const active=type==='breakfast'?meal.id===S.activeBreakfast:meal.id===S.activeLunch;
+  const faved=isFavourite(meal.id);
+  const cTag=meal.cuisine?`<span class="cuisine-tag" style="background:${CC[meal.cuisine].bg};color:${CC[meal.cuisine].c}">${meal.cuisine}</span>`:'';
+  const pill=type==='breakfast'?(meal.type==='batch'?`<span class="pill pill-batch">Batch</span>`:`<span class="pill pill-fresh">Fresh</span>`):'';
+  return `<div class="meal-card ${active?'selected':''}">
+    <div class="meal-row">
+      <div class="meal-icon ${active?'sel':''}">${meal.emoji}</div>
+      <div class="meal-info">${cTag}${pill}<div class="meal-name">${meal.name}</div><div class="meal-meta">${meal.prepTime} · ${meal.macros.protein}g protein</div></div>
+      <div class="meal-macros"><div class="m-prot">${meal.macros.protein}g</div><div class="m-lbl">protein</div><div class="m-cal">${meal.macros.calories} kcal</div></div>
+    </div>
+    <div class="meal-btns">
+      <button class="btn-sel ${active?'on':''}" onclick="${type==='breakfast'?'selBf':'selLunch'}('${meal.id}')">${active?'✓ Selected':'Select'}</button>
+      <button class="btn-rec ${active?'on':''}" onclick="openRecipe('${type}','${meal.id}')">Recipe</button>
+      <button class="fav-btn ${faved?'faved':''}" onclick="toggleFavourite('${meal.id}',event)">${faved?'❤️':'🤍'}</button>
+    </div>
+  </div>`;
 }
 
 function chgPortion(d){S.portions=Math.max(1,Math.min(7,S.portions+d));saveState();renderMeals();renderShop();}
 function selBf(id){S.activeBreakfast=id;saveState();renderMeals();}
 function selLunch(id){S.activeLunch=id;saveState();renderMeals();renderShop();}
+function setMealTab(t){mealViewTab=t;renderMeals();}
+function setSearch(v){searchQ=v;renderMeals();}
+function setFilter(type,val){
+  if(type==='cuisine'){filterCuisine=filterCuisine===val?'':val;filterProtein='';}
+  else{filterProtein=filterProtein===val?'':val;filterCuisine='';}
+  renderMeals();
+}
+function clearFilters(){filterCuisine='';filterProtein='';searchQ='';renderMeals();}
 
 // ── RECIPE VIEW ──────────────────────────────────────────────────────────────
 function openRecipe(type,id){
   recipeFrom=currentView;recipeType=type;recipeId=id;
   const meal=type==='breakfast'?BREAKFASTS.find(b=>b.id===id):LUNCHES.find(l=>l.id===id);
   const mult=S.portions;
-  const cTag=meal.cuisine?`<span class="cuisine-tag" style="background:${CC[meal.cuisine].bg};color:${CC[meal.cuisine].c};margin-bottom:5px;display:inline-block">${meal.cuisine}</span>`:'';
-  const typePill=type==='breakfast'?(meal.type==='batch'?`<span class="pill pill-batch" style="margin-bottom:5px;display:inline-block">Batch Sunday</span>`:`<span class="pill pill-fresh" style="margin-bottom:5px;display:inline-block">Fresh daily</span>`):'';
-  const servingLabel=type==='breakfast'&&meal.type==='fresh'?`${mult} serving${mult>1?'s':''}`:`${mult} portion${mult>1?'s':''}`;
+  const servLbl=`${mult} ${type==='breakfast'&&meal.type==='fresh'?'serving':'portion'}${mult>1?'s':''}`;
+  const cTag=meal.cuisine?`<span class="cuisine-tag" style="background:${CC[meal.cuisine].bg};color:${CC[meal.cuisine].c};margin-bottom:4px;display:inline-block">${meal.cuisine}</span>`:'';
+  const pill=type==='breakfast'?(meal.type==='batch'?`<span class="pill pill-batch" style="margin-bottom:4px;display:inline-block">Batch Sunday</span>`:`<span class="pill pill-fresh" style="margin-bottom:4px;display:inline-block">Fresh daily</span>`):'';
 
   let h=`<button class="back-btn" onclick="closeRecipe()">← Back</button>`;
   h+=`<div class="recipe-hero" style="background:${meal.heroColor}">
     <div class="r-emoji">${meal.emoji}</div>
-    <div>${cTag}${typePill}<div class="r-name">${meal.name}</div>
-    <div class="r-meta" style="color:${meal.heroText}">${servingLabel} · ${meal.prepTime}</div></div>
+    <div>${cTag}${pill}<div class="r-name">${meal.name}</div>
+    <div class="r-meta" style="color:${meal.heroText}">${servLbl} · ${meal.prepTime}</div></div>
   </div>`;
   h+=`<div class="mpills">${[{l:'Protein',v:meal.macros.protein+'g',hl:true},{l:'Calories',v:meal.macros.calories},{l:'Carbs',v:meal.macros.carbs+'g'},{l:'Fat',v:meal.macros.fat+'g'}].map(m=>`<div class="mpill ${m.hl?'hl':'pl'}"><div class="pv">${m.v}</div><div class="plb">${m.l}</div></div>`).join('')}</div>`;
   h+=`<div class="alert-y"><strong>💡 </strong>${meal.tip}</div>`;
-  if(meal.fridgeOnly)h+=`<div class="alert-b"><strong>❄ Fridge only</strong> — don't freeze this meal. Best within 3–4 days.</div>`;
+  if(meal.fridgeOnly)h+=`<div class="alert-b"><strong>❄ Fridge only</strong> — don't freeze. Best within 3–4 days.</div>`;
 
-  h+=`<div class="section-label">Ingredients · ${servingLabel}</div>`;
+  h+=`<div class="sec-lbl">Ingredients · ${servLbl}</div>`;
   h+=`<div class="ing-list">${meal.ingredients.map(ing=>{
     let q;
     if(typeof ing.qty==='number'){
-      if(ing.unit===''&&Number.isInteger(ing.qty)){q=Math.ceil(ing.qty*mult)+'';}
-      else{q=fmtQty(ing.qty*mult,ing.unit);}
-    }else{q=ing.qty;}
+      if(ing.unit===''&&Number.isInteger(ing.qty))q=Math.ceil(ing.qty*mult)+'';
+      else q=fmtQty(ing.qty*mult,ing.unit);
+    }else q=ing.qty;
     return `<div class="ing-row"><span class="ing-n">${ing.name}</span><span class="ing-q">${q}</span></div>`;
   }).join('')}</div>`;
 
-  h+=`<div class="section-label">Method</div>`;
+  h+=`<div class="sec-lbl">Method</div>`;
   h+=`<div class="steps-list">${meal.steps.map((step,i)=>{
     const key=`${meal.id}-${i}`;const done=S.steps[key];
-    return `<div class="step ${done?'done':''}" onclick="toggleStep('${meal.id}',${i})">
-      <div class="step-num">${done?'✓':i+1}</div><div class="step-text">${step}</div></div>`;
+    return `<div class="step ${done?'done':''}" onclick="toggleStep('${meal.id}',${i})"><div class="step-num">${done?'✓':i+1}</div><div class="step-text">${step}</div></div>`;
   }).join('')}</div>`;
 
-  // Prep guide section
   if(meal.prepSteps&&meal.prepSteps.length>0){
-    h+=`<div class="prep-section">
-      <div class="prep-section-title">⏱ Prep Guide</div>
-      ${meal.prepSteps.map(ps=>`
-        <div class="prep-step-row">
-          <div class="prep-step-icon">${ps.icon}</div>
-          <div class="prep-step-content">
-            <div class="prep-step-title">${ps.title}</div>
-            <div class="prep-step-desc">${ps.desc}</div>
-          </div>
-        </div>`).join('')}
+    h+=`<div class="prep-section"><div class="prep-sec-title">⏱ Prep Guide</div>
+    ${meal.prepSteps.map(ps=>`<div class="prep-row"><div class="prep-row-icon">${ps.icon}</div><div><div class="prep-row-title">${ps.title}</div><div class="prep-row-desc">${ps.desc}</div></div></div>`).join('')}
     </div>`;
   }
 
@@ -683,104 +750,128 @@ function toggleStep(mealId,i){
 }
 function closeRecipe(){showView(recipeFrom);}
 
-// ── PLAN VIEW (7 days) ───────────────────────────────────────────────────────
+// ── PLAN VIEW ────────────────────────────────────────────────────────────────
 function renderPlan(){
+  const currentMon=getCurrentWeekMonday();
+  const viewMon=getWeekMonday(planWeekOffset);
+  const viewSun=offsetDate(viewMon,6);
+  const isPast=viewMon<currentMon;
+  const isCurrent=viewMon===currentMon;
+  const isNext=planWeekOffset===1;
+  const weekKey=getWeekKey(viewMon);
   const todayName=new Date().toLocaleDateString('en-GB',{weekday:'long'});
-  const weekendDays=['Saturday','Sunday'];
-  let h=`<div style="font-size:17px;font-weight:800;color:#0f172a;margin-bottom:3px">Week Plan</div>
-  <p style="font-size:12px;color:#64748b;margin-bottom:14px">Assign meals to each day. Tap a selected meal again to deselect.</p>`;
 
-  DAYS.forEach(day=>{
-    const plan=S.weekPlan[day]||{};
+  const badge=isCurrent?`<span class="week-badge badge-current">This week</span>`:
+               isNext?`<span class="week-badge badge-next">Next week</span>`:
+               isPast?`<span class="week-badge badge-past">Past</span>`:'';
+
+  let h=`<div style="font-size:16px;font-weight:800;color:#0f172a;margin-bottom:10px">Week Plan</div>
+  <div class="week-nav">
+    <button class="week-nav-btn" onclick="chgPlanWeek(-1)" ${planWeekOffset<=-4?'disabled':''}>←</button>
+    <div class="week-lbl">
+      <div class="week-lbl-main">${fmtShort(viewMon)} – ${fmtShort(viewSun)}${badge}</div>
+      <div class="week-lbl-sub">${isPast?'Read only — tap to view':'Tap a day to assign meals'}</div>
+    </div>
+    <button class="week-nav-btn" onclick="chgPlanWeek(1)" ${planWeekOffset>=1?'disabled':''}>→</button>
+  </div>`;
+
+  DAYS.forEach((day,di)=>{
+    const dayDate=offsetDate(viewMon,di);
+    const plan=(S.weekPlans[weekKey]&&S.weekPlans[weekKey][day])||{};
     const bfMeal=plan.breakfast?BREAKFASTS.find(b=>b.id===plan.breakfast):null;
     const lMeal=plan.lunch?LUNCHES.find(l=>l.id===plan.lunch):null;
-    const isOpen=expandedDay===day;
-    const isTod=todayName===day;
-    const isWeekend=weekendDays.includes(day);
+    const isOpen=expandedDay===weekKey+day;
+    const isTod=dayDate===todayStr();
+    const isWeekend=['Saturday','Sunday'].includes(day);
     const preview=[];
     if(bfMeal)preview.push(bfMeal.emoji+' '+bfMeal.name);
     if(lMeal)preview.push(lMeal.emoji+' '+lMeal.name);
     const hasAny=preview.length>0;
 
     h+=`<div class="day-card">
-      <div class="day-header" onclick="toggleDay('${day}')">
+      <div class="day-header" onclick="toggleDay('${weekKey}','${day}')">
         <div>
-          <div style="display:flex;align-items:center">
+          <div class="day-name-wrap">
             <span class="day-name">${day}</span>
+            <span class="day-date-lbl">${fmtShort(dayDate)}</span>
             ${isTod?'<span class="day-today-badge">Today</span>':''}
             ${isWeekend&&!isTod?'<span class="day-weekend-badge">Weekend</span>':''}
+            ${isPast?'<span class="readonly-badge">Read only</span>':''}
           </div>
-          <div class="day-preview ${hasAny?'set':''}">${hasAny?preview.join(' · '):'Tap to assign meals'}</div>
+          <div class="day-preview ${hasAny?'set':''}">${hasAny?preview.join(' · '):'No meals assigned'}</div>
         </div>
-        <div style="color:#94a3b8;font-size:14px">${isOpen?'▲':'▼'}</div>
+        <div style="color:#94a3b8;font-size:13px">${isOpen?'▲':'▼'}</div>
       </div>
-      <div class="day-body ${isOpen?'open':''}">
-        <div class="day-section-lbl">Breakfast</div>
-        ${BREAKFASTS.map(m=>{
-          const chosen=plan.breakfast===m.id;
-          return `<div class="day-opt ${chosen?'chosen':''}" onclick="toggleDayMeal('${day}','breakfast','${m.id}')">
-            <div class="day-opt-emoji">${m.emoji}</div>
-            <div class="day-opt-name">${m.name}</div>
-            <div class="day-opt-check">${chosen?'✓':''}</div>
-          </div>`;
-        }).join('')}
-        <div class="day-section-lbl" style="margin-top:8px">Lunch / Dinner</div>
-        ${LUNCHES.map(m=>{
-          const chosen=plan.lunch===m.id;
-          return `<div class="day-opt ${chosen?'chosen':''}" onclick="toggleDayMeal('${day}','lunch','${m.id}')">
-            <div class="day-opt-emoji">${m.emoji}</div>
-            <div class="day-opt-name">${m.name}</div>
-            <div class="day-opt-check">${chosen?'✓':''}</div>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`;
+      <div class="day-body ${isOpen?'open':''}">`;
+
+    if(isPast){
+      h+=`<div style="font-size:12px;color:#94a3b8;padding:8px 0">`;
+      if(bfMeal)h+=`<div style="margin-bottom:4px">${bfMeal.emoji} ${bfMeal.name}</div>`;
+      if(lMeal)h+=`<div>${lMeal.emoji} ${lMeal.name}</div>`;
+      if(!hasAny)h+=`<div>No meals were assigned for this day.</div>`;
+      h+=`</div>`;
+    }else{
+      h+=`<div class="day-sec-lbl">Breakfast</div>`;
+      h+=BREAKFASTS.map(m=>{
+        const chosen=plan.breakfast===m.id;
+        return `<div class="day-opt ${chosen?'chosen':''}" onclick="toggleDayMeal('${weekKey}','${day}','breakfast','${m.id}')">
+          <div class="day-opt-emoji">${m.emoji}</div><div class="day-opt-name">${m.name}</div>
+          <div class="day-opt-check">${chosen?'✓':''}</div></div>`;
+      }).join('');
+      h+=`<div class="day-sec-lbl" style="margin-top:7px">Lunch / Dinner</div>`;
+      h+=LUNCHES.map(m=>{
+        const chosen=plan.lunch===m.id;
+        return `<div class="day-opt ${chosen?'chosen':''}" onclick="toggleDayMeal('${weekKey}','${day}','lunch','${m.id}')">
+          <div class="day-opt-emoji">${m.emoji}</div><div class="day-opt-name">${m.name}</div>
+          <div class="day-opt-check">${chosen?'✓':''}</div></div>`;
+      }).join('');
+    }
+    h+=`</div></div>`;
   });
+
   document.getElementById('view-plan').innerHTML=h;
 }
 
-function toggleDay(day){expandedDay=expandedDay===day?null:day;renderPlan();}
-function toggleDayMeal(day,type,id){
-  if(!S.weekPlan[day])S.weekPlan[day]={};
-  if(S.weekPlan[day][type]===id)delete S.weekPlan[day][type];
-  else S.weekPlan[day][type]=id;
+function chgPlanWeek(d){planWeekOffset=Math.max(-4,Math.min(1,planWeekOffset+d));expandedDay=null;renderPlan();}
+function toggleDay(wk,day){const k=wk+day;expandedDay=expandedDay===k?null:k;renderPlan();}
+function toggleDayMeal(wk,day,type,id){
+  if(!S.weekPlans[wk])S.weekPlans[wk]={};
+  if(!S.weekPlans[wk][day])S.weekPlans[wk][day]={};
+  if(S.weekPlans[wk][day][type]===id)delete S.weekPlans[wk][day][type];
+  else S.weekPlans[wk][day][type]=id;
   saveState();renderPlan();
 }
 
 // ── SHOP VIEW ────────────────────────────────────────────────────────────────
 function renderShop(){
-  const lunch=getLunch();const bf=getBreakfast();
-  const lunchItems=buildList(lunch.ingredients,S.portions);
-  const bfItems=buildList(bf.ingredients,S.portions);
-  const items=shopTab==='lunch'?lunchItems:bfItems;
+  const lunch=getLunch();const bf=getBf();
+  const items=shopTab==='lunch'?buildList(lunch.ingredients,S.portions):buildList(bf.ingredients,S.portions);
   const checked=shopTab==='lunch'?S.shopLunch:S.shopBf;
   const total=items.length;
-  const doneCount=Object.values(checked).filter(Boolean).length;
-  const pct=total>0?(doneCount/total*100):0;
+  const done=Object.values(checked).filter(Boolean).length;
+  const pct=total>0?(done/total*100):0;
   const grouped={};
   items.forEach(item=>{const cat=categorise(item.name);if(!grouped[cat])grouped[cat]=[];grouped[cat].push(item);});
 
   let h=`<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
-    <div><div style="font-size:17px;font-weight:800;color:#0f172a">Shopping List</div>
+    <div><div style="font-size:16px;font-weight:800">Shopping List</div>
     <div style="font-size:11px;color:#64748b;margin-top:2px">${shopTab==='lunch'?lunch.name:bf.name} · ${S.portions} portion${S.portions>1?'s':''}</div></div>
-    ${doneCount>0?`<button class="ghost-btn" onclick="resetShop()">Reset</button>`:''}
+    ${done>0?`<button class="ghost-btn" onclick="resetShop()">Reset</button>`:''}
   </div>
-  <div class="prog-bar" style="margin-top:10px"><div class="prog-fill" style="width:${pct}%"></div></div>
+  <div class="prog-bar" style="margin:10px 0 12px"><div class="prog-fill" style="width:${pct}%"></div></div>
   <div class="shop-toggle">
     <button class="shop-tab-btn ${shopTab==='breakfast'?'active':''}" onclick="setShopTab('breakfast')">🥣 Breakfast</button>
     <button class="shop-tab-btn ${shopTab==='lunch'?'active':''}" onclick="setShopTab('lunch')">🍽 Lunch</button>
   </div>`;
 
-  if(shopTab==='breakfast'&&bf.type==='fresh'){
-    h+=`<div class="alert-y">This breakfast is made fresh each morning. Quantities shown are per serving × ${S.portions}.</div>`;
-  }
+  if(shopTab==='breakfast'&&bf.type==='fresh')h+=`<div class="alert-y">Fresh breakfast — quantities shown per serving × ${S.portions}.</div>`;
 
   CAT_ORDER.filter(c=>grouped[c]).forEach(cat=>{
     h+=`<div class="cat-lbl">${CAT_ICONS[cat]} ${cat}</div><div class="shop-list">`;
     grouped[cat].forEach(item=>{
-      const key=item.name.toLowerCase();const done=checked[key];
-      h+=`<div class="shop-row ${done?'chk':''}" onclick="toggleShop('${key}')">
-        <div class="shop-left"><div class="chkbox ${done?'on':''}">${done?'✓':''}</div>
+      const key=item.name.toLowerCase();const isDone=checked[key];
+      h+=`<div class="shop-row ${isDone?'chk':''}" onclick="toggleShop('${key}')">
+        <div class="shop-left"><div class="chkbox ${isDone?'on':''}">${isDone?'✓':''}</div>
         <span class="shop-name">${item.name}</span></div>
         <span class="shop-qty">${typeof item.qty==='number'?fmtQty(item.qty,item.unit):item.qty}</span>
       </div>`;
@@ -802,53 +893,81 @@ function resetShop(){
 }
 
 // ── DAILY VIEW ───────────────────────────────────────────────────────────────
-function renderDaily(){
-  const log=S.macroLog[trackDate]||{};
-  let totalP=0,totalC=0;
-  if(log.entries)log.entries.forEach(e=>{totalP+=(e.protein||0);totalC+=(e.calories||0);});
+function getAutoMealsForDate(dateStr){
+  const dayName=new Date(dateStr+'T12:00:00').toLocaleDateString('en-GB',{weekday:'long'});
+  const wk=getWeekKey(getMondayOf(dateStr));
+  const plan=(S.weekPlans[wk]&&S.weekPlans[wk][dayName])||{};
+  const meals=[];
+  if(plan.breakfast){const m=BREAKFASTS.find(b=>b.id===plan.breakfast);if(m)meals.push({id:m.id,name:m.name,emoji:m.emoji,protein:m.macros.protein,calories:m.macros.calories,auto:true});}
+  if(plan.lunch){const m=LUNCHES.find(l=>l.id===plan.lunch);if(m)meals.push({id:m.id,name:m.name,emoji:m.emoji,protein:m.macros.protein,calories:m.macros.calories,auto:true});}
+  return meals;
+}
 
-  const todayBool=trackDate===todayStr();
+function renderDaily(){
+  const log=S.macroLog[trackDate]||{entries:[]};
+  const autoMeals=getAutoMealsForDate(trackDate);
+  const manualEntries=log.entries||[];
+
+  // Combine auto + manual for display (auto shown separately, not duplicated)
+  let totalP=0,totalC=0;
+  autoMeals.forEach(e=>{totalP+=e.protein;totalC+=e.calories;});
+  manualEntries.forEach(e=>{totalP+=(e.protein||0);totalC+=(e.calories||0);});
+
   const pt=S.settings.proteinTarget||120;
   const ct=S.settings.calorieTarget||1800;
-  const goalMet=totalP>=pt;
+  const todayBool=trackDate===todayStr();
   const pctP=Math.min(100,Math.round((totalP/pt)*100));
   const pctC=Math.min(100,Math.round((totalC/ct)*100));
 
-  let h=`<div style="font-size:17px;font-weight:800;color:#0f172a;margin-bottom:12px">Daily Log</div>
+  let h=`<div style="font-size:16px;font-weight:800;margin-bottom:11px">Daily Log</div>
   <div class="date-nav">
     <button class="date-nav-btn" onclick="chgTrackDate(-1)">←</button>
-    <div class="date-lbl">${todayBool?'Today — '+new Date().toLocaleDateString('en-GB',{weekday:'long'}):fmtDateShort(trackDate)}</div>
+    <div>
+      <div class="date-lbl">${todayBool?'Today':fmtShort(trackDate)}</div>
+      <div class="date-sublbl">${todayBool?new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'}):fmtFull(trackDate)}</div>
+    </div>
     <button class="date-nav-btn" onclick="chgTrackDate(1)" ${todayBool?'disabled':''}>→</button>
   </div>`;
 
-  // Summary boxes
+  // Summary
   h+=`<div class="macro-grid">
     <div class="macro-box big">
-      <div class="macro-box-val">${totalP}g <span style="font-size:14px;font-weight:600;opacity:0.7">/ ${pt}g</span></div>
-      <div class="macro-box-lbl">${goalMet?'✓ Protein goal met!':'Protein · '+Math.max(0,pt-totalP)+'g to go'}</div>
+      <div class="macro-box-val">${totalP}g <span style="font-size:13px;font-weight:600;opacity:0.75">/ ${pt}g</span></div>
+      <div class="macro-box-lbl">${totalP>=pt?'✓ Protein goal met!':'Protein · '+(pt-totalP>0?pt-totalP:0)+'g to go'}</div>
     </div>
-    <div class="macro-box">
-      <div class="macro-box-val" style="color:#0f172a;font-size:18px">${totalC}</div>
-      <div class="macro-box-lbl" style="color:#64748b">/ ${ct} kcal</div>
-    </div>
-    <div class="macro-box">
-      <div class="macro-box-val" style="font-size:15px;color:${pctP>=100?'#16a34a':pctP>=60?'#f59e0b':'#ef4444'}">${pctP}%</div>
-      <div class="macro-box-lbl" style="color:#64748b">Protein target</div>
-    </div>
+    <div class="macro-box" style="grid-column:span 2"><div class="macro-box-val" style="color:#0f172a;font-size:17px">${totalC} <span style="font-size:13px;font-weight:600;color:#94a3b8">/ ${ct} kcal</span></div><div class="macro-box-lbl" style="color:#64748b">Calories</div></div>
   </div>`;
 
   // Progress bars
-  h+=`<div style="margin-bottom:14px">
-    <div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:4px"><span>Protein</span><span>${totalP}g / ${pt}g</span></div>
-    <div class="prog-bar" style="margin-bottom:8px"><div class="prog-fill" style="width:${pctP}%;background:${pctP>=100?'#16a34a':pctP>=60?'#f59e0b':'#ef4444'}"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:4px"><span>Calories</span><span>${totalC} / ${ct}</span></div>
-    <div class="prog-bar"><div class="prog-fill" style="width:${pctC}%;background:${pctC>=100?'#ef4444':pctC>=80?'#f59e0b':'#16a34a'}"></div></div>
+  h+=`<div class="macro-bar-wrap">
+    <div class="macro-bar-row">
+      <div class="macro-bar-header"><span class="macro-bar-key">Protein</span><span class="macro-bar-val">${totalP}g / ${pt}g</span></div>
+      <div class="prog-bar"><div class="prog-fill" style="width:${pctP}%;background:${pctP>=100?'#16a34a':pctP>=60?'#f59e0b':'#ef4444'}"></div></div>
+    </div>
+    <div class="macro-bar-row" style="margin-top:8px">
+      <div class="macro-bar-header"><span class="macro-bar-key">Calories</span><span class="macro-bar-val">${totalC} / ${ct} kcal</span></div>
+      <div class="prog-bar"><div class="prog-fill" style="width:${pctC}%;background:${pctC>=100?'#ef4444':pctC>=80?'#f59e0b':'#16a34a'}"></div></div>
+    </div>
   </div>`;
 
-  // Logged entries
-  if(log.entries&&log.entries.length>0){
-    h+=`<div class="section-label">Logged</div>`;
-    log.entries.forEach((e,i)=>{
+  // Auto meals from plan
+  if(autoMeals.length>0){
+    h+=`<div class="sec-lbl">From your plan</div>`;
+    autoMeals.forEach(e=>{
+      h+=`<div class="log-entry">
+        <div class="log-entry-info">
+          <div class="log-entry-name">${e.emoji} ${e.name}</div>
+          <div class="log-entry-macros">${e.protein}g protein · ${e.calories} kcal</div>
+          <div class="log-entry-auto">📅 Auto-added from week plan</div>
+        </div>
+      </div>`;
+    });
+  }
+
+  // Manual entries
+  if(manualEntries.length>0){
+    h+=`<div class="sec-lbl" style="margin-top:10px">Added manually</div>`;
+    manualEntries.forEach((e,i)=>{
       h+=`<div class="log-entry">
         <div class="log-entry-info">
           <div class="log-entry-name">${e.emoji||'🍴'} ${e.name}</div>
@@ -857,42 +976,34 @@ function renderDaily(){
         <button class="remove-btn" onclick="removeEntry(${i})">×</button>
       </div>`;
     });
-  }else{
-    h+=`<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nothing logged yet.<br>Add a meal below to get started.</div></div>`;
+  }
+
+  if(autoMeals.length===0&&manualEntries.length===0){
+    h+=`<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nothing logged yet.<br>${autoMeals.length===0?'Assign meals in the Plan tab and they\'ll appear here automatically.':'Add a meal below.'}</div></div>`;
   }
 
   // Add meal panel
-  h+=`<div class="add-meal-panel">
-    <div class="add-meal-header" onclick="toggleAddMeal()">
-      <h4>+ Add meal or snack</h4>
-      <span style="color:#94a3b8;font-size:14px">${addMealOpen?'▲':'▼'}</span>
+  h+=`<div class="add-meal-panel" style="margin-top:10px">
+    <div class="amp-header" onclick="toggleAddMeal()">
+      <h4>+ Add extra meal or snack</h4>
+      <span style="color:#94a3b8;font-size:13px">${addMealOpen?'▲':'▼'}</span>
     </div>`;
   if(addMealOpen){
-    h+=`<div class="add-meal-body">
+    h+=`<div class="amp-body">
       <div class="add-tabs">
         <button class="add-tab ${addMealTab==='meals'?'active':''}" onclick="setAddTab('meals')">My Meals</button>
         <button class="add-tab ${addMealTab==='manual'?'active':''}" onclick="setAddTab('manual')">Manual Entry</button>
       </div>`;
     if(addMealTab==='meals'){
       h+=`<div class="meal-picker">
-        <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;padding:2px 2px 6px">Breakfasts</div>`;
-      BREAKFASTS.forEach(m=>{
-        h+=`<div class="picker-opt" onclick="addMealEntry('${m.id}','breakfast')">
-          <div class="picker-opt-emoji">${m.emoji}</div>
-          <div class="picker-opt-info"><div class="picker-opt-name">${m.name}</div><div class="picker-opt-macros">${m.macros.protein}g protein · ${m.macros.calories} kcal</div></div>
-        </div>`;
-      });
-      h+=`<div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;padding:8px 2px 6px">Lunches & Dinners</div>`;
-      LUNCHES.forEach(m=>{
-        h+=`<div class="picker-opt" onclick="addMealEntry('${m.id}','lunch')">
-          <div class="picker-opt-emoji">${m.emoji}</div>
-          <div class="picker-opt-info"><div class="picker-opt-name">${m.name}</div><div class="picker-opt-macros">${m.macros.protein}g protein · ${m.macros.calories} kcal</div></div>
-        </div>`;
-      });
+        <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;padding:2px 0 5px">Breakfasts</div>`;
+      BREAKFASTS.forEach(m=>{h+=`<div class="picker-opt" onclick="addMealEntry('${m.id}','breakfast')"><div class="picker-opt-emoji">${m.emoji}</div><div><div class="picker-opt-name">${m.name}</div><div class="picker-opt-macros">${m.macros.protein}g protein · ${m.macros.calories} kcal</div></div></div>`;});
+      h+=`<div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;padding:7px 0 5px">Lunches & Dinners</div>`;
+      LUNCHES.forEach(m=>{h+=`<div class="picker-opt" onclick="addMealEntry('${m.id}','lunch')"><div class="picker-opt-emoji">${m.emoji}</div><div><div class="picker-opt-name">${m.name}</div><div class="picker-opt-macros">${m.macros.protein}g protein · ${m.macros.calories} kcal</div></div></div>`;});
       h+=`</div>`;
     }else{
       h+=`<div class="manual-fields">
-        <div class="field-grp full"><label>Meal name</label><input type="text" id="m-name" placeholder="e.g. Dinner, Protein shake, Snack"></div>
+        <div class="field-grp full"><label>Meal name</label><input type="text" id="m-name" placeholder="e.g. Dinner, Protein shake"></div>
         <div class="field-grp"><label>Protein (g)</label><input type="number" id="m-protein" placeholder="0" min="0"></div>
         <div class="field-grp"><label>Calories</label><input type="number" id="m-cals" placeholder="0" min="0"></div>
       </div>
@@ -926,6 +1037,7 @@ function addManualEntry(){
   saveState();addMealOpen=false;renderDaily();
 }
 function removeEntry(idx){
+  if(!S.macroLog[trackDate])return;
   S.macroLog[trackDate].entries.splice(idx,1);
   saveState();renderDaily();
 }
@@ -934,133 +1046,276 @@ function removeEntry(idx){
 function renderProgress(){
   const pt=S.settings.proteinTarget||120;
   const ct=S.settings.calorieTarget||1800;
-  const logDates=Object.keys(S.macroLog).filter(d=>S.macroLog[d]&&S.macroLog[d].entries&&S.macroLog[d].entries.length>0).sort((a,b)=>b.localeCompare(a));
 
-  if(logDates.length===0){
-    document.getElementById('view-progress').innerHTML=`
-      <div style="font-size:17px;font-weight:800;color:#0f172a;margin-bottom:3px">Progress</div>
-      <div class="empty" style="margin-top:40px"><div class="empty-icon">📈</div><div class="empty-text">No data yet.<br>Start logging in Daily to see your progress here.</div></div>`;
-    return;
-  }
+  let h=`<div style="font-size:16px;font-weight:800;margin-bottom:3px">Progress</div>
+  <p style="font-size:11px;color:#64748b;margin-bottom:12px">Targets: <strong>${pt}g protein</strong> · <strong>${ct} kcal</strong></p>`;
 
-  function getWeekStart(str){
-    const d=new Date(str+'T12:00:00');
-    const day=d.getDay();
-    const diff=d.getDate()-(day===0?6:day-1);
-    const mon=new Date(d);mon.setDate(diff);
-    return mon.toISOString().split('T')[0];
-  }
+  // Weight section
+  h+=`<div class="card" style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;cursor:pointer" onclick="toggleWeightSection()">
+      <div class="sec-lbl" style="margin-bottom:0">⚖️ Weight Tracking</div>
+      <span style="color:#94a3b8;font-size:13px">${progWeightExpanded?'▲':'▼'}</span>
+    </div>`;
 
-  const weeks={};
-  logDates.forEach(date=>{
-    const ws=getWeekStart(date);
-    if(!weeks[ws])weeks[ws]=[];
-    weeks[ws].push(date);
-  });
+  const weights=S.weightLog||[];
+  const latestW=weights.length>0?weights[weights.length-1].weight:S.settings.startWeight;
+  const startW=S.settings.startWeight;
+  const targetW=S.settings.targetWeight;
 
-  let h=`<div style="font-size:17px;font-weight:800;color:#0f172a;margin-bottom:3px">Progress</div>
-  <p style="font-size:12px;color:#64748b;margin-bottom:14px">Protein target: <strong>${pt}g</strong> · Calorie target: <strong>${ct} kcal</strong></p>`;
+  h+=`<div class="weight-stats">
+    <div class="wstat"><div class="wstat-val">${fmtWeight(startW)}</div><div class="wstat-lbl">Start</div></div>
+    <div class="wstat highlight"><div class="wstat-val">${fmtWeight(latestW)}</div><div class="wstat-lbl">Current</div></div>
+    <div class="wstat"><div class="wstat-val">${fmtWeight(targetW)}</div><div class="wstat-lbl">Target</div></div>
+  </div>`;
 
-  Object.keys(weeks).sort((a,b)=>b.localeCompare(a)).forEach(ws=>{
-    const dates=weeks[ws];
-    const isOpen=expandedWeek===ws;
-    let goalDays=0;
-    const dayData=[];
-
-    dates.forEach(date=>{
-      const log=S.macroLog[date];
-      if(!log||!log.entries)return;
-      let p=0,c=0;
-      log.entries.forEach(e=>{p+=(e.protein||0);c+=(e.calories||0);});
-      if(p>=pt)goalDays++;
-      dayData.push({date,p,c,entries:log.entries});
-    });
-
-    const we=offsetDate(ws,6);
-    const wsLabel=fmtDateShort(ws)+' – '+fmtDateShort(we);
-
-    h+=`<div class="prog-week">
-      <div class="prog-week-header" onclick="toggleWeek('${ws}')">
-        <div>
-          <div class="prog-week-title">${wsLabel}</div>
-          <div style="font-size:11px;color:#94a3b8;margin-top:2px">${dates.length} day${dates.length>1?'s':''} logged · <span style="color:${goalDays===dates.length?'#16a34a':'#f59e0b'}">${goalDays}/${dates.length} protein goal days</span></div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-size:11px;color:#94a3b8">${isOpen?'▲':'▼'}</div>
-        </div>
+  if(startW&&targetW&&latestW){
+    const totalLoss=Math.abs(startW-targetW);
+    const achieved=Math.abs(startW-latestW);
+    const pct=totalLoss>0?Math.min(100,Math.round((achieved/totalLoss)*100)):0;
+    const direction=targetW<startW?'lost':'gained';
+    h+=`<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px">
+        <span style="color:#64748b">${direction==='lost'?'Weight lost':'Weight gained'}</span>
+        <span style="font-weight:700;color:#16a34a">${Math.round(Math.abs(startW-latestW)*10)/10}kg of ${Math.round(totalLoss*10)/10}kg goal (${pct}%)</span>
       </div>
-      <div class="prog-week-body ${isOpen?'open':''}">`;
+      <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }
 
-    dayData.sort((a,b)=>b.date.localeCompare(a.date)).forEach(day=>{
-      const mealNames=day.entries.map(e=>e.emoji+' '+e.name).join(' · ');
-      const goalMet=day.p>=pt;
-      h+=`<div class="prog-day-row">
-        <div>
-          <div class="prog-day-date">${fmtDateShort(day.date)}${day.date===todayStr()?'<span style="background:#dcfce7;color:#16a34a;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:4px">Today</span>':''}</div>
-          <div class="prog-day-meals">${mealNames}</div>
-        </div>
-        <div style="text-align:right;flex-shrink:0">
-          <div class="prog-day-protein">${day.p}g<span class="goal-badge ${goalMet?'goal-ok':'goal-miss'}">${goalMet?'✓':'✗'}</span></div>
-          <div class="prog-day-cal">${day.c} kcal</div>
+  // Log weight
+  h+=`<div class="weight-input-row">
+    <input type="number" id="w-input" placeholder="${S.settings.weightUnit==='kg'?'Weight in kg':'Weight in kg (convert st/lbs first)'}" step="0.1" min="0">
+    <button class="green-btn" onclick="logWeight()">Log</button>
+  </div>`;
+
+  if(progWeightExpanded&&weights.length>0){
+    // Simple chart using divs
+    h+=`<div class="weight-chart">
+      <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:8px">Weight history</div>`;
+    const last14=weights.slice(-14);
+    const minW=Math.min(...last14.map(w=>w.weight))-1;
+    const maxW=Math.max(...last14.map(w=>w.weight))+1;
+    const range=maxW-minW||1;
+    h+=`<div style="display:flex;align-items:flex-end;gap:4px;height:60px;margin-bottom:4px">`;
+    last14.forEach(w=>{
+      const pct=((w.weight-minW)/range)*100;
+      h+=`<div style="flex:1;background:#16a34a;border-radius:3px 3px 0 0;height:${Math.max(5,pct)}%;opacity:0.8;min-width:8px" title="${w.weight}kg on ${fmtShort(w.date)}"></div>`;
+    });
+    h+=`</div>
+      <div style="font-size:9px;color:#94a3b8;text-align:center">Last ${last14.length} entries</div>
+    </div>`;
+
+    h+=`<div class="weight-log-list">`;
+    weights.slice().reverse().slice(0,10).forEach((w,i)=>{
+      h+=`<div class="wlog-row">
+        <span class="wlog-date">${fmtShort(w.date)}</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="wlog-val">${fmtWeight(w.weight)}</span>
+          <button class="wlog-del" onclick="deleteWeight(${weights.length-1-i})">×</button>
         </div>
       </div>`;
     });
-    h+=`</div></div>`;
-  });
+    h+=`</div>`;
+  }
+  h+=`</div>`;
+
+  // Macro history weeks
+  const logDates=Object.keys(S.macroLog).filter(d=>{
+    const log=S.macroLog[d];
+    const auto=getAutoMealsForDate(d);
+    return (log&&log.entries&&log.entries.length>0)||auto.length>0;
+  }).sort((a,b)=>b.localeCompare(a));
+
+  if(logDates.length===0){
+    h+=`<div class="empty" style="margin-top:20px"><div class="empty-icon">📈</div><div class="empty-text">No macro data yet.<br>Assign meals in Plan and they'll appear here.</div></div>`;
+  }else{
+    h+=`<div class="sec-lbl" style="margin-top:4px">Macro History</div>`;
+    function getWeekStart(str){return getMondayOf(str);}
+    const weeks={};
+    logDates.forEach(date=>{const ws=getWeekStart(date);if(!weeks[ws])weeks[ws]=[];weeks[ws].push(date);});
+
+    Object.keys(weeks).sort((a,b)=>b.localeCompare(a)).forEach(ws=>{
+      const dates=weeks[ws];
+      const isOpen=expandedWeek===ws;
+      let goalDays=0;
+      const dayData=[];
+
+      dates.forEach(date=>{
+        const log=S.macroLog[date]||{};
+        const auto=getAutoMealsForDate(date);
+        let p=0,c=0;
+        auto.forEach(e=>{p+=e.protein;c+=e.calories;});
+        if(log.entries)log.entries.forEach(e=>{p+=(e.protein||0);c+=(e.calories||0);});
+        if(p>0||c>0){
+          if(p>=pt)goalDays++;
+          const allEntries=[...auto,...(log.entries||[])];
+          dayData.push({date,p,c,entries:allEntries});
+        }
+      });
+
+      if(dayData.length===0)return;
+      const we=offsetDate(ws,6);
+
+      h+=`<div class="prog-week">
+        <div class="prog-week-header" onclick="toggleWeek('${ws}')">
+          <div>
+            <div class="prog-week-title">${fmtShort(ws)} – ${fmtShort(we)}</div>
+            <div style="font-size:10px;color:#94a3b8;margin-top:1px">${dayData.length} day${dayData.length>1?'s':''} · <span style="color:${goalDays===dayData.length?'#16a34a':'#f59e0b'}">${goalDays}/${dayData.length} protein goal days</span></div>
+          </div>
+          <div style="font-size:11px;color:#94a3b8">${isOpen?'▲':'▼'}</div>
+        </div>
+        <div class="prog-week-body ${isOpen?'open':''}">`;
+
+      dayData.sort((a,b)=>b.date.localeCompare(a.date)).forEach(day=>{
+        const mealNames=day.entries.map(e=>e.emoji+' '+e.name).join(' · ');
+        const gm=day.p>=pt;
+        h+=`<div class="prog-day-row">
+          <div>
+            <div class="prog-day-date">${fmtShort(day.date)}${day.date===todayStr()?'<span style="background:#dcfce7;color:#16a34a;font-size:8px;font-weight:700;padding:1px 4px;border-radius:3px;margin-left:4px">Today</span>':''}</div>
+            <div class="prog-day-meals">${mealNames}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0">
+            <div class="prog-day-protein">${day.p}g<span class="goal-badge ${gm?'goal-ok':'goal-miss'}">${gm?'✓':'✗'}</span></div>
+            <div class="prog-day-cal">${day.c} kcal</div>
+          </div>
+        </div>`;
+      });
+      h+=`</div></div>`;
+    });
+  }
 
   document.getElementById('view-progress').innerHTML=h;
 }
 
 function toggleWeek(ws){expandedWeek=expandedWeek===ws?null:ws;renderProgress();}
+function toggleWeightSection(){progWeightExpanded=!progWeightExpanded;renderProgress();}
+function logWeight(){
+  const inp=document.getElementById('w-input');
+  const val=parseFloat(inp.value);
+  if(!val||val<=0)return;
+  S.weightLog.push({date:todayStr(),weight:val});
+  saveState();renderProgress();
+}
+function deleteWeight(idx){
+  S.weightLog.splice(idx,1);
+  saveState();renderProgress();
+}
 
 // ── SETTINGS VIEW ────────────────────────────────────────────────────────────
 function renderSettings(){
   const s=S.settings;
-  let h=`<div style="font-size:17px;font-weight:800;color:#0f172a;margin-bottom:14px">Settings</div>
-  <div class="settings-section">
-    <h3>Your profile</h3>
-    <div class="settings-field">
-      <label>Your name</label>
-      <input type="text" id="s-name" value="${s.name||''}" placeholder="Your name">
+  let h=`<div style="font-size:16px;font-weight:800;margin-bottom:12px">Settings</div>
+  <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Profile</div>
+  <div class="settings-field"><label>Your name</label><input type="text" id="s-name" value="${s.name||''}" placeholder="Your name"></div>
+
+  <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin:14px 0 8px">Daily Targets</div>
+  <div class="settings-field"><label>Protein target (g)</label><input type="number" id="s-protein" value="${s.proteinTarget||120}" min="0"><div class="hint">Total daily protein across all meals</div></div>
+  <div class="settings-field"><label>Calorie target (kcal)</label><input type="number" id="s-cals" value="${s.calorieTarget||1800}" min="0"></div>
+
+  <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin:14px 0 8px">Weight</div>
+  <div class="settings-field"><label>Weight unit</label>
+    <div class="unit-toggle" style="margin-top:4px">
+      <button class="unit-btn ${s.weightUnit==='kg'?'active':''}" onclick="setSettingsUnit('kg')">kg</button>
+      <button class="unit-btn ${s.weightUnit==='st'?'active':''}" onclick="setSettingsUnit('st')">st / lbs</button>
     </div>
   </div>
-  <div class="settings-section">
-    <h3>Daily nutrition targets</h3>
-    <div class="settings-field">
-      <label>Protein target (g)</label>
-      <input type="number" id="s-protein" value="${s.proteinTarget||120}" min="0" placeholder="120">
-      <div class="hint">Total daily protein goal across all meals</div>
-    </div>
-    <div class="settings-field">
-      <label>Calorie target (kcal)</label>
-      <input type="number" id="s-cals" value="${s.calorieTarget||1800}" min="0" placeholder="1800">
-      <div class="hint">Total daily calorie goal</div>
-    </div>
-  </div>
+  <div class="settings-field"><label>Start weight (kg)</label><input type="number" id="s-startw" value="${s.startWeight||''}" step="0.1" placeholder="e.g. 90"><div class="hint">Used as your baseline in Progress</div></div>
+  <div class="settings-field"><label>Target weight (kg)</label><input type="number" id="s-targetw" value="${s.targetWeight||''}" step="0.1" placeholder="e.g. 80"></div>
+
   <button class="settings-save-btn" onclick="saveSettings()">Save changes</button>
   <div class="settings-saved" id="settings-saved">✓ Settings saved</div>
 
-  <div class="settings-section" style="margin-top:24px">
-    <h3>About</h3>
-    <div class="card" style="font-size:12px;color:#64748b;line-height:1.7">
-      <div><strong style="color:#0f172a">Plate Plan</strong> — your personal meal prep companion.</div>
-      <div style="margin-top:6px">Data saves locally on this device. Reload-safe.</div>
-      <div style="margin-top:6px">Each person who opens this app on their own device gets their own separate data and targets.</div>
-    </div>
-  </div>`;
+  <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin:20px 0 8px">Data Export</div>
+  <button class="export-btn" onclick="exportPDF()">📄 Export Progress & Meal Plan as PDF</button>
 
+  <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin:14px 0 8px">About</div>
+  <div class="card" style="font-size:11px;color:#64748b;line-height:1.7">
+    <div><strong style="color:#0f172a">Plate Plan</strong> — your personal meal prep companion.</div>
+    <div style="margin-top:4px">Data saves locally on this device. Each user gets their own separate data.</div>
+    <div style="margin-top:4px">Updates to the app never affect your saved data.</div>
+  </div>`;
   document.getElementById('view-settings').innerHTML=h;
 }
 
+function setSettingsUnit(u){
+  S.settings.weightUnit=u;saveState();
+  document.querySelectorAll('.unit-toggle .unit-btn').forEach(b=>{b.classList.toggle('active',b.textContent.trim().startsWith(u));});
+}
 function saveSettings(){
   S.settings.name=document.getElementById('s-name').value.trim();
   S.settings.proteinTarget=parseInt(document.getElementById('s-protein').value)||120;
   S.settings.calorieTarget=parseInt(document.getElementById('s-cals').value)||1800;
-  saveState();
-  setHeaderDate();
-  const saved=document.getElementById('settings-saved');
-  saved.style.display='block';
-  setTimeout(()=>saved.style.display='none',2000);
+  S.settings.startWeight=parseFloat(document.getElementById('s-startw').value)||null;
+  S.settings.targetWeight=parseFloat(document.getElementById('s-targetw').value)||null;
+  saveState();initHeader();
+  const el=document.getElementById('settings-saved');el.style.display='block';
+  setTimeout(()=>el.style.display='none',2000);
+}
+
+// ── PDF EXPORT ───────────────────────────────────────────────────────────────
+function exportPDF(){
+  const s=S.settings;
+  const today=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const weights=S.weightLog||[];
+  const latestW=weights.length>0?weights[weights.length-1].weight:s.startWeight;
+
+  // Build week plan summary for current week
+  const wk=getWeekKey(getCurrentWeekMonday());
+  let planRows='';
+  DAYS.forEach((day,i)=>{
+    const plan=(S.weekPlans[wk]&&S.weekPlans[wk][day])||{};
+    const bfMeal=plan.breakfast?BREAKFASTS.find(b=>b.id===plan.breakfast):null;
+    const lMeal=plan.lunch?LUNCHES.find(l=>l.id===plan.lunch):null;
+    planRows+=`<tr><td style="padding:6px 10px;font-weight:700;color:#334155">${day}</td><td style="padding:6px 10px;color:#64748b">${bfMeal?bfMeal.emoji+' '+bfMeal.name:'—'}</td><td style="padding:6px 10px;color:#64748b">${lMeal?lMeal.emoji+' '+lMeal.name:'—'}</td></tr>`;
+  });
+
+  // Build macro log summary
+  const logDates=Object.keys(S.macroLog).sort((a,b)=>b.localeCompare(a)).slice(0,14);
+  let logRows='';
+  logDates.forEach(date=>{
+    const log=S.macroLog[date]||{};
+    const auto=getAutoMealsForDate(date);
+    let p=0,c=0;
+    auto.forEach(e=>{p+=e.protein;c+=e.calories;});
+    if(log.entries)log.entries.forEach(e=>{p+=(e.protein||0);c+=(e.calories||0);});
+    if(p>0||c>0)logRows+=`<tr><td style="padding:5px 10px">${fmtShort(date)}</td><td style="padding:5px 10px;font-weight:700;color:${p>=(s.proteinTarget||120)?'#16a34a':'#f59e0b'}">${p}g</td><td style="padding:5px 10px;color:#64748b">${c} kcal</td><td style="padding:5px 10px;color:${p>=(s.proteinTarget||120)?'#16a34a':'#ef4444'}">${p>=(s.proteinTarget||120)?'✓ Goal met':'✗ Below target'}</td></tr>`;
+  });
+
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Plate Plan Export</title>
+  <style>body{font-family:'Helvetica Neue',sans-serif;padding:32px;color:#0f172a;max-width:700px;margin:0 auto}
+  h1{font-size:26px;font-weight:900;color:#16a34a;margin-bottom:4px}
+  h2{font-size:16px;font-weight:700;color:#0f172a;margin:24px 0 10px;padding-bottom:6px;border-bottom:2px solid #f1f5f9}
+  table{width:100%;border-collapse:collapse;margin-bottom:16px}
+  th{background:#f8fafc;padding:8px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#94a3b8}
+  tr:nth-child(even){background:#f8fafc}
+  .stat{display:inline-block;background:#f8fafc;border-radius:10px;padding:12px 16px;margin-right:8px;margin-bottom:8px;text-align:center}
+  .stat-val{font-size:20px;font-weight:800;color:#16a34a}
+  .stat-lbl{font-size:11px;color:#94a3b8;margin-top:2px}
+  .footer{margin-top:32px;font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:12px}
+  </style></head><body>
+  <h1>🍽 Plate Plan</h1>
+  <p style="color:#64748b;font-size:13px">Export for ${s.name||'User'} · Generated ${today}</p>
+  <h2>Summary</h2>
+  <div class="stat"><div class="stat-val">${s.proteinTarget||120}g</div><div class="stat-lbl">Protein target</div></div>
+  <div class="stat"><div class="stat-val">${s.calorieTarget||1800}</div><div class="stat-lbl">Calorie target</div></div>
+  <div class="stat"><div class="stat-val">${fmtWeight(s.startWeight)}</div><div class="stat-lbl">Start weight</div></div>
+  <div class="stat"><div class="stat-val">${fmtWeight(latestW)}</div><div class="stat-lbl">Current weight</div></div>
+  <div class="stat"><div class="stat-val">${fmtWeight(s.targetWeight)}</div><div class="stat-lbl">Target weight</div></div>
+  ${s.startWeight&&latestW?`<div class="stat"><div class="stat-val" style="color:#16a34a">${Math.round(Math.abs(s.startWeight-latestW)*10)/10}kg</div><div class="stat-lbl">${latestW<s.startWeight?'Lost':'Gained'} so far</div></div>`:''}
+  <h2>This Week's Meal Plan</h2>
+  <table><thead><tr><th>Day</th><th>Breakfast</th><th>Lunch / Dinner</th></tr></thead><tbody>${planRows}</tbody></table>
+  <h2>Macro Log (Last 14 Days)</h2>
+  ${logRows?`<table><thead><tr><th>Date</th><th>Protein</th><th>Calories</th><th>Goal</th></tr></thead><tbody>${logRows}</tbody></table>`:'<p style="color:#94a3b8;font-size:13px">No macro data logged yet.</p>'}
+  ${weights.length>0?`<h2>Weight Log</h2><table><thead><tr><th>Date</th><th>Weight</th></tr></thead><tbody>${weights.slice().reverse().slice(0,20).map(w=>`<tr><td style="padding:5px 10px">${fmtShort(w.date)}</td><td style="padding:5px 10px;font-weight:700;color:#16a34a">${fmtWeight(w.weight)}</td></tr>`).join('')}</tbody></table>`:''}
+  <div class="footer">Plate Plan · Personal meal prep & macro tracking app · ${today}</div>
+  </body></html>`;
+
+  const blob=new Blob([html],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`plateplan-export-${todayStr()}.html`;
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 
 // ── NAVIGATION ───────────────────────────────────────────────────────────────
@@ -1070,8 +1325,7 @@ function showView(name,skipRender){
   document.getElementById('view-'+name).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   const navMap={meals:'meals',plan:'plan',shop:'shop',daily:'daily',progress:'progress',settings:'settings',recipe:recipeFrom||'meals'};
-  const nb=document.getElementById('nav-'+(navMap[name]||name));
-  if(nb)nb.classList.add('active');
+  const nb=document.getElementById('nav-'+(navMap[name]||name));if(nb)nb.classList.add('active');
   if(!skipRender){
     if(name==='meals')renderMeals();
     else if(name==='plan')renderPlan();
@@ -1081,6 +1335,13 @@ function showView(name,skipRender){
     else if(name==='settings')renderSettings();
   }
   window.scrollTo(0,0);
+}
+
+// ── SERVICE WORKER ───────────────────────────────────────────────────────────
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('/sw.js').catch(()=>{});
+  });
 }
 
 // ── INIT ─────────────────────────────────────────────────────────────────────
